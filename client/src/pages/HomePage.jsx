@@ -238,10 +238,10 @@ export default function HomePage({
 
   return (
     <div className="space-y-10 sm:space-y-20 lg:space-y-24 pb-20 bg-[#fafbfc]">
-      {/* 1. HERO SECTION (Redesigned Mobile-First & High-Impact Commercial Showcase) */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9]/60 to-[#fafbfc] pt-4 pb-8 sm:pt-14 sm:pb-18 lg:pt-20 lg:pb-24 border-b border-slate-200/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+      {/* 1. HERO SECTION (Full Mobile First-Screen Viewport & High-Impact Commercial Showcase) */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9]/60 to-[#fafbfc] min-h-[calc(100dvh-54px)] sm:min-h-0 flex flex-col justify-between pt-3 pb-4 sm:pt-14 sm:pb-18 lg:pt-20 lg:pb-24 border-b border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex-1 flex flex-col justify-around lg:justify-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-center my-auto">
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-3 sm:space-y-5 text-left">
               {/* Small Professional Eyebrow Label */}

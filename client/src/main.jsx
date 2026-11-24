@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 
+// Safety shim for rate list handlers across any legacy cache
+if (typeof window !== 'undefined') {
+  window.onOpenRateList = () => {};
+}
+
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);

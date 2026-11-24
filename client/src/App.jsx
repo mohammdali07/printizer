@@ -11,13 +11,15 @@ import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import AdminDashboard from './pages/AdminDashboard.jsx';
 
+import initialCatalog from './data/initialCatalog.json';
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [currentParam, setCurrentParam] = useState(null);
 
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState(initialCatalog.categories || []);
+  const [products, setProducts] = useState(initialCatalog.products || []);
+  const [loading, setLoading] = useState(false);
 
   // Global Quote Modal State
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);

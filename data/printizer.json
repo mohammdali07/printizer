@@ -85,7 +85,9 @@
       "minQuantity": 1000,
       "image": "/images/products/visiting-card.webp",
       "secondaryImages": [
-        "/images/products/visiting-card.webp"
+        "/images/products/visiting-card.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "Standard 3.5\" x 2.0\"",
@@ -116,7 +118,9 @@
       "minQuantity": 500,
       "image": "/images/products/letterhead.webp",
       "secondaryImages": [
-        "/images/products/letterhead.webp"
+        "/images/products/letterhead.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "A4 (210 x 297 mm)",
@@ -144,7 +148,9 @@
       "minQuantity": 10,
       "image": "/images/products/bill-book.webp",
       "secondaryImages": [
-        "/images/products/bill-book.webp"
+        "/images/products/bill-book.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "1/8 Demy (5.5\" x 8.5\")",
@@ -173,7 +179,9 @@
       "minQuantity": 10,
       "image": "/images/products/cash-memo-book.webp",
       "secondaryImages": [
-        "/images/products/cash-memo-book.webp"
+        "/images/products/cash-memo-book.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "1/8 Demy (5.5\" x 8.5\")",
@@ -200,7 +208,9 @@
       "minQuantity": 10,
       "image": "/images/products/receipt-book.webp",
       "secondaryImages": [
-        "/images/products/receipt-book.webp"
+        "/images/products/receipt-book.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "1/8 Demy",
@@ -227,7 +237,9 @@
       "minQuantity": 10,
       "image": "/images/products/quotation-book.webp",
       "secondaryImages": [
-        "/images/products/quotation-book.webp"
+        "/images/products/quotation-book.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "A4 (8.27\" x 11.69\")",
@@ -254,7 +266,9 @@
       "minQuantity": 10,
       "image": "/images/products/invoice-book.webp",
       "secondaryImages": [
-        "/images/products/invoice-book.webp"
+        "/images/products/invoice-book.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "A4 Standard (8.27\" x 11.69\")",
@@ -282,7 +296,9 @@
       "minQuantity": 10,
       "image": "/images/products/delivery-challan-book.webp",
       "secondaryImages": [
-        "/images/products/delivery-challan-book.webp"
+        "/images/products/delivery-challan-book.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "1/4 Demy (8.5\" x 11\")",
@@ -310,7 +326,9 @@
       "minQuantity": 10,
       "image": "/images/products/purchase-order-book.webp",
       "secondaryImages": [
-        "/images/products/purchase-order-book.webp"
+        "/images/products/purchase-order-book.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "A4 Standard",
@@ -337,7 +355,9 @@
       "minQuantity": 20,
       "image": "/images/products/payment-voucher.webp",
       "secondaryImages": [
-        "/images/products/payment-voucher.webp"
+        "/images/products/payment-voucher.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "Pocket Size (7.5\" x 4.5\")",
@@ -364,7 +384,9 @@
       "minQuantity": 500,
       "image": "/images/products/envelope.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/envelope.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "DL Size (9.5\" x 4.25\")",
@@ -392,7 +414,9 @@
       "minQuantity": 100,
       "image": "/images/products/office-file.webp",
       "secondaryImages": [
-        "/images/products/office-file.webp"
+        "/images/products/office-file.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "Standard A4 / Foolscap",
@@ -420,7 +444,9 @@
       "minQuantity": 250,
       "image": "/images/products/folder.webp",
       "secondaryImages": [
-        "/images/products/folder.webp"
+        "/images/products/folder.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "A4 Presentation Folder (9\" x 12\")"
@@ -447,7 +473,9 @@
       "minQuantity": 50,
       "image": "/images/products/id-card.webp",
       "secondaryImages": [
-        "/images/products/id-card.webp"
+        "/images/products/id-card.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -473,7 +501,9 @@
       "minQuantity": 50,
       "image": "/images/products/employee-id-card.webp",
       "secondaryImages": [
-        "/images/products/employee-id-card.webp"
+        "/images/products/employee-id-card.webp",
+        "/images/categories/business-stationery.webp",
+        "/images/slides/cards.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -500,7 +530,9 @@
       "minQuantity": 1000,
       "image": "/images/products/pamphlet.webp",
       "secondaryImages": [
-        "/images/products/pamphlet.webp"
+        "/images/products/pamphlet.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "A5 (148 x 210 mm)",
@@ -527,7 +559,9 @@
       "minQuantity": 1000,
       "image": "/images/products/flyer.webp",
       "secondaryImages": [
-        "/images/products/flyer.webp"
+        "/images/products/flyer.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "A4 (210 x 297 mm)",
@@ -554,7 +588,9 @@
       "minQuantity": 500,
       "image": "/images/products/brochure.webp",
       "secondaryImages": [
-        "/images/products/brochure.webp"
+        "/images/products/brochure.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/flyer.webp"
       ],
       "standardSizes": [
         "Tri-Fold (A4 Open)",
@@ -581,7 +617,9 @@
       "minQuantity": 100,
       "image": "/images/products/poster.webp",
       "secondaryImages": [
-        "/images/products/poster.webp"
+        "/images/products/poster.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "A3 (11.7\" x 16.5\")",
@@ -609,7 +647,9 @@
       "minQuantity": 200,
       "image": "/images/products/catalogue.webp",
       "secondaryImages": [
-        "/images/products/catalogue.webp"
+        "/images/products/catalogue.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "A4 Multi-Page",
@@ -635,7 +675,9 @@
       "minQuantity": 1000,
       "image": "/images/products/leaflet.webp",
       "secondaryImages": [
-        "/images/products/leaflet.webp"
+        "/images/products/leaflet.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "A5",
@@ -662,7 +704,9 @@
       "minQuantity": 200,
       "image": "/images/products/danglers.webp",
       "secondaryImages": [
-        "/images/products/danglers.webp"
+        "/images/products/danglers.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "8\" x 8\" Round / Die-Cut Shape",
@@ -689,7 +733,9 @@
       "minQuantity": 2,
       "image": "/images/products/standee.webp",
       "secondaryImages": [
-        "/images/products/standee.webp"
+        "/images/products/standee.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "Roll-Up Standee 3ft x 6ft",
@@ -716,7 +762,9 @@
       "minQuantity": 1,
       "image": "/images/products/banner.webp",
       "secondaryImages": [
-        "/images/products/banner.webp"
+        "/images/products/banner.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "Custom Width x Height (e.g. 8ft x 4ft)"
@@ -742,7 +790,9 @@
       "minQuantity": 1,
       "image": "/images/products/flex-printing.webp",
       "secondaryImages": [
-        "/images/products/flex-printing.webp"
+        "/images/products/flex-printing.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "Seamless up to 10ft Width"
@@ -768,7 +818,9 @@
       "minQuantity": 5,
       "image": "/images/products/sunboard-printing.webp",
       "secondaryImages": [
-        "/images/products/sunboard-printing.webp"
+        "/images/products/sunboard-printing.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "12\" x 18\"",
@@ -796,7 +848,9 @@
       "minQuantity": 500,
       "image": "/images/products/promotional-cards.webp",
       "secondaryImages": [
-        "/images/products/promotional-cards.webp"
+        "/images/products/promotional-cards.webp",
+        "/images/categories/marketing-advertising.webp",
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "4\" x 6\" Postcard",
@@ -823,7 +877,9 @@
       "minQuantity": 200,
       "image": "/images/products/notebook.webp",
       "secondaryImages": [
-        "/images/products/notebook.webp"
+        "/images/products/notebook.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/office-diary.webp"
       ],
       "standardSizes": [
         "A5 (148 x 210 mm)",
@@ -849,7 +905,9 @@
       "minQuantity": 300,
       "image": "/images/products/pub-school-diary.webp",
       "secondaryImages": [
-        "/images/products/pub-school-diary.webp"
+        "/images/products/pub-school-diary.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "Custom A5",
@@ -875,7 +933,9 @@
       "minQuantity": 100,
       "image": "/images/products/office-diary.webp",
       "secondaryImages": [
-        "/images/products/office-diary.webp"
+        "/images/products/office-diary.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "Executive A5 / B5 Daily Planner"
@@ -901,7 +961,9 @@
       "minQuantity": 500,
       "image": "/images/products/exercise-book.webp",
       "secondaryImages": [
-        "/images/products/exercise-book.webp"
+        "/images/products/exercise-book.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "Four Line / Single Line / Square (Crown Size)"
@@ -926,7 +988,9 @@
       "minQuantity": 100,
       "image": "/images/products/book-printing.webp",
       "secondaryImages": [
-        "/images/products/book-printing.webp"
+        "/images/products/book-printing.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "Standard 5.5\" x 8.5\"",
@@ -953,7 +1017,9 @@
       "minQuantity": 200,
       "image": "/images/products/magazine.webp",
       "secondaryImages": [
-        "/images/products/magazine.webp"
+        "/images/products/magazine.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "A4 (8.27\" x 11.69\")"
@@ -978,7 +1044,9 @@
       "minQuantity": 100,
       "image": "/images/products/journal.webp",
       "secondaryImages": [
-        "/images/products/journal.webp"
+        "/images/products/journal.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "A5 Executive",
@@ -1004,7 +1072,9 @@
       "minQuantity": 100,
       "image": "/images/products/annual-report.webp",
       "secondaryImages": [
-        "/images/products/annual-report.webp"
+        "/images/products/annual-report.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "A4 Corporate"
@@ -1029,7 +1099,9 @@
       "minQuantity": 200,
       "image": "/images/products/calendar.webp",
       "secondaryImages": [
-        "/images/products/calendar.webp"
+        "/images/products/calendar.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "Desk Tent Calendar (8.5\" x 6\")",
@@ -1055,7 +1127,9 @@
       "minQuantity": 50,
       "image": "/images/products/e-book-printing.webp",
       "secondaryImages": [
-        "/images/products/e-book-printing.webp"
+        "/images/products/e-book-printing.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "A5",
@@ -1081,7 +1155,9 @@
       "minQuantity": 20,
       "image": "/images/products/project-report.webp",
       "secondaryImages": [
-        "/images/products/project-report.webp"
+        "/images/products/project-report.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "A4 Standard"
@@ -1106,7 +1182,9 @@
       "minQuantity": 10,
       "image": "/images/products/thesis-printing.webp",
       "secondaryImages": [
-        "/images/products/thesis-printing.webp"
+        "/images/products/thesis-printing.webp",
+        "/images/categories/books-publications.webp",
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "A4 Academic"
@@ -1131,7 +1209,9 @@
       "minQuantity": 250,
       "image": "/images/products/wedding-invitation-card.webp",
       "secondaryImages": [
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/wedding-invitation-card.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/engagement-card.webp"
       ],
       "standardSizes": [
         "Traditional Royal 7\" x 9\"",
@@ -1159,7 +1239,9 @@
       "minQuantity": 200,
       "image": "/images/products/engagement-card.webp",
       "secondaryImages": [
-        "/images/products/engagement-card.webp"
+        "/images/products/engagement-card.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "6\" x 8\"",
@@ -1185,7 +1267,9 @@
       "minQuantity": 100,
       "image": "/images/products/birthday-invitation.webp",
       "secondaryImages": [
-        "/images/products/birthday-invitation.webp"
+        "/images/products/birthday-invitation.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "5\" x 7\"",
@@ -1212,7 +1296,9 @@
       "minQuantity": 100,
       "image": "/images/products/anniversary-invitation.webp",
       "secondaryImages": [
-        "/images/products/anniversary-invitation.webp"
+        "/images/products/anniversary-invitation.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "5.5\" x 8.5\" Folded"
@@ -1237,7 +1323,9 @@
       "minQuantity": 300,
       "image": "/images/products/invitation-envelope.webp",
       "secondaryImages": [
-        "/images/products/invitation-envelope.webp"
+        "/images/products/invitation-envelope.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "Custom Coordinated Sizes"
@@ -1263,7 +1351,9 @@
       "minQuantity": 150,
       "image": "/images/products/save-the-date-card.webp",
       "secondaryImages": [
-        "/images/products/save-the-date-card.webp"
+        "/images/products/save-the-date-card.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "4\" x 6\"",
@@ -1289,7 +1379,9 @@
       "minQuantity": 200,
       "image": "/images/products/thank-you-card.webp",
       "secondaryImages": [
-        "/images/products/thank-you-card.webp"
+        "/images/products/thank-you-card.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "Folded 4\" x 5.5\"",
@@ -1315,7 +1407,9 @@
       "minQuantity": 100,
       "image": "/images/products/greeting-card.webp",
       "secondaryImages": [
-        "/images/products/greeting-card.webp"
+        "/images/products/greeting-card.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "A5 Folded to A6",
@@ -1341,7 +1435,9 @@
       "minQuantity": 250,
       "image": "/images/products/religious-invitation-card.webp",
       "secondaryImages": [
-        "/images/products/religious-invitation-card.webp"
+        "/images/products/religious-invitation-card.webp",
+        "/images/categories/wedding-invitation.webp",
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "Traditional Accordion Fold",
@@ -1367,7 +1463,9 @@
       "minQuantity": 500,
       "image": "/images/products/paper-bag.webp",
       "secondaryImages": [
-        "/images/products/paper-bag.webp"
+        "/images/products/paper-bag.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "Medium (10\" x 12\" x 4\")",
@@ -1394,7 +1492,9 @@
       "minQuantity": 500,
       "image": "/images/products/shopping-bag.webp",
       "secondaryImages": [
-        "/images/products/shopping-bag.webp"
+        "/images/products/shopping-bag.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "Large (14\" x 16\" x 5\")",
@@ -1421,7 +1521,9 @@
       "minQuantity": 500,
       "image": "/images/products/product-box.webp",
       "secondaryImages": [
-        "/images/products/product-box.webp"
+        "/images/products/product-box.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "Custom Structural Die-Line per Product"
@@ -1448,7 +1550,9 @@
       "minQuantity": 500,
       "image": "/images/products/cake-box.webp",
       "secondaryImages": [
-        "/images/products/cake-box.webp"
+        "/images/products/cake-box.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "0.5 Kg (8\" x 8\" x 5\")",
@@ -1474,7 +1578,9 @@
       "minQuantity": 500,
       "image": "/images/products/sweet-box.webp",
       "secondaryImages": [
-        "/images/products/sweet-box.webp"
+        "/images/products/sweet-box.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "250g, 500g, 1kg Traditional Mithai Sizes"
@@ -1499,7 +1605,9 @@
       "minQuantity": 1000,
       "image": "/images/products/food-packaging.webp",
       "secondaryImages": [
-        "/images/products/food-packaging.webp"
+        "/images/products/food-packaging.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "Meal Trays",
@@ -1525,7 +1633,9 @@
       "minQuantity": 1000,
       "image": "/images/products/pkg-product-label.webp",
       "secondaryImages": [
-        "/images/products/pkg-product-label.webp"
+        "/images/products/pkg-product-label.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "Custom Bottle / Jar / Pouch Wraparound"
@@ -1551,7 +1661,9 @@
       "minQuantity": 1000,
       "image": "/images/products/sticker-label.webp",
       "secondaryImages": [
-        "/images/products/sticker-label.webp"
+        "/images/products/sticker-label.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "Custom Shape Die-Cut"
@@ -1576,7 +1688,9 @@
       "minQuantity": 2000,
       "image": "/images/products/barcode-label.webp",
       "secondaryImages": [
-        "/images/products/barcode-label.webp"
+        "/images/products/barcode-label.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "50 x 25 mm",
@@ -1603,7 +1717,9 @@
       "minQuantity": 1000,
       "image": "/images/products/hang-tag.webp",
       "secondaryImages": [
-        "/images/products/hang-tag.webp"
+        "/images/products/hang-tag.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "2\" x 3.5\"",
@@ -1631,7 +1747,9 @@
       "minQuantity": 1000,
       "image": "/images/products/product-sleeve.webp",
       "secondaryImages": [
-        "/images/products/product-sleeve.webp"
+        "/images/products/product-sleeve.webp",
+        "/images/categories/packaging-printing.webp",
+        "/images/slides/packaging.webp"
       ],
       "standardSizes": [
         "Wraparound Belly Band per Container"
@@ -1656,7 +1774,9 @@
       "minQuantity": 1000,
       "image": "/images/products/round-sticker.webp",
       "secondaryImages": [
-        "/images/products/round-sticker.webp"
+        "/images/products/round-sticker.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/waterproof-sticker.webp"
       ],
       "standardSizes": [
         "2\" Diameter",
@@ -1684,7 +1804,9 @@
       "minQuantity": 1000,
       "image": "/images/products/square-sticker.webp",
       "secondaryImages": [
-        "/images/products/square-sticker.webp"
+        "/images/products/square-sticker.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "2\" x 2\"",
@@ -1712,7 +1834,9 @@
       "minQuantity": 1000,
       "image": "/images/products/transparent-sticker.webp",
       "secondaryImages": [
-        "/images/products/transparent-sticker.webp"
+        "/images/products/transparent-sticker.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "Custom Contour",
@@ -1738,7 +1862,9 @@
       "minQuantity": 1000,
       "image": "/images/products/waterproof-sticker.webp",
       "secondaryImages": [
-        "/images/products/waterproof-sticker.webp"
+        "/images/products/waterproof-sticker.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "Custom Bottle / Freezer Dimensions"
@@ -1763,7 +1889,9 @@
       "minQuantity": 500,
       "image": "/images/products/vinyl-sticker.webp",
       "secondaryImages": [
-        "/images/products/vinyl-sticker.webp"
+        "/images/products/vinyl-sticker.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "Custom Contour / Kiss-Cut"
@@ -1788,7 +1916,9 @@
       "minQuantity": 1000,
       "image": "/images/products/logo-sticker.webp",
       "secondaryImages": [
-        "/images/products/logo-sticker.webp"
+        "/images/products/logo-sticker.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "Brand Shape Custom Die-Cut"
@@ -1814,7 +1944,9 @@
       "minQuantity": 500,
       "image": "/images/products/qr-code-sticker.webp",
       "secondaryImages": [
-        "/images/products/qr-code-sticker.webp"
+        "/images/products/qr-code-sticker.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "1.5\" x 1.5\"",
@@ -1840,7 +1972,9 @@
       "minQuantity": 1000,
       "image": "/images/products/lbl-product-label.webp",
       "secondaryImages": [
-        "/images/products/lbl-product-label.webp"
+        "/images/products/lbl-product-label.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "Custom Box / Bottle Wrap"
@@ -1865,7 +1999,9 @@
       "minQuantity": 500,
       "image": "/images/products/warning-label.webp",
       "secondaryImages": [
-        "/images/products/warning-label.webp"
+        "/images/products/warning-label.webp",
+        "/images/categories/labels-stickers.webp",
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "3\" x 4\"",
@@ -1892,7 +2028,9 @@
       "minQuantity": 20,
       "image": "/images/products/photo-printing.webp",
       "secondaryImages": [
-        "/images/products/photo-printing.webp"
+        "/images/products/photo-printing.webp",
+        "/images/categories/photo-digital-printing.webp",
+        "/images/products/photo-album.webp"
       ],
       "standardSizes": [
         "4\" x 6\"",
@@ -1920,7 +2058,9 @@
       "minQuantity": 32,
       "image": "/images/products/passport-size-photo.webp",
       "secondaryImages": [
-        "/images/products/passport-size-photo.webp"
+        "/images/products/passport-size-photo.webp",
+        "/images/categories/photo-digital-printing.webp",
+        "/images/products/photo-printing.webp"
       ],
       "standardSizes": [
         "35 x 45 mm (Sheet of 8, 16, 32)"
@@ -1945,7 +2085,9 @@
       "minQuantity": 1,
       "image": "/images/products/photo-album.webp",
       "secondaryImages": [
-        "/images/products/photo-album.webp"
+        "/images/products/photo-album.webp",
+        "/images/categories/photo-digital-printing.webp",
+        "/images/products/photo-printing.webp"
       ],
       "standardSizes": [
         "12\" x 15\" Karizma",
@@ -1971,7 +2113,9 @@
       "minQuantity": 1,
       "image": "/images/products/photo-frame.webp",
       "secondaryImages": [
-        "/images/products/photo-frame.webp"
+        "/images/products/photo-frame.webp",
+        "/images/categories/photo-digital-printing.webp",
+        "/images/products/photo-printing.webp"
       ],
       "standardSizes": [
         "8\" x 10\"",
@@ -1998,7 +2142,9 @@
       "minQuantity": 1,
       "image": "/images/products/canvas-printing.webp",
       "secondaryImages": [
-        "/images/products/canvas-printing.webp"
+        "/images/products/canvas-printing.webp",
+        "/images/categories/photo-digital-printing.webp",
+        "/images/products/photo-printing.webp"
       ],
       "standardSizes": [
         "12\" x 18\"",
@@ -2025,7 +2171,9 @@
       "minQuantity": 1,
       "image": "/images/products/customized-photo-mug.webp",
       "secondaryImages": [
-        "/images/products/customized-photo-mug.webp"
+        "/images/products/customized-photo-mug.webp",
+        "/images/categories/photo-digital-printing.webp",
+        "/images/products/photo-printing.webp"
       ],
       "standardSizes": [
         "Standard 11 Oz (325 ml) Ceramic"
@@ -2050,7 +2198,9 @@
       "minQuantity": 10,
       "image": "/images/products/personalized-gifts.webp",
       "secondaryImages": [
-        "/images/products/personalized-gifts.webp"
+        "/images/products/personalized-gifts.webp",
+        "/images/categories/photo-digital-printing.webp",
+        "/images/products/photo-printing.webp"
       ],
       "standardSizes": [
         "Custom Desk Acrylic Blocks / Pens / Keychains"
@@ -2075,7 +2225,9 @@
       "minQuantity": 25,
       "image": "/images/products/pvc-card-printing.webp",
       "secondaryImages": [
-        "/images/products/pvc-card-printing.webp"
+        "/images/products/pvc-card-printing.webp",
+        "/images/categories/photo-digital-printing.webp",
+        "/images/products/photo-printing.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -2100,7 +2252,9 @@
       "minQuantity": 100,
       "image": "/images/products/school-id-card.webp",
       "secondaryImages": [
-        "/images/products/school-id-card.webp"
+        "/images/products/school-id-card.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/certificate.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -2125,7 +2279,9 @@
       "minQuantity": 300,
       "image": "/images/products/edu-school-diary.webp",
       "secondaryImages": [
-        "/images/products/edu-school-diary.webp"
+        "/images/products/edu-school-diary.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "Custom School A5 (6\" x 9\")"
@@ -2150,7 +2306,9 @@
       "minQuantity": 500,
       "image": "/images/products/marksheet.webp",
       "secondaryImages": [
-        "/images/products/marksheet.webp"
+        "/images/products/marksheet.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "A4 Standard (210 x 297 mm)"
@@ -2177,7 +2335,9 @@
       "minQuantity": 100,
       "image": "/images/products/certificate.webp",
       "secondaryImages": [
-        "/images/products/certificate.webp"
+        "/images/products/certificate.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "A4 Landscape (11.7\" x 8.3\")"
@@ -2203,7 +2363,9 @@
       "minQuantity": 500,
       "image": "/images/products/question-paper.webp",
       "secondaryImages": [
-        "/images/products/question-paper.webp"
+        "/images/products/question-paper.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "A4",
@@ -2230,7 +2392,9 @@
       "minQuantity": 500,
       "image": "/images/products/admission-form.webp",
       "secondaryImages": [
-        "/images/products/admission-form.webp"
+        "/images/products/admission-form.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "A4 4-Page Folded",
@@ -2255,7 +2419,9 @@
       "minQuantity": 300,
       "image": "/images/products/school-prospectus.webp",
       "secondaryImages": [
-        "/images/products/school-prospectus.webp"
+        "/images/products/school-prospectus.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "A4 Multi-Page Brochure (8 - 16 Pages)"
@@ -2280,7 +2446,9 @@
       "minQuantity": 200,
       "image": "/images/products/exam-pad.webp",
       "secondaryImages": [
-        "/images/products/exam-pad.webp"
+        "/images/products/exam-pad.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "8.5\" x 14\" Standard Examination Clipboard"
@@ -2305,7 +2473,9 @@
       "minQuantity": 500,
       "image": "/images/products/student-notebook.webp",
       "secondaryImages": [
-        "/images/products/student-notebook.webp"
+        "/images/products/student-notebook.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "Standard Long Book (A4)",
@@ -2331,7 +2501,9 @@
       "minQuantity": 300,
       "image": "/images/products/school-calendar.webp",
       "secondaryImages": [
-        "/images/products/school-calendar.webp"
+        "/images/products/school-calendar.webp",
+        "/images/categories/school-educational-printing.webp",
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "Wall Calendar (12\" x 18\")",
@@ -2357,7 +2529,9 @@
       "minQuantity": 25,
       "image": "/images/products/restaurant-menu-card.webp",
       "secondaryImages": [
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/restaurant-menu-card.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/table-tent-card.webp"
       ],
       "standardSizes": [
         "A4 Bi-Fold (4 Page)",
@@ -2384,7 +2558,9 @@
       "minQuantity": 50,
       "image": "/images/products/food-menu.webp",
       "secondaryImages": [
-        "/images/products/food-menu.webp"
+        "/images/products/food-menu.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "A3 Folded to A4",
@@ -2410,7 +2586,9 @@
       "minQuantity": 50,
       "image": "/images/products/table-tent-card.webp",
       "secondaryImages": [
-        "/images/products/table-tent-card.webp"
+        "/images/products/table-tent-card.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "4\" x 6\" Freestanding Triangle",
@@ -2436,7 +2614,9 @@
       "minQuantity": 20,
       "image": "/images/products/rest-bill-book.webp",
       "secondaryImages": [
-        "/images/products/rest-bill-book.webp"
+        "/images/products/rest-bill-book.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "1/8 Demy (5.5\" x 8.5\")",
@@ -2463,7 +2643,9 @@
       "minQuantity": 1000,
       "image": "/images/products/parcel-sticker.webp",
       "secondaryImages": [
-        "/images/products/parcel-sticker.webp"
+        "/images/products/parcel-sticker.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "2\" x 3\" Seal Tape",
@@ -2489,7 +2671,9 @@
       "minQuantity": 1000,
       "image": "/images/products/rest-food-label.webp",
       "secondaryImages": [
-        "/images/products/rest-food-label.webp"
+        "/images/products/rest-food-label.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "Custom Box / Container Lid Label"
@@ -2514,7 +2698,9 @@
       "minQuantity": 1000,
       "image": "/images/products/takeaway-menu.webp",
       "secondaryImages": [
-        "/images/products/takeaway-menu.webp"
+        "/images/products/takeaway-menu.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "A4 Tri-Fold Pamphlet",
@@ -2540,7 +2726,9 @@
       "minQuantity": 100,
       "image": "/images/products/hotel-key-card.webp",
       "secondaryImages": [
-        "/images/products/hotel-key-card.webp"
+        "/images/products/hotel-key-card.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -2565,7 +2753,9 @@
       "minQuantity": 100,
       "image": "/images/products/room-service-card.webp",
       "secondaryImages": [
-        "/images/products/room-service-card.webp"
+        "/images/products/room-service-card.webp",
+        "/images/categories/restaurant-hotel-printing.webp",
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "Door Knob Hanger (4\" x 9\")",

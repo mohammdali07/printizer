@@ -397,39 +397,45 @@ export default function HomePage({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {showcaseCategories.map((card) => (
             <div
               key={card.id}
-              onClick={() => handleCardClick(card)}
-              className="group bg-white rounded-2xl p-5 sm:p-6 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-200/90 cursor-pointer flex flex-col justify-between"
-              title={`Click to configure ${card.title}`}
+              onClick={() => onNavigate('category', card.targetCategory)}
+              className="group bg-white rounded-3xl p-4 sm:p-5 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between"
+              title={`View ${card.title} Catalogue`}
             >
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 tracking-wider group-hover:text-brand-crimson transition">
-                    {card.title}
-                  </h3>
-                  <p className="text-[11px] text-slate-500 mt-1 line-clamp-1">
-                    {card.subtitle}
-                  </p>
-                </div>
-                <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full group-hover:bg-brand-crimson group-hover:text-white transition shrink-0">
+              {/* Large Studio Product Photograph */}
+              <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-xs mb-4">
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <span className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-[11px] font-bold px-3 py-1 rounded-full border border-slate-200/80 shadow-xs">
                   {card.badge}
                 </span>
               </div>
 
-              <div className="my-5 relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-50 flex items-center justify-center p-2 group-hover:bg-slate-100/70 transition">
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="w-full h-full object-cover rounded-lg group-hover:scale-103 transition-transform duration-500"
-                />
-              </div>
+              {/* Category Information */}
+              <div className="space-y-1.5 px-1 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight group-hover:text-brand-crimson transition-colors duration-200">
+                    {card.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 mt-1">
+                    {card.subtitle}
+                  </p>
+                </div>
 
-              <div className="flex items-center justify-between text-xs font-bold text-slate-700 group-hover:text-brand-crimson transition pt-3 border-t border-slate-100">
-                <span className="text-[11px]">Explore & Configure</span>
-                <ArrowRight className="w-3.5 h-3.5 -translate-x-1 group-hover:translate-x-0 transition-transform" />
+                {/* Explore & Configure Action Row */}
+                <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
+                  <span className="tracking-wide text-[11px] sm:text-xs">Explore & Configure</span>
+                  <div className="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
+                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </div>
               </div>
             </div>
           ))}
@@ -455,16 +461,17 @@ export default function HomePage({
             <div
               key={item.id}
               onClick={() => onNavigate('product', item.slug)}
-              className="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-left"
+              className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-left"
             >
               <div>
-                <div className="relative aspect-square rounded-xl overflow-hidden bg-slate-50 mb-3 flex items-center justify-center p-2">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-3.5 border border-slate-200/60 shadow-xs">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-full object-cover rounded-lg group-hover:scale-103 transition-transform duration-300"
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <span className="absolute bottom-2 left-2 bg-slate-900/85 text-white text-[10px] font-medium px-2 py-0.5 rounded">
+                  <span className="absolute bottom-2.5 left-2.5 bg-slate-900/90 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow-xs">
                     MOQ: {item.minQty} units
                   </span>
                 </div>
@@ -472,7 +479,7 @@ export default function HomePage({
                 <span className="text-[10px] font-bold text-brand-crimson uppercase tracking-wider block">
                   {item.category}
                 </span>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 line-clamp-1 group-hover:text-brand-crimson transition mt-0.5">
+                <h4 className="text-xs sm:text-sm font-bold text-slate-900 line-clamp-1 group-hover:text-brand-crimson transition mt-1">
                   {item.name}
                 </h4>
                 <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
@@ -480,9 +487,11 @@ export default function HomePage({
                 </p>
               </div>
 
-              <div className="pt-3 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-700 group-hover:text-brand-crimson">
+              <div className="pt-3.5 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
                 <span>View Details</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <div className="w-6 h-6 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
+                  <ArrowRight className="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform" />
+                </div>
               </div>
             </div>
           ))}

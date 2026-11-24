@@ -31,28 +31,38 @@ export default function CategoryPage({
 
   return (
     <div className="pb-20 space-y-10">
-      {/* Category Header Banner */}
-      <div className="bg-brand-navy text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-slate-800 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Breadcrumb */}
-          <div className="flex items-center space-x-2 text-xs text-slate-400 mb-4">
-            <button onClick={() => onNavigate('home')} className="hover:text-white transition">
-              Home
-            </button>
-            <ChevronRight className="w-3 h-3" />
-            <span className="text-brand-crimson font-medium">{category.name}</span>
-          </div>
+      {/* Category Header Banner with Authentic Studio Photograph */}
+      <div className="bg-slate-900 text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-800 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="lg:col-span-7 space-y-3.5 text-left">
+            {/* Breadcrumb */}
+            <div className="flex items-center space-x-2 text-xs text-slate-400">
+              <button onClick={() => onNavigate('home')} className="hover:text-white transition">
+                Home
+              </button>
+              <ChevronRight className="w-3 h-3" />
+              <span className="text-brand-crimson font-medium">{category.name}</span>
+            </div>
 
-          <div className="max-w-3xl">
-            <span className="inline-block bg-brand-crimson/20 border border-brand-crimson/40 text-rose-300 text-[11px] font-bold px-3 py-1 rounded-full mb-3">
-              {category.badge}
+            <span className="inline-block bg-brand-crimson/20 border border-brand-crimson/40 text-rose-300 text-[11px] font-bold px-3 py-1 rounded-full">
+              {category.badge || `${categoryProducts.length} Products`}
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               {category.name}
             </h1>
-            <p className="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
               {category.description}
             </p>
+          </div>
+
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative aspect-[4/3] w-full max-w-md rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl">
+              <img
+                src={category.image}
+                alt={category.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -93,19 +103,20 @@ Thank you.`;
               return (
                 <div
                   key={p.id}
-                  className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col group"
+                  className="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group"
                 >
                   {/* Mockup Image */}
                   <div 
                     onClick={() => onNavigate('product', p.slug)}
-                    className="relative h-52 overflow-hidden bg-slate-50 cursor-pointer"
+                    className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 cursor-pointer border-b border-slate-100"
                   >
                     <img
                       src={p.image}
                       alt={p.name}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <span className="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-sm text-white text-[11px] font-medium px-2.5 py-0.5 rounded-md">
+                    <span className="absolute bottom-3 left-3 bg-slate-900/90 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1 rounded-md shadow-xs">
                       Min Qty: {p.minQuantity} units
                     </span>
                   </div>

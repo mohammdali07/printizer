@@ -473,14 +473,6 @@ Thank you!`;
                 <span><strong>Color Calibration:</strong> CMYK 300 DPI Photographic Fidelity</span>
               </p>
             </div>
-
-            {/* Specifications Notes Box */}
-            <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 text-[11px] text-slate-600 space-y-1">
-              <strong className="text-slate-900 block font-bold">Production Standards:</strong>
-              <p>• Size and artwork must include 3mm bleed margin.</p>
-              <p>• Vector PDF, AI, or CorelDRAW CDR format with converted curves recommended.</p>
-              <p>• Full CMYK color spectrum fidelity assured on every order.</p>
-            </div>
           </div>
         </div>
       </div>

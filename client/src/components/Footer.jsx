@@ -150,35 +150,35 @@ export default function Footer({ onNavigate, categories = [] }) {
             </ul>
           </div>
 
-          {/* Column 4: Useful Links */}
+          {/* Column 4: Commercial Categories */}
           <div>
             <h4 className="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wider mb-4">
-              Commercial Links
+              Printing Categories
             </h4>
             <ul className="space-y-2 text-xs text-slate-600">
               <li>
-                <button onClick={() => onNavigate('category', 'business-printing')} className="hover:text-brand-crimson transition">
-                  Visiting & Business Cards
+                <button onClick={() => onNavigate('category', 'business-stationery')} className="hover:text-brand-crimson transition">
+                  Business Stationery
                 </button>
               </li>
               <li>
                 <button onClick={() => onNavigate('category', 'packaging-printing')} className="hover:text-brand-crimson transition">
-                  Custom Packaging Boxes
+                  Packaging Printing
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('category', 'marketing-printing')} className="hover:text-brand-crimson transition">
-                  Brochures & Flyers
+                <button onClick={() => onNavigate('category', 'marketing-advertising')} className="hover:text-brand-crimson transition">
+                  Marketing & Advertising
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('category', 'stickers-labels')} className="hover:text-brand-crimson transition">
-                  Die-Cut Vinyl Stickers
+                <button onClick={() => onNavigate('category', 'labels-stickers')} className="hover:text-brand-crimson transition">
+                  Labels & Stickers
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('category', 'large-format-printing')} className="hover:text-brand-crimson transition">
-                  Roll-Up Banners & Signage
+                <button onClick={() => onNavigate('category', 'books-publications')} className="hover:text-brand-crimson transition">
+                  Books & Publications
                 </button>
               </li>
             </ul>

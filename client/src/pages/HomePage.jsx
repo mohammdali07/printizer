@@ -238,151 +238,173 @@ export default function HomePage({
 
   return (
     <div className="space-y-10 sm:space-y-20 lg:space-y-24 pb-20 bg-[#fafbfc]">
-      {/* 1. HERO SECTION (Full Mobile First-Screen Viewport & High-Impact Commercial Showcase) */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9]/60 to-[#fafbfc] min-h-[calc(100dvh-54px)] sm:min-h-0 flex flex-col justify-between pt-3 pb-4 sm:pt-14 sm:pb-18 lg:pt-20 lg:pb-24 border-b border-slate-200/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex-1 flex flex-col justify-around lg:justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-center my-auto">
+      {/* 1. HERO SECTION (Expanded Full-Width Mobile-First Showcase) */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9]/60 to-[#fafbfc] pt-4 pb-8 xs:pt-6 xs:pb-10 sm:pt-12 sm:pb-16 lg:pt-16 lg:pb-20 border-b border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4.5 xs:px-5 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             {/* Left Content Column */}
-            <div className="lg:col-span-6 space-y-3 sm:space-y-5 text-left">
+            <div className="lg:col-span-6 space-y-3.5 sm:space-y-5 text-left">
               {/* Small Professional Eyebrow Label */}
-              <div className="inline-flex items-center space-x-1.5 bg-white/95 border border-slate-200/90 rounded-full py-0.5 sm:py-1 px-2.5 sm:px-3 shadow-2xs">
+              <div className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 rounded-full py-1 px-3 shadow-2xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson animate-pulse"></span>
-                <span className="text-[9.5px] sm:text-[11px] font-bold tracking-widest text-slate-700 uppercase">
+                <span className="text-[10px] xs:text-[11px] sm:text-xs font-bold tracking-widest text-slate-700 uppercase">
                   Professional Printing Solutions
                 </span>
               </div>
 
-              {/* Short Powerful Headline */}
-              <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight text-slate-900 leading-[1.14]">
-                Make Every Print <br className="hidden xs:inline" />
+              {/* Expanded Powerful Headline */}
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] font-extrabold tracking-tight text-slate-900 leading-[1.12]">
+                Make Every Print <br />
                 <span className="text-brand-crimson relative inline-block">
                   Stand Out.
                   <span className="absolute bottom-1 left-0 right-0 h-1.5 sm:h-2 bg-brand-crimson/15 -z-10 rounded"></span>
                 </span>
               </h1>
 
-              {/* Concise Supporting Description */}
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed max-w-xl font-normal">
+              {/* Full-Width Supporting Description */}
+              <p className="text-sm xs:text-base text-slate-600 leading-relaxed font-normal max-w-xl">
                 Premium business printing, marketing materials and custom packaging — made to represent your brand.
               </p>
 
-              {/* Primary & Compact Secondary Action Buttons */}
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-1">
+              {/* Primary & Secondary Action Buttons (Stacked on Small Mobile, Horizontal on Wider Screens) */}
+              <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-3 pt-1 w-full max-w-md sm:max-w-none">
                 <button
                   onClick={() => {
                     const el = document.getElementById('categories-showcase');
                     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }}
-                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 xs:px-5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm shadow-md hover:shadow-xl transition flex items-center justify-center space-x-1.5 active:scale-95 cursor-pointer"
+                  className="w-full xs:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm shadow-md hover:shadow-xl transition flex items-center justify-center space-x-2 active:scale-[0.98] cursor-pointer min-h-[46px]"
                 >
                   <span>Explore Our Products</span>
-                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <button
-                  onClick={() => onNavigate('contact')}
-                  className="bg-white hover:bg-slate-50 text-slate-800 font-bold px-3.5 xs:px-4 sm:px-5 py-2.5 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm border border-slate-300 shadow-2xs hover:border-slate-400 transition flex items-center justify-center active:scale-95 cursor-pointer"
-                >
-                  <span>Contact Us</span>
-                </button>
+                <div className="flex items-center gap-2 w-full xs:w-auto">
+                  <button
+                    onClick={() => onNavigate('contact')}
+                    className="flex-1 xs:flex-none bg-white hover:bg-slate-50 text-slate-800 font-bold px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm border border-slate-300 shadow-2xs hover:border-slate-400 transition flex items-center justify-center active:scale-[0.98] cursor-pointer min-h-[46px]"
+                  >
+                    <span>Contact Us</span>
+                  </button>
 
-                <a
-                  href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20am%20interested%20in%20getting%20a%20quotation%20for%20business%20printing."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 sm:px-4 sm:py-3.5 rounded-xl sm:rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition flex items-center justify-center space-x-1.5 active:scale-95 text-xs font-bold"
-                  title="Chat on WhatsApp"
-                >
-                  <MessageCircle className="w-4 h-4 text-emerald-600" />
-                  <span className="hidden sm:inline">WhatsApp</span>
-                </a>
-              </div>
-
-              {/* Desktop Trust Features Row */}
-              <div className="hidden lg:flex items-center space-x-6 pt-5 border-t border-slate-200/80 text-xs text-slate-600 font-medium">
-                <div className="flex items-center space-x-1.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Rigorous Color Calibration</span>
-                </div>
-                <div className="flex items-center space-x-1.5">
-                  <Truck className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>PAN India Shipping</span>
-                </div>
-                <div className="flex items-center space-x-1.5">
-                  <Palette className="w-4 h-4 text-purple-600 shrink-0" />
-                  <span>Free Digital Soft Proofs</span>
+                  <a
+                    href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20am%20interested%20in%20getting%20a%20quotation%20for%20business%20printing."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-none px-3.5 py-3 sm:py-3.5 rounded-xl sm:rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition flex items-center justify-center active:scale-[0.98] text-xs font-bold min-h-[46px]"
+                    title="Chat on WhatsApp"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-600" />
+                    <span className="hidden sm:inline ml-1.5">WhatsApp</span>
+                  </a>
                 </div>
               </div>
             </div>
 
-            {/* Right Visual Column: Studio Product Photography Showcase */}
-            <div className="lg:col-span-6 relative flex flex-col items-center justify-center pt-2 sm:pt-4 lg:pt-0">
+            {/* Right Visual Column: Expanded Large Studio Product Photography Showcase */}
+            <div className="lg:col-span-6 relative flex flex-col items-center justify-center w-full pt-3 sm:pt-4 lg:pt-0">
               <div 
-                className="relative w-full max-w-sm sm:max-w-lg lg:max-w-xl mx-auto flex items-center justify-center min-h-[220px] xs:min-h-[250px] sm:min-h-[380px] lg:min-h-[440px]"
+                className="relative w-full max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto flex flex-col items-center justify-center"
                 onMouseEnter={() => setHeroPaused(true)}
                 onMouseLeave={() => setHeroPaused(false)}
               >
-                {/* Ambient Halo Pedestal */}
-                <div 
-                  className={`absolute w-52 h-52 xs:w-64 xs:h-64 sm:w-88 sm:h-88 md:w-[26rem] md:h-[26rem] lg:w-[28rem] lg:h-[28rem] rounded-full bg-gradient-to-tr ${activeHero.circleBg} border border-slate-200/60 shadow-xl shadow-slate-300/30 transition-all duration-700 pointer-events-none transform -rotate-3`}
-                />
+                {/* Ambient Studio Lighting Backdrop */}
+                <div className="relative w-full aspect-[4/3] xs:aspect-[16/11] sm:aspect-[16/10] max-h-[300px] xs:max-h-[340px] sm:max-h-[400px] lg:max-h-[460px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-100/90 via-slate-50/60 to-white/90 border border-slate-200/70 p-3 sm:p-6 flex items-center justify-center shadow-xs overflow-hidden">
+                  {/* Subtle ambient light pool */}
+                  <div 
+                    className={`absolute w-4/5 h-4/5 rounded-full bg-gradient-to-tr ${activeHero.circleBg} blur-2xl opacity-70 pointer-events-none transition-all duration-700`}
+                  />
 
-                {/* Ground Contact Soft Shadow */}
-                <div className="absolute bottom-4 sm:bottom-8 w-48 xs:w-60 sm:w-80 h-5 sm:h-7 bg-slate-900/10 blur-xl rounded-full pointer-events-none" />
-
-                {/* 100% Transparent Studio Mockup */}
-                <div className="relative z-10 w-full flex items-center justify-center px-2 sm:px-4 py-1 sm:py-2">
+                  {/* 100% Transparent Isolated Studio Mockup - Large, crisp, prominent */}
                   <img
                     key={activeHero.id}
                     src={activeHero.image}
                     alt={activeHero.title}
-                    className={`w-full max-h-[190px] xs:max-h-[220px] sm:max-h-[340px] lg:max-h-[400px] object-contain transition-all duration-500 transform ${activeHero.rotate} hover:scale-[1.02] drop-shadow-[0_12px_20px_rgba(0,0,0,0.12)] select-none`}
+                    className="relative z-10 w-full h-full object-contain transition-transform duration-500 hover:scale-[1.03] drop-shadow-[0_16px_28px_rgba(0,0,0,0.12)] select-none"
                   />
+
+                  {/* Subtle Corner Badge: Product Classification */}
+                  <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-lg py-1 px-2.5 shadow-2xs text-[10px] sm:text-xs font-bold text-slate-700 flex items-center space-x-1.5 pointer-events-none">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson"></span>
+                    <span>{activeHero.badge}</span>
+                  </div>
                 </div>
 
-                {/* Floating Feature Badge 1: Top Right */}
-                <div className="absolute top-1 right-1 sm:top-4 sm:right-2 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl sm:rounded-2xl py-1 px-2 sm:py-2 sm:px-3.5 shadow-md text-[9px] sm:text-xs font-bold text-slate-800 flex items-center space-x-1 pointer-events-none animate-in fade-in slide-in-from-top-2">
-                  <span>{activeHero.pill1}</span>
-                </div>
+                {/* Clean Caption & Slide Switcher Below Image */}
+                <div className="w-full flex items-center justify-between px-1 pt-2.5 sm:pt-3 text-xs">
+                  <div className="flex items-center space-x-2 min-w-0">
+                    <span className="font-bold text-slate-900 text-xs sm:text-sm truncate">
+                      {activeHero.title}
+                    </span>
+                    <span className="text-slate-300 hidden sm:inline">•</span>
+                    <span className="text-slate-500 text-[11px] sm:text-xs truncate hidden sm:inline font-medium">
+                      {activeHero.tagline}
+                    </span>
+                  </div>
 
-                {/* Floating Feature Badge 2: Bottom Left */}
-                <div className="absolute bottom-2 left-1 sm:bottom-6 sm:left-4 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl sm:rounded-2xl py-1 px-2 sm:py-2 sm:px-3.5 shadow-md text-[9px] sm:text-xs font-bold text-slate-800 flex items-center space-x-1 pointer-events-none animate-in fade-in slide-in-from-bottom-2">
-                  <span>{activeHero.pill2}</span>
+                  {/* Slide Dots */}
+                  <div className="flex items-center space-x-1.5 shrink-0 pl-2">
+                    {heroSlides.map((s, idx) => (
+                      <button
+                        key={s.id}
+                        type="button"
+                        onClick={() => setCurrentHeroSlide(idx)}
+                        className={`transition-all duration-300 rounded-full cursor-pointer ${
+                          currentHeroSlide === idx
+                            ? 'w-6 sm:w-7 h-2 bg-slate-900 shadow-xs'
+                            : 'w-2 h-2 bg-slate-300 hover:bg-slate-500'
+                        }`}
+                        aria-label={`Jump to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                {/* Carousel Pagination Dots */}
-                <div className="absolute -bottom-4 sm:-bottom-8 flex items-center space-x-2 z-20">
-                  {heroSlides.map((s, idx) => (
-                    <button
-                      key={s.id}
-                      type="button"
-                      onClick={() => setCurrentHeroSlide(idx)}
-                      className={`transition-all duration-300 rounded-full cursor-pointer ${
-                        currentHeroSlide === idx
-                          ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-slate-900 shadow-xs'
-                          : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-slate-300 hover:bg-slate-500'
-                      }`}
-                      aria-label={`Jump to slide ${idx + 1}`}
-                    />
-                  ))}
+          {/* Trust Indicators: 3 Balanced Compact Cards (Full Width & Clean on All Viewports) */}
+          <div className="w-full mt-6 sm:mt-10 pt-4 sm:pt-6 border-t border-slate-200/80">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6 text-center sm:text-left">
+              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-xs">
+                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0 text-emerald-600">
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-[10px] xs:text-[11px] sm:text-xs lg:text-sm font-bold text-slate-900 leading-tight">
+                    Color Calibration
+                  </h4>
+                  <p className="text-[10px] text-slate-500 hidden sm:block mt-0.5">
+                    Strict CMYK True-Color Standards
+                  </p>
                 </div>
               </div>
 
-              {/* Mobile Trust Indicators Strip (Directly Below Hero Product Photography) */}
-              <div className="lg:hidden w-full mt-7 pt-3.5 border-t border-slate-200/80">
-                <div className="flex items-center justify-between gap-1.5 text-[10px] text-slate-600 font-semibold overflow-x-auto no-scrollbar py-0.5">
-                  <div className="flex items-center space-x-1 shrink-0 bg-white/80 px-2 py-1 rounded-lg border border-slate-200/60 shadow-2xs">
-                    <Check className="w-3 h-3 text-emerald-600 shrink-0" />
-                    <span>Color Calibration</span>
-                  </div>
-                  <div className="flex items-center space-x-1 shrink-0 bg-white/80 px-2 py-1 rounded-lg border border-slate-200/60 shadow-2xs">
-                    <Truck className="w-3 h-3 text-blue-600 shrink-0" />
-                    <span>PAN India Shipping</span>
-                  </div>
-                  <div className="flex items-center space-x-1 shrink-0 bg-white/80 px-2 py-1 rounded-lg border border-slate-200/60 shadow-2xs">
-                    <Palette className="w-3 h-3 text-purple-600 shrink-0" />
-                    <span>Free Soft Proofs</span>
-                  </div>
+              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-xs">
+                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 text-blue-600">
+                  <Truck className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-[10px] xs:text-[11px] sm:text-xs lg:text-sm font-bold text-slate-900 leading-tight">
+                    PAN India Shipping
+                  </h4>
+                  <p className="text-[10px] text-slate-500 hidden sm:block mt-0.5">
+                    Moisture-Proof Secure Delivery
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-xs">
+                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center shrink-0 text-purple-600">
+                  <Palette className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-[10px] xs:text-[11px] sm:text-xs lg:text-sm font-bold text-slate-900 leading-tight">
+                    Free Soft Proofs
+                  </h4>
+                  <p className="text-[10px] text-slate-500 hidden sm:block mt-0.5">
+                    Pre-Press Digital Verification
+                  </p>
                 </div>
               </div>
             </div>

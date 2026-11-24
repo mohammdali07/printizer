@@ -126,7 +126,7 @@ export default function Header({
       </div>
 
       {/* 2. MAIN NAVBAR */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-6">
+      <div className="max-w-7xl mx-auto px-4.5 xs:px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-6">
         {/* Brand Logo */}
         <button 
           onClick={() => onNavigate('home')} 
@@ -136,7 +136,7 @@ export default function Header({
           <img 
             src="/images/printizer-logo-horizontal.png" 
             alt="PRINTIZER - Everything Your Business Needs to Print" 
-            className="h-7 sm:h-10 md:h-12 w-auto max-w-[125px] sm:max-w-none object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+            className="h-8 xs:h-9 sm:h-10 md:h-12 w-auto max-w-[140px] sm:max-w-none object-contain transition-transform duration-200 group-hover:scale-[1.02]"
             onError={(e) => {
               e.target.src = "/images/printizer-logo-horizontal.jpeg";
             }}
@@ -263,30 +263,30 @@ export default function Header({
           {/* Mobile Search Icon Toggle */}
           <button
             onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-            className="md:hidden p-1.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition"
+            className="md:hidden w-9 h-9 flex items-center justify-center text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition"
             aria-label="Search"
           >
-            <Search className="w-5 h-5" />
+            <Search className="w-4.5 h-4.5" />
           </button>
 
-          {/* Primary Action Button - Compact on Mobile */}
+          {/* Primary Action Button - Compact & Crisp on Mobile */}
           <button
             onClick={() => onRequestQuote()}
-            className="bg-brand-crimson hover:bg-brand-red text-white font-extrabold text-[11px] sm:text-xs px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-xs hover:shadow-md transition flex items-center space-x-1 active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+            className="bg-brand-crimson hover:bg-brand-red text-white font-extrabold text-[11px] sm:text-xs h-9 px-3 sm:px-4 rounded-xl shadow-xs hover:shadow-md transition flex items-center space-x-1 active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
             title="Request Official Quotation"
           >
             <span className="hidden sm:inline">Request </span>
             <span>Quote</span>
-            <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+            <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
           </button>
 
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-1.5 text-slate-800 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition flex items-center justify-center cursor-pointer shrink-0"
+            className="lg:hidden w-9 h-9 flex items-center justify-center text-slate-800 hover:text-slate-900 hover:bg-slate-100 rounded-xl border border-slate-200/80 transition cursor-pointer shrink-0"
             aria-label="Open Navigation Menu"
           >
-            <Menu className="w-6 h-6" />
+            <Menu className="w-5 h-5" />
           </button>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default function WhatsAppFloating({ defaultProduct = null }) {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bottom-safe z-40 flex flex-col items-end">
       {/* Floating Prompt Card */}
       {isOpen && (
         <div className="mb-3 w-72 bg-white rounded-2xl shadow-2xl border border-slate-200 p-4 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -29,7 +29,7 @@ export default function WhatsAppFloating({ defaultProduct = null }) {
             </div>
             <button 
               onClick={() => setIsOpen(false)}
-              className="text-slate-400 hover:text-slate-600 p-1"
+              className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -49,17 +49,16 @@ export default function WhatsAppFloating({ defaultProduct = null }) {
         </div>
       )}
 
-      {/* Main Floating Button */}
+      {/* Main Floating Button - Clean & Professional */}
       <div className="relative group">
         <a
           href={getUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-emerald-500/40 hover:scale-105 transition-all duration-300"
+          className="w-12 h-12 sm:w-13 sm:h-13 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-emerald-500/30 hover:scale-105 transition-all duration-300"
           title="Chat with PRINTIZER on WhatsApp"
         >
-          <MessageCircle className="w-7 h-7" />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></span>
+          <MessageCircle className="w-6 h-6 sm:w-6.5 sm:h-6.5" />
         </a>
       </div>
     </div>

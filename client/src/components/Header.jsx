@@ -84,23 +84,23 @@ export default function Header({
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-2xs border-b border-slate-200/80">
       {/* 1. TOP ANNOUNCEMENT BAR (Compact & Responsive) */}
-      <div className="bg-slate-900 text-slate-300 text-[10px] sm:text-xs py-1.5 px-3 sm:px-6 border-b border-slate-800">
+      <div className="bg-slate-900 text-slate-300 text-[10px] sm:text-xs py-1 sm:py-1.5 px-3 sm:px-6 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           {/* Left: Brand & Assurance */}
-          <div className="flex items-center space-x-2 text-slate-300 min-w-0">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 text-slate-300 min-w-0">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson shrink-0 animate-pulse"></span>
-            <span className="font-bold text-white tracking-wider shrink-0">PRINTIZER</span>
-            <span className="text-slate-600 hidden xs:inline">|</span>
-            <span className="truncate text-slate-300 hidden xs:inline">
+            <span className="font-bold text-white tracking-wider shrink-0 text-[10px] sm:text-xs">PRINTIZER</span>
+            <span className="text-slate-600 hidden sm:inline">|</span>
+            <span className="truncate text-slate-300 hidden sm:inline">
               PAN India Delivery &bull; Free Digital Soft Proofs
             </span>
-            <span className="truncate text-slate-300 xs:hidden">
-              PAN India Delivery
+            <span className="truncate text-slate-300 sm:hidden text-[9.5px]">
+              PAN India Delivery Hub
             </span>
           </div>
 
           {/* Right: Direct WhatsApp Helpline & Admin Console */}
-          <div className="flex items-center space-x-2.5 sm:space-x-4 shrink-0">
+          <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
             <a 
               href="https://wa.me/919898351920" 
               target="_blank" 
@@ -110,12 +110,12 @@ export default function Header({
             >
               <MessageCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span className="hidden sm:inline">+91 98983 51920</span>
-              <span className="sm:hidden">WhatsApp</span>
+              <span className="sm:hidden text-[9.5px]">WhatsApp</span>
             </a>
 
             <button
               onClick={() => onNavigate('admin')}
-              className="flex items-center space-x-1 bg-slate-800 hover:bg-slate-700 text-amber-300 px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold border border-slate-700 transition"
+              className="hidden sm:flex items-center space-x-1 bg-slate-800 hover:bg-slate-700 text-amber-300 px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold border border-slate-700 transition"
               title="Admin Portal"
             >
               <Lock className="w-2.5 h-2.5 text-amber-400" />
@@ -126,7 +126,7 @@ export default function Header({
       </div>
 
       {/* 2. MAIN NAVBAR */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-6">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-6">
         {/* Brand Logo */}
         <button 
           onClick={() => onNavigate('home')} 
@@ -136,7 +136,7 @@ export default function Header({
           <img 
             src="/images/printizer-logo-horizontal.png" 
             alt="PRINTIZER - Everything Your Business Needs to Print" 
-            className="h-8 sm:h-11 md:h-13 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+            className="h-7 sm:h-10 md:h-12 w-auto max-w-[125px] sm:max-w-none object-contain transition-transform duration-200 group-hover:scale-[1.02]"
             onError={(e) => {
               e.target.src = "/images/printizer-logo-horizontal.jpeg";
             }}
@@ -258,30 +258,32 @@ export default function Header({
           )}
         </div>
 
-        {/* Action Controls: Mobile Search Trigger, Quote CTA, Mobile Drawer Toggle */}
-        <div className="flex items-center space-x-1.5 sm:space-x-3">
+        {/* Action Controls: Mobile Search Trigger, Compact Quote CTA, Mobile Drawer Toggle */}
+        <div className="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
           {/* Mobile Search Icon Toggle */}
           <button
             onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-            className="md:hidden p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition"
+            className="md:hidden p-1.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition"
             aria-label="Search"
           >
             <Search className="w-5 h-5" />
           </button>
 
-          {/* Primary Action Button */}
+          {/* Primary Action Button - Compact on Mobile */}
           <button
             onClick={() => onRequestQuote()}
-            className="bg-brand-crimson hover:bg-brand-red text-white font-extrabold text-[11px] sm:text-xs px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md shadow-brand-crimson/20 hover:shadow-lg transition flex items-center space-x-1 active:scale-95 whitespace-nowrap cursor-pointer"
+            className="bg-brand-crimson hover:bg-brand-red text-white font-extrabold text-[11px] sm:text-xs px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-xs hover:shadow-md transition flex items-center space-x-1 active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+            title="Request Official Quotation"
           >
-            <span>Request Quote</span>
-            <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+            <span className="hidden sm:inline">Request </span>
+            <span>Quote</span>
+            <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
           </button>
 
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition min-w-[40px] min-h-[40px] flex items-center justify-center cursor-pointer"
+            className="lg:hidden p-1.5 text-slate-800 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition flex items-center justify-center cursor-pointer shrink-0"
             aria-label="Open Navigation Menu"
           >
             <Menu className="w-6 h-6" />

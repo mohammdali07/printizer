@@ -237,51 +237,51 @@ export default function HomePage({
   };
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20 bg-[#fafbfc]">
-      {/* 1. HERO SECTION (Phase 5.2 - Premium International Aesthetic) */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9]/60 to-[#fafbfc] pt-8 pb-12 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 border-b border-slate-200/70">
+    <div className="space-y-10 sm:space-y-20 lg:space-y-24 pb-20 bg-[#fafbfc]">
+      {/* 1. HERO SECTION (Redesigned Mobile-First & High-Impact Commercial Showcase) */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9]/60 to-[#fafbfc] pt-4 pb-8 sm:pt-14 sm:pb-18 lg:pt-20 lg:pb-24 border-b border-slate-200/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             {/* Left Content Column */}
-            <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-left">
-              <div className="inline-flex items-center space-x-2 bg-white border border-slate-200 rounded-full py-1 px-3 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-brand-crimson animate-pulse"></span>
-                <span className="text-[11px] font-bold tracking-wider text-slate-700 uppercase">
-                  Commercial Printing & Bespoke Quotations
+            <div className="lg:col-span-6 space-y-3 sm:space-y-5 text-left">
+              {/* Small Professional Eyebrow Label */}
+              <div className="inline-flex items-center space-x-1.5 bg-white/95 border border-slate-200/90 rounded-full py-0.5 sm:py-1 px-2.5 sm:px-3 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson animate-pulse"></span>
+                <span className="text-[9.5px] sm:text-[11px] font-bold tracking-widest text-slate-700 uppercase">
+                  Professional Printing Solutions
                 </span>
               </div>
 
-              {/* Exact Suggested Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight text-slate-900 leading-[1.12]">
-                Print Your Ideas. <br />
-                <span className="text-slate-900">Make Your Brand </span>
+              {/* Short Powerful Headline */}
+              <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight text-slate-900 leading-[1.14]">
+                Make Every Print <br className="hidden xs:inline" />
                 <span className="text-brand-crimson relative inline-block">
                   Stand Out.
-                  <span className="absolute bottom-1 left-0 right-0 h-2 bg-brand-crimson/15 -z-10 rounded"></span>
+                  <span className="absolute bottom-1 left-0 right-0 h-1.5 sm:h-2 bg-brand-crimson/15 -z-10 rounded"></span>
                 </span>
               </h1>
 
-              {/* Exact Suggested Supporting Text */}
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl font-normal">
-                Professional printing solutions with quality presentation and attention to detail. From luxury executive visiting cards to structural retail packaging and corporate marketing suites.
+              {/* Concise Supporting Description */}
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed max-w-xl font-normal">
+                Premium business printing, marketing materials and custom packaging — made to represent your brand.
               </p>
 
-              {/* Primary & Secondary Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+              {/* Primary & Compact Secondary Action Buttons */}
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-1">
                 <button
                   onClick={() => {
                     const el = document.getElementById('categories-showcase');
                     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }}
-                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3.5 rounded-full text-xs sm:text-sm shadow-md hover:shadow-xl transition flex items-center justify-center space-x-2 active:scale-95"
+                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 xs:px-5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm shadow-md hover:shadow-xl transition flex items-center justify-center space-x-1.5 active:scale-95 cursor-pointer"
                 >
                   <span>Explore Our Products</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
 
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="bg-white hover:bg-slate-50 text-slate-800 font-bold px-6 py-3.5 rounded-full text-xs sm:text-sm border border-slate-300 shadow-xs hover:border-slate-400 transition flex items-center justify-center space-x-2 active:scale-95"
+                  className="bg-white hover:bg-slate-50 text-slate-800 font-bold px-3.5 xs:px-4 sm:px-5 py-2.5 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm border border-slate-300 shadow-2xs hover:border-slate-400 transition flex items-center justify-center active:scale-95 cursor-pointer"
                 >
                   <span>Contact Us</span>
                 </button>
@@ -290,15 +290,16 @@ export default function HomePage({
                   href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20am%20interested%20in%20getting%20a%20quotation%20for%20business%20printing."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-3.5 rounded-full text-xs sm:text-sm transition flex items-center justify-center space-x-2 shadow-xs active:scale-95"
+                  className="p-2.5 sm:px-4 sm:py-3.5 rounded-xl sm:rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition flex items-center justify-center space-x-1.5 active:scale-95 text-xs font-bold"
+                  title="Chat on WhatsApp"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp</span>
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <span className="hidden sm:inline">WhatsApp</span>
                 </a>
               </div>
 
-              {/* Core Quality Pillars */}
-              <div className="grid grid-cols-3 gap-3 pt-6 border-t border-slate-200 text-[11px] sm:text-xs text-slate-600 font-medium">
+              {/* Desktop Trust Features Row */}
+              <div className="hidden lg:flex items-center space-x-6 pt-5 border-t border-slate-200/80 text-xs text-slate-600 font-medium">
                 <div className="flex items-center space-x-1.5">
                   <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>Rigorous Color Calibration</span>
@@ -314,43 +315,43 @@ export default function HomePage({
               </div>
             </div>
 
-            {/* Right Visual Column: Studio Product Photography with Ambient Lighting Disc */}
-            <div className="lg:col-span-6 relative flex items-center justify-center pt-6 lg:pt-0">
+            {/* Right Visual Column: Studio Product Photography Showcase */}
+            <div className="lg:col-span-6 relative flex flex-col items-center justify-center pt-2 sm:pt-4 lg:pt-0">
               <div 
-                className="relative w-full max-w-lg lg:max-w-xl mx-auto flex items-center justify-center min-h-[380px] sm:min-h-[440px]"
+                className="relative w-full max-w-sm sm:max-w-lg lg:max-w-xl mx-auto flex items-center justify-center min-h-[220px] xs:min-h-[250px] sm:min-h-[380px] lg:min-h-[440px]"
                 onMouseEnter={() => setHeroPaused(true)}
                 onMouseLeave={() => setHeroPaused(false)}
               >
                 {/* Ambient Halo Pedestal */}
                 <div 
-                  className={`absolute w-72 h-72 sm:w-88 sm:h-88 md:w-[26rem] md:h-[26rem] lg:w-[28rem] lg:h-[28rem] rounded-full bg-gradient-to-tr ${activeHero.circleBg} border border-slate-200/60 shadow-2xl shadow-slate-300/40 transition-all duration-700 pointer-events-none transform -rotate-3`}
+                  className={`absolute w-52 h-52 xs:w-64 xs:h-64 sm:w-88 sm:h-88 md:w-[26rem] md:h-[26rem] lg:w-[28rem] lg:h-[28rem] rounded-full bg-gradient-to-tr ${activeHero.circleBg} border border-slate-200/60 shadow-xl shadow-slate-300/30 transition-all duration-700 pointer-events-none transform -rotate-3`}
                 />
 
                 {/* Ground Contact Soft Shadow */}
-                <div className="absolute bottom-8 w-64 sm:w-80 h-7 bg-slate-900/10 blur-xl rounded-full pointer-events-none" />
+                <div className="absolute bottom-4 sm:bottom-8 w-48 xs:w-60 sm:w-80 h-5 sm:h-7 bg-slate-900/10 blur-xl rounded-full pointer-events-none" />
 
                 {/* 100% Transparent Studio Mockup */}
-                <div className="relative z-10 w-full flex items-center justify-center px-4 py-2">
+                <div className="relative z-10 w-full flex items-center justify-center px-2 sm:px-4 py-1 sm:py-2">
                   <img
                     key={activeHero.id}
                     src={activeHero.image}
                     alt={activeHero.title}
-                    className={`w-full max-h-[340px] sm:max-h-[400px] object-contain transition-all duration-500 transform ${activeHero.rotate} hover:scale-[1.02] drop-shadow-[0_20px_25px_rgba(0,0,0,0.14)] select-none`}
+                    className={`w-full max-h-[190px] xs:max-h-[220px] sm:max-h-[340px] lg:max-h-[400px] object-contain transition-all duration-500 transform ${activeHero.rotate} hover:scale-[1.02] drop-shadow-[0_12px_20px_rgba(0,0,0,0.12)] select-none`}
                   />
                 </div>
 
                 {/* Floating Feature Badge 1: Top Right */}
-                <div className="absolute top-2 right-2 sm:top-4 sm:right-2 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl py-2 px-3.5 shadow-lg text-xs font-bold text-slate-800 flex items-center space-x-1.5 pointer-events-none animate-in fade-in slide-in-from-top-2">
+                <div className="absolute top-1 right-1 sm:top-4 sm:right-2 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl sm:rounded-2xl py-1 px-2 sm:py-2 sm:px-3.5 shadow-md text-[9px] sm:text-xs font-bold text-slate-800 flex items-center space-x-1 pointer-events-none animate-in fade-in slide-in-from-top-2">
                   <span>{activeHero.pill1}</span>
                 </div>
 
                 {/* Floating Feature Badge 2: Bottom Left */}
-                <div className="absolute bottom-4 left-2 sm:bottom-6 sm:left-4 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl py-2 px-3.5 shadow-lg text-xs font-bold text-slate-800 flex items-center space-x-1.5 pointer-events-none animate-in fade-in slide-in-from-bottom-2">
+                <div className="absolute bottom-2 left-1 sm:bottom-6 sm:left-4 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl sm:rounded-2xl py-1 px-2 sm:py-2 sm:px-3.5 shadow-md text-[9px] sm:text-xs font-bold text-slate-800 flex items-center space-x-1 pointer-events-none animate-in fade-in slide-in-from-bottom-2">
                   <span>{activeHero.pill2}</span>
                 </div>
 
                 {/* Carousel Pagination Dots */}
-                <div className="absolute -bottom-6 sm:-bottom-8 flex items-center space-x-2 z-20">
+                <div className="absolute -bottom-4 sm:-bottom-8 flex items-center space-x-2 z-20">
                   {heroSlides.map((s, idx) => (
                     <button
                       key={s.id}
@@ -358,12 +359,30 @@ export default function HomePage({
                       onClick={() => setCurrentHeroSlide(idx)}
                       className={`transition-all duration-300 rounded-full cursor-pointer ${
                         currentHeroSlide === idx
-                          ? 'w-8 h-2.5 bg-slate-900 shadow-sm'
-                          : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-500'
+                          ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-slate-900 shadow-xs'
+                          : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-slate-300 hover:bg-slate-500'
                       }`}
                       aria-label={`Jump to slide ${idx + 1}`}
                     />
                   ))}
+                </div>
+              </div>
+
+              {/* Mobile Trust Indicators Strip (Directly Below Hero Product Photography) */}
+              <div className="lg:hidden w-full mt-7 pt-3.5 border-t border-slate-200/80">
+                <div className="flex items-center justify-between gap-1.5 text-[10px] text-slate-600 font-semibold overflow-x-auto no-scrollbar py-0.5">
+                  <div className="flex items-center space-x-1 shrink-0 bg-white/80 px-2 py-1 rounded-lg border border-slate-200/60 shadow-2xs">
+                    <Check className="w-3 h-3 text-emerald-600 shrink-0" />
+                    <span>Color Calibration</span>
+                  </div>
+                  <div className="flex items-center space-x-1 shrink-0 bg-white/80 px-2 py-1 rounded-lg border border-slate-200/60 shadow-2xs">
+                    <Truck className="w-3 h-3 text-blue-600 shrink-0" />
+                    <span>PAN India Shipping</span>
+                  </div>
+                  <div className="flex items-center space-x-1 shrink-0 bg-white/80 px-2 py-1 rounded-lg border border-slate-200/60 shadow-2xs">
+                    <Palette className="w-3 h-3 text-purple-600 shrink-0" />
+                    <span>Free Soft Proofs</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -371,14 +390,14 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 2. 9-CARD COMMERCIAL PRODUCT CATEGORY SHOWCASE (Phase 5.3) */}
+      {/* 2. EXPLORE OUR PRINTING SOLUTIONS (Category Showcase Grid) */}
       <section id="categories-showcase" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-2">
-          <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-1.5 sm:space-y-2">
+          <span className="text-[10px] sm:text-xs font-bold text-brand-crimson uppercase tracking-widest block">
             Commercial Printing Catalogue
           </span>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Commercial Printing Categories
+            Explore Our Printing Solutions
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
             Nine specialized printing divisions engineered with high-grade substrates, exact color fidelity, and tailored finishing options.
@@ -419,7 +438,7 @@ export default function HomePage({
 
                 {/* Explore & Configure Action Row */}
                 <div className="pt-2 sm:pt-4 mt-2 sm:mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
-                  <span className="tracking-wide text-[10px] sm:text-xs">Explore</span>
+                  <span className="tracking-wide text-[10px] sm:text-xs">View Products</span>
                   <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
                     <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
                   </div>

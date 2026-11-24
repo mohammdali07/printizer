@@ -158,7 +158,10 @@ app.post('/api/enquiries', upload.single('artwork'), async (req, res) => {
       dimensions,
       material,
       finishing,
-      additionalRequirements
+      additionalRequirements,
+      jobName,
+      estimatedPrice,
+      selectedOptions
     } = req.body;
 
     if (!customerName || !whatsappNumber || !email) {
@@ -183,20 +186,26 @@ app.post('/api/enquiries', upload.single('artwork'), async (req, res) => {
       material,
       finishing,
       additionalRequirements,
+      jobName,
+      estimatedPrice,
+      selectedOptions,
       artworkPath,
       artworkOriginalName
     });
 
     // Prepare WhatsApp continue link
     const waText = `Hello PRINTIZER,
-I am interested in getting a quotation for the following product.
+I would like to request an official quotation:
 Product: ${enquiry.productName}
 Quantity: ${enquiry.quantity}
-Size: ${enquiry.dimensions || 'As required'}
-Material: ${enquiry.material || 'Please suggest'}
-Name: ${enquiry.customerName}
+Size/Specs: ${enquiry.dimensions || 'Standard'}
+Material: ${enquiry.material || 'Standard'}
+Finishing: ${enquiry.finishing || 'Standard'}
+${enquiry.estimatedPrice ? `Estimated Price: ₹ ${enquiry.estimatedPrice}\n` : ''}Job Name: ${enquiry.jobName || 'Commercial Order'}
+Customer: ${enquiry.customerName}
 Enquiry Ref: ${enquiry.referenceNo}
-Please share your best quotation.
+
+Please share the official quotation and artwork review.
 Thank you.`;
 
     const whatsappUrl = `https://wa.me/919898351920?text=${encodeURIComponent(waText)}`;

@@ -672,10 +672,18 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                                 {enq.material && <span>{enq.material} &bull; </span>}
                                 {enq.finishing && <span>{enq.finishing}</span>}
                               </div>
+                              {enq.jobName && (
+                                <span className="text-[10px] text-indigo-600 font-semibold block mt-0.5">Job: {enq.jobName}</span>
+                              )}
                             </td>
 
-                            <td className="py-3 px-3 sm:px-4 whitespace-nowrap font-bold text-slate-800">
-                              {enq.quantity}
+                            <td className="py-3 px-3 sm:px-4 whitespace-nowrap">
+                              <span className="font-bold text-slate-800 block">{enq.quantity}</span>
+                              {enq.estimatedPrice && (
+                                <span className="text-[11px] font-extrabold text-emerald-600 block">
+                                  ₹{Number(enq.estimatedPrice).toLocaleString('en-IN')}
+                                </span>
+                              )}
                             </td>
 
                             <td className="py-3 px-3 sm:px-4 whitespace-nowrap">
@@ -906,6 +914,18 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                   <span className="text-slate-400 block text-[10px]">Finishing:</span>
                   <span className="font-bold text-slate-800">{selectedEnquiry.finishing || 'Standard'}</span>
                 </div>
+                {selectedEnquiry.estimatedPrice && (
+                  <div>
+                    <span className="text-slate-400 block text-[10px]">Client Configured Estimate:</span>
+                    <span className="font-extrabold text-emerald-600">₹ {Number(selectedEnquiry.estimatedPrice).toLocaleString('en-IN')}</span>
+                  </div>
+                )}
+                {selectedEnquiry.jobName && (
+                  <div>
+                    <span className="text-slate-400 block text-[10px]">Job Name:</span>
+                    <span className="font-bold text-slate-800">{selectedEnquiry.jobName}</span>
+                  </div>
+                )}
               </div>
 
               {/* Line Items Table */}

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { 
   ArrowRight, MessageCircle, ChevronRight, CheckCircle2, 
   UploadCloud, ShieldCheck, Sparkles, Layers, FileText, 
-  Truck, Clock, AlertCircle, HelpCircle, Eye
+  Truck, Clock, AlertCircle, HelpCircle, Eye, Check, X,
+  FileCheck, Printer, ArrowLeft, Send
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import PrintConfigurator from '../components/PrintConfigurator.jsx';
 
 export default function ProductDetailPage({ 
   product, 
@@ -13,104 +13,209 @@ export default function ProductDetailPage({
   onRequestQuote,
   allProducts = []
 }) {
-  const [activeImage, setActiveImage] = useState(product?.image || '');
-
-  useEffect(() => {
-    if (product) {
-      setActiveImage(product.image || '');
-      setFormState(prev => ({
-        ...prev,
-        quantity: String(product.minQuantity || 1000),
-        dimensions: product.standardSizes?.[0] || 'Standard 3.5" x 2.0"',
-        material: product.materials?.[0] || '250g Art Card (Gloss)',
-        finishing: product.finishes?.[0] || 'Gloss Lamination'
-      }));
-    }
-  }, [product]);
-
-  const [formState, setFormState] = useState({
-    customerName: '',
-    businessName: '',
-    whatsappNumber: '',
-    email: '',
-    quantity: String(product?.minQuantity || 1000),
-    dimensions: product?.standardSizes?.[0] || 'Standard 3.5" x 2.0"',
-    material: product?.materials?.[0] || '250g Art Card (Gloss)',
-    finishing: product?.finishes?.[0] || 'Gloss Lamination',
-    additionalRequirements: ''
-  });
-
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [successData, setSuccessData] = useState(null);
-
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <h2 className="text-xl font-bold text-slate-800">Product Not Found</h2>
+        <p className="text-xs text-slate-500 mt-2">The requested printing collateral could not be located.</p>
         <button 
           onClick={() => onNavigate('home')}
-          className="mt-4 text-xs font-bold text-brand-crimson underline"
+          className="mt-4 inline-flex items-center space-x-1.5 text-xs font-bold text-white bg-brand-crimson px-5 py-2.5 rounded-full shadow-md hover:bg-brand-red transition"
         >
-          Return to Home
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Return to Homepage</span>
         </button>
       </div>
     );
   }
 
-  // Pre-filled dynamic WhatsApp link for the product
+  // Active gallery image
+  const [activeImage, setActiveImage] = useState(product.image || '');
+
+  // Available options from product configuration
+  const sizes = product.standardSizes && product.standardSizes.length > 0
+    ? product.standardSizes
+    : ['Standard Commercial Size'];
+
+  const materials = product.materials && product.materials.length > 0
+    ? product.materials
+    : ['Standard Executive Stock'];
+
+  const finishes = product.finishes && product.finishes.length > 0
+    ? product.finishes
+    : ['Standard Commercial Finish'];
+
+  const pricingConfig = product.pricingConfig || {};
+  const supportsBothSides = Boolean(pricingConfig.supportsBothSides);
+  const supportsFoil = Boolean(pricingConfig.supportsFoil);
+  const supportsSpotUv = Boolean(pricingConfig.supportsSpotUv);
+
+  const quantityTiers = product.quantityTiers && product.quantityTiers.length > 0
+    ? product.quantityTiers
+    : [product.minQuantity || 100, (product.minQuantity || 100) * 2, (product.minQuantity || 100) * 5];
+
+  // Configurator state
+  const [selectedSize, setSelectedSize] = useState(sizes[0]);
+  const [selectedMaterial, setSelectedMaterial] = useState(materials[0]);
+  const [selectedSides, setSelectedSides] = useState(supportsBothSides ? 'both-sides' : 'single-side');
+  const [selectedFinish, setSelectedFinish] = useState(finishes[0]);
+  const [selectedFoil, setSelectedFoil] = useState('none');
+  const [selectedSpotUv, setSelectedSpotUv] = useState('none');
+  const [quantity, setQuantity] = useState(product.minQuantity || quantityTiers[0]);
+  const [customQtyInput, setCustomQtyInput] = useState('');
+  const [isCustomQty, setIsCustomQty] = useState(false);
+  const [jobName, setJobName] = useState('');
+
+  // Modal / Quote Request form state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [customerName, setCustomerName] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [whatsappNumber, setWhatsappNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [instructions, setInstructions] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [successData, setSuccessData] = useState(null);
+
+  // Sync state when product changes
+  useEffect(() => {
+    setActiveImage(product.image || '');
+    setSelectedSize(sizes[0]);
+    setSelectedMaterial(materials[0]);
+    setSelectedSides(supportsBothSides ? 'both-sides' : 'single-side');
+    setSelectedFinish(finishes[0]);
+    setSelectedFoil('none');
+    setSelectedSpotUv('none');
+    setQuantity(product.minQuantity || quantityTiers[0]);
+    setIsCustomQty(false);
+    setCustomQtyInput('');
+    setJobName('');
+    setSuccessData(null);
+    setSubmitError('');
+    setIsModalOpen(false);
+  }, [product.slug]);
+
+  // Gallery images array
+  const galleryImages = product.secondaryImages && product.secondaryImages.length > 0
+    ? product.secondaryImages
+    : [product.image];
+
+  const currentMainImage = activeImage || product.image;
+
+  // Active quantity numeric value
+  const activeQuantity = isCustomQty 
+    ? (parseInt(customQtyInput, 10) || product.minQuantity || 100)
+    : quantity;
+
+  // Real-time Product-Specific Price Calculation
+  const calculatePricing = () => {
+    const baseRate = pricingConfig.baseRate || product.baseRate;
+    if (!baseRate || baseRate <= 0) {
+      return { hasPrice: false };
+    }
+
+    const qty = activeQuantity;
+    const sideMultiplier = (supportsBothSides && selectedSides === 'both-sides')
+      ? (pricingConfig.bothSidesMultiplier || 1.4)
+      : 1.0;
+
+    const baseAmount = qty * baseRate * sideMultiplier;
+
+    let foilExtra = 0;
+    if (supportsFoil && selectedFoil !== 'none') {
+      foilExtra = Math.max(350, baseAmount * 0.15);
+    }
+
+    let spotUvExtra = 0;
+    if (supportsSpotUv && selectedSpotUv !== 'none') {
+      spotUvExtra = Math.max(400, baseAmount * 0.15);
+    }
+
+    const netSubtotal = baseAmount + foilExtra + spotUvExtra;
+    const gstRate = pricingConfig.gstPercent || 18;
+    const gstAmount = netSubtotal * (gstRate / 100);
+    const finalTotal = Math.round(netSubtotal + gstAmount);
+    const effectiveUnitRate = (finalTotal / qty).toFixed(2);
+
+    return {
+      hasPrice: true,
+      baseRate,
+      qty,
+      baseAmount: Math.round(baseAmount),
+      foilExtra: Math.round(foilExtra),
+      spotUvExtra: Math.round(spotUvExtra),
+      netSubtotal: Math.round(netSubtotal),
+      gstAmount: Math.round(gstAmount),
+      finalTotal,
+      effectiveUnitRate,
+      unitName: pricingConfig.unitName || 'Units'
+    };
+  };
+
+  const pricing = calculatePricing();
+
+  // WhatsApp Enquiry Link
   const getWhatsAppEnquiryUrl = () => {
     const text = `Hello PRINTIZER,
-I am interested in getting a quotation for the following product.
+I would like to request an official quotation for the following product:
 Product: ${product.name}
-Quantity: ${formState.quantity}
-Size: ${formState.dimensions || 'Standard / Per Spec'}
-Material: ${formState.material || 'Please suggest'}
-Name: ${formState.customerName || 'Customer'}
-Please share your best quotation.
-Thank you.`;
+Category: ${product.categoryName}
+Quantity: ${activeQuantity} ${pricingConfig.unitName || 'units'}
+Size: ${selectedSize}
+Paper Stock: ${selectedMaterial}
+Printing Sides: ${supportsBothSides ? (selectedSides === 'both-sides' ? 'Both Sides (Front & Back)' : 'Single Side (Front Only)') : 'Per Standard Spec'}
+Finishing: ${selectedFinish}
+${supportsFoil && selectedFoil !== 'none' ? `Hot Foil Stamping: ${selectedFoil}\n` : ''}${supportsSpotUv && selectedSpotUv !== 'none' ? `Raised Spot UV Gloss: Yes\n` : ''}Job Name: ${jobName || 'Commercial Order'}
+${pricing.hasPrice ? `Estimated Amount: ₹ ${pricing.finalTotal.toLocaleString('en-IN')} (incl. 18% GST)` : 'Custom Quotation Requested'}
+
+Please verify vector artwork and share official quotation.
+Thank you!`;
 
     return `https://wa.me/919898351920?text=${encodeURIComponent(text)}`;
   };
 
-  const handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    }
-  };
-
-  const handleSubmit = async (e) => {
+  // Handle Form Submission
+  const handleSubmitQuotation = async (e) => {
     e.preventDefault();
-    setError('');
+    setSubmitError('');
 
-    if (!formState.customerName.trim()) {
-      setError('Please provide your full name.');
+    if (!customerName.trim()) {
+      setSubmitError('Please provide your name.');
       return;
     }
-    if (!formState.whatsappNumber.trim()) {
-      setError('Please enter your WhatsApp or contact number.');
+    if (!whatsappNumber.trim()) {
+      setSubmitError('Please enter your WhatsApp or contact phone number.');
       return;
     }
-    if (!formState.email.trim()) {
-      setError('Please enter your email address.');
+    if (!email.trim() || !email.includes('@')) {
+      setSubmitError('Please enter a valid email address.');
       return;
     }
 
     try {
-      setLoading(true);
+      setSubmitting(true);
       const data = new FormData();
-      data.append('customerName', formState.customerName);
-      data.append('businessName', formState.businessName);
-      data.append('whatsappNumber', formState.whatsappNumber);
-      data.append('email', formState.email);
+      data.append('customerName', customerName.trim());
+      data.append('businessName', businessName.trim());
+      data.append('whatsappNumber', whatsappNumber.trim());
+      data.append('email', email.trim());
       data.append('productSlug', product.slug);
       data.append('productName', product.name);
-      data.append('quantity', formState.quantity);
-      data.append('dimensions', formState.dimensions);
-      data.append('material', formState.material);
-      data.append('finishing', formState.finishing);
-      data.append('additionalRequirements', formState.additionalRequirements);
+      data.append('quantity', String(activeQuantity));
+      data.append('dimensions', selectedSize);
+      data.append('material', selectedMaterial);
+      data.append('finishing', [
+        selectedFinish,
+        supportsBothSides ? (selectedSides === 'both-sides' ? 'Both Sides' : 'Single Side') : '',
+        supportsFoil && selectedFoil !== 'none' ? `Hot Foil: ${selectedFoil}` : '',
+        supportsSpotUv && selectedSpotUv !== 'none' ? 'Raised Spot UV' : ''
+      ].filter(Boolean).join(' + '));
+      data.append('jobName', jobName.trim() || `${product.name} Order`);
+      data.append('additionalRequirements', instructions.trim());
+      if (pricing.hasPrice) {
+        data.append('estimatedPrice', String(pricing.finalTotal));
+      }
 
       if (selectedFile) {
         data.append('artwork', selectedFile);
@@ -128,7 +233,7 @@ Thank you.`;
 
       try {
         confetti({
-          particleCount: 90,
+          particleCount: 100,
           spread: 70,
           origin: { y: 0.6 }
         });
@@ -136,84 +241,94 @@ Thank you.`;
 
       setSuccessData(json);
     } catch (err) {
-      setError(err.message || 'An error occurred. Please try again.');
+      setSubmitError(err.message || 'An error occurred. Please try again.');
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
-  const galleryImages = product.secondaryImages && product.secondaryImages.length > 0 
-    ? product.secondaryImages 
-    : [product.image];
-
-  const currentMainImage = activeImage || product.image;
-
-  const related = allProducts
-    .filter(p => p.categoryId === product.categoryId && p.id !== product.id)
-    .slice(0, 3);
+  // Related products from the same category
+  const relatedProducts = allProducts
+    .filter(p => p.categoryId === product.categoryId && p.slug !== product.slug)
+    .slice(0, 4);
 
   return (
-    <div className="pb-16 sm:pb-24 space-y-8 sm:space-y-12">
-      {/* Breadcrumb strip */}
-      <div className="bg-slate-100 border-b border-slate-200 py-3 px-3 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex items-center space-x-2 text-xs text-slate-500 overflow-x-auto whitespace-nowrap">
-          <button onClick={() => onNavigate('home')} className="hover:text-slate-800 transition">
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-          <button 
-            onClick={() => onNavigate('category', product.categoryId)} 
-            className="hover:text-slate-800 transition"
+    <div className="pb-24 bg-[#f8fafc] text-left">
+      {/* 1. BREADCRUMB STRIP */}
+      <div className="bg-white border-b border-slate-200/80 py-3.5 px-4 sm:px-6 lg:px-8 shadow-2xs">
+        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs text-slate-500 overflow-x-auto whitespace-nowrap">
+          <div className="flex items-center space-x-2">
+            <button 
+              onClick={() => onNavigate('home')} 
+              className="hover:text-slate-900 transition flex items-center space-x-1"
+            >
+              <span>Home</span>
+            </button>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <button 
+              onClick={() => onNavigate('category', product.categoryId)} 
+              className="hover:text-slate-900 transition font-medium"
+            >
+              {product.categoryName}
+            </button>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <span className="text-brand-crimson font-bold truncate">{product.name}</span>
+          </div>
+
+          <button
+            onClick={() => onNavigate('category', product.categoryId)}
+            className="hidden sm:inline-flex items-center space-x-1 text-slate-600 hover:text-slate-900 text-xs font-semibold"
           >
-            {product.categoryName}
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to {product.categoryName}</span>
           </button>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-          <span className="text-brand-crimson font-semibold truncate">{product.name}</span>
         </div>
       </div>
 
-      {/* Interactive Configurator */}
-      {(product.slug === 'visiting-card' || product.categoryId === 'business-stationery') && (
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <PrintConfigurator
-            initialCategory={product.categoryId || 'business-stationery'}
-            onOpenQuoteModal={onRequestQuote}
-            onRequestCustomQuote={() => onRequestQuote({ productName: product.name })}
-          />
-        </div>
-      )}
-
-      {/* Main Product Showcase & Quotation Form */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-          {/* Left Column: Product Visuals & Specs (7 cols) */}
+      {/* 2. MAIN TWO-COLUMN WORKFLOW */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          
+          {/* ==================== LEFT COLUMN: PRODUCT PRESENTATION (7 COLS) ==================== */}
           <div className="lg:col-span-7 space-y-6 sm:space-y-8">
-            {/* Main Product Image Container */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm relative bg-slate-50">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+            
+            {/* Primary Photo Showcase Frame */}
+            <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm relative">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                 <img
                   src={currentMainImage}
                   alt={product.name}
-                  className="w-full h-full object-cover transition-all duration-300"
+                  className="w-full h-full object-cover transition-all duration-500"
                 />
-                <span className="absolute top-3 left-3 bg-brand-navy text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md">
-                  {product.categoryName}
-                </span>
-                <span className="absolute bottom-3 right-3 bg-white/95 text-slate-900 text-[11px] font-bold px-2.5 py-1 rounded-lg shadow-md border border-slate-200">
-                  Minimum Order: {product.minQuantity} units
-                </span>
+                
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md flex items-center space-x-1.5 border border-white/10">
+                  <span className="w-2 h-2 rounded-full bg-brand-crimson animate-pulse"></span>
+                  <span>{product.categoryName}</span>
+                </div>
+
+                {/* Minimum Order Badge */}
+                <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md text-slate-900 text-[11px] font-bold px-3 py-1 rounded-xl shadow-md border border-slate-200">
+                  MOQ: {product.minQuantity || 100} {pricingConfig.unitName || 'units'}
+                </div>
               </div>
 
-              {/* Thumbnails Gallery */}
+              {/* Multi-View Gallery Thumbnails */}
               {galleryImages.length > 1 && (
-                <div className="p-3 bg-slate-50 border-t border-slate-100 flex items-center space-x-3 overflow-x-auto">
+                <div className="p-3.5 bg-slate-50/80 border-t border-slate-100 flex items-center space-x-3 overflow-x-auto">
+                  <span className="text-[10px] uppercase font-bold text-slate-400 shrink-0 px-1">
+                    Angles & Details:
+                  </span>
                   {galleryImages.map((img, idx) => (
                     <button
                       key={idx}
                       onClick={() => setActiveImage(img)}
-                      className={`h-16 w-20 rounded-lg overflow-hidden border-2 transition shrink-0 ${
-                        currentMainImage === img ? 'border-brand-crimson shadow-sm' : 'border-slate-200 hover:border-slate-300'
+                      className={`h-16 w-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                        currentMainImage === img 
+                          ? 'border-brand-crimson ring-2 ring-brand-crimson/20 shadow-sm scale-102' 
+                          : 'border-slate-200 opacity-80 hover:opacity-100 hover:border-slate-300'
                       }`}
+                      title={`View angle ${idx + 1}`}
                     >
                       <img src={img} alt="" className="w-full h-full object-cover" />
                     </button>
@@ -222,71 +337,104 @@ Thank you.`;
               )}
             </div>
 
-            {/* Title & Description */}
-            <div className="space-y-2 sm:space-y-3">
-              <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+            {/* Product Title, Tagline & Overview */}
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-2xs space-y-3">
+              <div className="flex items-center space-x-2 text-xs font-bold text-brand-crimson uppercase tracking-widest">
+                <Sparkles className="w-4 h-4 text-brand-crimson" />
+                <span>Commercial Print Standard</span>
+              </div>
+
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
                 {product.name}
               </h1>
-              <p className="text-xs sm:text-sm text-brand-crimson font-semibold">
-                {product.tagline}
-              </p>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+
+              {product.tagline && (
+                <p className="text-xs sm:text-sm font-semibold text-slate-700">
+                  {product.tagline}
+                </p>
+              )}
+
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-1">
                 {product.description}
               </p>
+
+              {/* Key Features Badges */}
+              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Turnaround</span>
+                  <span className="font-bold text-slate-800">{product.productionTime || '3-4 Business Days'}</span>
+                </div>
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Color Profile</span>
+                  <span className="font-bold text-slate-800">300 DPI CMYK</span>
+                </div>
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Proofing</span>
+                  <span className="font-bold text-slate-800">Digital PDF Sign-off</span>
+                </div>
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Delivery</span>
+                  <span className="font-bold text-slate-800">Doorstep Dispatch</span>
+                </div>
+              </div>
             </div>
 
-            {/* Specifications Card (Modeled after Madhuram Print reference Image 3) */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+            {/* Technical Specifications & Prepress Guide */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-2xs space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center space-x-2">
-                  <Sparkles className="w-4 h-4 text-brand-crimson" />
-                  <span>Technical Specifications & Standards</span>
+                  <Layers className="w-4 h-4 text-brand-crimson" />
+                  <span>Technical Specifications & Guidelines</span>
                 </h3>
+                <span className="text-[11px] font-bold text-slate-400">Prepress Verified</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
-                <div className="flex items-center space-x-2 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                  <span className="w-2 h-2 rounded-full bg-brand-crimson"></span>
-                  <span><strong>Product Class:</strong> {product.productClass || 'Regular / Commercial'}</span>
+                <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                  <span className="w-2 h-2 rounded-full bg-brand-crimson mt-1.5 shrink-0"></span>
+                  <div>
+                    <strong className="block text-slate-900 font-bold">Bleed & Cutting Tolerance:</strong>
+                    <span className="text-slate-500">Provide standard 3mm bleed margin beyond the trim edge with 4mm inner safe margin.</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center space-x-2 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                  <span className="w-2 h-2 rounded-full bg-brand-crimson"></span>
-                  <span><strong>Paper Quality:</strong> {product.paperQuality || '250 - 350 GSM Art Card'}</span>
+                <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                  <span className="w-2 h-2 rounded-full bg-brand-crimson mt-1.5 shrink-0"></span>
+                  <div>
+                    <strong className="block text-slate-900 font-bold">Accepted Artwork Formats:</strong>
+                    <span className="text-slate-500">CorelDRAW CDR (curves), Vector PDF, Adobe Illustrator (AI), or 300 DPI high-res TIFF.</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center space-x-2 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                  <span className="w-2 h-2 rounded-full bg-brand-crimson"></span>
-                  <span><strong>Turnaround:</strong> {product.productionTime || '3-4 business days'}</span>
+                <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                  <span className="w-2 h-2 rounded-full bg-brand-crimson mt-1.5 shrink-0"></span>
+                  <div>
+                    <strong className="block text-slate-900 font-bold">Color Calibration:</strong>
+                    <span className="text-slate-500">CMYK process inks. Avoid RGB color swatches to prevent color shift during press run.</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center space-x-2 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                  <span className="w-2 h-2 rounded-full bg-brand-crimson"></span>
-                  <span><strong>Finishes:</strong> {product.laminationType || 'Gloss / Matte / Velvet'}</span>
+                <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                  <span className="w-2 h-2 rounded-full bg-brand-crimson mt-1.5 shrink-0"></span>
+                  <div>
+                    <strong className="block text-slate-900 font-bold">Typography & Curves:</strong>
+                    <span className="text-slate-500">All fonts converted to outlines/curves (Ctrl+Q). Minimum 6pt text size for legible reproduction.</span>
+                  </div>
                 </div>
-              </div>
-
-              {/* Points to be Noted */}
-              <div className="bg-amber-50/70 p-3.5 rounded-xl border border-amber-200 text-xs text-amber-900 space-y-1">
-                <strong className="block text-[11px] uppercase tracking-wider font-extrabold">
-                  Points to be Noted for this Job:
-                </strong>
-                <p>&bull; Size must include standard 3mm bleed margin for edge cutting.</p>
-                <p>&bull; CorelDRAW (CDR x7), AI, or PDF vector curves required for sharp typographic reproduction.</p>
-                <p>&bull; Files must be formatted in CMYK color mode (RGB colors may show hue shifts).</p>
-                <p>&bull; Keep critical text and logos at least 4mm inside the safe trim line.</p>
               </div>
             </div>
 
-            {/* WhatsApp Quick Banner */}
-            <div className="bg-emerald-50 rounded-2xl p-4 sm:p-5 border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0">
-                  <MessageCircle className="w-5 h-5" />
+            {/* Direct Specialist WhatsApp Contact Card */}
+            <div className="bg-emerald-50 rounded-3xl p-5 sm:p-6 border border-emerald-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center space-x-3.5">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-500/20">
+                  <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">Need Immediate Advice on {product.name}?</h4>
-                  <p className="text-[11px] text-slate-600">Chat directly with a print specialist for instant quotation and sample verification.</p>
+                  <h4 className="text-sm font-extrabold text-slate-900">Need Guidance on {product.name}?</h4>
+                  <p className="text-xs text-slate-600 mt-0.5">
+                    Speak directly with a PRINTIZER prepress specialist on WhatsApp for custom specifications.
+                  </p>
                 </div>
               </div>
 
@@ -294,290 +442,732 @@ Thank you.`;
                 href={getWhatsAppEnquiryUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto shrink-0 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition flex items-center justify-center space-x-1.5 shadow-sm"
+                className="w-full sm:w-auto shrink-0 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-5 rounded-xl text-xs transition flex items-center justify-center space-x-2 shadow-sm"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp Enquiry</span>
+                <span>Chat with Specialist</span>
               </a>
             </div>
           </div>
 
-          {/* Right Column: DEDICATED PRODUCT QUOTATION FORM (5 cols) */}
+          {/* ==================== RIGHT COLUMN: DEDICATED PRODUCT CONFIGURATOR (5 COLS) ==================== */}
           <div className="lg:col-span-5">
-            <div className="sticky top-24 bg-white rounded-3xl border-2 border-slate-200 shadow-xl overflow-hidden">
-              <div className="bg-brand-navy p-4 sm:p-5 text-white">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-crimson block">
-                  Official Quotation Request
-                </span>
-                <h3 className="text-base font-extrabold text-white">
-                  Get a Quotation for {product.name}
-                </h3>
-                <p className="text-xs text-slate-300 mt-0.5">
-                  Tailored pricing from PRINTIZER &bull; Zero Obligation
-                </p>
+            <div className="sticky top-20 bg-white rounded-3xl border-2 border-slate-200/90 shadow-xl overflow-hidden">
+              
+              {/* Header Strip */}
+              <div className="bg-brand-navy p-5 text-white flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-crimson block">
+                    Product Specification Panel
+                  </span>
+                  <h3 className="text-base sm:text-lg font-extrabold text-white mt-0.5">
+                    Configure {product.name}
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    Live dynamic quotation based on configured commercial specifications
+                  </p>
+                </div>
+                <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center text-white shrink-0">
+                  <FileText className="w-4 h-4" />
+                </div>
               </div>
 
-              <div className="p-4 sm:p-6">
-                {successData ? (
-                  /* SUCCESS STATE */
-                  <div className="text-center py-6 space-y-4">
-                    <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mx-auto">
-                      <CheckCircle2 className="w-8 h-8" />
-                    </div>
-
-                    <div>
-                      <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-full mb-1">
-                        Ref: {successData.referenceNo}
-                      </span>
-                      <h4 className="text-base font-bold text-slate-900">
-                        Quotation Request Received!
-                      </h4>
-                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                        Thank you, {formState.customerName}. Your requirement for <strong>{product.name}</strong> ({formState.quantity} units) is being reviewed by our specialists.
-                      </p>
-                    </div>
-
-                    {/* WhatsApp Continue Button */}
-                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-left space-y-2">
-                      <p className="text-xs font-bold text-slate-800">
-                        Continue this enquiry on WhatsApp:
-                      </p>
-                      <a
-                        href={successData.whatsappUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-1.5 transition shadow-sm"
-                      >
-                        <MessageCircle className="w-4 h-4" />
-                        <span>Continue on WhatsApp (+91 98983 51920)</span>
-                      </a>
-                    </div>
-
-                    <p className="text-[11px] text-slate-500">
-                      An acknowledgment has been dispatched to <strong>{formState.email}</strong>.
-                    </p>
-
-                    <button
-                      onClick={() => setSuccessData(null)}
-                      className="text-xs text-brand-crimson font-bold underline"
-                    >
-                      Submit Another Requirement
-                    </button>
+              {/* Configurator Form Body */}
+              <div className="p-5 sm:p-6 space-y-5">
+                
+                {/* 1. Finished Size / Dimensions */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <label className="font-extrabold text-slate-800">
+                      1. Finished Size / Dimensions
+                    </label>
+                    <span className="text-[11px] text-slate-400 font-medium">Standard Trim</span>
                   </div>
-                ) : (
-                  /* DEDICATED FORM */
-                  <form onSubmit={handleSubmit} className="space-y-3.5">
-                    {error && (
-                      <div className="p-2.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-600 flex items-center space-x-2">
-                        <AlertCircle className="w-4 h-4 shrink-0" />
-                        <span>{error}</span>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {sizes.map((s) => (
+                      <button
+                        key={s}
+                        type="button"
+                        onClick={() => setSelectedSize(s)}
+                        className={`text-left p-3 rounded-xl border text-xs font-semibold transition-all ${
+                          selectedSize === s
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson shadow-2xs'
+                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="truncate">{s}</span>
+                          {selectedSize === s && (
+                            <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 ml-1" />
+                          )}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 2. Paper Stock / GSM */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <label className="font-extrabold text-slate-800">
+                      2. Paper Quality & Grammage (GSM)
+                    </label>
+                    <span className="text-[11px] text-slate-400 font-medium">Substrate</span>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    {materials.map((m) => (
+                      <button
+                        key={m}
+                        type="button"
+                        onClick={() => setSelectedMaterial(m)}
+                        className={`w-full text-left p-2.5 sm:p-3 rounded-xl border text-xs font-semibold transition-all flex items-center justify-between ${
+                          selectedMaterial === m
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson shadow-2xs'
+                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                        }`}
+                      >
+                        <span className="truncate">{m}</span>
+                        {selectedMaterial === m && (
+                          <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 ml-2" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 3. Printing Sides (Only if supported by product) */}
+                {supportsBothSides && (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <label className="font-extrabold text-slate-800">
+                        3. Printing Sides
+                      </label>
+                      <span className="text-[11px] text-slate-400 font-medium">Color Calibration</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedSides('single-side')}
+                        className={`p-3 rounded-xl border text-xs font-semibold transition-all text-center ${
+                          selectedSides === 'single-side'
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
+                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                        }`}
+                      >
+                        <span>Single Side (Front)</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedSides('both-sides')}
+                        className={`p-3 rounded-xl border text-xs font-semibold transition-all text-center ${
+                          selectedSides === 'both-sides'
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
+                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                        }`}
+                      >
+                        <span className="block">Both Sides (Front & Back)</span>
+                        <span className="text-[10px] text-brand-crimson font-bold">+40%</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* 4. Surface Finishing & Lamination */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <label className="font-extrabold text-slate-800">
+                      {supportsBothSides ? '4' : '3'}. Lamination & Finishing
+                    </label>
+                    <span className="text-[11px] text-slate-400 font-medium">Protection</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {finishes.map((f) => (
+                      <button
+                        key={f}
+                        type="button"
+                        onClick={() => setSelectedFinish(f)}
+                        className={`text-left p-2.5 rounded-xl border text-xs font-semibold transition-all ${
+                          selectedFinish === f
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
+                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="truncate">{f}</span>
+                          {selectedFinish === f && (
+                            <CheckCircle2 className="w-3.5 h-3.5 text-brand-crimson shrink-0 ml-1" />
+                          )}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Optional Embellishments: Foil & Spot UV (When supported) */}
+                {(supportsFoil || supportsSpotUv) && (
+                  <div className="p-3.5 rounded-2xl bg-amber-50/60 border border-amber-200/80 space-y-3">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 flex items-center space-x-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                      <span>Optional Luxury Embellishments</span>
+                    </span>
+
+                    {/* Foil Stamping */}
+                    {supportsFoil && (
+                      <div className="space-y-1.5">
+                        <label className="block text-[11px] font-bold text-slate-700">
+                          Metallic Hot Foil Stamping
+                        </label>
+                        <div className="grid grid-cols-4 gap-1.5 text-xs font-semibold">
+                          {[
+                            { id: 'none', label: 'None' },
+                            { id: 'gold', label: 'Gold Foil' },
+                            { id: 'silver', label: 'Silver Foil' },
+                            { id: 'rose-gold', label: 'Rose Gold' }
+                          ].map(opt => (
+                            <button
+                              key={opt.id}
+                              type="button"
+                              onClick={() => setSelectedFoil(opt.id)}
+                              className={`py-1.5 px-2 rounded-lg border text-[11px] font-bold transition text-center ${
+                                selectedFoil === opt.id
+                                  ? 'bg-amber-600 text-white border-amber-600 shadow-2xs'
+                                  : 'bg-white text-slate-700 border-amber-200 hover:border-amber-400'
+                              }`}
+                            >
+                              {opt.label}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     )}
 
-                    {/* Customer Name */}
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
-                        Customer Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Rahul Sharma"
-                        value={formState.customerName}
-                        onChange={(e) => setFormState({ ...formState, customerName: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                      />
-                    </div>
-
-                    {/* Business Name */}
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
-                        Business / Company Name (Optional)
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g. Apex Corporation"
-                        value={formState.businessName}
-                        onChange={(e) => setFormState({ ...formState, businessName: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                      />
-                    </div>
-
-                    {/* WhatsApp & Email */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
-                          WhatsApp Number *
+                    {/* Spot UV */}
+                    {supportsSpotUv && (
+                      <div className="space-y-1.5">
+                        <label className="block text-[11px] font-bold text-slate-700">
+                          Tactile Raised Spot UV Gloss
                         </label>
-                        <input
-                          type="tel"
-                          required
-                          placeholder="+91 98983 51920"
-                          value={formState.whatsappNumber}
-                          onChange={(e) => setFormState({ ...formState, whatsappNumber: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                        />
+                        <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
+                          {[
+                            { id: 'none', label: 'No Spot UV' },
+                            { id: 'spot-uv', label: 'Raised Spot UV (+15%)' }
+                          ].map(opt => (
+                            <button
+                              key={opt.id}
+                              type="button"
+                              onClick={() => setSelectedSpotUv(opt.id)}
+                              className={`py-1.5 px-2 rounded-lg border text-[11px] font-bold transition text-center ${
+                                selectedSpotUv === opt.id
+                                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-2xs'
+                                  : 'bg-white text-slate-700 border-amber-200 hover:border-amber-400'
+                              }`}
+                            >
+                              {opt.label}
+                            </button>
+                          ))}
+                        </div>
                       </div>
+                    )}
+                  </div>
+                )}
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
-                          Email Address *
-                        </label>
-                        <input
-                          type="email"
-                          required
-                          placeholder="name@company.com"
-                          value={formState.email}
-                          onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                        />
-                      </div>
-                    </div>
+                {/* 5. Quantity Selection (Product-Specific Tiers) */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <label className="font-extrabold text-slate-800">
+                      {supportsBothSides ? '5' : '4'}. Select Quantity ({pricingConfig.unitName || 'Units'})
+                    </label>
+                    <span className="text-[11px] text-brand-crimson font-bold">
+                      Min: {product.minQuantity || 100}
+                    </span>
+                  </div>
 
-                    {/* Product Name (Populated) & Quantity */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="sm:col-span-2">
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
-                          Product Name
-                        </label>
-                        <input
-                          type="text"
-                          readOnly
-                          value={product.name}
-                          className="w-full bg-slate-100 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-700 font-semibold cursor-not-allowed"
-                        />
-                      </div>
+                  {/* Quantity Pills */}
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                    {quantityTiers.map((q) => (
+                      <button
+                        key={q}
+                        type="button"
+                        onClick={() => {
+                          setQuantity(q);
+                          setIsCustomQty(false);
+                        }}
+                        className={`py-2 px-1 rounded-xl border text-xs font-extrabold transition-all text-center ${
+                          !isCustomQty && quantity === q
+                            ? 'border-brand-crimson bg-brand-crimson text-white shadow-xs scale-102'
+                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                        }`}
+                      >
+                        {q.toLocaleString('en-IN')}
+                      </button>
+                    ))}
+                  </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
-                          Required Qty *
-                        </label>
+                  {/* Custom Quantity Option */}
+                  <div className="pt-1">
+                    {!isCustomQty ? (
+                      <button
+                        type="button"
+                        onClick={() => setIsCustomQty(true)}
+                        className="text-[11px] font-bold text-brand-crimson hover:underline"
+                      >
+                        + Need a different volume? Enter custom quantity
+                      </button>
+                    ) : (
+                      <div className="flex items-center space-x-2 pt-1">
                         <input
                           type="number"
-                          required
-                          min="1"
-                          value={formState.quantity}
-                          onChange={(e) => setFormState({ ...formState, quantity: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
+                          min={product.minQuantity || 10}
+                          placeholder={`Min ${product.minQuantity || 100}`}
+                          value={customQtyInput}
+                          onChange={(e) => setCustomQtyInput(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
                         />
+                        <button
+                          type="button"
+                          onClick={() => setIsCustomQty(false)}
+                          className="text-xs text-slate-400 hover:text-slate-600 px-2 py-2"
+                        >
+                          Cancel
+                        </button>
                       </div>
-                    </div>
+                    )}
+                  </div>
+                </div>
 
-                    {/* Material & Finishing Preferences */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
-                          Material Preference
-                        </label>
-                        {product.materials && product.materials.length > 0 ? (
-                          <select
-                            value={formState.material}
-                            onChange={(e) => setFormState({ ...formState, material: e.target.value })}
-                            className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-2 text-xs text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                          >
-                            {product.materials.map((m, idx) => (
-                              <option key={idx} value={m}>{m}</option>
-                            ))}
-                          </select>
-                        ) : (
-                          <input
-                            type="text"
-                            placeholder="e.g. 250g Art Card"
-                            value={formState.material}
-                            onChange={(e) => setFormState({ ...formState, material: e.target.value })}
-                            className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                          />
-                        )}
+                {/* 6. Job Name / Reference */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Job / Project Title (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. 2026 Executive Brand Refresh"
+                    value={jobName}
+                    onChange={(e) => setJobName(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
+                  />
+                </div>
+
+                {/* 7. LIVE ITEMISED PRICE BREAKDOWN */}
+                <div className="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-200 space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
+                    <span className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
+                      Price Calculation Summary
+                    </span>
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
+                      Commercial Rate
+                    </span>
+                  </div>
+
+                  {pricing.hasPrice ? (
+                    <div className="space-y-1.5 text-xs">
+                      <div className="flex items-center justify-between text-slate-600">
+                        <span>Base Printing ({pricing.qty.toLocaleString('en-IN')} {pricing.unitName}):</span>
+                        <span className="font-semibold text-slate-800">₹ {pricing.baseAmount.toLocaleString('en-IN')}</span>
                       </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
-                          Finishing Preference
-                        </label>
-                        {product.finishes && product.finishes.length > 0 ? (
-                          <select
-                            value={formState.finishing}
-                            onChange={(e) => setFormState({ ...formState, finishing: e.target.value })}
-                            className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-2 text-xs text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                          >
-                            {product.finishes.map((f, idx) => (
-                              <option key={idx} value={f}>{f}</option>
-                            ))}
-                          </select>
-                        ) : (
-                          <input
-                            type="text"
-                            placeholder="e.g. Gloss Lamination"
-                            value={formState.finishing}
-                            onChange={(e) => setFormState({ ...formState, finishing: e.target.value })}
-                            className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                          />
-                        )}
-                      </div>
-                    </div>
+                      {pricing.foilExtra > 0 && (
+                        <div className="flex items-center justify-between text-slate-600">
+                          <span>Hot Foil Stamping ({selectedFoil}):</span>
+                          <span className="font-semibold text-slate-800">+₹ {pricing.foilExtra.toLocaleString('en-IN')}</span>
+                        </div>
+                      )}
 
-                    {/* Additional Requirements */}
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
-                        Additional Requirements
-                      </label>
-                      <textarea
-                        rows="2"
-                        placeholder="Any special notes, deadline dates, or shipping address..."
-                        value={formState.additionalRequirements}
-                        onChange={(e) => setFormState({ ...formState, additionalRequirements: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                      ></textarea>
-                    </div>
+                      {pricing.spotUvExtra > 0 && (
+                        <div className="flex items-center justify-between text-slate-600">
+                          <span>Raised Spot UV Embellishment:</span>
+                          <span className="font-semibold text-slate-800">+₹ {pricing.spotUvExtra.toLocaleString('en-IN')}</span>
+                        </div>
+                      )}
 
-                    {/* Upload Reference Artwork */}
-                    <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <label className="text-xs font-bold text-slate-700">
-                          Upload Artwork / Design File (Optional)
-                        </label>
+                      <div className="flex items-center justify-between text-slate-500 pt-1 border-t border-slate-200">
+                        <span>Applicable GST (18%):</span>
+                        <span className="font-semibold text-slate-700">+₹ {pricing.gstAmount.toLocaleString('en-IN')}</span>
                       </div>
-                      <div className="border border-dashed border-slate-300 hover:border-slate-400 rounded-xl p-3 text-center bg-slate-50 transition relative">
-                        <input
-                          type="file"
-                          onChange={handleFileChange}
-                          className="absolute inset-0 opacity-0 cursor-pointer"
-                          accept=".cdr,.pdf,.ai,.eps,.psd,.jpg,.jpeg,.png,.zip"
-                        />
-                        <div className="flex items-center justify-center space-x-2 pointer-events-none">
-                          <UploadCloud className="w-4 h-4 text-slate-400" />
-                          <span className="text-xs text-slate-600 truncate max-w-[200px]">
-                            {selectedFile ? selectedFile.name : 'Select CDR, PDF, AI, ZIP'}
+
+                      <div className="pt-2 border-t-2 border-slate-300 flex items-center justify-between">
+                        <div>
+                          <span className="text-xs font-extrabold text-slate-900 block">Total Estimated Amount:</span>
+                          <span className="text-[10px] text-slate-500">Effective: ₹{pricing.effectiveUnitRate} per {pricing.unitName.replace(/s$/, '').toLowerCase()}</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-xl sm:text-2xl font-black text-brand-crimson">
+                            ₹ {pricing.finalTotal.toLocaleString('en-IN')}
                           </span>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full bg-brand-crimson hover:bg-brand-red active:scale-98 text-white font-extrabold py-3.5 px-6 rounded-2xl text-xs sm:text-sm shadow-xl shadow-brand-crimson/25 transition flex items-center justify-center space-x-2 disabled:opacity-60"
-                    >
-                      {loading ? (
-                        <span className="flex items-center space-x-2">
-                          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                          <span>Submitting...</span>
-                        </span>
-                      ) : (
-                        <>
-                          <span>GET MY QUOTATION</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
-                  </form>
-                )}
+                      <p className="text-[10px] text-slate-400 italic pt-1 leading-normal">
+                        * Estimated price based on standard specs. Delivery charges applicable as per delivery pin-code.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="text-center py-3">
+                      <p className="text-xs text-slate-600 font-medium">
+                        Custom specifications require specialist evaluation.
+                      </p>
+                      <span className="text-base font-extrabold text-slate-900 block mt-1">
+                        Request a Tailored Quote
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* 8. PRIMARY ACTION BUTTONS */}
+                <div className="space-y-2.5 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSuccessData(null);
+                      setSubmitError('');
+                      setIsModalOpen(true);
+                    }}
+                    className="w-full bg-brand-crimson hover:bg-brand-red text-white font-extrabold py-3.5 px-6 rounded-2xl text-xs sm:text-sm transition flex items-center justify-center space-x-2 shadow-lg shadow-brand-crimson/25 hover:shadow-xl cursor-pointer"
+                  >
+                    <span>Request Official Quotation</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <a
+                    href={getWhatsAppEnquiryUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-2xl text-xs transition flex items-center justify-center space-x-2 shadow-xs"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Instant WhatsApp Enquiry</span>
+                  </a>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
+
+        {/* 3. RELATED PRODUCTS IN THIS CATEGORY */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-16 sm:mt-24 pt-12 border-t border-slate-200">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-2">
+              <div>
+                <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
+                  More From {product.categoryName}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mt-1">
+                  Related Commercial Products
+                </h3>
+              </div>
+              <button
+                onClick={() => onNavigate('category', product.categoryId)}
+                className="text-xs font-bold text-slate-600 hover:text-brand-crimson flex items-center space-x-1"
+              >
+                <span>View Full {product.categoryName} Category &rarr;</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {relatedProducts.map((rel) => (
+                <div
+                  key={rel.id}
+                  onClick={() => onNavigate('product', rel.slug)}
+                  className="bg-white rounded-3xl p-4 border border-slate-200/80 shadow-2xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-3 border border-slate-100">
+                      <img
+                        src={rel.image}
+                        alt={rel.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <span className="absolute bottom-2 left-2 bg-slate-900/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">
+                        MOQ: {rel.minQuantity || 100}
+                      </span>
+                    </div>
+
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-brand-crimson transition line-clamp-1">
+                      {rel.name}
+                    </h4>
+                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                      {rel.tagline || rel.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
+                    <span>
+                      {rel.baseRate ? `From ₹${Math.round(rel.baseRate * (rel.minQuantity || 100)).toLocaleString('en-IN')}` : 'Request Quote'}
+                    </span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* 4. STICKY BOTTOM ACTION BAR FOR MOBILE */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 z-30 shadow-2xl flex items-center justify-between gap-3">
+        <div>
+          <span className="text-[10px] text-slate-400 block font-medium">
+            {activeQuantity} {pricingConfig.unitName || 'units'} &bull; {selectedSize}
+          </span>
+          <span className="text-base font-black text-brand-crimson">
+            {pricing.hasPrice ? `₹ ${pricing.finalTotal.toLocaleString('en-IN')}` : 'Custom Quote'}
+          </span>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <a
+            href={getWhatsAppEnquiryUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm"
+            title="Chat on WhatsApp"
+          >
+            <MessageCircle className="w-5 h-5" />
+          </a>
+
+          <button
+            type="button"
+            onClick={() => {
+              setSuccessData(null);
+              setSubmitError('');
+              setIsModalOpen(true);
+            }}
+            className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-extrabold px-5 py-2.5 rounded-xl transition shadow-md"
+          >
+            Request Quotation
+          </button>
+        </div>
+      </div>
+
+      {/* 5. OFFICIAL QUOTATION REQUEST MODAL */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 text-left">
+            
+            {/* Modal Header */}
+            <div className="bg-brand-navy p-5 text-white flex items-center justify-between sticky top-0 z-10">
+              <div>
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-crimson block">
+                  Official Quotation Request
+                </span>
+                <h3 className="text-base font-extrabold text-white mt-0.5">
+                  {product.name}
+                </h3>
+              </div>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-5 sm:p-6">
+              {successData ? (
+                /* Success View */
+                <div className="text-center py-6 space-y-4">
+                  <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mx-auto">
+                    <CheckCircle2 className="w-10 h-10" />
+                  </div>
+
+                  <div>
+                    <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-full mb-1">
+                      Ref: {successData.referenceNo}
+                    </span>
+                    <h4 className="text-lg font-bold text-slate-900">
+                      Quotation Request Received!
+                    </h4>
+                    <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                      Thank you, {customerName}. Your quotation requirement for <strong>{product.name}</strong> ({activeQuantity} units) has been registered.
+                    </p>
+                  </div>
+
+                  {/* Configured Details Preview */}
+                  <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-left text-slate-700 space-y-1">
+                    <div><strong>Size:</strong> {selectedSize}</div>
+                    <div><strong>Material:</strong> {selectedMaterial}</div>
+                    <div><strong>Finishing:</strong> {selectedFinish} {supportsBothSides ? `(${selectedSides === 'both-sides' ? 'Both Sides' : 'Single Side'})` : ''}</div>
+                    {pricing.hasPrice && <div><strong>Estimated Price:</strong> ₹{pricing.finalTotal.toLocaleString('en-IN')} (incl. GST)</div>}
+                  </div>
+
+                  {/* Continue on WhatsApp */}
+                  <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-left space-y-2">
+                    <p className="text-xs font-bold text-slate-800">
+                      Immediate response on WhatsApp:
+                    </p>
+                    <a
+                      href={successData.whatsappUrl || getWhatsAppEnquiryUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-1.5 transition shadow-sm"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span>Continue on WhatsApp (+91 98983 51920)</span>
+                    </a>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setIsModalOpen(false);
+                      setSuccessData(null);
+                    }}
+                    className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition"
+                  >
+                    Done
+                  </button>
+                </div>
+              ) : (
+                /* Submission Form */
+                <form onSubmit={handleSubmitQuotation} className="space-y-4">
+                  {submitError && (
+                    <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-600 flex items-center space-x-2">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
+                  {/* Configured Specs Summary Strip */}
+                  <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-1">
+                    <div className="flex items-center justify-between font-bold text-slate-900">
+                      <span>{product.name} ({activeQuantity} {pricingConfig.unitName || 'units'})</span>
+                      {pricing.hasPrice && <span className="text-brand-crimson">₹{pricing.finalTotal.toLocaleString('en-IN')}</span>}
+                    </div>
+                    <p className="text-[11px] text-slate-500">
+                      {selectedSize} &bull; {selectedMaterial} &bull; {selectedFinish} {supportsBothSides ? `(${selectedSides === 'both-sides' ? 'Both Sides' : 'Single Side'})` : ''}
+                    </p>
+                  </div>
+
+                  {/* Customer Name */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Customer Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Rahul Sharma"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-crimson focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Business Name */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Company / Organization Name (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Apex Corporation"
+                      value={businessName}
+                      onChange={(e) => setBusinessName(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-crimson focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Contact details */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        WhatsApp Number *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="+91 98983 51920"
+                        value={whatsappNumber}
+                        onChange={(e) => setWhatsappNumber(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-crimson focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="name@company.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-crimson focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Artwork Upload */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Artwork File (Optional)
+                    </label>
+                    <div className="border-2 border-dashed border-slate-300 rounded-xl p-3 text-center bg-slate-50 hover:bg-white transition cursor-pointer relative">
+                      <input
+                        type="file"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            setSelectedFile(e.target.files[0]);
+                          }
+                        }}
+                        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                        accept=".pdf,.cdr,.ai,.psd,.zip,.jpg,.jpeg,.png"
+                      />
+                      <UploadCloud className="w-5 h-5 text-slate-400 mx-auto mb-1" />
+                      <span className="text-xs text-slate-600 block">
+                        {selectedFile ? selectedFile.name : 'Click to attach vector artwork (PDF, CDR, AI, ZIP)'}
+                      </span>
+                      <span className="text-[10px] text-slate-400">Max size 25MB</span>
+                    </div>
+                  </div>
+
+                  {/* Special Instructions */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Additional Prepress Instructions (Optional)
+                    </label>
+                    <textarea
+                      rows="2"
+                      placeholder="Any specific delivery instructions, Pantone codes, or packing preferences..."
+                      value={instructions}
+                      onChange={(e) => setInstructions(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 focus:bg-white focus:border-brand-crimson focus:outline-none"
+                    ></textarea>
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full bg-brand-crimson hover:bg-brand-red disabled:bg-slate-400 text-white font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm transition shadow-md shadow-brand-crimson/25 flex items-center justify-center space-x-2"
+                    >
+                      {submitting ? (
+                        <span>Submitting Quotation Request...</span>
+                      ) : (
+                        <>
+                          <span>Submit Official Quotation Request</span>
+                          <Send className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }

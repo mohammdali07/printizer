@@ -133,9 +133,9 @@ export default function Footer({ onNavigate, categories = [] }) {
                 </button>
               </li>
               <li>
-                <a href="#configurator-section" className="hover:text-brand-crimson transition">
-                  Quotation Calculator
-                </a>
+                <button onClick={() => onNavigate('product', 'visiting-card')} className="hover:text-brand-crimson transition">
+                  Product Configurator & Quote
+                </button>
               </li>
               <li>
                 <button onClick={() => onNavigate('about')} className="hover:text-brand-crimson transition">

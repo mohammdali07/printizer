@@ -9,6 +9,7 @@ client/dist/
 # Uploads & Temp files
 server/uploads/*
 !server/uploads/.gitkeep
+data/sent_emails/
 
 # Environment & Local secrets
 .env

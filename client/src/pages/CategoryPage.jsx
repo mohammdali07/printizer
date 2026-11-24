@@ -146,13 +146,22 @@ Thank you.`;
                       )}
                     </div>
 
-                    {/* Actions */}
-                    <div className="mt-6 pt-4 border-t border-slate-100 space-y-2">
+                    {/* Price and Actions */}
+                    <div className="mt-5 pt-3.5 border-t border-slate-100 space-y-2.5">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-[11px] text-slate-400 font-medium">Starting from:</span>
+                        <span className="font-extrabold text-slate-900 text-sm">
+                          {p.pricingConfig?.startingPrice 
+                            ? `₹ ${p.pricingConfig.startingPrice.toLocaleString('en-IN')}` 
+                            : (p.baseRate ? `₹ ${Math.round(p.baseRate * (p.minQuantity || 100)).toLocaleString('en-IN')}` : 'Custom Quote')}
+                        </span>
+                      </div>
+
                       <button
-                        onClick={() => onRequestQuote({ productName: p.name, productSlug: p.slug, quantity: p.minQuantity })}
-                        className="w-full bg-brand-crimson hover:bg-brand-red text-white font-bold py-2.5 px-4 rounded-xl text-xs transition flex items-center justify-center space-x-1.5 shadow-md shadow-brand-crimson/20"
+                        onClick={() => onNavigate('product', p.slug)}
+                        className="w-full bg-brand-crimson hover:bg-brand-red text-white font-extrabold py-2.5 px-4 rounded-xl text-xs transition flex items-center justify-center space-x-1.5 shadow-md shadow-brand-crimson/20"
                       >
-                        <span>Request a Quote</span>
+                        <span>Configure & Get Quote</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </button>
 
@@ -161,7 +170,7 @@ Thank you.`;
                           onClick={() => onNavigate('product', p.slug)}
                           className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-1.5 px-3 rounded-xl text-xs transition text-center"
                         >
-                          View Specs
+                          View Details
                         </button>
                         <a
                           href={waUrl}

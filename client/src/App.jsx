@@ -68,12 +68,17 @@ export default function App() {
       if (!active || active === 'home') {
         setCurrentPage('home');
         setCurrentParam(null);
-      } else if (active.startsWith('category/')) {
+      } else if (active.startsWith('category/') || active.startsWith('categories/')) {
         setCurrentPage('category');
-        setCurrentParam(active.replace('category/', ''));
-      } else if (active.startsWith('product/')) {
+        const catSlug = active.replace(/^(category|categories)\//, '').split('/')[0];
+        setCurrentParam(catSlug);
+      } else if (active.startsWith('product/') || active.startsWith('products/')) {
         setCurrentPage('product');
-        setCurrentParam(active.replace('product/', ''));
+        const prodSlug = active.replace(/^(product|products)\//, '').split('/')[0];
+        setCurrentParam(prodSlug);
+      } else if (active === 'products' || active === 'catalog') {
+        setCurrentPage('home');
+        setCurrentParam(null);
       } else if (active === 'about') {
         setCurrentPage('about');
         setCurrentParam(null);

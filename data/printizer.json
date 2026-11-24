@@ -105,7 +105,28 @@
         "Raised Spot UV",
         "Gold Foil"
       ],
-      "featured": true
+      "featured": true,
+      "baseRate": 0.35,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 0.35,
+        "minQuantity": 1000,
+        "startingPrice": 350,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-letterhead",
@@ -135,7 +156,27 @@
         "Clean Cut",
         "Full CMYK Calibration"
       ],
-      "featured": true
+      "featured": true,
+      "baseRate": 2.2,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 2.2,
+        "minQuantity": 500,
+        "startingPrice": 1100,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-bill-book",
@@ -166,7 +207,28 @@
         "Perforated Top",
         "Hardboard Binding"
       ],
-      "featured": true
+      "featured": true,
+      "baseRate": 65,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 65,
+        "minQuantity": 10,
+        "startingPrice": 650,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-cash-memo-book",
@@ -195,7 +257,28 @@
         "Sequential Numbering",
         "Bound with Counterfoil"
       ],
-      "featured": true
+      "featured": true,
+      "baseRate": 55,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 55,
+        "minQuantity": 10,
+        "startingPrice": 550,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-receipt-book",
@@ -224,7 +307,28 @@
         "Spiral or Tape Bound",
         "Perforated Slip"
       ],
-      "featured": true
+      "featured": true,
+      "baseRate": 50,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 50,
+        "minQuantity": 10,
+        "startingPrice": 500,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-quotation-book",
@@ -253,7 +357,28 @@
         "Cloth Spine Tape",
         "Numbered Slips"
       ],
-      "featured": true
+      "featured": true,
+      "baseRate": 75,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 75,
+        "minQuantity": 10,
+        "startingPrice": 750,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-invoice-book",
@@ -283,7 +408,28 @@
         "Serial Numbering",
         "Hard Strawboard Base"
       ],
-      "featured": true
+      "featured": true,
+      "baseRate": 85,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 85,
+        "minQuantity": 10,
+        "startingPrice": 850,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-delivery-challan-book",
@@ -313,7 +459,28 @@
         "Perforated",
         "Cloth Spine Binding"
       ],
-      "featured": true
+      "featured": true,
+      "baseRate": 70,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 70,
+        "minQuantity": 10,
+        "startingPrice": 700,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-purchase-order-book",
@@ -342,7 +509,28 @@
         "Sequential Machine Numbering",
         "Cardboard Back"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 80,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 80,
+        "minQuantity": 10,
+        "startingPrice": 800,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-payment-voucher",
@@ -371,7 +559,28 @@
         "Padding Top",
         "Tear-off Perforation"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 40,
+      "quantityTiers": [
+        20,
+        40,
+        100,
+        200,
+        400
+      ],
+      "pricingConfig": {
+        "baseRate": 40,
+        "minQuantity": 20,
+        "startingPrice": 800,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-envelope",
@@ -401,7 +610,27 @@
         "Peel & Seal Strip",
         "Full Face Printing"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 3.5,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 3.5,
+        "minQuantity": 500,
+        "startingPrice": 1750,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-office-file",
@@ -431,7 +660,27 @@
         "Steel Clip Attached",
         "Pocket Slit"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 28,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 28,
+        "minQuantity": 100,
+        "startingPrice": 2800,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-folder",
@@ -460,7 +709,27 @@
         "Raised Spot UV",
         "Single/Double Inside Pockets"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 18,
+      "quantityTiers": [
+        250,
+        500,
+        1250,
+        2500
+      ],
+      "pricingConfig": {
+        "baseRate": 18,
+        "minQuantity": 250,
+        "startingPrice": 4500,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-id-card",
@@ -488,7 +757,28 @@
         "Oval Lanyard Punch",
         "Magnetic Stripe"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 35,
+      "quantityTiers": [
+        50,
+        100,
+        250,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 35,
+        "minQuantity": 50,
+        "startingPrice": 1750,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-employee-id-card",
@@ -517,7 +807,28 @@
         "QR Code / Barcode Integration",
         "Holographic Overlay"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 45,
+      "quantityTiers": [
+        50,
+        100,
+        250,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 45,
+        "minQuantity": 50,
+        "startingPrice": 2250,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-pamphlet",
@@ -546,7 +857,28 @@
         "Vibrant High Speed Color",
         "Single / Both Side"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 2.8,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 2.8,
+        "minQuantity": 1000,
+        "startingPrice": 2800,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-flyer",
@@ -575,7 +907,28 @@
         "Gloss / Matte Finish",
         "Creased"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 3.2,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 3.2,
+        "minQuantity": 1000,
+        "startingPrice": 3200,
+        "unitName": "Copies",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-brochure",
@@ -604,7 +957,27 @@
         "Precision Folds & Creases",
         "Thermal Matte Lamination"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 8.5,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 8.5,
+        "minQuantity": 500,
+        "startingPrice": 4250,
+        "unitName": "Copies",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-poster",
@@ -634,7 +1007,27 @@
         "UV Coating",
         "Moisture Resistant"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 22,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 22,
+        "minQuantity": 100,
+        "startingPrice": 2200,
+        "unitName": "Copies",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-catalogue",
@@ -662,7 +1055,27 @@
         "Center Staple Pin",
         "Thermal Matte Lamination Cover"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 45,
+      "quantityTiers": [
+        200,
+        400,
+        1000,
+        2000
+      ],
+      "pricingConfig": {
+        "baseRate": 45,
+        "minQuantity": 200,
+        "startingPrice": 9000,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-leaflet",
@@ -691,7 +1104,28 @@
         "Both Side CMYK",
         "Straight Trim"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 2.5,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 2.5,
+        "minQuantity": 1000,
+        "startingPrice": 2500,
+        "unitName": "Copies",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-danglers",
@@ -720,7 +1154,27 @@
         "Custom Die-Cut Contour",
         "Eyelet Hole Punch with String"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 14,
+      "quantityTiers": [
+        200,
+        400,
+        1000,
+        2000
+      ],
+      "pricingConfig": {
+        "baseRate": 14,
+        "minQuantity": 200,
+        "startingPrice": 2800,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-standee",
@@ -749,7 +1203,27 @@
         "Twin Swivel Feet",
         "Padded Carry Bag"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1250,
+      "quantityTiers": [
+        2,
+        4,
+        10,
+        20
+      ],
+      "pricingConfig": {
+        "baseRate": 1250,
+        "minQuantity": 2,
+        "startingPrice": 2500,
+        "unitName": "Standees",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-banner",
@@ -777,7 +1251,27 @@
         "Border Hemming",
         "Brass Corner Eyelets / Grommets"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 450,
+      "quantityTiers": [
+        1,
+        2,
+        5,
+        10
+      ],
+      "pricingConfig": {
+        "baseRate": 450,
+        "minQuantity": 1,
+        "startingPrice": 450,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-flex-printing",
@@ -805,7 +1299,27 @@
         "High Solvent Weatherproof Inks",
         "Reinforced Edge Welds"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 380,
+      "quantityTiers": [
+        1,
+        2,
+        5,
+        10
+      ],
+      "pricingConfig": {
+        "baseRate": 380,
+        "minQuantity": 1,
+        "startingPrice": 380,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-sunboard-printing",
@@ -835,7 +1349,27 @@
         "Direct UV Flatbed Print",
         "Matte / Gloss Overlaminate"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 220,
+      "quantityTiers": [
+        5,
+        10,
+        25,
+        50
+      ],
+      "pricingConfig": {
+        "baseRate": 220,
+        "minQuantity": 5,
+        "startingPrice": 1100,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-promotional-cards",
@@ -864,7 +1398,27 @@
         "Raised Spot UV",
         "Tear-off Coupon Perforation"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 4.5,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 4.5,
+        "minQuantity": 500,
+        "startingPrice": 2250,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-notebook",
@@ -892,7 +1446,27 @@
         "Spiral Wire-O Bound",
         "Soft Touch Matte Cover"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 48,
+      "quantityTiers": [
+        200,
+        400,
+        1000,
+        2000
+      ],
+      "pricingConfig": {
+        "baseRate": 48,
+        "minQuantity": 200,
+        "startingPrice": 9600,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-pub-school-diary",
@@ -920,7 +1494,27 @@
         "Gold Foil Logo Stamped",
         "Section Sewn Binding"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 65,
+      "quantityTiers": [
+        300,
+        600,
+        1500,
+        3000
+      ],
+      "pricingConfig": {
+        "baseRate": 65,
+        "minQuantity": 300,
+        "startingPrice": 19500,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-office-diary",
@@ -948,7 +1542,27 @@
         "Satin Ribbon Bookmark",
         "Monthly Index"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 180,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 180,
+        "minQuantity": 100,
+        "startingPrice": 18000,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-exercise-book",
@@ -975,7 +1589,27 @@
         "Center Pinned Saddle Stitch",
         "Square Folded Spine"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 28,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 28,
+        "minQuantity": 500,
+        "startingPrice": 14000,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-book-printing",
@@ -1004,7 +1638,27 @@
         "Perfect Glue Binding",
         "Matte Laminated Cover"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 95,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 95,
+        "minQuantity": 100,
+        "startingPrice": 9500,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-magazine",
@@ -1031,7 +1685,27 @@
         "High Gloss Varnish",
         "Center Saddle Stitch"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 42,
+      "quantityTiers": [
+        200,
+        400,
+        1000,
+        2000
+      ],
+      "pricingConfig": {
+        "baseRate": 42,
+        "minQuantity": 200,
+        "startingPrice": 8400,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-journal",
@@ -1059,7 +1733,27 @@
         "Gold Gilded Edges",
         "Elastic Closure Band"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 140,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 140,
+        "minQuantity": 100,
+        "startingPrice": 14000,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-annual-report",
@@ -1086,7 +1780,27 @@
         "Perfect Binding",
         "Spot UV on Corporate Title"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 85,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 85,
+        "minQuantity": 100,
+        "startingPrice": 8500,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-calendar",
@@ -1114,7 +1828,27 @@
         "Spiral Wire-O Ring",
         "12 Months Full Color Spread"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 95,
+      "quantityTiers": [
+        200,
+        400,
+        1000,
+        2000
+      ],
+      "pricingConfig": {
+        "baseRate": 95,
+        "minQuantity": 200,
+        "startingPrice": 19000,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-e-book-printing",
@@ -1142,7 +1876,28 @@
         "Thermal Softcover Binding",
         "Quick Turnaround"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 75,
+      "quantityTiers": [
+        50,
+        100,
+        250,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 75,
+        "minQuantity": 50,
+        "startingPrice": 3750,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-project-report",
@@ -1169,7 +1924,28 @@
         "Golden Foil Spine Stamping",
         "Clear Acetate Guard"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 150,
+      "quantityTiers": [
+        20,
+        40,
+        100,
+        200,
+        400
+      ],
+      "pricingConfig": {
+        "baseRate": 150,
+        "minQuantity": 20,
+        "startingPrice": 3000,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-thesis-printing",
@@ -1196,7 +1972,28 @@
         "Golden Lettering Embossing",
         "University Guidelines Compliant"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 250,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 250,
+        "minQuantity": 10,
+        "startingPrice": 2500,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-wedding-invitation-card",
@@ -1226,7 +2023,27 @@
         "Laser Cut Lattice",
         "Coordinated Boxed Envelope"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 45,
+      "quantityTiers": [
+        250,
+        500,
+        1250,
+        2500
+      ],
+      "pricingConfig": {
+        "baseRate": 45,
+        "minQuantity": 250,
+        "startingPrice": 11250,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-engagement-card",
@@ -1254,7 +2071,27 @@
         "Rose Gold Hot Foil",
         "Embossed Monogram"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 35,
+      "quantityTiers": [
+        200,
+        400,
+        1000,
+        2000
+      ],
+      "pricingConfig": {
+        "baseRate": 35,
+        "minQuantity": 200,
+        "startingPrice": 7000,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-birthday-invitation",
@@ -1283,7 +2120,27 @@
         "High Gloss UV Glaze",
         "Vibrant Theme Artwork"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 15,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 15,
+        "minQuantity": 100,
+        "startingPrice": 1500,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-anniversary-invitation",
@@ -1310,7 +2167,27 @@
         "Silver Foil Stamping",
         "Ribbon Accent"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 30,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 30,
+        "minQuantity": 100,
+        "startingPrice": 3000,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-invitation-envelope",
@@ -1338,7 +2215,27 @@
         "Die-Cut Flap",
         "Gold Foil Border"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 12,
+      "quantityTiers": [
+        300,
+        600,
+        1500,
+        3000
+      ],
+      "pricingConfig": {
+        "baseRate": 12,
+        "minQuantity": 300,
+        "startingPrice": 3600,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-save-the-date-card",
@@ -1366,7 +2263,27 @@
         "Letterpress Impression",
         "Gold Foil Edge Gilding"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 18,
+      "quantityTiers": [
+        150,
+        300,
+        750,
+        1500
+      ],
+      "pricingConfig": {
+        "baseRate": 18,
+        "minQuantity": 150,
+        "startingPrice": 2700,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-thank-you-card",
@@ -1394,7 +2311,27 @@
         "Debossed Logo",
         "Matching Envelope Included"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 10,
+      "quantityTiers": [
+        200,
+        400,
+        1000,
+        2000
+      ],
+      "pricingConfig": {
+        "baseRate": 10,
+        "minQuantity": 200,
+        "startingPrice": 2000,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-greeting-card",
@@ -1422,7 +2359,27 @@
         "Gloss Thermal Finish",
         "Score Fold"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 14,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 14,
+        "minQuantity": 100,
+        "startingPrice": 1400,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-religious-invitation-card",
@@ -1450,7 +2407,27 @@
         "Gold Hot Foil Deity Emblem",
         "Scented Card Finish"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 38,
+      "quantityTiers": [
+        250,
+        500,
+        1250,
+        2500
+      ],
+      "pricingConfig": {
+        "baseRate": 38,
+        "minQuantity": 250,
+        "startingPrice": 9500,
+        "unitName": "Cards",
+        "supportsBothSides": false,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-paper-bag",
@@ -1479,7 +2456,27 @@
         "Twisted Rope Handle",
         "Reinforced Turnover Top & Base"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 18,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 18,
+        "minQuantity": 500,
+        "startingPrice": 9000,
+        "unitName": "Bags",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-shopping-bag",
@@ -1508,7 +2505,27 @@
         "Grossgrain Ribbon Handle",
         "Foil Stamped Logo"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 26,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 26,
+        "minQuantity": 500,
+        "startingPrice": 13000,
+        "unitName": "Bags",
+        "supportsBothSides": false,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-product-box",
@@ -1537,7 +2554,27 @@
         "Gloss / Matte Coating",
         "Window Cutout"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 24,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 24,
+        "minQuantity": 500,
+        "startingPrice": 12000,
+        "unitName": "Boxes",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-cake-box",
@@ -1565,7 +2602,27 @@
         "Clear Transparent Window Patch",
         "Oil/Moisture Barrier"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 28,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 28,
+        "minQuantity": 500,
+        "startingPrice": 14000,
+        "unitName": "Boxes",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-sweet-box",
@@ -1592,7 +2649,27 @@
         "Embossed Heritage Motif",
         "Gold Foil Logo Accent"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 32,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 32,
+        "minQuantity": 500,
+        "startingPrice": 16000,
+        "unitName": "Boxes",
+        "supportsBothSides": false,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-food-packaging",
@@ -1620,7 +2697,28 @@
         "Leakproof Interlocking Tabs",
         "Grease Resistant"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 16,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 16,
+        "minQuantity": 1000,
+        "startingPrice": 16000,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-pkg-product-label",
@@ -1648,7 +2746,28 @@
         "Supplied on Rolls or Sheets",
         "Permanent Cold-Tack Adhesive"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.8,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.8,
+        "minQuantity": 1000,
+        "startingPrice": 1800,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-sticker-label",
@@ -1675,7 +2794,28 @@
         "Gloss UV Protected",
         "Precision Half-Cut"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.5,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.5,
+        "minQuantity": 1000,
+        "startingPrice": 1500,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-barcode-label",
@@ -1704,7 +2844,28 @@
         "Grade-A Scannability",
         "High Speed Barcode / SKU Print"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 0.6,
+      "quantityTiers": [
+        2000,
+        4000,
+        6000,
+        10000,
+        20000
+      ],
+      "pricingConfig": {
+        "baseRate": 0.6,
+        "minQuantity": 2000,
+        "startingPrice": 1200,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-hang-tag",
@@ -1734,7 +2895,28 @@
         "Matte Velvet Touch",
         "Cotton / Elastic Cord"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 3.5,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 3.5,
+        "minQuantity": 1000,
+        "startingPrice": 3500,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-product-sleeve",
@@ -1761,7 +2943,28 @@
         "Glue Interlock / Double Tape",
         "Thermal Matte Finish"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 4.2,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 4.2,
+        "minQuantity": 1000,
+        "startingPrice": 4200,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-round-sticker",
@@ -1791,7 +2994,28 @@
         "Circular Laser Die-Cut",
         "Easy Peel Backing"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.8,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.8,
+        "minQuantity": 1000,
+        "startingPrice": 1800,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-square-sticker",
@@ -1821,7 +3045,28 @@
         "Rounded / Sharp Corners",
         "UV Barrier"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.6,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.6,
+        "minQuantity": 1000,
+        "startingPrice": 1600,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-transparent-sticker",
@@ -1849,7 +3094,28 @@
         "White Ink Under-Print (No Show-Through)",
         "100% Water Resistant"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 2.8,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 2.8,
+        "minQuantity": 1000,
+        "startingPrice": 2800,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-waterproof-sticker",
@@ -1876,7 +3142,28 @@
         "Freezer & Oil Proof",
         "Permanent Adhesive"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 2.4,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 2.4,
+        "minQuantity": 1000,
+        "startingPrice": 2400,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-vinyl-sticker",
@@ -1903,7 +3190,27 @@
         "Outdoor 3-Year Sun UV Resistance",
         "Scratchproof Lamination"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 3.2,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 3.2,
+        "minQuantity": 500,
+        "startingPrice": 1600,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-logo-sticker",
@@ -1931,7 +3238,28 @@
         "Metallic Sheen",
         "Precision Kiss-Cut Sheet"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 2.5,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 2.5,
+        "minQuantity": 1000,
+        "startingPrice": 2500,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-qr-code-sticker",
@@ -1959,7 +3287,27 @@
         "Instant Scannability (ISO Grade A)",
         "Direct Payment / URL Code"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.9,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.9,
+        "minQuantity": 500,
+        "startingPrice": 950,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-lbl-product-label",
@@ -1986,7 +3334,28 @@
         "Full CMYK Spectrum",
         "Roll or Sheet Delivery"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.8,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.8,
+        "minQuantity": 1000,
+        "startingPrice": 1800,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-warning-label",
@@ -2015,7 +3384,27 @@
         "OSHA/ISO Compliant Symbols",
         "Heavy Industrial Adhesive"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 2.2,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 2.2,
+        "minQuantity": 500,
+        "startingPrice": 1100,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-photo-printing",
@@ -2045,7 +3434,28 @@
         "High Color Gamut 12-Color Archival Print",
         "Fingerprint Resistant"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 12,
+      "quantityTiers": [
+        20,
+        40,
+        100,
+        200,
+        400
+      ],
+      "pricingConfig": {
+        "baseRate": 12,
+        "minQuantity": 20,
+        "startingPrice": 240,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-passport-size-photo",
@@ -2072,7 +3482,28 @@
         "White / Light Grey Background",
         "Official Visa / Passport Specs"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 80,
+      "quantityTiers": [
+        32,
+        64,
+        160,
+        320,
+        640
+      ],
+      "pricingConfig": {
+        "baseRate": 80,
+        "minQuantity": 32,
+        "startingPrice": 2560,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-photo-album",
@@ -2100,7 +3531,27 @@
         "Leatherette Embossed Cover",
         "Padded Briefcase Box"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1800,
+      "quantityTiers": [
+        1,
+        2,
+        5,
+        10
+      ],
+      "pricingConfig": {
+        "baseRate": 1800,
+        "minQuantity": 1,
+        "startingPrice": 1800,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-photo-frame",
@@ -2129,7 +3580,27 @@
         "Unbreakable Acrylic Glass",
         "Rear Hanging Hardware Included"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 350,
+      "quantityTiers": [
+        1,
+        2,
+        5,
+        10
+      ],
+      "pricingConfig": {
+        "baseRate": 350,
+        "minQuantity": 1,
+        "startingPrice": 350,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-canvas-printing",
@@ -2158,7 +3629,27 @@
         "Stretched on 1-Inch Seasoned Wooden Stretcher Frame",
         "Museum Gallery Wrap"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 650,
+      "quantityTiers": [
+        1,
+        2,
+        5,
+        10
+      ],
+      "pricingConfig": {
+        "baseRate": 650,
+        "minQuantity": 1,
+        "startingPrice": 650,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-customized-photo-mug",
@@ -2185,7 +3676,27 @@
         "Sublimation Photographic Print",
         "Microwave & Dishwasher Safe"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 180,
+      "quantityTiers": [
+        1,
+        2,
+        5,
+        10
+      ],
+      "pricingConfig": {
+        "baseRate": 180,
+        "minQuantity": 1,
+        "startingPrice": 180,
+        "unitName": "Mugs",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-personalized-gifts",
@@ -2212,7 +3723,28 @@
         "UV Direct Printing / Laser Engraving",
         "Gift Presentation Box"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 120,
+      "quantityTiers": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "pricingConfig": {
+        "baseRate": 120,
+        "minQuantity": 10,
+        "startingPrice": 1200,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-pvc-card-printing",
@@ -2239,7 +3771,28 @@
         "Dual Sided Photographic Quality",
         "Waterproof Solid Edge"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 35,
+      "quantityTiers": [
+        25,
+        50,
+        125,
+        250,
+        500
+      ],
+      "pricingConfig": {
+        "baseRate": 35,
+        "minQuantity": 25,
+        "startingPrice": 875,
+        "unitName": "Cards",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-school-id-card",
@@ -2266,7 +3819,27 @@
         "Lanyard with School Name Sublimation",
         "Transparent Soft Holder"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 30,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 30,
+        "minQuantity": 100,
+        "startingPrice": 3000,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-edu-school-diary",
@@ -2293,7 +3866,27 @@
         "School Crest Gold Foil Embossed",
         "Student Details & Rules Pages"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 60,
+      "quantityTiers": [
+        300,
+        600,
+        1500,
+        3000
+      ],
+      "pricingConfig": {
+        "baseRate": 60,
+        "minQuantity": 300,
+        "startingPrice": 18000,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-marksheet",
@@ -2322,7 +3915,27 @@
         "Micro-Text Line",
         "Tamper Evident"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 8.5,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 8.5,
+        "minQuantity": 500,
+        "startingPrice": 4250,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-certificate",
@@ -2350,7 +3963,27 @@
         "Metallic Gold Foil Seal",
         "Official Ornate Security Border"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 15,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 15,
+        "minQuantity": 100,
+        "startingPrice": 1500,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-question-paper",
@@ -2379,7 +4012,27 @@
         "Strict Confidentiality Printing",
         "Center Folded / Stapled Sets"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.2,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.2,
+        "minQuantity": 500,
+        "startingPrice": 600,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-admission-form",
@@ -2406,7 +4059,27 @@
       "finishes": [
         "Clean Form Layout with Photo Box & Counterfoil Tear-off"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 3.5,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 3.5,
+        "minQuantity": 500,
+        "startingPrice": 1750,
+        "unitName": "Units",
+        "supportsBothSides": true,
+        "supportsFoil": true,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-school-prospectus",
@@ -2433,7 +4106,27 @@
         "Thermal Matte Cover",
         "Center Saddle Stitch"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 35,
+      "quantityTiers": [
+        300,
+        600,
+        1500,
+        3000
+      ],
+      "pricingConfig": {
+        "baseRate": 35,
+        "minQuantity": 300,
+        "startingPrice": 10500,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-exam-pad",
@@ -2460,7 +4153,27 @@
         "High Tensile Chrome Clip",
         "Full Face School Crest Print"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 55,
+      "quantityTiers": [
+        200,
+        400,
+        1000,
+        2000
+      ],
+      "pricingConfig": {
+        "baseRate": 55,
+        "minQuantity": 200,
+        "startingPrice": 11000,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-student-notebook",
@@ -2488,7 +4201,27 @@
         "Single Line / Square / Four Line Grids",
         "Strong Center Pinning"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 32,
+      "quantityTiers": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "pricingConfig": {
+        "baseRate": 32,
+        "minQuantity": 500,
+        "startingPrice": 16000,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-school-calendar",
@@ -2516,7 +4249,27 @@
         "Tin Rim at Top or Spiral Wire-O",
         "Holiday & Exam Date Highlights"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 25,
+      "quantityTiers": [
+        300,
+        600,
+        1500,
+        3000
+      ],
+      "pricingConfig": {
+        "baseRate": 25,
+        "minQuantity": 300,
+        "startingPrice": 7500,
+        "unitName": "Units",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-restaurant-menu-card",
@@ -2545,7 +4298,28 @@
         "100% Waterproof Wipe-Clean Lamination",
         "Spill-Proof Rigid Finish"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 85,
+      "quantityTiers": [
+        25,
+        50,
+        125,
+        250,
+        500
+      ],
+      "pricingConfig": {
+        "baseRate": 85,
+        "minQuantity": 25,
+        "startingPrice": 2125,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-food-menu",
@@ -2573,7 +4347,28 @@
         "Washable Surface",
         "Rounded Safety Corners"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 45,
+      "quantityTiers": [
+        50,
+        100,
+        250,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 45,
+        "minQuantity": 50,
+        "startingPrice": 2250,
+        "unitName": "Menus",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-table-tent-card",
@@ -2601,7 +4396,28 @@
         "Die-Cut Interlocking Base Tabs",
         "Gloss Thermal UV"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 16,
+      "quantityTiers": [
+        50,
+        100,
+        250,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 16,
+        "minQuantity": 50,
+        "startingPrice": 800,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-rest-bill-book",
@@ -2630,7 +4446,28 @@
         "Perforated Customer Bill Slip",
         "Strawboard Base"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 55,
+      "quantityTiers": [
+        20,
+        40,
+        100,
+        200,
+        400
+      ],
+      "pricingConfig": {
+        "baseRate": 55,
+        "minQuantity": 20,
+        "startingPrice": 1100,
+        "unitName": "Books",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-parcel-sticker",
@@ -2658,7 +4495,28 @@
         "Tamper-Evident Safety Seal",
         "Brand Logo & Phone"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.4,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.4,
+        "minQuantity": 1000,
+        "startingPrice": 1400,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-rest-food-label",
@@ -2685,7 +4543,28 @@
         "Veg / Non-Veg Indicator Dot",
         "Packed Date & Expiry Blank"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 1.5,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 1.5,
+        "minQuantity": 1000,
+        "startingPrice": 1500,
+        "unitName": "Labels",
+        "supportsBothSides": false,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-takeaway-menu",
@@ -2713,7 +4592,28 @@
         "Vibrant High Speed Press",
         "Machine Tri-Fold"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 3.2,
+      "quantityTiers": [
+        1000,
+        2000,
+        3000,
+        5000,
+        10000
+      ],
+      "pricingConfig": {
+        "baseRate": 3.2,
+        "minQuantity": 1000,
+        "startingPrice": 3200,
+        "unitName": "Menus",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-hotel-key-card",
@@ -2740,7 +4640,27 @@
         "High Gloss Card Surface",
         "Double Sided Hotel Branding"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 42,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 42,
+        "minQuantity": 100,
+        "startingPrice": 4200,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": true,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     },
     {
       "id": "prd-room-service-card",
@@ -2768,10 +4688,73 @@
         "Die-Cut Doorknob Hole & Slit",
         "Double Sided Breakfast / Do Not Disturb"
       ],
-      "featured": false
+      "featured": false,
+      "baseRate": 18,
+      "quantityTiers": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "pricingConfig": {
+        "baseRate": 18,
+        "minQuantity": 100,
+        "startingPrice": 1800,
+        "unitName": "Cards",
+        "supportsBothSides": true,
+        "supportsFoil": false,
+        "supportsSpotUv": false,
+        "foilExtraPercent": 15,
+        "spotUvExtraPercent": 15,
+        "bothSidesMultiplier": 1.4,
+        "gstPercent": 18
+      }
     }
   ],
   "enquiries": [
+    {
+      "id": "PRZ-2026-1710",
+      "referenceNo": "PRZ-2026-1710",
+      "customerName": "Test Commercial Client",
+      "businessName": "Apex Industries Ltd",
+      "whatsappNumber": "+91 98983 51920",
+      "email": "test@apexcorp.com",
+      "productSlug": "visiting-card",
+      "productName": "Visiting Card",
+      "quantity": 1000,
+      "dimensions": "Standard 3.5x2.0 inch",
+      "material": "350g Velvet Board",
+      "finishing": "Thermal Matte + Both Sides + Gold Foil",
+      "additionalRequirements": "Deliver with luxury packaging.",
+      "jobName": "Executive Brand Launch",
+      "estimatedPrice": "525",
+      "selectedOptions": null,
+      "artworkPath": null,
+      "artworkOriginalName": null,
+      "status": "New Enquiry",
+      "createdAt": "2026-11-24T10:36:38.647Z",
+      "quotation": null
+    },
+    {
+      "id": "PRZ-2026-1381",
+      "referenceNo": "PRZ-2026-1381",
+      "customerName": "Test Commercial Client",
+      "businessName": "Apex Industries Ltd",
+      "whatsappNumber": "+91 98983 51920",
+      "email": "test@apexcorp.com",
+      "productSlug": "visiting-card",
+      "productName": "Visiting Card",
+      "quantity": 1000,
+      "dimensions": "Standard 3.5x2.0 inch",
+      "material": "350g Velvet Board",
+      "finishing": "Thermal Matte + Both Sides + Gold Foil",
+      "additionalRequirements": "Deliver with luxury packaging.",
+      "artworkPath": null,
+      "artworkOriginalName": null,
+      "status": "New Enquiry",
+      "createdAt": "2026-11-24T10:36:15.743Z",
+      "quotation": null
+    },
     {
       "id": "PRZ-2026-2879",
       "referenceNo": "PRZ-2026-2879",

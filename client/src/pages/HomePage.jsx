@@ -6,7 +6,6 @@ import {
   ExternalLink, Search
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import PrintConfigurator from '../components/PrintConfigurator.jsx';
 
 export default function HomePage({ 
   categories = [], 
@@ -14,8 +13,6 @@ export default function HomePage({
   onNavigate, 
   onRequestQuote
 }) {
-  const [configuratorCategory, setConfiguratorCategory] = useState('visiting-card');
-  const [configuratorHighlighted, setConfiguratorHighlighted] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
@@ -77,7 +74,6 @@ export default function HomePage({
       title: 'BUSINESS STATIONERY',
       subtitle: 'Visiting Cards, Letterheads, Bill Books, Vouchers & ID Systems',
       image: '/images/categories/business-stationery.webp',
-      configuratorCat: 'business-stationery',
       targetCategory: 'business-stationery',
       badge: '15 Products'
     },
@@ -86,7 +82,6 @@ export default function HomePage({
       title: 'MARKETING & ADVERTISING',
       subtitle: 'Pamphlets, Flyers, Brochures, Posters, Standees & Banners',
       image: '/images/categories/marketing-advertising.webp',
-      configuratorCat: 'marketing-advertising',
       targetCategory: 'marketing-advertising',
       badge: '12 Products'
     },
@@ -95,7 +90,6 @@ export default function HomePage({
       title: 'BOOKS & PUBLICATIONS',
       subtitle: 'Notebooks, Diaries, Book Printing, Magazines & Thesis Binding',
       image: '/images/categories/books-publications.webp',
-      configuratorCat: 'books-publications',
       targetCategory: 'books-publications',
       badge: '12 Products'
     },
@@ -104,7 +98,6 @@ export default function HomePage({
       title: 'WEDDING & INVITATION',
       subtitle: 'Royal Wedding Cards, Metallic Foil Invitations & Envelopes',
       image: '/images/categories/wedding-invitation.webp',
-      configuratorCat: 'wedding-invitation',
       targetCategory: 'wedding-invitation',
       badge: '9 Products'
     },
@@ -113,7 +106,6 @@ export default function HomePage({
       title: 'PACKAGING PRINTING',
       subtitle: 'Paper Bags, Shopping Bags, Product Boxes & Folding Cartons',
       image: '/images/categories/packaging-printing.webp',
-      configuratorCat: 'packaging-printing',
       targetCategory: 'packaging-printing',
       badge: '11 Products'
     },
@@ -122,7 +114,6 @@ export default function HomePage({
       title: 'LABELS & STICKERS',
       subtitle: 'Round, Square, Transparent & Waterproof Vinyl Stickers',
       image: '/images/categories/labels-stickers.webp',
-      configuratorCat: 'labels-stickers',
       targetCategory: 'labels-stickers',
       badge: '9 Products'
     },
@@ -131,7 +122,6 @@ export default function HomePage({
       title: 'PHOTO & DIGITAL PRINTING',
       subtitle: 'Ultra HD Photo Prints, Canvases, PVC Cards & Photo Frames',
       image: '/images/categories/photo-digital-printing.webp',
-      configuratorCat: 'photo-digital-printing',
       targetCategory: 'photo-digital-printing',
       badge: '8 Products'
     },
@@ -140,7 +130,6 @@ export default function HomePage({
       title: 'SCHOOL & EDUCATIONAL',
       subtitle: 'School ID Cards, Marksheets, Certificates, Diaries & Prospectus',
       image: '/images/categories/school-educational-printing.webp',
-      configuratorCat: 'school-educational-printing',
       targetCategory: 'school-educational-printing',
       badge: '10 Products'
     },
@@ -149,7 +138,6 @@ export default function HomePage({
       title: 'RESTAURANT & HOTEL',
       subtitle: 'Menu Cards, Food Packaging, Table Tents & Key Card Sleeves',
       image: '/images/categories/restaurant-hotel-printing.webp',
-      configuratorCat: 'restaurant-hotel-printing',
       targetCategory: 'restaurant-hotel-printing',
       badge: '9 Products'
     }
@@ -164,7 +152,9 @@ export default function HomePage({
       category: 'Business Stationery',
       image: '/images/products/visiting-card.webp',
       specs: '350 GSM Velvet Soft-Touch / Raised Spot UV / Gold Foil',
-      minQty: 1000
+      minQty: 1000,
+      startingPrice: 350,
+      unitPrice: '₹0.35/card'
     },
     {
       id: 'product-box',
@@ -173,7 +163,9 @@ export default function HomePage({
       category: 'Packaging Printing',
       image: '/images/products/product-box.webp',
       specs: 'Rigid SBS Board / Structural Die-Line / Auto-Lock Base',
-      minQty: 500
+      minQty: 500,
+      startingPrice: 12000,
+      unitPrice: '₹24/box'
     },
     {
       id: 'letterhead',
@@ -182,7 +174,9 @@ export default function HomePage({
       category: 'Business Stationery',
       image: '/images/products/letterhead.webp',
       specs: '100 GSM Executive Bond / Alabaster Superfine Stock',
-      minQty: 500
+      minQty: 500,
+      startingPrice: 1100,
+      unitPrice: '₹2.20/sheet'
     },
     {
       id: 'round-sticker',
@@ -191,7 +185,9 @@ export default function HomePage({
       category: 'Labels & Stickers',
       image: '/images/products/round-sticker.webp',
       specs: '100% Waterproof BOPP Vinyl / Precision Contour Kiss-Cut',
-      minQty: 1000
+      minQty: 1000,
+      startingPrice: 1800,
+      unitPrice: '₹1.80/sticker'
     },
     {
       id: 'brochure',
@@ -200,7 +196,9 @@ export default function HomePage({
       category: 'Marketing & Advertising',
       image: '/images/products/brochure.webp',
       specs: '170 GSM Gloss Art / Precision Creasing & Multi-Panel Fold',
-      minQty: 500
+      minQty: 500,
+      startingPrice: 4250,
+      unitPrice: '₹8.50/copy'
     }
   ];
 
@@ -228,16 +226,6 @@ export default function HomePage({
       date: 'Finishing Guide'
     }
   ];
-
-  const handleCardClick = (card) => {
-    setConfiguratorCategory(card.configuratorCat);
-    setConfiguratorHighlighted(true);
-    const configuratorEl = document.getElementById('configurator-section');
-    if (configuratorEl) {
-      configuratorEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    setTimeout(() => setConfiguratorHighlighted(false), 2000);
-  };
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
@@ -488,9 +476,20 @@ export default function HomePage({
               </div>
 
               <div className="pt-3.5 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
-                <span>View Details</span>
-                <div className="w-6 h-6 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
-                  <ArrowRight className="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform" />
+                <div>
+                  <span className="text-[10px] text-slate-400 font-medium block">Starting from</span>
+                  <span className="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-brand-crimson">
+                    ₹{item.startingPrice ? item.startingPrice.toLocaleString('en-IN') : 'Quote'}
+                  </span>
+                  {item.unitPrice && (
+                    <span className="text-[10px] text-slate-400 font-normal ml-1">({item.unitPrice})</span>
+                  )}
+                </div>
+                <div className="flex items-center space-x-1 text-brand-crimson text-xs font-bold">
+                  <span>Configure</span>
+                  <div className="w-6 h-6 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
+                    <ArrowRight className="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -645,11 +644,8 @@ export default function HomePage({
               </p>
               <div className="pt-2">
                 <button
-                  onClick={() => {
-                    const el = document.getElementById('configurator-section');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }}
-                  className="bg-white text-slate-900 hover:bg-slate-100 font-bold text-xs sm:text-sm px-6 py-3 rounded-full transition flex items-center space-x-2"
+                  onClick={() => onRequestQuote({ productName: 'Bestselling Corporate Collaterals' })}
+                  className="bg-white text-slate-900 hover:bg-slate-100 font-bold text-xs sm:text-sm px-6 py-3 rounded-full transition flex items-center space-x-2 shadow-md"
                 >
                   <span>Request Custom Quotation</span>
                   <ArrowRight className="w-4 h-4" />
@@ -669,23 +665,7 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 7. INTERACTIVE COMMERCIAL ORDER & QUOTATION CONFIGURATOR */}
-      <section id="configurator-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        <div className={`transition-all duration-500 rounded-3xl ${
-          configuratorHighlighted 
-            ? 'ring-4 ring-brand-crimson ring-offset-4 shadow-2xl scale-[1.005]' 
-            : ''
-        }`}>
-          <PrintConfigurator
-            key={configuratorCategory}
-            initialCategory={configuratorCategory}
-            onOpenQuoteModal={onRequestQuote}
-            onRequestCustomQuote={() => onRequestQuote({ productName: 'Visiting Cards' })}
-          />
-        </div>
-      </section>
-
-      {/* 8. PREPRESS KNOWLEDGE & PRINT SPECIFICATIONS */}
+      {/* 7. PREPRESS KNOWLEDGE & PRINT SPECIFICATIONS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
@@ -721,13 +701,10 @@ export default function HomePage({
                 <span className="font-semibold text-slate-700">{guide.date}</span>
                 <button
                   type="button"
-                  onClick={() => {
-                    const el = document.getElementById('configurator-section');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }}
+                  onClick={() => onNavigate('product', 'visiting-card')}
                   className="font-bold text-brand-crimson hover:underline flex items-center space-x-1"
                 >
-                  <span>Configure Now &rarr;</span>
+                  <span>Explore Specs &rarr;</span>
                 </button>
               </div>
             </div>

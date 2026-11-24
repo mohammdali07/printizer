@@ -137,6 +137,7 @@ export default function App() {
           categories={categories}
           products={products}
           onRequestQuote={handleOpenQuoteModal}
+          onOpenRateList={() => {}}
           activePage={currentParam ? `${currentPage}-${currentParam}` : currentPage}
         />
       )}
@@ -160,6 +161,7 @@ export default function App() {
                 products={products}
                 onNavigate={navigate}
                 onRequestQuote={handleOpenQuoteModal}
+                onOpenRateList={() => {}}
               />
             )}
 

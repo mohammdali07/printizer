@@ -139,7 +139,7 @@ export default function Footer({ onNavigate, categories = [] }) {
               </li>
               <li>
                 <button onClick={() => onNavigate('about')} className="hover:text-brand-crimson transition">
-                  File Upload Rules (CDR x7)
+                  Printing Quality Assurance
                 </button>
               </li>
               <li>
@@ -226,11 +226,11 @@ export default function Footer({ onNavigate, categories = [] }) {
             &copy; {new Date().getFullYear()} <strong>PRINTIZER</strong> &bull; Everything Your Business Needs to Print. All rights reserved.
           </p>
           <div className="flex items-center space-x-3 text-[11px] font-medium text-slate-500">
-            <span>CorelDRAW CDR x7 Compatible</span>
+            <span>PAN India Delivery</span>
             <span>&bull;</span>
-            <span>CMYK 300 DPI Prepress</span>
+            <span>CMYK True Color Calibration</span>
             <span>&bull;</span>
-            <span>Doorstep Transit Insured</span>
+            <span>Insured Doorstep Transit</span>
           </div>
         </div>
       </div>

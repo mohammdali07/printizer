@@ -202,14 +202,14 @@ export default function HomePage({
     }
   ];
 
-  // Genuine Knowledge Articles on Prepress and Commercial Printing
+  // Commercial Capabilities & Production Quality
   const printingGuides = [
     {
       id: 1,
-      title: 'CorelDRAW CDR x7 & Vector Prepress Standards',
-      category: 'Prepress Guidelines',
-      snippet: 'Ensure all fonts are converted to curves (Ctrl+Q), RGB color palettes are calibrated to CMYK, and minimum 3mm bleed margins are preserved.',
-      date: 'Commercial Standard'
+      title: 'Advanced Offset & High-Definition Digital Presses',
+      category: 'Printing Capabilities',
+      snippet: 'High-speed multi-color offset presses for high-volume cost efficiency, alongside ultra-high-definition digital presses for short runs and rapid turnaround.',
+      date: 'Production Technology'
     },
     {
       id: 2,
@@ -385,43 +385,43 @@ export default function HomePage({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
           {showcaseCategories.map((card) => (
             <div
               key={card.id}
               onClick={() => onNavigate('category', card.targetCategory)}
-              className="group bg-white rounded-3xl p-4 sm:p-5 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between"
+              className="group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between"
               title={`View ${card.title} Catalogue`}
             >
               {/* Large Studio Product Photograph */}
-              <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-xs mb-4">
+              <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-xs mb-2.5 sm:mb-4">
                 <img
                   src={card.image}
                   alt={card.title}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <span className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-[11px] font-bold px-3 py-1 rounded-full border border-slate-200/80 shadow-xs">
+                <span className="absolute top-2 right-2 sm:top-3.5 sm:right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-[9px] sm:text-[11px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-slate-200/80 shadow-xs">
                   {card.badge}
                 </span>
               </div>
 
               {/* Category Information */}
-              <div className="space-y-1.5 px-1 flex-1 flex flex-col justify-between">
+              <div className="space-y-1 sm:space-y-1.5 px-0.5 sm:px-1 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight group-hover:text-brand-crimson transition-colors duration-200">
+                  <h3 className="text-xs sm:text-base lg:text-lg font-bold text-slate-900 tracking-tight group-hover:text-brand-crimson transition-colors duration-200 line-clamp-1">
                     {card.title}
                   </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 mt-1">
+                  <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed line-clamp-2 mt-0.5 sm:mt-1 hidden xs:block">
                     {card.subtitle}
                   </p>
                 </div>
 
                 {/* Explore & Configure Action Row */}
-                <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
-                  <span className="tracking-wide text-[11px] sm:text-xs">Explore & Configure</span>
-                  <div className="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
-                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
+                <div className="pt-2 sm:pt-4 mt-2 sm:mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
+                  <span className="tracking-wide text-[10px] sm:text-xs">Explore</span>
+                  <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
+                    <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
               </div>
@@ -444,51 +444,48 @@ export default function HomePage({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-5">
           {featuredProducts.map((item) => (
             <div
               key={item.id}
               onClick={() => onNavigate('product', item.slug)}
-              className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-left"
+              className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-slate-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-left"
             >
               <div>
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-3.5 border border-slate-200/60 shadow-xs">
+                <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 mb-2.5 sm:mb-3.5 border border-slate-200/60 shadow-xs">
                   <img
                     src={item.image}
                     alt={item.name}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <span className="absolute bottom-2.5 left-2.5 bg-slate-900/90 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow-xs">
-                    MOQ: {item.minQty} units
+                  <span className="absolute bottom-1.5 left-1.5 sm:bottom-2.5 sm:left-2.5 bg-slate-900/90 backdrop-blur-xs text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2.5 py-0.5 rounded-md shadow-xs">
+                    MOQ: {item.minQty}
                   </span>
                 </div>
 
-                <span className="text-[10px] font-bold text-brand-crimson uppercase tracking-wider block">
+                <span className="text-[9px] sm:text-[10px] font-bold text-brand-crimson uppercase tracking-wider block truncate">
                   {item.category}
                 </span>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 line-clamp-1 group-hover:text-brand-crimson transition mt-1">
+                <h4 className="text-xs sm:text-sm font-bold text-slate-900 line-clamp-1 group-hover:text-brand-crimson transition mt-0.5 sm:mt-1">
                   {item.name}
                 </h4>
-                <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                <p className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5 sm:mt-1 line-clamp-2 leading-relaxed hidden xs:block">
                   {item.specs}
                 </p>
               </div>
 
-              <div className="pt-3.5 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
+              <div className="pt-2 sm:pt-3.5 mt-2.5 sm:mt-4 border-t border-slate-100 flex flex-col xs:flex-row xs:items-center justify-between gap-1 text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
                 <div>
-                  <span className="text-[10px] text-slate-400 font-medium block">Starting from</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-400 font-medium block">Starting from</span>
                   <span className="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-brand-crimson">
                     ₹{item.startingPrice ? item.startingPrice.toLocaleString('en-IN') : 'Quote'}
                   </span>
-                  {item.unitPrice && (
-                    <span className="text-[10px] text-slate-400 font-normal ml-1">({item.unitPrice})</span>
-                  )}
                 </div>
-                <div className="flex items-center space-x-1 text-brand-crimson text-xs font-bold">
+                <div className="flex items-center space-x-1 text-brand-crimson text-[10px] sm:text-xs font-bold self-end xs:self-auto">
                   <span>Configure</span>
-                  <div className="w-6 h-6 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
-                    <ArrowRight className="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform" />
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
+                    <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 transform group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
               </div>
@@ -665,17 +662,17 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 7. PREPRESS KNOWLEDGE & PRINT SPECIFICATIONS */}
+      {/* 7. PRINTING CAPABILITIES & FINISHING STANDARDS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
-            Prepress Knowledge
+            Quality Assurance
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Commercial Printing Standards
           </h2>
           <p className="text-xs sm:text-sm text-slate-500">
-            Technical prepress guidance to ensure your digital vector artwork prints with razor-sharp fidelity.
+            Specialized printing capabilities, premium paper engineering, and luxury tactile embellishments.
           </p>
         </div>
 

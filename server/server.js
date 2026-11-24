@@ -407,8 +407,13 @@ if (fs.existsSync(clientDist)) {
   });
 }
 
-// Start Server
-if (!process.env.VERCEL) {
+// Start Server only when run directly from CLI
+const isDirectRun = process.argv[1] && (
+  process.argv[1].endsWith('server.js') || 
+  process.argv[1].endsWith('server')
+);
+
+if (isDirectRun && !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`=======================================================`);
     console.log(` PRINTIZER Solutions Backend Server`);

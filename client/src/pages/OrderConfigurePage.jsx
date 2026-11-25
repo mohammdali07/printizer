@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  ChevronRight, Plus, CheckCircle2, AlertCircle, Trash2, Edit,
+  ChevronLeft, ChevronRight, Plus, CheckCircle2, AlertCircle, Trash2, Edit,
   ShoppingBag, FileText, ArrowRight, MessageCircle, UploadCloud,
   Sparkles, Package, Layers, Send, ExternalLink
 } from 'lucide-react';
@@ -59,6 +59,7 @@ export default function OrderConfigurePage({
   const [editingItemId, setEditingItemId] = useState(null);
   const [formError, setFormError] = useState('');
   const [formNotice, setFormNotice] = useState('');
+  const [activeMediaIdx, setActiveMediaIdx] = useState(0);
 
   // Final Quote Request modal / drawer state
   const [showQuoteSubmitModal, setShowQuoteSubmitModal] = useState(false);
@@ -81,6 +82,18 @@ export default function OrderConfigurePage({
 
   const activeCategoryObj = categories.find(c => c.id === (activeProduct?.categoryId || selectedCategoryId));
   const cfg = activeProduct ? getEffectiveOrderFields(activeProduct) : null;
+  const productImages = activeProduct
+    ? Array.from(new Set([
+        ...(activeProduct.image ? [activeProduct.image] : []),
+        ...(Array.isArray(activeProduct.secondaryImages) ? activeProduct.secondaryImages : [])
+      ].filter(Boolean)))
+    : [];
+  const safeMediaIdx = productImages.length > 0 ? (activeMediaIdx % productImages.length) : 0;
+
+  // Reset carousel index when selected product changes
+  useEffect(() => {
+    setActiveMediaIdx(0);
+  }, [activeProduct?.slug]);
 
   // Apply defaults for a given product whenever product changes cleanly
   const resetFieldsForProduct = (prod, preset = null) => {
@@ -442,7 +455,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
     <div className="bg-[#f4f6f9] min-h-screen pb-24">
       {/* Top Breadcrumb & Page Title Strip */}
       <div className="bg-white border-b border-slate-200/80">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="space-y-1">
               <div className="flex items-center space-x-1.5 text-xs text-slate-500">
@@ -494,72 +507,57 @@ Please share the final quotation and artwork instructions. Thank you!`;
         </div>
       </div>
 
-      {/* Main Content Container */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-5" ref={formRef}>
+      {/* Main Content Container (printizer-main split workspace: Left Form | Right ProductMedia) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-6" ref={formRef}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-        {/* CARD 1: SELECT CATEGORY (CLEAN WHITE CARD MATCHING REFERENCE) */}
-        <div className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-6 shadow-2xs">
-          <label
-            htmlFor="config-category-select"
-            className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-2"
-          >
-            Select Category
-          </label>
-          <select
-            id="config-category-select"
-            value={selectedCategoryId}
-            onChange={(e) => handleCategoryChange(e.target.value)}
-            className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition cursor-pointer"
-          >
-            {categories.map((cat) => {
-              const count = products.filter(p => p.categoryId === cat.id).length;
-              return (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name} ({count} Products)
-                </option>
-              );
-            })}
-          </select>
-        </div>
+          {/* LEFT COLUMN (Category + Add Order Form) */}
+          <div className="lg:col-span-6 space-y-4 min-w-0">
 
-        {/* CARD 2: ADD ORDER FORM (CLEAN WHITE TWO-COLUMN WORKBENCH MATCHING REFERENCE) */}
-        <form
-          onSubmit={handleAddOrUpdateOrder}
-          className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-7 shadow-2xs space-y-5"
-        >
-          {/* Header Row: Add Order + Compact Product Strip */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-            <div className="flex items-center space-x-2.5">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-crimson to-indigo-600 text-white flex items-center justify-center shadow-xs shrink-0">
-                <Sparkles className="w-4 h-4" />
-              </div>
-              <div>
-                <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 leading-tight">
-                  {editingItemId ? 'Edit Order Item' : 'Add Order'}
-                </h2>
-                <div className="h-0.5 w-20 bg-gradient-to-r from-brand-crimson via-rose-400 to-indigo-500 rounded-full mt-0.5"></div>
-              </div>
+            {/* CARD 1: SELECT CATEGORY */}
+            <div className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-6 shadow-2xs">
+              <label
+                htmlFor="config-category-select"
+                className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-2"
+              >
+                Select Category
+              </label>
+              <select
+                id="config-category-select"
+                value={selectedCategoryId}
+                onChange={(e) => handleCategoryChange(e.target.value)}
+                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition cursor-pointer"
+              >
+                {categories.map((cat) => {
+                  const count = products.filter(p => p.categoryId === cat.id).length;
+                  return (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name} ({count} Products)
+                    </option>
+                  );
+                })}
+              </select>
             </div>
 
-            {activeProduct && (
-              <div className="flex items-center space-x-3 bg-slate-50/90 border border-slate-200/70 rounded-lg px-3 py-1.5">
-                <div className="w-10 h-8 rounded overflow-hidden border border-slate-200 bg-white shrink-0">
-                  <ProductImage
-                    src={activeProduct.image}
-                    alt={activeProduct.name}
-                    placeholderLabel={activeProduct.name}
-                    eager={true}
-                  />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-xs font-bold text-slate-900 truncate max-w-[190px] sm:max-w-[240px]">
-                    {activeProduct.name}
+            {/* CARD 2: ADD ORDER FORM */}
+            <form
+              onSubmit={handleAddOrUpdateOrder}
+              className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-6 shadow-2xs space-y-5"
+            >
+              {/* Header Row */}
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-100">
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-crimson to-indigo-600 text-white flex items-center justify-center shadow-xs shrink-0">
+                    <Sparkles className="w-4 h-4" />
                   </div>
-                  <div className="text-[10px] font-semibold text-slate-500">
-                    MOQ: {cfg?.minQuantity?.toLocaleString('en-IN')} {cfg?.unitName}
-                    {cfg?.hsnCode ? ` • HSN ${cfg.hsnCode}` : ''}
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 leading-tight">
+                      {editingItemId ? 'Edit Order Item' : 'Add Order'}
+                    </h2>
+                    <div className="h-0.5 w-20 bg-gradient-to-r from-brand-crimson via-rose-400 to-indigo-500 rounded-full mt-0.5"></div>
                   </div>
                 </div>
+
                 {editingItemId && (
                   <button
                     type="button"
@@ -568,14 +566,12 @@ Please share the final quotation and artwork instructions. Thank you!`;
                       resetFieldsForProduct(activeProduct);
                       setFormNotice('');
                     }}
-                    className="text-[11px] font-bold text-brand-crimson hover:underline shrink-0 ml-1"
+                    className="text-xs font-bold text-brand-crimson hover:underline"
                   >
                     Cancel Edit
                   </button>
                 )}
               </div>
-            )}
-          </div>
 
           {formNotice && (
             <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center space-x-2">
@@ -592,7 +588,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
           )}
 
           {/* TWO-COLUMN RESPONSIVE FORM GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4 items-start">
 
             {/* ==================== LEFT COLUMN ==================== */}
             <div className="space-y-4">
@@ -1087,6 +1083,150 @@ Please share the final quotation and artwork instructions. Thank you!`;
             </button>
           </div>
         </form>
+          </div>
+
+          {/* RIGHT COLUMN: PRODUCT MEDIA & DESCRIPTION SHOWCASE (MATCHING printizer-main ProductMedia) */}
+          <div className="lg:col-span-6 min-w-0">
+            <div className="bg-white border border-slate-200/90 rounded-xl p-4 sm:p-5 shadow-2xs h-full flex flex-col justify-between space-y-4">
+              {activeProduct ? (
+                <>
+                  <div className="space-y-4">
+                    {/* Studio Photo Carousel */}
+                    <div className="relative aspect-[5/3] w-full rounded-lg overflow-hidden bg-slate-100 border border-slate-200/70">
+                      <ProductImage
+                        src={productImages[safeMediaIdx] || activeProduct.image}
+                        alt={activeProduct.name}
+                        placeholderLabel={activeProduct.name}
+                        eager={true}
+                        imgClassName="w-full h-full object-cover"
+                      />
+
+                      {productImages.length > 1 && (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => setActiveMediaIdx((safeMediaIdx - 1 + productImages.length) % productImages.length)}
+                            className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-slate-800 shadow-md flex items-center justify-center transition"
+                            aria-label="Previous product photo"
+                          >
+                            <ChevronLeft className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveMediaIdx((safeMediaIdx + 1) % productImages.length)}
+                            className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-slate-800 shadow-md flex items-center justify-center transition"
+                            aria-label="Next product photo"
+                          >
+                            <ChevronRight className="w-4 h-4" />
+                          </button>
+                          <div className="absolute bottom-2.5 right-2.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                            {safeMediaIdx + 1} / {productImages.length}
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Thumbnail Strip when product has >1 photo */}
+                    {productImages.length > 1 && (
+                      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                        {productImages.map((imgUrl, idx) => (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={() => setActiveMediaIdx(idx)}
+                            className={`w-16 h-12 rounded-md overflow-hidden border-2 shrink-0 transition ${
+                              idx === safeMediaIdx
+                                ? 'border-brand-crimson ring-1 ring-brand-crimson/30'
+                                : 'border-slate-200 opacity-75 hover:opacity-100'
+                            }`}
+                          >
+                            <ProductImage src={imgUrl} alt={`${activeProduct.name} ${idx + 1}`} imgClassName="w-full h-full object-cover" />
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Product Name & Badges */}
+                    <div className="space-y-1.5">
+                      <h2 className="text-2xl sm:text-[28px] font-bold text-brand-crimson leading-tight">
+                        {activeProduct.name}
+                      </h2>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded">
+                          {activeProduct.categoryName}
+                        </span>
+                        <span className="text-[11px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded">
+                          MOQ: {cfg?.minQuantity?.toLocaleString('en-IN')} {cfg?.unitName}
+                        </span>
+                        {cfg?.hsnCode && (
+                          <span className="text-[11px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded">
+                            HSN: {cfg.hsnCode}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Underlined Description + Specifications (matching ProductMedia.svelte) */}
+                    <div className="space-y-2">
+                      <h3 className="text-sm font-semibold text-brand-navy underline underline-offset-4">
+                        Description
+                      </h3>
+                      <div className="max-h-[260px] overflow-y-auto pr-1 text-xs sm:text-sm text-slate-600 leading-relaxed space-y-2.5">
+                        {activeProduct.tagline && (
+                          <p className="font-semibold text-slate-800">{activeProduct.tagline}</p>
+                        )}
+                        {(activeProduct.description || '')
+                          .split(/\n{2,}/)
+                          .filter(Boolean)
+                          .map((para, pIdx) => (
+                            <p key={pIdx}>{para}</p>
+                          ))}
+
+                        {cfg?.materials?.length > 0 && (
+                          <p>
+                            <strong className="text-slate-800">Available Paper / Materials:</strong>{' '}
+                            {cfg.materials.join(', ')}
+                          </p>
+                        )}
+                        {cfg?.sizes?.length > 0 && (
+                          <p>
+                            <strong className="text-slate-800">Standard Sizes:</strong>{' '}
+                            {cfg.sizes.join(', ')}
+                          </p>
+                        )}
+                        {cfg?.finishes?.length > 0 && (
+                          <p>
+                            <strong className="text-slate-800">Finishing Options:</strong>{' '}
+                            {cfg.finishes.join(', ')}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quick Spec Sheet Footer Link */}
+                  <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <span className="text-slate-500 font-medium">
+                      Free soft proof before bulk print
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => onNavigate('product', activeProduct.slug)}
+                      className="text-brand-crimson hover:underline font-bold inline-flex items-center space-x-1"
+                    >
+                      <span>View Full Technical Spec Sheet</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <p className="text-sm text-slate-500 py-8 text-center">
+                  Select a product to view its studio photography, specifications, and description.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
 
         {/* SECTION 6: ORDER SUMMARY (MULTI-PRODUCT QUOTE LIST) */}
         <section ref={summaryRef} className="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden scroll-mt-24">

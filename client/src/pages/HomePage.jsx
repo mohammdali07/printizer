@@ -321,42 +321,23 @@ export default function HomePage({
                     alt={activeHero.title}
                     className="relative z-10 w-full h-full object-contain transition-transform duration-500 hover:scale-[1.03] drop-shadow-[0_16px_28px_rgba(0,0,0,0.12)] select-none"
                   />
-
-                  {/* Subtle Corner Badge: Product Classification */}
-                  <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-lg py-1 px-2.5 shadow-sm text-[10px] sm:text-xs font-bold text-slate-700 flex items-center space-x-1.5 pointer-events-none">
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson"></span>
-                    <span>{activeHero.badge}</span>
-                  </div>
                 </div>
 
-                {/* Clean Caption & Slide Switcher Below Image */}
-                <div className="w-full flex items-center justify-between px-1 pt-2.5 sm:pt-3 text-xs">
-                  <div className="flex items-center space-x-2 min-w-0">
-                    <span className="font-bold text-slate-900 text-xs sm:text-sm truncate">
-                      {activeHero.title}
-                    </span>
-                    <span className="text-slate-300 hidden sm:inline">•</span>
-                    <span className="text-slate-500 text-[11px] sm:text-xs truncate hidden sm:inline font-medium">
-                      {activeHero.tagline}
-                    </span>
-                  </div>
-
-                  {/* Slide Dots */}
-                  <div className="flex items-center space-x-1.5 shrink-0 pl-2">
-                    {heroSlides.map((s, idx) => (
-                      <button
-                        key={s.id}
-                        type="button"
-                        onClick={() => setCurrentHeroSlide(idx)}
-                        className={`transition-all duration-300 rounded-full cursor-pointer ${
-                          currentHeroSlide === idx
-                            ? 'w-6 sm:w-7 h-2 bg-slate-900 shadow-sm'
-                            : 'w-2 h-2 bg-slate-300 hover:bg-slate-500'
-                        }`}
-                        aria-label={`Jump to slide ${idx + 1}`}
-                      />
-                    ))}
-                  </div>
+                {/* Slide Switcher Dots */}
+                <div className="flex items-center justify-center space-x-1.5 pt-3">
+                  {heroSlides.map((s, idx) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => setCurrentHeroSlide(idx)}
+                      className={`transition-all duration-300 rounded-full cursor-pointer ${
+                        currentHeroSlide === idx
+                          ? 'w-6 sm:w-7 h-2 bg-slate-900 shadow-sm'
+                          : 'w-2 h-2 bg-slate-300 hover:bg-slate-500'
+                      }`}
+                      aria-label={`Jump to slide ${idx + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>

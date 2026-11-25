@@ -243,26 +243,25 @@ export default function HomePage({
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             {/* Left Content Column */}
-            <div className="lg:col-span-6 space-y-3.5 sm:space-y-5 text-left">
+            <div className="lg:col-span-6 space-y-4 sm:space-y-5 text-left">
               {/* Small Professional Eyebrow Label */}
-              <div className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 rounded-full py-1 px-3 shadow-sm">
+              <div className="inline-flex items-center space-x-2 bg-white border border-slate-200/90 rounded-full py-1 px-3.5 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson animate-pulse"></span>
-                <span className="text-[10px] xs:text-[11px] sm:text-xs font-bold tracking-widest text-slate-700 uppercase">
+                <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.14em] text-slate-700 uppercase">
                   Professional Printing Solutions
                 </span>
               </div>
 
-              {/* Expanded Powerful Headline */}
-              <h1 className="text-[26px] min-[350px]:text-3xl xs:text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] font-extrabold tracking-tight text-slate-900 leading-[1.12]">
+              {/* Expanded Editorial Headline */}
+              <h1 className="font-display text-[29px] min-[360px]:text-[33px] xs:text-[38px] sm:text-5xl lg:text-[3.5rem] xl:text-[3.85rem] font-extrabold tracking-[-0.03em] text-slate-950 leading-[1.08]">
                 Make Every Print <br />
-                <span className="text-brand-crimson relative inline-block">
+                <span className="bg-gradient-to-r from-brand-crimson via-rose-600 to-brand-red bg-clip-text text-transparent">
                   Stand Out.
-                  <span className="absolute bottom-1 left-0 right-0 h-1.5 sm:h-2 bg-brand-crimson/15 -z-10 rounded"></span>
                 </span>
               </h1>
 
               {/* Full-Width Supporting Description */}
-              <p className="text-sm xs:text-base text-slate-600 leading-relaxed font-normal max-w-xl">
+              <p className="text-sm xs:text-[15px] sm:text-base text-slate-600 leading-relaxed font-normal max-w-xl">
                 Premium business printing, marketing materials and custom packaging — made to represent your brand.
               </p>
 
@@ -273,7 +272,7 @@ export default function HomePage({
                     const el = document.getElementById('categories-showcase');
                     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }}
-                  className="w-full xs:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm shadow-md hover:shadow-xl transition flex items-center justify-center space-x-2 active:scale-[0.98] cursor-pointer min-h-[46px]"
+                  className="w-full xs:w-auto bg-slate-950 hover:bg-slate-800 text-white font-bold px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm shadow-lg shadow-slate-900/15 hover:shadow-xl transition flex items-center justify-center space-x-2 active:scale-[0.98] cursor-pointer min-h-[46px]"
                 >
                   <span>Explore Our Products</span>
                   <ArrowRight className="w-4 h-4" />

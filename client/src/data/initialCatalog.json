@@ -197,7 +197,7 @@
           ],
           "optionRateModifiers": {
             "materialMultipliers": {
-              "NT Card": 1.35,
+              "NT Card": 0.8,
               "250g Art Card": 0.9,
               "250g Art Card + Lamination": 1.0,
               "350 GSM Matte Card": 1.15,

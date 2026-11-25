@@ -266,13 +266,15 @@ export default function OrderConfigurePage({
     if (cfg.showBinding && bindingOption) specSummary.push({ label: 'Binding', value: bindingOption });
     if (cfg.showSetsPerBook && setsPerBook) specSummary.push({ label: 'Sets', value: setsPerBook });
     if (cfg.showFinishing && finishing) {
-      const fExtra = [
-        finishing,
-        foil !== 'none' ? `${foil} foil` : null,
-        spotUv !== 'none' ? 'Spot UV' : null,
-        ...activeAddonsList
-      ].filter(Boolean).join(' + ');
-      specSummary.push({ label: 'Finishing', value: fExtra });
+      specSummary.push({ label: 'Finishing', value: [finishing, ...activeAddonsList].filter(Boolean).join(' + ') });
+    } else if (activeAddonsList.length > 0) {
+      specSummary.push({ label: 'Finishing', value: activeAddonsList.join(' + ') });
+    }
+    if (cfg.supportsFoil && foil !== 'none') {
+      specSummary.push({ label: 'Foil', value: foil === 'gold' ? 'Gold Foil' : 'Silver Foil' });
+    }
+    if (cfg.supportsSpotUv && spotUv !== 'none') {
+      specSummary.push({ label: 'Spot UV', value: 'Raised Spot UV' });
     }
     if (cfg.showDelivery) {
       specSummary.push({
@@ -368,12 +370,12 @@ export default function OrderConfigurePage({
     { pricedTotal: 0, pricedCount: 0, quoteOnlyCount: 0 }
   );
 
-  // Build readable multi-item WhatsApp quote summary
+  // Build readable multi-item WhatsApp quote summary (includes material, printing, finishing, quantity, job name & price)
   const buildOrderWhatsAppUrl = (refNo = null) => {
     const linesText = orderItems.map((it, idx) => {
       const specsStr = it.specs.map(s => `${s.label}: ${s.value}`).join(' | ');
-      const priceStr = it.hasPrice ? `₹ ${it.totalAmount.toLocaleString('en-IN')}` : 'Request a Quote';
-      return `${idx + 1}. ${it.productName} (${it.quantity.toLocaleString('en-IN')} ${it.unitName}) -> ${priceStr}\n   Specs: ${specsStr}`;
+      const priceStr = it.hasPrice ? `₹ ${it.totalAmount.toLocaleString('en-IN')} (₹${it.unitPrice}/unit)` : 'Request a Quote';
+      return `${idx + 1}. ${it.productName} — Qty: ${it.quantity.toLocaleString('en-IN')} ${it.unitName} — Amount: ${priceStr}\n   ${specsStr}`;
     }).join('\n');
 
     const text = `Hello PRINTIZER,
@@ -1072,14 +1074,14 @@ Please share the final quotation and artwork instructions. Thank you!`;
             </div>
           </div>
 
-          {/* BOTTOM-RIGHT ACTION BUTTON: ADD ORDER (MATCHING SCREENSHOT) */}
+          {/* BOTTOM-RIGHT ACTION BUTTON: ADD TO CART */}
           <div className="pt-2 flex justify-end">
             <button
               type="submit"
-              className="w-full sm:w-auto min-w-[165px] bg-gradient-to-r from-[#e83e8c] via-brand-crimson to-[#5a67f2] hover:opacity-95 text-white font-bold text-sm py-3 px-8 rounded-tl-2xl rounded-tr-sm rounded-b-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer"
+              className="w-full sm:w-auto min-w-[175px] bg-gradient-to-r from-[#e83e8c] via-brand-crimson to-[#5a67f2] hover:opacity-95 text-white font-bold text-sm py-3 px-8 rounded-tl-2xl rounded-tr-sm rounded-b-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer"
             >
-              <Plus className="w-4 h-4" />
-              <span>{editingItemId ? 'Update Order Item' : 'Add Order'}</span>
+              <ShoppingBag className="w-4 h-4" />
+              <span>{editingItemId ? 'Update Cart Item' : 'Add to Cart'}</span>
             </button>
           </div>
         </form>
@@ -1376,10 +1378,10 @@ Please share the final quotation and artwork instructions. Thank you!`;
                       href={buildOrderWhatsAppUrl()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 font-bold text-xs px-4 py-3 rounded-xl transition flex items-center justify-center space-x-1.5"
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow-md shadow-emerald-600/20 transition flex items-center justify-center space-x-2"
                     >
-                      <MessageCircle className="w-4 h-4 text-emerald-600" />
-                      <span>WhatsApp Summary</span>
+                      <MessageCircle className="w-4 h-4" />
+                      <span>Enquire on WhatsApp</span>
                     </a>
 
                     <button
@@ -1389,7 +1391,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                         setSubmitError('');
                         setShowQuoteSubmitModal(true);
                       }}
-                      className="bg-brand-crimson hover:bg-brand-red text-white font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-lg shadow-brand-crimson/25 transition flex items-center justify-center space-x-2"
+                      className="bg-brand-crimson hover:bg-brand-red text-white font-bold text-xs px-4 py-3 rounded-xl transition flex items-center justify-center space-x-1.5"
                     >
                       <span>Request Quote</span>
                       <ArrowRight className="w-4 h-4" />

@@ -153,14 +153,18 @@ async function run() {
     await sleep(1000);
     await evalJs(`localStorage.removeItem('prz_order_items');`);
     await send(pWs, 'Page.reload', { ignoreCache: true });
-    await sleep(1000);
 
-    const tappedHomeCard = await evalJs(`(() => {
-      const h4 = Array.from(document.querySelectorAll('h4')).find(el => el.textContent.includes('Visiting Card'));
-      if (!h4) return false;
-      h4.click();
-      return true;
-    })()`);
+    let tappedHomeCard = false;
+    for (let i = 0; i < 15; i++) {
+      await sleep(300);
+      tappedHomeCard = await evalJs(`(() => {
+        const h4 = Array.from(document.querySelectorAll('h4')).find(el => el.textContent.includes('Visiting Card'));
+        if (!h4) return false;
+        h4.click();
+        return true;
+      })()`);
+      if (tappedHomeCard) break;
+    }
     assert(tappedHomeCard, 'Clicked Featured Product card on HomePage');
     await sleep(700);
     const homeTapState = await evalJs(`(() => ({
@@ -214,9 +218,9 @@ async function run() {
     assert(billState.prodVal === 'bill-book', 'Bill Book auto-selected without re-selection');
     assert(billState.hasNcr && billState.hasCopy && billState.hasBinding && billState.hasSets, 'Bill Book displays NCR, Copy Type, Binding & Sets options');
 
-    // Add Bill Book to Order Summary
+    // Add Bill Book to Cart
     await evalJs(`(() => {
-      const btn = Array.from(document.querySelectorAll('button[type="submit"]')).find(b => b.textContent.includes('Add Order'));
+      const btn = Array.from(document.querySelectorAll('button[type="submit"]')).find(b => b.textContent.includes('Add to Cart'));
       btn?.click();
     })()`);
     await sleep(500);
@@ -274,7 +278,7 @@ async function run() {
 
     // Add Visiting Card as 2nd item
     await evalJs(`(() => {
-      const btn = Array.from(document.querySelectorAll('button[type="submit"]')).find(b => b.textContent.includes('Add Order'));
+      const btn = Array.from(document.querySelectorAll('button[type="submit"]')).find(b => b.textContent.includes('Add to Cart'));
       btn?.click();
     })()`);
     await sleep(600);
@@ -283,14 +287,18 @@ async function run() {
       const text = document.body.innerText;
       const totMatch = text.match(/Order Total[\\s\\S]*?₹\\s*([\\d,]+)/i);
       const h2List = Array.from(document.querySelectorAll('h2')).map(h => h.textContent.trim());
+      const waLink = Array.from(document.querySelectorAll('a')).find(a => a.textContent.includes('Enquire on WhatsApp'))?.getAttribute('href') || '';
+      const decodedWa = waLink ? decodeURIComponent(waLink) : '';
       return {
         hasTwo: h2List.some(t => t.includes('Order Summary (2 Products)')) || text.includes('2 configured items'),
         h2List,
         total: totMatch ? Number(totMatch[1].replace(/,/g, '')) : 0,
+        waOk: waLink.startsWith('https://wa.me/919898351920?text=') && decodedWa.includes('Bill Book') && decodedWa.includes('Visiting Card') && decodedWa.includes('NT Card'),
         overflowDesktop: document.documentElement.scrollWidth > window.innerWidth
       };
     })()`);
     assert(summaryAfterTwo.hasTwo && summaryAfterTwo.total > vcUpdatedAmt, `Multi-item Order Summary shows 2 Products & combined total ₹${summaryAfterTwo.total} (${summaryAfterTwo.h2List.join(' | ')})`);
+    assert(summaryAfterTwo.waOk, 'Enquire on WhatsApp link encodes all cart items with materials, printing, quantity & prices');
     assert(!summaryAfterTwo.overflowDesktop, 'Desktop 1440px has zero horizontal overflow');
 
     const deskShot = await send(pWs, 'Page.captureScreenshot', { format: 'png' });
@@ -303,7 +311,7 @@ async function run() {
     })()`);
     await sleep(400);
     await evalJs(`(() => {
-      const btn = Array.from(document.querySelectorAll('button[type="submit"]')).find(b => b.textContent.includes('Update Order Item'));
+      const btn = Array.from(document.querySelectorAll('button[type="submit"]')).find(b => b.textContent.includes('Update Cart Item'));
       btn?.click();
     })()`);
     await sleep(400);
@@ -377,18 +385,22 @@ async function run() {
       pricingConfig: { ...vcOrig.pricingConfig, priceUnavailable: true }
     });
     await send(pWs, 'Page.navigate', { url: `${BASE_URL}/#configure/visiting-card` });
-    await sleep(1100);
+    await sleep(600);
     // Force full reload so catalog state pulls updated DB immediately
     await send(pWs, 'Page.reload', { ignoreCache: true });
-    await sleep(1100);
 
-    const quoteOnlyState = await evalJs(`(() => {
-      const text = document.body.innerText;
-      return {
-        hasQuoteOnly: /Request a Quote/i.test(text),
-        hasNumericEst: /Estimated Total Amount/i.test(text)
-      };
-    })()`);
+    let quoteOnlyState = { hasQuoteOnly: false, hasNumericEst: false };
+    for (let i = 0; i < 15; i++) {
+      await sleep(300);
+      quoteOnlyState = await evalJs(`(() => {
+        const text = document.body.innerText;
+        return {
+          hasQuoteOnly: /Request a Quote/i.test(text),
+          hasNumericEst: /Estimated Total Amount/i.test(text)
+        };
+      })()`);
+      if (quoteOnlyState.hasQuoteOnly && !quoteOnlyState.hasNumericEst) break;
+    }
     assert(quoteOnlyState.hasQuoteOnly && !quoteOnlyState.hasNumericEst, 'Admin priceUnavailable setting displays "Request a Quote" without fake prices');
 
     // Restore original visiting-card

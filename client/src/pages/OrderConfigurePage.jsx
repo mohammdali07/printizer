@@ -20,15 +20,19 @@ export default function OrderConfigurePage({
   const summaryRef = useRef(null);
 
   // Resolve initial product & category cleanly without forcing customer to re-select
-  const findInitialProduct = () => {
-    if (initialProductSlug) {
-      const found = products.find(p => p.slug === initialProductSlug || p.id === initialProductSlug);
+  const resolveTargetProduct = (slug) => {
+    if (slug) {
+      if (slug === 'visiting-card') {
+        const nt = products.find(p => p.slug === 'nt-card');
+        if (nt) return nt;
+      }
+      const found = products.find(p => p.slug === slug || p.id === slug);
       if (found) return found;
     }
     return products[0] || null;
   };
 
-  const initialProd = findInitialProduct();
+  const initialProd = resolveTargetProduct(initialProductSlug);
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     initialProd?.categoryId || categories[0]?.id || 'business-stationery'
   );
@@ -74,9 +78,13 @@ export default function OrderConfigurePage({
   const [submitError, setSubmitError] = useState('');
   const [submittedResult, setSubmittedResult] = useState(null);
 
-  const categoryProducts = products.filter(p => p.categoryId === selectedCategoryId);
+  const categoryProductsRaw = products.filter(p => p.categoryId === selectedCategoryId);
+  const hasNtCardInCat = categoryProductsRaw.some(p => p.slug === 'nt-card');
+  const categoryProducts = hasNtCardInCat
+    ? categoryProductsRaw.filter(p => p.slug !== 'visiting-card')
+    : categoryProductsRaw;
   const activeProduct =
-    products.find(p => p.slug === selectedProductSlug && p.categoryId === selectedCategoryId) ||
+    categoryProducts.find(p => p.slug === selectedProductSlug) ||
     categoryProducts[0] ||
     products[0] ||
     null;
@@ -130,7 +138,7 @@ export default function OrderConfigurePage({
   // Respond to route parameter change (`#configure/<slug>`)
   useEffect(() => {
     if (!initialProductSlug || products.length === 0) return;
-    const match = products.find(p => p.slug === initialProductSlug || p.id === initialProductSlug);
+    const match = resolveTargetProduct(initialProductSlug);
     if (match) {
       setSelectedCategoryId(match.categoryId);
       setSelectedProductSlug(match.slug);

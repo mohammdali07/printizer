@@ -170,11 +170,12 @@ async function run() {
     const homeTapState = await evalJs(`(() => ({
       hash: location.hash,
       h1: document.querySelector('h1')?.textContent?.trim() || '',
+      prodVal: document.querySelector('#order-product-select')?.value || '',
       hasAddOrderHeading: document.body.innerText.includes('Add Order'),
       hasFoil: !!document.querySelector('#order-foil-select'),
       hasSpotUv: !!document.querySelector('#order-spotuv-select')
     }))()`);
-    assert(homeTapState.hash === '#configure/visiting-card' && homeTapState.h1 === 'Visiting Card Configuration', `Tapping HomePage product card opens Visiting Card Configuration (${homeTapState.hash} / ${homeTapState.h1})`);
+    assert(homeTapState.hash === '#configure/visiting-card' && homeTapState.prodVal === 'nt-card' && homeTapState.h1 === 'NT Card Configuration', `Tapping HomePage product card opens NT Card in Select Product (${homeTapState.hash} / ${homeTapState.prodVal} / ${homeTapState.h1})`);
     assert(homeTapState.hasAddOrderHeading && homeTapState.hasFoil && homeTapState.hasSpotUv, 'Clean Add Order view renders Foil, Spot UV, and Add Order form cleanly');
     const vcDeskShot = await send(pWs, 'Page.captureScreenshot', { format: 'png' });
     fs.writeFileSync(path.join(ARTIFACT_DIR, 'verify_cfg_vc_desktop.png'), Buffer.from(vcDeskShot.data, 'base64'));
@@ -242,7 +243,7 @@ async function run() {
 
     await setSelect('#config-category-select', 'business-stationery');
     await sleep(400);
-    await setSelect('#order-product-select', 'visiting-card');
+    await setSelect('#order-product-select', 'nt-card');
     await sleep(400);
 
     const readEstimatedTotal = () => evalJs(`(() => {
@@ -260,13 +261,13 @@ async function run() {
         hasNcr: /NCR \\/ Paper Carbon Option/i.test(text),
         hasCopy: /Copy Type/i.test(text),
         hasPrinting: !!document.querySelector('#order-printing-select'),
-        hasMaterial: !!document.querySelector('#order-material-select')
+        hasProductSelect: !!document.querySelector('#order-product-select')
       };
     })()`);
     vcState.amount = await readEstimatedTotal();
-    assert(vcState.h1 === 'Visiting Card Configuration', `Category switch updates heading to "Visiting Card Configuration" (got ${vcState.h1})`);
-    assert(!vcState.hasNcr && !vcState.hasCopy, 'Visiting Card hides irrelevant NCR/Copy fields');
-    assert(vcState.hasMaterial && vcState.hasPrinting && vcState.amount > 0, `Visiting Card computes live Amount (₹${vcState.amount})`);
+    assert(vcState.h1 === 'NT Card Configuration', `Category switch updates heading to "NT Card Configuration" (got ${vcState.h1})`);
+    assert(!vcState.hasNcr && !vcState.hasCopy, 'NT Card hides irrelevant NCR/Copy fields');
+    assert(vcState.hasProductSelect && vcState.hasPrinting && vcState.amount > 0, `NT Card computes live Amount (₹${vcState.amount})`);
 
     // Change printing & quantity -> amount increases deterministically
     await setSelect('#order-printing-select', await evalJs(`document.querySelector('#order-printing-select')?.options[1]?.value || ''`));
@@ -293,7 +294,7 @@ async function run() {
         hasTwo: h2List.some(t => t.includes('Order Summary (2 Products)')) || text.includes('2 configured items'),
         h2List,
         total: totMatch ? Number(totMatch[1].replace(/,/g, '')) : 0,
-        waOk: waLink.startsWith('https://wa.me/919898351920?text=') && decodedWa.includes('Bill Book') && decodedWa.includes('Visiting Card') && decodedWa.includes('NT Card'),
+        waOk: waLink.startsWith('https://wa.me/919898351920?text=') && decodedWa.includes('Bill Book') && decodedWa.includes('NT Card'),
         overflowDesktop: document.documentElement.scrollWidth > window.innerWidth
       };
     })()`);
@@ -378,13 +379,13 @@ async function run() {
 
     // --- TEST 5: Admin dynamic priceUnavailable toggle -> "Request a Quote" ---
     const prodList = await requestJson('GET', '/api/products');
-    const vcOrig = prodList.json.data.find((p) => p.slug === 'visiting-card');
-    assert(Boolean(vcOrig), 'Fetched visiting-card via /api/products');
+    const vcOrig = prodList.json.data.find((p) => p.slug === 'nt-card');
+    assert(Boolean(vcOrig), 'Fetched nt-card via /api/products');
 
     await requestJson('PUT', `/api/products/${vcOrig.id}`, {
       pricingConfig: { ...vcOrig.pricingConfig, priceUnavailable: true }
     });
-    await send(pWs, 'Page.navigate', { url: `${BASE_URL}/#configure/visiting-card` });
+    await send(pWs, 'Page.navigate', { url: `${BASE_URL}/#configure/nt-card` });
     await sleep(600);
     // Force full reload so catalog state pulls updated DB immediately
     await send(pWs, 'Page.reload', { ignoreCache: true });

@@ -39,7 +39,6 @@ export default function HomePage({
       tagline: 'Rigid SBS Board & Clean Auto-Lock Folding',
       image: '/images/slides/packaging.webp',
       badge: 'Luxury Packaging',
-      fullBleed: true,
       circleBg: 'from-emerald-500/15 via-emerald-500/5 to-transparent',
       pill1: '📦 Custom Structural Dielines',
       pill2: '🌿 Certified Food-Grade Board',

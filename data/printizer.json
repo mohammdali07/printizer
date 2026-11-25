@@ -2615,12 +2615,12 @@
         "markupPercent": 30,
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -2632,7 +2632,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       },
       "packSize": 1000,
@@ -8498,8 +8499,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 364,
+            "both": 510,
             "minimum": null,
             "foilGold": 325,
             "foilSilver": 286,
@@ -8538,12 +8539,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -8556,7 +8557,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -8662,12 +8664,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -8680,7 +8682,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -8786,12 +8789,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -8804,7 +8807,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -8910,12 +8914,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -8928,7 +8932,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -9035,12 +9040,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -9053,7 +9058,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -9159,12 +9165,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -9177,7 +9183,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -9283,12 +9290,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -9301,7 +9308,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -9408,12 +9416,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -9426,7 +9434,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -9532,12 +9541,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -9550,7 +9559,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -9656,12 +9666,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -9674,7 +9684,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -9780,12 +9791,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -9798,7 +9809,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -9904,12 +9916,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -9922,7 +9934,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -10029,12 +10042,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -10047,7 +10060,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -10154,12 +10168,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -10172,7 +10186,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -10279,12 +10294,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -10297,7 +10312,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -10404,12 +10420,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -10422,7 +10438,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -10529,12 +10546,12 @@
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -10547,7 +10564,8 @@
             "Full Color (CMYK)",
             "CMYK + Rich Black Back"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },

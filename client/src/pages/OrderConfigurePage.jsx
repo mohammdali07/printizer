@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   ChevronLeft, ChevronRight, Plus, CheckCircle2, AlertCircle, Trash2, Edit,
   ShoppingBag, FileText, ArrowRight, MessageCircle, UploadCloud,
-  Sparkles, Package, Layers, Send, ExternalLink
+  Sparkles, Package, Layers, Send, ExternalLink, Info, X
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import ProductImage from '../components/ProductImage';
@@ -60,6 +60,7 @@ export default function OrderConfigurePage({
   const [formError, setFormError] = useState('');
   const [formNotice, setFormNotice] = useState('');
   const [activeMediaIdx, setActiveMediaIdx] = useState(0);
+  const [showInstructionsModal, setShowInstructionsModal] = useState(false);
 
   // Final Quote Request modal / drawer state
   const [showQuoteSubmitModal, setShowQuoteSubmitModal] = useState(false);
@@ -546,33 +547,46 @@ Please share the final quotation and artwork instructions. Thank you!`;
               onSubmit={handleAddOrUpdateOrder}
               className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-6 shadow-2xs space-y-5"
             >
-              {/* Header Row */}
-              <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-100">
-                <div className="flex items-center space-x-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-crimson to-indigo-600 text-white flex items-center justify-center shadow-xs shrink-0">
-                    <Sparkles className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 leading-tight">
-                      {editingItemId ? 'Edit Order Item' : 'Add Order'}
+              {/* Header Row (matching printizer-main Add Order + View file upload instructions) */}
+              <div className="space-y-2 pb-2 border-b border-slate-100">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center space-x-2.5">
+                    <img
+                      src="/images/printizer-icon.png"
+                      alt="PRINTIZER"
+                      className="w-6 h-6 object-contain shrink-0"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                    <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">
+                      {editingItemId ? 'Edit Cart Item' : 'Add Order'}
                     </h2>
-                    <div className="h-0.5 w-20 bg-gradient-to-r from-brand-crimson via-rose-400 to-indigo-500 rounded-full mt-0.5"></div>
                   </div>
+
+                  {editingItemId && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingItemId(null);
+                        resetFieldsForProduct(activeProduct);
+                        setFormNotice('');
+                      }}
+                      className="text-xs font-bold text-brand-crimson hover:underline"
+                    >
+                      Cancel Edit
+                    </button>
+                  )}
                 </div>
 
-                {editingItemId && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEditingItemId(null);
-                      resetFieldsForProduct(activeProduct);
-                      setFormNotice('');
-                    }}
-                    className="text-xs font-bold text-brand-crimson hover:underline"
-                  >
-                    Cancel Edit
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setShowInstructionsModal(true)}
+                  className="inline-flex items-center space-x-1.5 text-xs font-medium text-[#1d4ed8] hover:text-[#1e3a8a] underline underline-offset-2 cursor-pointer"
+                >
+                  <Info className="w-3.5 h-3.5 shrink-0" />
+                  <span>View file upload instructions</span>
+                </button>
               </div>
 
           {formNotice && (
@@ -1040,7 +1054,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                 </div>
 
                 {pricing.hasPrice ? (
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <div
                       data-testid="order-estimated-total"
                       className="w-full bg-[#e5e9f0] border border-slate-200 rounded-lg py-2.5 px-3.5 flex items-center justify-between text-slate-900"
@@ -1052,6 +1066,10 @@ Please share the final quotation and artwork instructions. Thank you!`;
                         {pricing.qty.toLocaleString('en-IN')} {pricing.unitName}
                       </span>
                     </div>
+
+                    <p className="text-[11px] font-medium text-slate-500 px-0.5">
+                      ₹{pricing.baseAmount.toLocaleString('en-IN')}.00 per {pricing.qty.toLocaleString('en-IN')} {cfg?.unitName?.toLowerCase() || 'pieces'}
+                    </p>
 
                     {(pricing.foilExtra > 0 || pricing.spotUvExtra > 0 || pricing.finishingExtra > 0 || pricing.deliveryCharge > 0 || pricing.gstAmount > 0) && (
                       <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500 px-0.5">
@@ -1403,6 +1421,46 @@ Please share the final quotation and artwork instructions. Thank you!`;
           </div>
         </section>
       </div>
+
+      {/* FILE UPLOAD & ARTWORK INSTRUCTIONS MODAL */}
+      {showInstructionsModal && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full border border-slate-200 overflow-hidden">
+            <div className="bg-brand-navy px-5 py-4 text-white flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Info className="w-4 h-4 text-brand-crimson" />
+                <h3 className="text-sm font-extrabold">File Upload &amp; Prepress Instructions</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowInstructionsModal(false)}
+                className="text-slate-300 hover:text-white p-1"
+                aria-label="Close instructions"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="p-5 space-y-3 text-xs text-slate-700 leading-relaxed">
+              <ul className="space-y-2 list-disc pl-4">
+                <li><strong>Accepted Formats:</strong> CorelDRAW (.CDR), Adobe Illustrator (.AI), Print-Ready PDF, or high-resolution PNG/JPEG.</li>
+                <li><strong>Color Mode &amp; Resolution:</strong> Prepare artwork in <strong>CMYK</strong> at <strong>300 DPI</strong> for sharp offset/digital output.</li>
+                <li><strong>Bleed &amp; Safe Margin:</strong> Keep <strong>3 mm bleed</strong> outside the trim size and keep critical text 4 mm inside the cut edge.</li>
+                <li><strong>Fonts:</strong> Convert all text to <strong>Curves / Outlines</strong> before exporting.</li>
+                <li><strong>Spot UV / Foil Mask:</strong> Provide a separate 100% K vector layer for Foil or Raised Spot UV areas.</li>
+              </ul>
+              <div className="pt-2 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setShowInstructionsModal(false)}
+                  className="bg-brand-navy text-white text-xs font-bold px-4 py-2 rounded-lg"
+                >
+                  Got It
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FINAL MULTI-ITEM REQUEST QUOTE MODAL */}
       {showQuoteSubmitModal && (

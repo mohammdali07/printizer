@@ -178,11 +178,11 @@
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -213,7 +213,8 @@
               "Round Cut Corners": 120,
               "Special Drip-Off Texture": 260
             }
-          }
+          },
+          "showBilling": false
         }
       },
       "packSize": 1000,

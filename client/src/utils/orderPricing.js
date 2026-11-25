@@ -43,6 +43,7 @@ export function getEffectiveOrderFields(product) {
     showPrinting: fields.showPrinting !== undefined ? fields.showPrinting : (supportsBoth || printingOptions.length > 1),
     showColour: fields.showColour !== undefined ? fields.showColour : colourOptions.length > 0,
     showDelivery: fields.showDelivery !== false,
+    showBilling: fields.showBilling !== false,
     showNcr: Boolean(fields.showNcr && Array.isArray(fields.ncrOptions) && fields.ncrOptions.length > 0),
     showCopyType: Boolean(fields.showCopyType && Array.isArray(fields.copyOptions) && fields.copyOptions.length > 0),
     showBinding: Boolean(fields.showBinding && Array.isArray(fields.bindingOptions) && fields.bindingOptions.length > 0),

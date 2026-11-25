@@ -981,8 +981,8 @@ Please share the final quotation and artwork instructions. Thank you!`;
               </div>
 
               {/* 4. Delivery & Billing Class */}
-              {(cfg?.showDelivery || cfg?.priceSheets) && (
-                <div className={`grid gap-3.5 ${cfg?.showDelivery && cfg?.priceSheets ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}>
+              {((cfg?.showDelivery) || (cfg?.showBilling && cfg?.priceSheets)) && (
+                <div className={`grid gap-3.5 ${cfg?.showDelivery && cfg?.showBilling && cfg?.priceSheets ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}>
                   {cfg?.showDelivery && (
                     <div>
                       <label htmlFor="order-delivery-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
@@ -1005,7 +1005,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                     </div>
                   )}
 
-                  {cfg?.priceSheets && (
+                  {cfg?.showBilling && cfg?.priceSheets && (
                     <div>
                       <label htmlFor="order-billing-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
                         Billing Class

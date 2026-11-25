@@ -125,12 +125,12 @@ Thank you.`;
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                      Fulfillment & Dispatch
+                      Fulfillment & Registered State
                     </h4>
                     <p className="text-sm font-semibold text-slate-900 mt-0.5">
-                      PAN India Doorstep Shipping
+                      Gujarat (State Code: 24) &bull; PAN India Dispatch
                     </p>
-                    <span className="text-xs text-slate-400">Secure moisture-proof courier delivery</span>
+                    <span className="text-xs text-slate-400">Courier (₹60/pack), Transport (₹300/parcel) &amp; Office Pickup</span>
                   </div>
                 </div>
               </div>

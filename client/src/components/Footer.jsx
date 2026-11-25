@@ -99,7 +99,7 @@ export default function Footer({ onNavigate, categories = [] }) {
             <ul className="space-y-2.5 text-xs text-slate-600">
               <li className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 text-brand-crimson shrink-0 mt-0.5" />
-                <span>Pan India Doorstep Delivery Hub</span>
+                <span>Gujarat (Code 24) &bull; PAN India Dispatch</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="w-4 h-4 text-emerald-600 shrink-0" />

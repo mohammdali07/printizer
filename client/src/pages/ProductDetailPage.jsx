@@ -46,21 +46,33 @@ export default function ProductDetailPage({
     : ['Standard Commercial Finish'];
 
   const pricingConfig = product.pricingConfig || {};
+  const priceSheets = pricingConfig.priceSheets || null;
+  const pricingKind = pricingConfig.pricingKind || product.pricingKind || 'pack';
+  const hasDimensions = Boolean(pricingConfig.dimensions ?? product.dimensions);
+  const packSize = Number(pricingConfig.packSize || product.packSize || product.minQuantity || 100);
+  const hsnCode = pricingConfig.hsnCode || product.hsnCode || '';
+
   const supportsBothSides = Boolean(pricingConfig.supportsBothSides);
   const supportsFoil = Boolean(pricingConfig.supportsFoil);
   const supportsSpotUv = Boolean(pricingConfig.supportsSpotUv);
 
   const quantityTiers = product.quantityTiers && product.quantityTiers.length > 0
     ? product.quantityTiers
-    : [product.minQuantity || 100, (product.minQuantity || 100) * 2, (product.minQuantity || 100) * 5];
+    : [packSize, packSize * 2, packSize * 3, packSize * 5, packSize * 10];
 
   // Configurator state
+  const [customerClass, setCustomerClass] = useState('retail'); // 'retail' | 'gst'
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0]);
   const [selectedSides, setSelectedSides] = useState(supportsBothSides ? 'both-sides' : 'single-side');
   const [selectedFinish, setSelectedFinish] = useState(finishes[0]);
   const [selectedFoil, setSelectedFoil] = useState('none');
   const [selectedSpotUv, setSelectedSpotUv] = useState('none');
+  const [selectedAddons, setSelectedAddons] = useState({});
+  const [dimWidth, setDimWidth] = useState('3.5');
+  const [dimHeight, setDimHeight] = useState('2.0');
+  const [specialUnitPrice, setSpecialUnitPrice] = useState('10');
+  const [deliveryMode, setDeliveryMode] = useState('collect'); // 'courier' | 'transport' | 'collect'
   const [quantity, setQuantity] = useState(product.minQuantity || quantityTiers[0]);
   const [customQtyInput, setCustomQtyInput] = useState('');
   const [isCustomQty, setIsCustomQty] = useState(false);
@@ -87,6 +99,11 @@ export default function ProductDetailPage({
     setSelectedFinish(finishes[0]);
     setSelectedFoil('none');
     setSelectedSpotUv('none');
+    setSelectedAddons({});
+    setDimWidth('3.5');
+    setDimHeight('2.0');
+    setSpecialUnitPrice('10');
+    setDeliveryMode('collect');
     setQuantity(product.minQuantity || quantityTiers[0]);
     setIsCustomQty(false);
     setCustomQtyInput('');
@@ -104,12 +121,130 @@ export default function ProductDetailPage({
   const currentMainImage = activeImage || product.image;
 
   // Active quantity numeric value
-  const activeQuantity = isCustomQty 
-    ? (parseInt(customQtyInput, 10) || product.minQuantity || 100)
+  const rawQty = isCustomQty
+    ? (parseInt(customQtyInput, 10) || product.minQuantity || packSize)
     : quantity;
+  const activeQuantity = pricingKind === 'special_job'
+    ? Math.max(1, rawQty)
+    : Math.max(packSize, rawQty);
 
-  // Real-time Product-Specific Price Calculation
+  // Quarter-inch ceiling helper matching printizer-main (pricing.ts)
+  const toQuarterInches = (inches) => {
+    const n = parseFloat(inches);
+    if (!Number.isFinite(n) || n <= 0) return 4;
+    return Math.ceil(n * 4 - 1e-9);
+  };
+
+  // Real-time Product-Specific Price Calculation (aligned with printizer-main pricing.ts)
   const calculatePricing = () => {
+    if (pricingKind === 'special_job') {
+      const unitP = Math.max(0, parseFloat(specialUnitPrice) || 0);
+      if (unitP <= 0) return { hasPrice: false };
+      const baseAmount = activeQuantity * unitP;
+      const sheet = priceSheets?.[customerClass] || priceSheets?.retail;
+      const deliveryCharge = deliveryMode === 'courier'
+        ? (sheet?.courierPerPack || 60)
+        : (deliveryMode === 'transport' ? (sheet?.transportPerParcel || 300) : 0);
+      const gstRate = pricingConfig.gstPercent || 18;
+      const gstAmount = customerClass === 'gst' ? Math.round((baseAmount + deliveryCharge) * (gstRate / 100)) : 0;
+      const finalTotal = Math.round(baseAmount + deliveryCharge + gstAmount);
+      return {
+        hasPrice: true,
+        qty: activeQuantity,
+        packs: 1,
+        baseAmount: Math.round(baseAmount),
+        foilExtra: 0,
+        spotUvExtra: 0,
+        finishingExtra: 0,
+        deliveryCharge,
+        netSubtotal: Math.round(baseAmount + deliveryCharge),
+        gstAmount,
+        finalTotal,
+        effectiveUnitRate: (finalTotal / activeQuantity).toFixed(2),
+        unitName: pricingConfig.unitName || 'Units',
+        customerClass
+      };
+    }
+
+    const activeSheet = priceSheets?.[customerClass] || priceSheets?.retail || null;
+
+    if (activeSheet && activeSheet.single > 0) {
+      const packs = Math.max(1, Math.ceil(activeQuantity / packSize));
+      const effectiveQty = packs * packSize;
+      const isBoth = supportsBothSides && selectedSides === 'both-sides' && activeSheet.both != null;
+      let ratePerPack = isBoth ? activeSheet.both : activeSheet.single;
+
+      let foilExtra = 0;
+      if (supportsFoil && selectedFoil !== 'none') {
+        const foilRate = selectedFoil === 'gold'
+          ? activeSheet.foilGold
+          : (selectedFoil === 'silver' ? activeSheet.foilSilver : activeSheet.foilGold);
+        if (foilRate) foilExtra = foilRate * packs;
+      }
+
+      let spotUvExtra = 0;
+      if (supportsSpotUv && selectedSpotUv !== 'none') {
+        const uvRate = (selectedSides === 'both-sides' && activeSheet.spotUvBoth)
+          ? activeSheet.spotUvBoth
+          : activeSheet.spotUvSingle;
+        if (uvRate) spotUvExtra = uvRate * packs;
+      }
+
+      let baseAmount = ratePerPack * packs;
+      let areaSqIn = null;
+      if (pricingKind === 'area' && hasDimensions) {
+        const wq = toQuarterInches(dimWidth);
+        const hq = toQuarterInches(dimHeight);
+        areaSqIn = ((wq * hq) / 16).toFixed(2);
+        baseAmount = (baseAmount * wq * hq) / 16;
+      }
+      if (activeSheet.minimum && baseAmount < activeSheet.minimum) {
+        baseAmount = activeSheet.minimum;
+      }
+      baseAmount = Math.round(baseAmount);
+
+      let finishingExtra = 0;
+      if (activeSheet.finishing) {
+        for (const [fk, enabled] of Object.entries(selectedAddons)) {
+          if (enabled && activeSheet.finishing[fk]) {
+            finishingExtra += activeSheet.finishing[fk];
+          }
+        }
+      }
+
+      const deliveryCharge = deliveryMode === 'courier'
+        ? (activeSheet.courierPerPack || 0) * packs
+        : (deliveryMode === 'transport' ? (activeSheet.transportPerParcel || 0) : 0);
+
+      const netSubtotal = baseAmount + foilExtra + spotUvExtra + finishingExtra + deliveryCharge;
+      const gstRate = pricingConfig.gstPercent || 18;
+      // In printizer-main: retail customers are quoted without extra GST; GST billing adds 18% GST on lower GST base rates
+      const gstAmount = customerClass === 'gst' ? Math.round(netSubtotal * (gstRate / 100)) : 0;
+      const finalTotal = Math.round(netSubtotal + gstAmount);
+      const effectiveUnitRate = (finalTotal / effectiveQty).toFixed(2);
+
+      return {
+        hasPrice: true,
+        isExactSheet: true,
+        qty: effectiveQty,
+        packs,
+        areaSqIn,
+        minApplied: Boolean(activeSheet.minimum && baseAmount === activeSheet.minimum),
+        baseAmount,
+        foilExtra,
+        spotUvExtra,
+        finishingExtra,
+        deliveryCharge,
+        netSubtotal,
+        gstAmount,
+        finalTotal,
+        effectiveUnitRate,
+        unitName: pricingConfig.unitName || 'Units',
+        customerClass
+      };
+    }
+
+    // Fallback formula for legacy catalog products without priceSheets
     const baseRate = pricingConfig.baseRate || product.baseRate;
     if (!baseRate || baseRate <= 0) {
       return { hasPrice: false };
@@ -124,32 +259,36 @@ export default function ProductDetailPage({
 
     let foilExtra = 0;
     if (supportsFoil && selectedFoil !== 'none') {
-      foilExtra = Math.max(350, baseAmount * 0.15);
+      foilExtra = Math.max(250, baseAmount * 0.15);
     }
 
     let spotUvExtra = 0;
     if (supportsSpotUv && selectedSpotUv !== 'none') {
-      spotUvExtra = Math.max(400, baseAmount * 0.15);
+      spotUvExtra = Math.max(150, baseAmount * 0.15);
     }
 
-    const netSubtotal = baseAmount + foilExtra + spotUvExtra;
+    const deliveryCharge = deliveryMode === 'courier' ? 60 : (deliveryMode === 'transport' ? 300 : 0);
+    const netSubtotal = baseAmount + foilExtra + spotUvExtra + deliveryCharge;
     const gstRate = pricingConfig.gstPercent || 18;
-    const gstAmount = netSubtotal * (gstRate / 100);
+    const gstAmount = customerClass === 'gst' ? netSubtotal * (gstRate / 100) : 0;
     const finalTotal = Math.round(netSubtotal + gstAmount);
     const effectiveUnitRate = (finalTotal / qty).toFixed(2);
 
     return {
       hasPrice: true,
-      baseRate,
       qty,
+      packs: 1,
       baseAmount: Math.round(baseAmount),
       foilExtra: Math.round(foilExtra),
       spotUvExtra: Math.round(spotUvExtra),
+      finishingExtra: 0,
+      deliveryCharge,
       netSubtotal: Math.round(netSubtotal),
       gstAmount: Math.round(gstAmount),
       finalTotal,
       effectiveUnitRate,
-      unitName: pricingConfig.unitName || 'Units'
+      unitName: pricingConfig.unitName || 'Units',
+      customerClass
     };
   };
 
@@ -157,17 +296,20 @@ export default function ProductDetailPage({
 
   // WhatsApp Enquiry Link
   const getWhatsAppEnquiryUrl = () => {
+    const activeAddonsList = Object.entries(selectedAddons).filter(([, v]) => v).map(([k]) => k).join(', ');
     const text = `Hello PRINTIZER,
 I would like to request an official quotation for the following product:
 Product: ${product.name}
-Category: ${product.categoryName}
-Quantity: ${activeQuantity} ${pricingConfig.unitName || 'units'}
-Size: ${selectedSize}
+Category: ${product.categoryName}${hsnCode ? `\nHSN Code: ${hsnCode}` : ''}
+Billing Type: ${customerClass === 'gst' ? 'GST Tax Invoice (+18% GST)' : 'Retail'}
+Quantity: ${pricing.qty || activeQuantity} ${pricingConfig.unitName || 'units'}
+Size: ${hasDimensions ? `${dimWidth}" × ${dimHeight}" (${pricing.areaSqIn || ''} sq.in)` : selectedSize}
 Paper Stock: ${selectedMaterial}
-Printing Sides: ${supportsBothSides ? (selectedSides === 'both-sides' ? 'Both Sides (Front & Back)' : 'Single Side (Front Only)') : 'Per Standard Spec'}
-Finishing: ${selectedFinish}
+Printing Sides: ${supportsBothSides ? (selectedSides === 'both-sides' ? 'Both Sides (Front & Back)' : 'Single Side (Front Only)') : 'Single Side'}
+Finishing: ${selectedFinish}${activeAddonsList ? ` + ${activeAddonsList}` : ''}
+Delivery Mode: ${deliveryMode === 'courier' ? 'Courier' : deliveryMode === 'transport' ? 'Transport' : 'Collect From Office'}
 ${supportsFoil && selectedFoil !== 'none' ? `Hot Foil Stamping: ${selectedFoil}\n` : ''}${supportsSpotUv && selectedSpotUv !== 'none' ? `Raised Spot UV Gloss: Yes\n` : ''}Job Name: ${jobName || 'Commercial Order'}
-${pricing.hasPrice ? `Estimated Amount: ₹ ${pricing.finalTotal.toLocaleString('en-IN')} (incl. 18% GST)` : 'Custom Quotation Requested'}
+${pricing.hasPrice ? `Estimated Amount: ₹ ${pricing.finalTotal.toLocaleString('en-IN')}${customerClass === 'gst' ? ' (incl. 18% GST)' : ' (Retail)'}` : 'Custom Quotation Requested'}
 
 Please verify vector artwork and share official quotation.
 Thank you!`;
@@ -202,14 +344,18 @@ Thank you!`;
       data.append('email', email.trim());
       data.append('productSlug', product.slug);
       data.append('productName', product.name);
-      data.append('quantity', String(activeQuantity));
-      data.append('dimensions', selectedSize);
+      data.append('quantity', String(pricing.qty || activeQuantity));
+      data.append('dimensions', hasDimensions ? `${dimWidth}" x ${dimHeight}" (${pricing.areaSqIn || ''} sq.in)` : selectedSize);
       data.append('material', selectedMaterial);
+      const activeAddonsList = Object.entries(selectedAddons).filter(([, v]) => v).map(([k]) => k);
       data.append('finishing', [
         selectedFinish,
         supportsBothSides ? (selectedSides === 'both-sides' ? 'Both Sides' : 'Single Side') : '',
         supportsFoil && selectedFoil !== 'none' ? `Hot Foil: ${selectedFoil}` : '',
-        supportsSpotUv && selectedSpotUv !== 'none' ? 'Raised Spot UV' : ''
+        supportsSpotUv && selectedSpotUv !== 'none' ? 'Raised Spot UV' : '',
+        ...activeAddonsList,
+        `Billing: ${customerClass === 'gst' ? 'GST' : 'Retail'}`,
+        `Delivery: ${deliveryMode}`
       ].filter(Boolean).join(' + '));
       data.append('jobName', jobName.trim() || `${product.name} Order`);
       data.append('additionalRequirements', instructions.trim());
@@ -379,46 +525,52 @@ Thank you!`;
               </div>
             </div>
 
-            {/* Technical Specifications & Prepress Guide */}
-            <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-2xs space-y-4">
+            {/* Technical Specifications & Prepress Guide (Synced from printizer.in) */}
+            <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-sm space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center space-x-2">
                   <Layers className="w-4 h-4 text-brand-crimson" />
-                  <span>Technical Specifications & Guidelines</span>
+                  <span>Important Print & File Upload Instructions</span>
                 </h3>
-                <span className="text-[11px] font-bold text-slate-400">Prepress Verified</span>
+                {hsnCode ? (
+                  <span className="text-[11px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                    HSN: {hsnCode}
+                  </span>
+                ) : (
+                  <span className="text-[11px] font-bold text-slate-400">Prepress Verified</span>
+                )}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
                 <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
                   <span className="w-2 h-2 rounded-full bg-brand-crimson mt-1.5 shrink-0"></span>
                   <div>
-                    <strong className="block text-slate-900 font-bold">Bleed & Cutting Tolerance:</strong>
-                    <span className="text-slate-500">Provide standard 3mm bleed margin beyond the trim edge with 4mm inner safe margin.</span>
+                    <strong className="block text-slate-900 font-bold">CorelDRAW (X7 or older) & Press PDF:</strong>
+                    <span className="text-slate-500">Send print files as CorelDRAW (.cdr, version X7 or older) or press-ready PDF, neatly arranged with fonts converted to curves.</span>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
                   <span className="w-2 h-2 rounded-full bg-brand-crimson mt-1.5 shrink-0"></span>
                   <div>
-                    <strong className="block text-slate-900 font-bold">Accepted Artwork Formats:</strong>
-                    <span className="text-slate-500">CorelDRAW CDR (curves), Vector PDF, Adobe Illustrator (AI), or 300 DPI high-res TIFF.</span>
+                    <strong className="block text-slate-900 font-bold">CMYK Mode & Bitmaps:</strong>
+                    <span className="text-slate-500">Design only in CMYK (not responsible for RGB/Pantone shifts). Convert images, lenses, transparency, drop shadows & PowerClips to bitmaps.</span>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
                   <span className="w-2 h-2 rounded-full bg-brand-crimson mt-1.5 shrink-0"></span>
                   <div>
-                    <strong className="block text-slate-900 font-bold">Color Calibration:</strong>
-                    <span className="text-slate-500">CMYK process inks. Avoid RGB color swatches to prevent color shift during press run.</span>
+                    <strong className="block text-slate-900 font-bold">Job Details & Area Check:</strong>
+                    <span className="text-slate-500">Write all processing details inside the file itself, and verify exact job size and printing area with 3mm bleed before sending.</span>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
                   <span className="w-2 h-2 rounded-full bg-brand-crimson mt-1.5 shrink-0"></span>
                   <div>
-                    <strong className="block text-slate-900 font-bold">Typography & Curves:</strong>
-                    <span className="text-slate-500">All fonts converted to outlines/curves (Ctrl+Q). Minimum 6pt text size for legible reproduction.</span>
+                    <strong className="block text-slate-900 font-bold">Colour Matching & Order Terms:</strong>
+                    <span className="text-slate-500">Send a physical colour sample for strict colour matching. Custom printed goods once produced and dispatched are non-returnable.</span>
                   </div>
                 </div>
               </div>
@@ -474,38 +626,123 @@ Thank you!`;
 
               {/* Configurator Form Body */}
               <div className="p-5 sm:p-6 space-y-5">
-                
-                {/* 1. Finished Size / Dimensions */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <label className="font-extrabold text-slate-800">
-                      1. Finished Size / Dimensions
-                    </label>
-                    <span className="text-[11px] text-slate-400 font-medium">Standard Trim</span>
-                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {sizes.map((s) => (
+                {/* Billing Class Toggle (Retail vs GST Tax Invoice from printizer.in) */}
+                {priceSheets && (
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-xs">
+                      <label className="font-extrabold text-slate-800">
+                        Billing Class
+                      </label>
+                      {hsnCode && (
+                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                          HSN {hsnCode}
+                        </span>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
                       <button
-                        key={s}
                         type="button"
-                        onClick={() => setSelectedSize(s)}
-                        className={`text-left p-3 rounded-xl border text-xs font-semibold transition-all ${
-                          selectedSize === s
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson shadow-2xs'
+                        onClick={() => setCustomerClass('retail')}
+                        className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${
+                          customerClass === 'retail'
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
                             : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
                         }`}
                       >
-                        <div className="flex items-center justify-between">
-                          <span className="truncate">{s}</span>
-                          {selectedSize === s && (
-                            <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 ml-1" />
-                          )}
-                        </div>
+                        <span className="block">Retail Rate</span>
+                        <span className="text-[10px] text-slate-500 font-medium">Direct Net Price</span>
                       </button>
-                    ))}
+                      <button
+                        type="button"
+                        onClick={() => setCustomerClass('gst')}
+                        className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${
+                          customerClass === 'gst'
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
+                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                        }`}
+                      >
+                        <span className="block">GST Invoice</span>
+                        <span className="text-[10px] text-brand-crimson font-semibold">GST Base + 18% GST</span>
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {/* 1. Finished Size / Dimensions (Interactive Width x Height for Per Sq.Inch products) */}
+                {pricingKind === 'area' && hasDimensions ? (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <label className="font-extrabold text-slate-800">
+                        1. Custom Dimensions (Inches)
+                      </label>
+                      <span className="text-[11px] text-brand-crimson font-bold">
+                        Rounded up to ¼"
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2.5">
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 mb-1">Width (inch)</label>
+                        <input
+                          type="number"
+                          min="0.25"
+                          step="0.25"
+                          value={dimWidth}
+                          onChange={(e) => setDimWidth(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 mb-1">Height (inch)</label>
+                        <input
+                          type="number"
+                          min="0.25"
+                          step="0.25"
+                          value={dimHeight}
+                          onChange={(e) => setDimHeight(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                    {pricing.areaSqIn && (
+                      <p className="text-[11px] text-slate-500 font-medium">
+                        Billable Area: <strong className="text-slate-800">{pricing.areaSqIn} sq. inch</strong>
+                        {priceSheets?.[customerClass]?.minimum ? ` • Min Order Base ₹${priceSheets[customerClass].minimum}` : ''}
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <label className="font-extrabold text-slate-800">
+                        1. Finished Size / Dimensions
+                      </label>
+                      <span className="text-[11px] text-slate-400 font-medium">Standard Trim</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {sizes.map((s) => (
+                        <button
+                          key={s}
+                          type="button"
+                          onClick={() => setSelectedSize(s)}
+                          className={`text-left p-3 rounded-xl border text-xs font-semibold transition-all ${
+                            selectedSize === s
+                              ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson shadow-sm'
+                              : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="truncate">{s}</span>
+                            {selectedSize === s && (
+                              <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 ml-1" />
+                            )}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* 2. Paper Stock / GSM */}
                 <div className="space-y-2">
@@ -524,7 +761,7 @@ Thank you!`;
                         onClick={() => setSelectedMaterial(m)}
                         className={`w-full text-left p-2.5 sm:p-3 rounded-xl border text-xs font-semibold transition-all flex items-center justify-between ${
                           selectedMaterial === m
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson shadow-2xs'
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson shadow-sm'
                             : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
                         }`}
                       >
@@ -544,7 +781,7 @@ Thank you!`;
                       <label className="font-extrabold text-slate-800">
                         3. Printing Sides
                       </label>
-                      <span className="text-[11px] text-slate-400 font-medium">Color Calibration</span>
+                      <span className="text-[11px] text-slate-400 font-medium">Per Pack Rate</span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-2">
@@ -557,7 +794,12 @@ Thank you!`;
                             : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
                         }`}
                       >
-                        <span>Single Side (Front)</span>
+                        <span className="block">Single Side (Front)</span>
+                        {priceSheets?.[customerClass]?.single && (
+                          <span className="text-[10px] text-slate-500 font-bold">
+                            ₹{priceSheets[customerClass].single}/{packSize}
+                          </span>
+                        )}
                       </button>
 
                       <button
@@ -570,13 +812,15 @@ Thank you!`;
                         }`}
                       >
                         <span className="block">Both Sides (Front & Back)</span>
-                        <span className="text-[10px] text-brand-crimson font-bold">+40%</span>
+                        <span className="text-[10px] text-brand-crimson font-bold">
+                          {priceSheets?.[customerClass]?.both ? `₹${priceSheets[customerClass].both}/${packSize}` : '+40%'}
+                        </span>
                       </button>
                     </div>
                   </div>
                 )}
 
-                {/* 4. Surface Finishing & Lamination */}
+                {/* 4. Surface Finishing & Lamination + Optional Job Add-ons */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-xs">
                     <label className="font-extrabold text-slate-800">
@@ -606,6 +850,38 @@ Thank you!`;
                       </button>
                     ))}
                   </div>
+
+                  {/* Exact Optional Finishing Add-ons from printizer-main */}
+                  {priceSheets?.[customerClass]?.finishing && (
+                    <div className="pt-1 flex flex-wrap gap-1.5">
+                      {[
+                        { key: 'halfBlade', label: 'Half Blade' },
+                        { key: 'creasing', label: 'Creasing' },
+                        { key: 'perforation', label: 'Perforate' },
+                        { key: 'die', label: 'Die Cutting' },
+                        { key: 'punching', label: 'Punching' },
+                        { key: 'folding', label: 'Folding' }
+                      ].filter(a => priceSheets[customerClass].finishing[a.key] != null).map(addon => {
+                        const fee = priceSheets[customerClass].finishing[addon.key];
+                        const active = Boolean(selectedAddons[addon.key]);
+                        return (
+                          <button
+                            key={addon.key}
+                            type="button"
+                            onClick={() => setSelectedAddons(prev => ({ ...prev, [addon.key]: !prev[addon.key] }))}
+                            className={`px-2.5 py-1.5 rounded-lg border text-[11px] font-bold transition flex items-center space-x-1 ${
+                              active
+                                ? 'bg-slate-900 text-white border-slate-900'
+                                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-400'
+                            }`}
+                          >
+                            <span>{addon.label}</span>
+                            <span className={active ? 'text-rose-300' : 'text-brand-crimson'}>+₹{fee}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
 
                 {/* Optional Embellishments: Foil & Spot UV (When supported) */}
@@ -622,20 +898,19 @@ Thank you!`;
                         <label className="block text-[11px] font-bold text-slate-700">
                           Metallic Hot Foil Stamping
                         </label>
-                        <div className="grid grid-cols-4 gap-1.5 text-xs font-semibold">
+                        <div className="grid grid-cols-3 gap-1.5 text-xs font-semibold">
                           {[
                             { id: 'none', label: 'None' },
-                            { id: 'gold', label: 'Gold Foil' },
-                            { id: 'silver', label: 'Silver Foil' },
-                            { id: 'rose-gold', label: 'Rose Gold' }
+                            { id: 'gold', label: priceSheets?.[customerClass]?.foilGold ? `Gold (+₹${priceSheets[customerClass].foilGold}/pk)` : 'Gold Foil' },
+                            { id: 'silver', label: priceSheets?.[customerClass]?.foilSilver ? `Silver (+₹${priceSheets[customerClass].foilSilver}/pk)` : 'Silver Foil' }
                           ].map(opt => (
                             <button
                               key={opt.id}
                               type="button"
                               onClick={() => setSelectedFoil(opt.id)}
-                              className={`py-1.5 px-2 rounded-lg border text-[11px] font-bold transition text-center ${
+                              className={`py-1.5 px-2 rounded-lg border text-[10px] sm:text-[11px] font-bold transition text-center ${
                                 selectedFoil === opt.id
-                                  ? 'bg-amber-600 text-white border-amber-600 shadow-2xs'
+                                  ? 'bg-amber-600 text-white border-amber-600 shadow-sm'
                                   : 'bg-white text-slate-700 border-amber-200 hover:border-amber-400'
                               }`}
                             >
@@ -655,7 +930,12 @@ Thank you!`;
                         <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
                           {[
                             { id: 'none', label: 'No Spot UV' },
-                            { id: 'spot-uv', label: 'Raised Spot UV (+15%)' }
+                            {
+                              id: 'spot-uv',
+                              label: priceSheets?.[customerClass]?.spotUvSingle
+                                ? `Spot UV (+₹${(selectedSides === 'both-sides' && priceSheets[customerClass].spotUvBoth) ? priceSheets[customerClass].spotUvBoth : priceSheets[customerClass].spotUvSingle}/pk)`
+                                : 'Raised Spot UV (+15%)'
+                            }
                           ].map(opt => (
                             <button
                               key={opt.id}
@@ -663,7 +943,7 @@ Thank you!`;
                               onClick={() => setSelectedSpotUv(opt.id)}
                               className={`py-1.5 px-2 rounded-lg border text-[11px] font-bold transition text-center ${
                                 selectedSpotUv === opt.id
-                                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-2xs'
+                                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
                                   : 'bg-white text-slate-700 border-amber-200 hover:border-amber-400'
                               }`}
                             >
@@ -676,67 +956,129 @@ Thank you!`;
                   </div>
                 )}
 
-                {/* 5. Quantity Selection (Product-Specific Tiers) */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <label className="font-extrabold text-slate-800">
-                      {supportsBothSides ? '5' : '4'}. Select Quantity ({pricingConfig.unitName || 'Units'})
-                    </label>
-                    <span className="text-[11px] text-brand-crimson font-bold">
-                      Min: {product.minQuantity || 100}
-                    </span>
-                  </div>
-
-                  {/* Quantity Pills */}
-                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
-                    {quantityTiers.map((q) => (
-                      <button
-                        key={q}
-                        type="button"
-                        onClick={() => {
-                          setQuantity(q);
-                          setIsCustomQty(false);
+                {/* 5. Quantity Selection (Product-Specific Pack Tiers or Special Job Input) */}
+                {pricingKind === 'special_job' ? (
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-800 mb-1">
+                        Quantity
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        value={isCustomQty ? customQtyInput : quantity}
+                        onChange={(e) => {
+                          setIsCustomQty(true);
+                          setCustomQtyInput(e.target.value);
                         }}
-                        className={`py-2 px-1 rounded-xl border text-xs font-extrabold transition-all text-center ${
-                          !isCustomQty && quantity === q
-                            ? 'border-brand-crimson bg-brand-crimson text-white shadow-xs scale-102'
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-800 mb-1">
+                        Price per Piece (₹)
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        step="0.5"
+                        value={specialUnitPrice}
+                        onChange={(e) => setSpecialUnitPrice(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <label className="font-extrabold text-slate-800">
+                        {supportsBothSides ? '5' : '4'}. Select Quantity ({pricingConfig.unitName || 'Units'})
+                      </label>
+                      <span className="text-[11px] text-brand-crimson font-bold">
+                        Min: {packSize.toLocaleString('en-IN')}
+                      </span>
+                    </div>
+
+                    {/* Quantity Pills */}
+                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                      {quantityTiers.map((q) => (
+                        <button
+                          key={q}
+                          type="button"
+                          onClick={() => {
+                            setQuantity(q);
+                            setIsCustomQty(false);
+                          }}
+                          className={`py-2 px-1 rounded-xl border text-xs font-extrabold transition-all text-center ${
+                            !isCustomQty && quantity === q
+                              ? 'border-brand-crimson bg-brand-crimson text-white shadow-sm'
+                              : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
+                          }`}
+                        >
+                          {q.toLocaleString('en-IN')}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Custom Quantity Option */}
+                    <div className="pt-1">
+                      {!isCustomQty ? (
+                        <button
+                          type="button"
+                          onClick={() => setIsCustomQty(true)}
+                          className="text-[11px] font-bold text-brand-crimson hover:underline"
+                        >
+                          + Need a different pack multiple? Enter custom quantity
+                        </button>
+                      ) : (
+                        <div className="flex items-center space-x-2 pt-1">
+                          <input
+                            type="number"
+                            min={packSize}
+                            step={packSize}
+                            placeholder={`Multiples of ${packSize}`}
+                            value={customQtyInput}
+                            onChange={(e) => setCustomQtyInput(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setIsCustomQty(false)}
+                            className="text-xs text-slate-400 hover:text-slate-600 px-2 py-2"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Delivery Mode Selector (Exact printizer-main options) */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-extrabold text-slate-800">
+                    Delivery Mode
+                  </label>
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {[
+                      { id: 'collect', label: 'Office Pickup', sub: 'Free' },
+                      { id: 'courier', label: 'Courier', sub: `₹${priceSheets?.[customerClass]?.courierPerPack || 60}/pack` },
+                      { id: 'transport', label: 'Transport', sub: `₹${priceSheets?.[customerClass]?.transportPerParcel || 300}/parcel` }
+                    ].map(d => (
+                      <button
+                        key={d.id}
+                        type="button"
+                        onClick={() => setDeliveryMode(d.id)}
+                        className={`p-2 rounded-xl border text-center transition ${
+                          deliveryMode === d.id
+                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
                             : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
                         }`}
                       >
-                        {q.toLocaleString('en-IN')}
+                        <span className="block text-[11px] font-bold leading-tight">{d.label}</span>
+                        <span className="text-[10px] text-slate-500 font-semibold">{d.sub}</span>
                       </button>
                     ))}
-                  </div>
-
-                  {/* Custom Quantity Option */}
-                  <div className="pt-1">
-                    {!isCustomQty ? (
-                      <button
-                        type="button"
-                        onClick={() => setIsCustomQty(true)}
-                        className="text-[11px] font-bold text-brand-crimson hover:underline"
-                      >
-                        + Need a different volume? Enter custom quantity
-                      </button>
-                    ) : (
-                      <div className="flex items-center space-x-2 pt-1">
-                        <input
-                          type="number"
-                          min={product.minQuantity || 10}
-                          placeholder={`Min ${product.minQuantity || 100}`}
-                          value={customQtyInput}
-                          onChange={(e) => setCustomQtyInput(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setIsCustomQty(false)}
-                          className="text-xs text-slate-400 hover:text-slate-600 px-2 py-2"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    )}
                   </div>
                 </div>
 
@@ -761,14 +1103,17 @@ Thank you!`;
                       Price Calculation Summary
                     </span>
                     <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
-                      Commercial Rate
+                      {customerClass === 'gst' ? 'GST Billing' : 'Retail Rate'}
                     </span>
                   </div>
 
                   {pricing.hasPrice ? (
                     <div className="space-y-1.5 text-xs">
                       <div className="flex items-center justify-between text-slate-600">
-                        <span>Base Printing ({pricing.qty.toLocaleString('en-IN')} {pricing.unitName}):</span>
+                        <span>
+                          Base Printing ({pricing.qty.toLocaleString('en-IN')} {pricing.unitName}
+                          {pricing.areaSqIn ? ` • ${pricing.areaSqIn} sq.in` : ''}):
+                        </span>
                         <span className="font-semibold text-slate-800">₹ {pricing.baseAmount.toLocaleString('en-IN')}</span>
                       </div>
 
@@ -786,15 +1131,34 @@ Thank you!`;
                         </div>
                       )}
 
-                      <div className="flex items-center justify-between text-slate-500 pt-1 border-t border-slate-200">
-                        <span>Applicable GST (18%):</span>
-                        <span className="font-semibold text-slate-700">+₹ {pricing.gstAmount.toLocaleString('en-IN')}</span>
-                      </div>
+                      {pricing.finishingExtra > 0 && (
+                        <div className="flex items-center justify-between text-slate-600">
+                          <span>Finishing Add-ons:</span>
+                          <span className="font-semibold text-slate-800">+₹ {pricing.finishingExtra.toLocaleString('en-IN')}</span>
+                        </div>
+                      )}
+
+                      {pricing.deliveryCharge > 0 && (
+                        <div className="flex items-center justify-between text-slate-600">
+                          <span>{deliveryMode === 'courier' ? 'Courier Charges' : 'Transport Charges'}:</span>
+                          <span className="font-semibold text-slate-800">+₹ {pricing.deliveryCharge.toLocaleString('en-IN')}</span>
+                        </div>
+                      )}
+
+                      {customerClass === 'gst' && (
+                        <div className="flex items-center justify-between text-slate-500 pt-1 border-t border-slate-200">
+                          <span>Applicable GST (18%):</span>
+                          <span className="font-semibold text-slate-700">+₹ {pricing.gstAmount.toLocaleString('en-IN')}</span>
+                        </div>
+                      )}
 
                       <div className="pt-2 border-t-2 border-slate-300 flex items-center justify-between">
                         <div>
                           <span className="text-xs font-extrabold text-slate-900 block">Total Estimated Amount:</span>
-                          <span className="text-[10px] text-slate-500">Effective: ₹{pricing.effectiveUnitRate} per {pricing.unitName.replace(/s$/, '').toLowerCase()}</span>
+                          <span className="text-[10px] text-slate-500">
+                            Effective: ₹{pricing.effectiveUnitRate} per {pricing.unitName.replace(/s$/, '').toLowerCase()}
+                            {pricing.minApplied ? ' (Minimum order charge applied)' : ''}
+                          </span>
                         </div>
                         <div className="text-right">
                           <span className="text-xl sm:text-2xl font-black text-brand-crimson">
@@ -804,7 +1168,7 @@ Thank you!`;
                       </div>
 
                       <p className="text-[10px] text-slate-400 italic pt-1 leading-normal">
-                        * Estimated price based on standard specs. Delivery charges applicable as per delivery pin-code.
+                        * Official rate from PRINTIZER price sheet ({customerClass === 'gst' ? 'GST Tax Invoice' : 'Retail'}). Custom goods once printed are non-returnable.
                       </p>
                     </div>
                   ) : (
@@ -915,7 +1279,7 @@ Thank you!`;
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 z-30 shadow-2xl flex items-center justify-between gap-3">
         <div>
           <span className="text-[10px] text-slate-400 block font-medium">
-            {activeQuantity} {pricingConfig.unitName || 'units'} &bull; {selectedSize}
+            {pricing.qty || activeQuantity} {pricingConfig.unitName || 'units'} &bull; {hasDimensions ? `${dimWidth}" × ${dimHeight}"` : selectedSize}
           </span>
           <span className="text-base font-black text-brand-crimson">
             {pricing.hasPrice ? `₹ ${pricing.finalTotal.toLocaleString('en-IN')}` : 'Custom Quote'}

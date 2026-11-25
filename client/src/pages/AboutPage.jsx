@@ -41,19 +41,19 @@ export default function AboutPage({ onNavigate, onRequestQuote }) {
             <ul className="space-y-3 text-xs text-slate-700">
               <li className="flex items-start space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 mt-0.5" />
-                <span><strong>Rigorous Color Fidelity:</strong> Calibrated digital proofs ensure final printed hues adhere faithfully to corporate brand manuals.</span>
+                <span><strong>Rigorous Color Fidelity:</strong> Design strictly in CMYK with fonts converted to curves (CorelDRAW X7 or older / press PDF); digital proofs verified prior to print.</span>
               </li>
               <li className="flex items-start space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 mt-0.5" />
-                <span><strong>Substrate Integrity:</strong> Exact verified grammages (GSM), premium specialty boards, and durable synthetics without compromise.</span>
+                <span><strong>Substrate Integrity:</strong> Verified paper grammages (80–800 GSM cards, Sunshine, Alabaster, SSP, Excel Bond, HM & PVC stickers, 320 GSM Ultima boards).</span>
               </li>
               <li className="flex items-start space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 mt-0.5" />
-                <span><strong>Specialized Embellishments:</strong> Expertise in velvet soft-touch, raised spot UV, foil stamping, embossing, and custom contour die-cutting.</span>
+                <span><strong>Specialized Embellishments:</strong> Gold & Silver hot foil stamping, raised spot UV, half blade, creasing, perforation, folding, punching & die cutting.</span>
               </li>
               <li className="flex items-start space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 mt-0.5" />
-                <span><strong>Direct Customer Consultation:</strong> Transparent quotations and dedicated print specialists accessible via WhatsApp and email.</span>
+                <span><strong>Gujarat Dispatch & PAN India Delivery:</strong> Courier (₹60/pack), Transport (₹300/parcel), or Office Pickup with Retail & GST (State Code 24) tax invoicing.</span>
               </li>
             </ul>
           </div>

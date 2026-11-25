@@ -67,23 +67,28 @@ export default function HomePage({
 
   const activeHero = heroSlides[currentHeroSlide] || heroSlides[0];
 
+  const getCategoryBadge = (catId, fallback) => {
+    const count = products.filter(p => p.categoryId === catId).length;
+    return count > 0 ? `${count} Products` : fallback;
+  };
+
   // 9 Authentic Commercial Showcase Categories from user catalogue
   const showcaseCategories = [
     {
       id: 'business-stationery',
       title: 'BUSINESS STATIONERY',
-      subtitle: 'Visiting Cards, Letterheads, Bill Books, Vouchers & ID Systems',
+      subtitle: 'Visiting Cards, Premium Cards, Letter Pads, Covers, Bill Books & ID Systems',
       image: '/images/categories/business-stationery.webp',
       targetCategory: 'business-stationery',
-      badge: '15 Products'
+      badge: getCategoryBadge('business-stationery', '47 Products')
     },
     {
       id: 'marketing-advertising',
       title: 'MARKETING & ADVERTISING',
-      subtitle: 'Pamphlets, Flyers, Brochures, Posters, Standees & Banners',
+      subtitle: 'Art Paper (100/130/170 gsm), 250 gsm Art Mix, Flyers, Brochures & Special Jobs',
       image: '/images/categories/marketing-advertising.webp',
       targetCategory: 'marketing-advertising',
-      badge: '12 Products'
+      badge: getCategoryBadge('marketing-advertising', '21 Products')
     },
     {
       id: 'books-publications',
@@ -91,7 +96,7 @@ export default function HomePage({
       subtitle: 'Notebooks, Diaries, Book Printing, Magazines & Thesis Binding',
       image: '/images/categories/books-publications.webp',
       targetCategory: 'books-publications',
-      badge: '12 Products'
+      badge: getCategoryBadge('books-publications', '12 Products')
     },
     {
       id: 'wedding-invitation',
@@ -99,23 +104,23 @@ export default function HomePage({
       subtitle: 'Royal Wedding Cards, Metallic Foil Invitations & Envelopes',
       image: '/images/categories/wedding-invitation.webp',
       targetCategory: 'wedding-invitation',
-      badge: '9 Products'
+      badge: getCategoryBadge('wedding-invitation', '9 Products')
     },
     {
       id: 'packaging-printing',
       title: 'PACKAGING PRINTING',
-      subtitle: 'Paper Bags, Shopping Bags, Product Boxes & Folding Cartons',
+      subtitle: '320 gsm Ultima Boxes, Paper Bags, Shopping Bags & Folding Cartons',
       image: '/images/categories/packaging-printing.webp',
       targetCategory: 'packaging-printing',
-      badge: '11 Products'
+      badge: getCategoryBadge('packaging-printing', '13 Products')
     },
     {
       id: 'labels-stickers',
       title: 'LABELS & STICKERS',
-      subtitle: 'Round, Square, Transparent & Waterproof Vinyl Stickers',
+      subtitle: 'HM Sticker, Silver Metallic, Every Sticker, PVC & Waterproof Vinyl Stickers',
       image: '/images/categories/labels-stickers.webp',
       targetCategory: 'labels-stickers',
-      badge: '9 Products'
+      badge: getCategoryBadge('labels-stickers', '15 Products')
     },
     {
       id: 'photo-digital-printing',
@@ -123,7 +128,7 @@ export default function HomePage({
       subtitle: 'Ultra HD Photo Prints, Canvases, PVC Cards & Photo Frames',
       image: '/images/categories/photo-digital-printing.webp',
       targetCategory: 'photo-digital-printing',
-      badge: '8 Products'
+      badge: getCategoryBadge('photo-digital-printing', '8 Products')
     },
     {
       id: 'school-educational-printing',
@@ -131,7 +136,7 @@ export default function HomePage({
       subtitle: 'School ID Cards, Marksheets, Certificates, Diaries & Prospectus',
       image: '/images/categories/school-educational-printing.webp',
       targetCategory: 'school-educational-printing',
-      badge: '10 Products'
+      badge: getCategoryBadge('school-educational-printing', '10 Products')
     },
     {
       id: 'restaurant-hotel-printing',
@@ -139,11 +144,11 @@ export default function HomePage({
       subtitle: 'Menu Cards, Food Packaging, Table Tents & Key Card Sleeves',
       image: '/images/categories/restaurant-hotel-printing.webp',
       targetCategory: 'restaurant-hotel-printing',
-      badge: '9 Products'
+      badge: getCategoryBadge('restaurant-hotel-printing', '9 Products')
     }
   ];
 
-  // Curated Featured Commercial Products (Real Products from Catalogue)
+  // Curated Featured Commercial Products (Synced MOQs & Specs from Printizer Catalogue)
   const featuredProducts = [
     {
       id: 'visiting-card',
@@ -151,10 +156,8 @@ export default function HomePage({
       name: 'Executive Visiting Cards',
       category: 'Business Stationery',
       image: '/images/products/visiting-card.webp',
-      specs: '350 GSM Velvet Soft-Touch / Raised Spot UV / Gold Foil',
-      minQty: 1000,
-      startingPrice: 350,
-      unitPrice: '₹0.35/card'
+      specs: '250/350/500 GSM Card / Spot UV / Gold & Silver Foil',
+      minQty: 1000
     },
     {
       id: 'product-box',
@@ -162,10 +165,8 @@ export default function HomePage({
       name: 'Custom Product Packaging Boxes',
       category: 'Packaging Printing',
       image: '/images/products/product-box.webp',
-      specs: 'Rigid SBS Board / Structural Die-Line / Auto-Lock Base',
-      minQty: 500,
-      startingPrice: 12000,
-      unitPrice: '₹24/box'
+      specs: '320 GSM Ultima Board / UV & Drip-Off / Per Sq. Inch',
+      minQty: 1000
     },
     {
       id: 'letterhead',
@@ -173,10 +174,8 @@ export default function HomePage({
       name: 'Corporate Letterheads',
       category: 'Business Stationery',
       image: '/images/products/letterhead.webp',
-      specs: '100 GSM Executive Bond / Alabaster Superfine Stock',
-      minQty: 500,
-      startingPrice: 1100,
-      unitPrice: '₹2.20/sheet'
+      specs: '80/100 GSM Sunshine, Alabaster & Executive Bond',
+      minQty: 1000
     },
     {
       id: 'round-sticker',
@@ -184,21 +183,17 @@ export default function HomePage({
       name: 'Waterproof Die-Cut Stickers',
       category: 'Labels & Stickers',
       image: '/images/products/round-sticker.webp',
-      specs: '100% Waterproof BOPP Vinyl / Precision Contour Kiss-Cut',
-      minQty: 1000,
-      startingPrice: 1800,
-      unitPrice: '₹1.80/sticker'
+      specs: 'HM / Silver Metallic / PVC Vinyl / Per Sq. Inch',
+      minQty: 1000
     },
     {
       id: 'brochure',
       slug: 'brochure',
-      name: 'Tri-Fold Marketing Brochures',
+      name: 'Art Paper Flyers & Brochures',
       category: 'Marketing & Advertising',
       image: '/images/products/brochure.webp',
-      specs: '170 GSM Gloss Art / Precision Creasing & Multi-Panel Fold',
-      minQty: 500,
-      startingPrice: 4250,
-      unitPrice: '₹8.50/copy'
+      specs: '100 / 130 / 170 GSM Art Paper (210x285mm) / Multi-Fold',
+      minQty: 1000
     }
   ];
 

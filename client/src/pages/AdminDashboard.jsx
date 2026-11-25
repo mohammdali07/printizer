@@ -7,7 +7,61 @@ import {
 } from 'lucide-react';
 import ProductImage from '../components/ProductImage';
 
-export default function AdminDashboard({ onNavigate }) {
+const parseCsvList = (val) =>
+  typeof val === 'string'
+    ? val.split(',').map((s) => s.trim()).filter(Boolean)
+    : Array.isArray(val) ? val : [];
+
+const createDefaultOrderFormState = (p = null, fallbackCat = null) => {
+  const pc = p?.pricingConfig || {};
+  const of = pc.orderFields || {};
+  const initialGallery = p
+    ? Array.from(new Set([...(p.image ? [p.image] : []), ...(Array.isArray(p.secondaryImages) ? p.secondaryImages : [])].filter(Boolean)))
+    : [];
+
+  return {
+    name: p?.name || '',
+    slug: p?.slug || '',
+    categoryId: p?.categoryId || fallbackCat?.id || 'business-stationery',
+    categoryName: p?.categoryName || fallbackCat?.name || 'Business Stationery',
+    tagline: p?.tagline || '',
+    description: p?.description || '',
+    minQuantity: p?.minQuantity ?? pc.minQuantity ?? 100,
+    packSize: p?.packSize ?? pc.packSize ?? p?.minQuantity ?? 100,
+    unitName: pc.unitName || 'Units',
+    baseRate: p?.baseRate ?? pc.baseRate ?? '',
+    startingPrice: p?.startingPrice ?? pc.startingPrice ?? '',
+    retailSingleRate: pc.priceSheets?.retail?.single ?? '',
+    retailBothRate: pc.priceSheets?.retail?.both ?? '',
+    priceUnavailable: Boolean(pc.priceUnavailable),
+    quantityTiers: Array.isArray(p?.quantityTiers) ? p.quantityTiers.join(', ') : '',
+    image: p?.image || '',
+    secondaryImages: initialGallery,
+    standardSizes: Array.isArray(p?.standardSizes) ? p.standardSizes.join(', ') : (p?.standardSizes || 'Standard Size'),
+    materials: Array.isArray(p?.materials) ? p.materials.join(', ') : (p?.materials || '250g Art Card, 350g Art Card'),
+    finishes: Array.isArray(p?.finishes) ? p.finishes.join(', ') : (p?.finishes || 'Gloss Lamination, Matte Lamination, Spot UV'),
+    orderFields: {
+      showMaterial: of.showMaterial !== false,
+      showSize: of.showSize !== false,
+      showFinishing: of.showFinishing !== false,
+      showPrinting: of.showPrinting !== undefined ? of.showPrinting : true,
+      showColour: of.showColour !== undefined ? of.showColour : true,
+      showDelivery: of.showDelivery !== false,
+      showNcr: Boolean(of.showNcr),
+      showCopyType: Boolean(of.showCopyType),
+      showBinding: Boolean(of.showBinding),
+      showSetsPerBook: Boolean(of.showSetsPerBook),
+      printingOptions: Array.isArray(of.printingOptions) ? of.printingOptions.join(', ') : 'Single Side, Both Sides',
+      colourOptions: Array.isArray(of.colourOptions) ? of.colourOptions.join(', ') : 'Full Color (CMYK)',
+      ncrOptions: Array.isArray(of.ncrOptions) ? of.ncrOptions.join(', ') : '',
+      copyOptions: Array.isArray(of.copyOptions) ? of.copyOptions.join(', ') : '',
+      bindingOptions: Array.isArray(of.bindingOptions) ? of.bindingOptions.join(', ') : '',
+      setsOptions: Array.isArray(of.setsOptions) ? of.setsOptions.join(', ') : ''
+    }
+  };
+};
+
+export default function AdminDashboard({ onNavigate, onCatalogUpdated }) {
   const [authToken, setAuthToken] = useState(localStorage.getItem('prz_admin_token') || '');
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('printizer@2026');
@@ -48,20 +102,7 @@ export default function AdminDashboard({ onNavigate }) {
   const [productCategoryFilter, setProductCategoryFilter] = useState('all');
   const [uploadingImages, setUploadingImages] = useState(false);
   const [imageUploadError, setImageUploadError] = useState('');
-  const [productFormData, setProductFormData] = useState({
-    name: '',
-    slug: '',
-    categoryId: 'business-stationery',
-    categoryName: 'Business Stationery',
-    tagline: '',
-    description: '',
-    minQuantity: 100,
-    image: '',
-    secondaryImages: [],
-    standardSizes: 'Standard Size',
-    materials: '250g Art Card, 300g Art Card, 350g Art Card',
-    finishes: 'Gloss Lamination, Matte Lamination, Raised Spot UV'
-  });
+  const [productFormData, setProductFormData] = useState(() => createDefaultOrderFormState());
 
   const [actionSuccess, setActionSuccess] = useState('');
   const [actionError, setActionError] = useState('');
@@ -497,6 +538,74 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         ? Array.from(new Set([primaryImg, ...rawGallery]))
         : Array.from(new Set(rawGallery));
 
+      const minQtyNum = Number(productFormData.minQuantity) || 100;
+      const packSizeNum = Number(productFormData.packSize) || minQtyNum;
+      const baseRateNum = productFormData.baseRate !== '' && productFormData.baseRate !== null
+        ? Number(productFormData.baseRate)
+        : undefined;
+      const startingPriceNum = productFormData.startingPrice !== '' && productFormData.startingPrice !== null
+        ? Number(productFormData.startingPrice)
+        : undefined;
+      const parsedTiers = parseCsvList(productFormData.quantityTiers)
+        .map((n) => parseInt(n, 10))
+        .filter((n) => Number.isFinite(n) && n > 0);
+
+      const existingPc = editingProduct?.pricingConfig || {};
+      const existingOrderFields = existingPc.orderFields || {};
+      const ofForm = productFormData.orderFields || {};
+      const updatedOrderFields = {
+        ...existingOrderFields,
+        enabled: true,
+        showMaterial: Boolean(ofForm.showMaterial),
+        showSize: Boolean(ofForm.showSize),
+        showFinishing: Boolean(ofForm.showFinishing),
+        showPrinting: Boolean(ofForm.showPrinting),
+        showColour: Boolean(ofForm.showColour),
+        showDelivery: Boolean(ofForm.showDelivery),
+        showNcr: Boolean(ofForm.showNcr),
+        showCopyType: Boolean(ofForm.showCopyType),
+        showBinding: Boolean(ofForm.showBinding),
+        showSetsPerBook: Boolean(ofForm.showSetsPerBook),
+        printingOptions: parseCsvList(ofForm.printingOptions),
+        colourOptions: parseCsvList(ofForm.colourOptions),
+        ncrOptions: parseCsvList(ofForm.ncrOptions),
+        copyOptions: parseCsvList(ofForm.copyOptions),
+        bindingOptions: parseCsvList(ofForm.bindingOptions),
+        setsOptions: parseCsvList(ofForm.setsOptions)
+      };
+
+      const retailSingleNum = productFormData.retailSingleRate !== '' && productFormData.retailSingleRate !== null
+        ? Number(productFormData.retailSingleRate)
+        : null;
+      const retailBothNum = productFormData.retailBothRate !== '' && productFormData.retailBothRate !== null
+        ? Number(productFormData.retailBothRate)
+        : null;
+
+      let nextPriceSheets = existingPc.priceSheets ? { ...existingPc.priceSheets } : undefined;
+      if (Number.isFinite(retailSingleNum) && retailSingleNum > 0) {
+        nextPriceSheets = {
+          ...(nextPriceSheets || {}),
+          retail: {
+            ...(nextPriceSheets?.retail || {}),
+            single: retailSingleNum,
+            ...(Number.isFinite(retailBothNum) && retailBothNum > 0 ? { both: retailBothNum } : {})
+          }
+        };
+      }
+
+      const nextPricingConfig = {
+        ...existingPc,
+        minQuantity: minQtyNum,
+        packSize: packSizeNum,
+        unitName: (productFormData.unitName || 'Units').trim(),
+        ...(Number.isFinite(baseRateNum) ? { baseRate: baseRateNum } : {}),
+        ...(Number.isFinite(startingPriceNum) ? { startingPrice: startingPriceNum } : {}),
+        priceUnavailable: Boolean(productFormData.priceUnavailable),
+        supportsBothSides: updatedOrderFields.printingOptions.some((opt) => /both|double/i.test(opt)) || Boolean(existingPc.supportsBothSides),
+        ...(nextPriceSheets ? { priceSheets: nextPriceSheets } : {}),
+        orderFields: updatedOrderFields
+      };
+
       const payload = {
         name: productFormData.name,
         slug: productFormData.slug || productFormData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
@@ -504,18 +613,17 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         categoryName: categories.find(c => c.id === productFormData.categoryId)?.name || 'Custom',
         tagline: productFormData.tagline,
         description: productFormData.description,
-        minQuantity: Number(productFormData.minQuantity) || 100,
+        minQuantity: minQtyNum,
+        packSize: packSizeNum,
+        ...(Number.isFinite(baseRateNum) ? { baseRate: baseRateNum } : {}),
+        ...(Number.isFinite(startingPriceNum) ? { startingPrice: startingPriceNum } : {}),
+        ...(parsedTiers.length > 0 ? { quantityTiers: parsedTiers } : {}),
+        pricingConfig: nextPricingConfig,
         image: primaryImg,
         secondaryImages: normalizedGallery,
-        standardSizes: typeof productFormData.standardSizes === 'string' 
-          ? productFormData.standardSizes.split(',').map(s => s.trim()).filter(Boolean)
-          : productFormData.standardSizes,
-        materials: typeof productFormData.materials === 'string'
-          ? productFormData.materials.split(',').map(s => s.trim()).filter(Boolean)
-          : productFormData.materials,
-        finishes: typeof productFormData.finishes === 'string'
-          ? productFormData.finishes.split(',').map(s => s.trim()).filter(Boolean)
-          : productFormData.finishes
+        standardSizes: parseCsvList(productFormData.standardSizes),
+        materials: parseCsvList(productFormData.materials),
+        finishes: parseCsvList(productFormData.finishes)
       };
 
       let res;
@@ -540,6 +648,7 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
       setShowProductModal(false);
       setEditingProduct(null);
       fetchData();
+      onCatalogUpdated?.();
     } catch (err) {
       setActionError(err.message);
     }
@@ -553,6 +662,7 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
       if (!res.ok || !data.success) throw new Error(data.error || 'Failed to delete');
       setActionSuccess('Product deleted successfully');
       fetchData();
+      onCatalogUpdated?.();
     } catch (err) {
       setActionError(err.message);
     }
@@ -1000,20 +1110,7 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                 onClick={() => {
                   setEditingProduct(null);
                   setImageUploadError('');
-                  setProductFormData({
-                    name: '',
-                    slug: '',
-                    categoryId: categories[0]?.id || 'business-stationery',
-                    categoryName: categories[0]?.name || 'Business Stationery',
-                    tagline: '',
-                    description: '',
-                    minQuantity: 100,
-                    image: '',
-                    secondaryImages: [],
-                    standardSizes: 'Standard Size',
-                    materials: '250g Art Card, 350g Art Card',
-                    finishes: 'Gloss Lamination, Matte Lamination, Spot UV'
-                  });
+                  setProductFormData(createDefaultOrderFormState(null, categories[0]));
                   setShowProductModal(true);
                 }}
                 className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-bold py-2 px-3.5 rounded-xl flex items-center justify-center space-x-1.5 shadow-sm shrink-0"
@@ -1060,24 +1157,7 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                       onClick={() => {
                         setEditingProduct(p);
                         setImageUploadError('');
-                        const initialGallery = Array.from(new Set([
-                          ...(p.image ? [p.image] : []),
-                          ...(Array.isArray(p.secondaryImages) ? p.secondaryImages : [])
-                        ].filter(Boolean)));
-                        setProductFormData({
-                          name: p.name,
-                          slug: p.slug,
-                          categoryId: p.categoryId,
-                          categoryName: p.categoryName,
-                          tagline: p.tagline || '',
-                          description: p.description || '',
-                          minQuantity: p.minQuantity || 100,
-                          image: p.image || '',
-                          secondaryImages: initialGallery,
-                          standardSizes: Array.isArray(p.standardSizes) ? p.standardSizes.join(', ') : (p.standardSizes || ''),
-                          materials: Array.isArray(p.materials) ? p.materials.join(', ') : (p.materials || ''),
-                          finishes: Array.isArray(p.finishes) ? p.finishes.join(', ') : (p.finishes || '')
-                        });
+                        setProductFormData(createDefaultOrderFormState(p, categories[0]));
                         setShowProductModal(true);
                       }}
                       className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100"
@@ -1659,6 +1739,230 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                     className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:bg-white focus:outline-none"
                   />
                 </div>
+              </div>
+
+              {/* Order Configurator & Pricing Setup */}
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <h4 className="text-xs font-extrabold text-slate-900">Order Configurator & Pricing Rules</h4>
+                    <p className="text-[11px] text-slate-500">Controls active fields, options, and pricing calculation on the Configure & Order page.</p>
+                  </div>
+                  <label className="flex items-center space-x-2 text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-1.5 rounded-xl cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={Boolean(productFormData.priceUnavailable)}
+                      onChange={(e) => setProductFormData({ ...productFormData, priceUnavailable: e.target.checked })}
+                      className="rounded text-brand-crimson"
+                    />
+                    <span>Quote Only (Hide Auto Price)</span>
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Starting Price (₹)</label>
+                    <input
+                      type="number"
+                      value={productFormData.startingPrice}
+                      onChange={(e) => setProductFormData({ ...productFormData, startingPrice: e.target.value })}
+                      placeholder="e.g. 540"
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Unit Base Rate (₹)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={productFormData.baseRate}
+                      onChange={(e) => setProductFormData({ ...productFormData, baseRate: e.target.value })}
+                      placeholder="e.g. 2.50"
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Pack / Step Size</label>
+                    <input
+                      type="number"
+                      min="1"
+                      value={productFormData.packSize}
+                      onChange={(e) => setProductFormData({ ...productFormData, packSize: e.target.value })}
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Unit Name</label>
+                    <input
+                      type="text"
+                      value={productFormData.unitName}
+                      onChange={(e) => setProductFormData({ ...productFormData, unitName: e.target.value })}
+                      placeholder="Books / Cards / Sheets"
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Quantity Tiers (comma-separated)</label>
+                    <input
+                      type="text"
+                      value={productFormData.quantityTiers}
+                      onChange={(e) => setProductFormData({ ...productFormData, quantityTiers: e.target.value })}
+                      placeholder="100, 200, 500, 1000"
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Sheet Pack Single Rate (₹)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={productFormData.retailSingleRate}
+                      onChange={(e) => setProductFormData({ ...productFormData, retailSingleRate: e.target.value })}
+                      placeholder="Optional per-pack rate"
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Sheet Pack Both-Side Rate (₹)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={productFormData.retailBothRate}
+                      onChange={(e) => setProductFormData({ ...productFormData, retailBothRate: e.target.value })}
+                      placeholder="Optional both-side rate"
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <span className="block text-[11px] font-bold text-slate-700 mb-1.5">Active Form Fields for This Product</span>
+                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                    {[
+                      ['showMaterial', 'Material / Paper'],
+                      ['showSize', 'Size'],
+                      ['showFinishing', 'Finishing'],
+                      ['showPrinting', 'Printing'],
+                      ['showColour', 'Colour Options'],
+                      ['showDelivery', 'Delivery Mode'],
+                      ['showNcr', 'NCR / Non-NCR'],
+                      ['showCopyType', 'Copy Type'],
+                      ['showBinding', 'Binding'],
+                      ['showSetsPerBook', 'Sets per Book']
+                    ].map(([key, label]) => (
+                      <label key={key} className="flex items-center space-x-1.5 bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-[11px] font-semibold text-slate-700 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={Boolean(productFormData.orderFields?.[key])}
+                          onChange={(e) => setProductFormData((prev) => ({
+                            ...prev,
+                            orderFields: { ...prev.orderFields, [key]: e.target.checked }
+                          }))}
+                          className="rounded text-brand-crimson"
+                        />
+                        <span>{label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Printing Options</label>
+                    <input
+                      type="text"
+                      value={productFormData.orderFields?.printingOptions || ''}
+                      onChange={(e) => setProductFormData((prev) => ({
+                        ...prev,
+                        orderFields: { ...prev.orderFields, printingOptions: e.target.value }
+                      }))}
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Colour Options</label>
+                    <input
+                      type="text"
+                      value={productFormData.orderFields?.colourOptions || ''}
+                      onChange={(e) => setProductFormData((prev) => ({
+                        ...prev,
+                        orderFields: { ...prev.orderFields, colourOptions: e.target.value }
+                      }))}
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                {(productFormData.orderFields?.showNcr ||
+                  productFormData.orderFields?.showCopyType ||
+                  productFormData.orderFields?.showBinding ||
+                  productFormData.orderFields?.showSetsPerBook) && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 border-t border-slate-200">
+                    {productFormData.orderFields?.showNcr && (
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">NCR Options (comma-separated)</label>
+                        <input
+                          type="text"
+                          value={productFormData.orderFields?.ncrOptions || ''}
+                          onChange={(e) => setProductFormData((prev) => ({
+                            ...prev,
+                            orderFields: { ...prev.orderFields, ncrOptions: e.target.value }
+                          }))}
+                          placeholder="NCR (Carbonless), Non-NCR (Maplitho)"
+                          className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                        />
+                      </div>
+                    )}
+                    {productFormData.orderFields?.showCopyType && (
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">Copy Options (comma-separated)</label>
+                        <input
+                          type="text"
+                          value={productFormData.orderFields?.copyOptions || ''}
+                          onChange={(e) => setProductFormData((prev) => ({
+                            ...prev,
+                            orderFields: { ...prev.orderFields, copyOptions: e.target.value }
+                          }))}
+                          placeholder="Duplicate (1+1), Triplicate (1+2)"
+                          className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                        />
+                      </div>
+                    )}
+                    {productFormData.orderFields?.showBinding && (
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">Binding Options (comma-separated)</label>
+                        <input
+                          type="text"
+                          value={productFormData.orderFields?.bindingOptions || ''}
+                          onChange={(e) => setProductFormData((prev) => ({
+                            ...prev,
+                            orderFields: { ...prev.orderFields, bindingOptions: e.target.value }
+                          }))}
+                          placeholder="Side Pinning + Perforation, Pad Binding"
+                          className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                        />
+                      </div>
+                    )}
+                    {productFormData.orderFields?.showSetsPerBook && (
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">Sets per Book (comma-separated)</label>
+                        <input
+                          type="text"
+                          value={productFormData.orderFields?.setsOptions || ''}
+                          onChange={(e) => setProductFormData((prev) => ({
+                            ...prev,
+                            orderFields: { ...prev.orderFields, setsOptions: e.target.value }
+                          }))}
+                          placeholder="50 Sets, 100 Sets"
+                          className="w-full bg-white border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:outline-none"
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className="pt-2 flex justify-end space-x-2">

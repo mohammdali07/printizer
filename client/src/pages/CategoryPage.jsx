@@ -171,7 +171,7 @@ Thank you.`;
                       </div>
 
                       <button
-                        onClick={() => onNavigate('product', p.slug)}
+                        onClick={() => onNavigate('configure', p.slug)}
                         className="w-full bg-brand-crimson hover:bg-brand-red text-white font-extrabold py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-[10.5px] sm:text-xs transition flex items-center justify-center space-x-1 shadow-md shadow-brand-crimson/20 min-h-[36px] sm:min-h-[38px]"
                       >
                         <span>Configure &amp; Get Quote</span>

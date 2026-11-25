@@ -88,20 +88,23 @@
         "/images/products/visiting-card.webp"
       ],
       "standardSizes": [
-        "Standard 3.5\" x 2.0\"",
-        "Square 2.5\" x 2.5\""
+        "Standard (3.5\" x 2.0\" / 89 x 51 mm)",
+        "Compact (87 x 51 mm)",
+        "Square (2.5\" x 2.5\")"
       ],
       "materials": [
         "250g Art Card",
-        "300g Art Card",
-        "350g Velvet Board",
-        "400g Ultra Thick"
+        "250g Art Card + Lamination",
+        "350 GSM Matte Card",
+        "500 GSM Matte Card + UV",
+        "350 GSM Velvet Touch"
       ],
       "finishes": [
+        "Matte Lamination",
         "Gloss Lamination",
-        "Thermal Matte",
-        "Raised Spot UV",
-        "Gold Foil"
+        "Round Cut Corners",
+        "Velvet Soft-Touch",
+        "Special Drip-Off Texture"
       ],
       "featured": true,
       "baseRate": 0.455,
@@ -169,7 +172,45 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Full Color + Metallic Accent"
+          ],
+          "optionRateModifiers": {
+            "materialMultipliers": {
+              "250g Art Card": 0.9,
+              "250g Art Card + Lamination": 1.0,
+              "350 GSM Matte Card": 1.15,
+              "500 GSM Matte Card + UV": 1.45,
+              "350 GSM Velvet Touch": 1.5
+            },
+            "colourMultipliers": {
+              "Full Color (CMYK)": 1.0,
+              "Full Color + Metallic Accent": 1.15
+            },
+            "finishingFlatAddons": {
+              "Round Cut Corners": 120,
+              "Special Drip-Off Texture": 260
+            }
+          }
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -191,17 +232,19 @@
         "/images/products/letterhead.webp"
       ],
       "standardSizes": [
-        "A4 (210 x 297 mm)",
-        "Executive Bond"
+        "A4 Size (210 x 297 mm)",
+        "Executive (210 x 285 mm)"
       ],
       "materials": [
-        "100 GSM Alabaster",
-        "120 GSM Sunshine Bond",
-        "85 GSM Executive Superwhite"
+        "100 GSM Paper (Alabaster)",
+        "120 GSM Paper (Executive Bond)",
+        "80 GSM Sunshine Paper",
+        "100 GSM Sunshine Paper"
       ],
       "finishes": [
-        "Clean Cut",
-        "Full CMYK Calibration"
+        "Clean Guillotine Cut",
+        "Top Padded (100 Sheets/Pad)",
+        "Micro-Perforated Edge"
       ],
       "featured": true,
       "baseRate": 0.585,
@@ -269,7 +312,42 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single-Sided Printing",
+            "Double-Sided Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color (Corporate Blue/Black)",
+            "Two Color"
+          ],
+          "optionRateModifiers": {
+            "materialMultipliers": {
+              "80 GSM Sunshine Paper": 0.9,
+              "100 GSM Sunshine Paper": 1.0,
+              "100 GSM Paper (Alabaster)": 1.05,
+              "120 GSM Paper (Executive Bond)": 1.2
+            },
+            "colourMultipliers": {
+              "Single Color (Corporate Blue/Black)": 0.85,
+              "Two Color": 0.95,
+              "Full Color (CMYK)": 1.0
+            }
+          }
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -291,18 +369,19 @@
         "/images/products/bill-book.webp"
       ],
       "standardSizes": [
-        "1/8 Demy (5.5\" x 8.5\")",
-        "1/4 Demy (8.5\" x 11\")"
+        "1/4 Demy (7.25\" x 9.5\")",
+        "1/8 Demy (4.75\" x 7.25\")",
+        "A4 Size (8.27\" x 11.69\")",
+        "A5 Size (5.83\" x 8.27\")"
       ],
       "materials": [
-        "NCR Carbonless (1+1 Duplicate)",
-        "NCR Carbonless (1+2 Triplicate)",
-        "White Ledger Paper"
+        "55 GSM Carbonless NCR",
+        "60 GSM Maplitho",
+        "70 GSM Hi-Bright Bond"
       ],
       "finishes": [
-        "Numbered",
-        "Perforated Top",
-        "Hardboard Binding"
+        "Sequential Red Numbering + Perforation",
+        "Standard Tear-Off Finish"
       ],
       "featured": true,
       "baseRate": 84.5,
@@ -325,7 +404,60 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side Printing",
+            "Front + Terms Back Printing"
+          ],
+          "colourOptions": [
+            "Single Color (Blue / Black)",
+            "Two Color (Blue + Red)",
+            "Full Color Header"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless (Auto Copy)",
+            "Non-NCR (Carbon Paper Required)"
+          ],
+          "copyOptions": [
+            "Duplicate (1+1)",
+            "Triplicate (1+2)"
+          ],
+          "bindingOptions": [
+            "Cloth Spine + Perforation",
+            "Hardboard Bound Register",
+            "Top Gummed Pad"
+          ],
+          "setsOptions": [
+            "50 Sets / Book",
+            "100 Sets / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Duplicate (1+1)": 1.0,
+              "Triplicate (1+2)": 1.38
+            },
+            "ncrMultipliers": {
+              "Non-NCR (Carbon Paper Required)": 0.92,
+              "NCR Carbonless (Auto Copy)": 1.0
+            },
+            "setsMultipliers": {
+              "50 Sets / Book": 1.0,
+              "100 Sets / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -342,16 +474,19 @@
         "/images/products/cash-memo-book.webp"
       ],
       "standardSizes": [
-        "1/8 Demy (5.5\" x 8.5\")",
-        "Pocket Size (4\" x 7\")"
+        "1/8 Demy (Compact)",
+        "1/6 Demy",
+        "A5 Size",
+        "1/4 Demy"
       ],
       "materials": [
-        "Duplicate Carbonless NCR",
-        "55 GSM Ledger Stock"
+        "60 GSM Maplitho Paper",
+        "55 GSM Carbonless NCR",
+        "70 GSM Bond Paper"
       ],
       "finishes": [
-        "Sequential Numbering",
-        "Bound with Counterfoil"
+        "Machine Serial Numbering",
+        "Perforated Detachable Leaves"
       ],
       "featured": true,
       "baseRate": 71.5,
@@ -374,7 +509,61 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side Printing",
+            "Both Sides (Rules on Back)"
+          ],
+          "colourOptions": [
+            "Single Color (Dark Blue / Black)",
+            "Two Color (Red + Blue)"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless",
+            "Non-NCR (Standard)"
+          ],
+          "copyOptions": [
+            "Duplicate (1+1)",
+            "Triplicate (1+2)",
+            "Single Copy"
+          ],
+          "bindingOptions": [
+            "Side Cloth Stitched",
+            "Top Perforated Pad",
+            "Hardboard Bound"
+          ],
+          "setsOptions": [
+            "50 Sets / Book",
+            "100 Sets / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Single Copy": 0.78,
+              "Duplicate (1+1)": 1.0,
+              "Triplicate (1+2)": 1.35
+            },
+            "ncrMultipliers": {
+              "Non-NCR (Standard)": 0.92,
+              "NCR Carbonless": 1.0
+            },
+            "setsMultipliers": {
+              "50 Sets / Book": 1.0,
+              "100 Sets / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -391,16 +580,18 @@
         "/images/products/receipt-book.webp"
       ],
       "standardSizes": [
-        "1/8 Demy",
+        "1/8 Demy (Oblong)",
+        "1/10 Demy (Compact)",
         "1/6 Demy"
       ],
       "materials": [
-        "1+1 Carbonless Duplicate",
-        "Bond Watermark Stock"
+        "70 GSM Ledger Bond",
+        "55 GSM NCR Carbonless",
+        "80 GSM Alabaster"
       ],
       "finishes": [
-        "Spiral or Tape Bound",
-        "Perforated Slip"
+        "Micro-Perforated Stub Tear Line",
+        "Sequential Red Numbering"
       ],
       "featured": true,
       "baseRate": 65,
@@ -423,7 +614,56 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side Printing",
+            "Double Side (Terms on Back)"
+          ],
+          "colourOptions": [
+            "Single Color (Black / Maroon / Blue)",
+            "Two Color"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless",
+            "Non-NCR (Counterfoil Stub)"
+          ],
+          "copyOptions": [
+            "Original + Counterfoil Stub",
+            "Duplicate (1+1)",
+            "Triplicate (1+2)"
+          ],
+          "bindingOptions": [
+            "Black Cloth Spine + Perforated Line",
+            "Left Side Wire-Stitched"
+          ],
+          "setsOptions": [
+            "50 Receipts / Book",
+            "100 Receipts / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Original + Counterfoil Stub": 1.0,
+              "Duplicate (1+1)": 1.25,
+              "Triplicate (1+2)": 1.55
+            },
+            "setsMultipliers": {
+              "50 Receipts / Book": 1.0,
+              "100 Receipts / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -440,16 +680,17 @@
         "/images/products/quotation-book.webp"
       ],
       "standardSizes": [
-        "A4 (8.27\" x 11.69\")",
+        "A4 Size (8.27\" x 11.69\")",
         "1/4 Demy"
       ],
       "materials": [
-        "1+1 NCR Carbonless",
-        "70 GSM Ledger Paper"
+        "70 GSM Ledger Paper",
+        "80 GSM Sunshine",
+        "55 GSM NCR Carbonless"
       ],
       "finishes": [
         "Cloth Spine Tape",
-        "Numbered Slips"
+        "Numbered Slips + Micro-Perforation"
       ],
       "featured": true,
       "baseRate": 97.5,
@@ -472,7 +713,57 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side Printing",
+            "Both Sides (Specifications on Back)"
+          ],
+          "colourOptions": [
+            "Single Color (Teal / Navy / Black)",
+            "Two Color",
+            "Full Color (CMYK)"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless",
+            "Non-NCR"
+          ],
+          "copyOptions": [
+            "Duplicate (1+1)",
+            "Triplicate (1+2)",
+            "Single Copy Pad"
+          ],
+          "bindingOptions": [
+            "Top Cloth Spine + Perforation",
+            "Spiral Wire-O Bound"
+          ],
+          "setsOptions": [
+            "50 Sets / Book",
+            "100 Sets / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Single Copy Pad": 0.8,
+              "Duplicate (1+1)": 1.0,
+              "Triplicate (1+2)": 1.35
+            },
+            "setsMultipliers": {
+              "50 Sets / Book": 1.0,
+              "100 Sets / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -489,17 +780,18 @@
         "/images/products/invoice-book.webp"
       ],
       "standardSizes": [
-        "A4 Standard (8.27\" x 11.69\")",
-        "Legal Size"
+        "A4 Size (GST Standard)",
+        "1/4 Demy",
+        "A5 Size"
       ],
       "materials": [
-        "Triplicate (1+2) Multi-Color NCR",
-        "Duplicate (1+1)"
+        "55 GSM NCR (White/Pink/Yellow)",
+        "70 GSM Maplitho",
+        "80 GSM Sunshine"
       ],
       "finishes": [
-        "GST Compliant Columns",
-        "Serial Numbering",
-        "Hard Strawboard Base"
+        "GST Columns + Sequential Serial Numbering",
+        "Micro-Perforated Sheets"
       ],
       "featured": true,
       "baseRate": 110.5,
@@ -522,7 +814,55 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side GST Format",
+            "Both Sides (GST Declaration on Back)"
+          ],
+          "colourOptions": [
+            "Single Color (Navy / Black)",
+            "Two Color",
+            "Full Color Header"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless (Auto Copy)",
+            "Non-NCR"
+          ],
+          "copyOptions": [
+            "Duplicate (1+1)",
+            "Triplicate (1+2 GST Standard)"
+          ],
+          "bindingOptions": [
+            "Hard Cloth Spine + Numbering",
+            "Top Gummed & Perforated"
+          ],
+          "setsOptions": [
+            "50 Sets / Book",
+            "100 Sets / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Duplicate (1+1)": 0.85,
+              "Triplicate (1+2 GST Standard)": 1.0
+            },
+            "setsMultipliers": {
+              "50 Sets / Book": 1.0,
+              "100 Sets / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -539,17 +879,19 @@
         "/images/products/delivery-challan-book.webp"
       ],
       "standardSizes": [
-        "1/4 Demy (8.5\" x 11\")",
-        "1/8 Demy"
+        "1/4 Demy",
+        "1/5 Demy",
+        "A4 Size",
+        "A5 Size"
       ],
       "materials": [
-        "NCR Carbonless (1+2 Triplicate)",
-        "Duplicate 60 GSM"
+        "55 GSM Carbonless NCR",
+        "60 GSM Maplitho",
+        "70 GSM Bond"
       ],
       "finishes": [
-        "Numbered",
-        "Perforated",
-        "Cloth Spine Binding"
+        "Perforated Tear Edge + Serial Numbering",
+        "Receiver Signature Box"
       ],
       "featured": true,
       "baseRate": 91,
@@ -572,7 +914,54 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side Dispatch Format",
+            "Double Side"
+          ],
+          "colourOptions": [
+            "Single Color (Brown / Blue / Black)",
+            "Two Color"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless",
+            "Non-NCR"
+          ],
+          "copyOptions": [
+            "Duplicate (1+1)",
+            "Triplicate (1+2 Dispatch + Gate + Office)"
+          ],
+          "bindingOptions": [
+            "Kraft Board + Perforated Tear Sheets",
+            "Cloth Spine Bound"
+          ],
+          "setsOptions": [
+            "50 Sets / Book",
+            "100 Sets / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Duplicate (1+1)": 1.0,
+              "Triplicate (1+2 Dispatch + Gate + Office)": 1.35
+            },
+            "setsMultipliers": {
+              "50 Sets / Book": 1.0,
+              "100 Sets / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -589,16 +978,17 @@
         "/images/products/purchase-order-book.webp"
       ],
       "standardSizes": [
-        "A4 Standard",
+        "A4 Size",
         "1/4 Demy"
       ],
       "materials": [
-        "1+2 Triplicate NCR Carbonless",
-        "1+1 Duplicate"
+        "70 GSM Bond Paper",
+        "55 GSM NCR Carbonless",
+        "60 GSM Maplitho"
       ],
       "finishes": [
-        "Sequential Machine Numbering",
-        "Cardboard Back"
+        "Sequential PO Numbering + Perforation",
+        "Terms & Conditions Backing"
       ],
       "featured": false,
       "baseRate": 104,
@@ -621,7 +1011,55 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side PO Format",
+            "Both Sides (Vendor Terms on Back)"
+          ],
+          "colourOptions": [
+            "Single Color (Indigo / Black)",
+            "Two Color",
+            "Full Color (CMYK)"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless",
+            "Non-NCR"
+          ],
+          "copyOptions": [
+            "Duplicate (1+1)",
+            "Triplicate (1+2)"
+          ],
+          "bindingOptions": [
+            "Hardboard Cloth Spine",
+            "Top Perforated Pad"
+          ],
+          "setsOptions": [
+            "50 Sets / Book",
+            "100 Sets / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Duplicate (1+1)": 1.0,
+              "Triplicate (1+2)": 1.35
+            },
+            "setsMultipliers": {
+              "50 Sets / Book": 1.0,
+              "100 Sets / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -670,7 +1108,55 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Single Color (Red/Blue/Black)",
+            "Two Color"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless",
+            "Non-NCR"
+          ],
+          "copyOptions": [
+            "Single Copy Pad",
+            "Duplicate (1+1)",
+            "Triplicate (1+2)"
+          ],
+          "bindingOptions": [
+            "Cloth Spine Strip + Perforation",
+            "Top Gummed Pad"
+          ],
+          "setsOptions": [
+            "50 Sets / Book",
+            "100 Sets / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Single Copy Pad": 0.85,
+              "Duplicate (1+1)": 1.0,
+              "Triplicate (1+2)": 1.35
+            },
+            "setsMultipliers": {
+              "50 Sets / Book": 1.0,
+              "100 Sets / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -765,7 +1251,30 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -819,7 +1328,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -867,7 +1396,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -915,7 +1464,29 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -964,7 +1535,29 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -1058,7 +1651,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -1157,7 +1771,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -1256,7 +1891,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -1310,7 +1966,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -1357,7 +2033,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -1451,7 +2148,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -1504,7 +2222,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -1552,7 +2290,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -1599,7 +2357,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -1646,7 +2424,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -1695,7 +2493,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -1789,7 +2607,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -1841,7 +2680,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -1888,7 +2760,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -1935,7 +2840,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -1981,7 +2919,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2029,7 +3000,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2075,7 +3079,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2122,7 +3159,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2168,7 +3238,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2215,7 +3318,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2263,7 +3399,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2310,7 +3479,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2357,7 +3559,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -2406,7 +3641,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2453,7 +3709,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2501,7 +3778,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2547,7 +3845,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2640,7 +3959,30 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -2692,7 +4034,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2739,7 +4102,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2786,7 +4170,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2833,7 +4238,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2881,7 +4306,33 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -2929,7 +4380,33 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -3023,7 +4500,33 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -3121,7 +4624,33 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -3218,7 +4747,33 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -3271,7 +4826,33 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -3364,7 +4945,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -3461,7 +5063,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -3560,7 +5183,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -3615,7 +5259,33 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -3662,7 +5332,33 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -3757,7 +5453,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -3857,7 +5574,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -3955,7 +5693,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + White Ink Layer"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -4052,7 +5811,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -4149,7 +5929,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -4247,7 +6048,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -4345,7 +6167,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -4442,7 +6285,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -4541,7 +6405,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -4596,7 +6481,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -4643,7 +6548,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -4690,7 +6615,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -4738,7 +6683,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -4786,7 +6751,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -4832,7 +6817,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -4879,7 +6884,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -4926,7 +6951,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -4972,7 +7017,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5018,7 +7084,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -5066,7 +7165,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5113,7 +7233,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5161,7 +7302,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5207,7 +7369,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5253,7 +7436,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -5299,7 +7515,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5346,7 +7582,40 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Cover Color + B&W Inside",
+            "Full Color Throughout"
+          ],
+          "colourOptions": [
+            "Full Color Cover + Monochrome Inner",
+            "Full Color (CMYK)"
+          ],
+          "bindingOptions": [
+            "Perfect Binding",
+            "Wire-O Spiral Binding",
+            "Hardbound Cloth Spine",
+            "Center Saddle Stitch"
+          ],
+          "optionRateModifiers": {
+            "printingMultipliers": {
+              "Cover Color + B&W Inside": 1.0,
+              "Full Color Throughout": 1.45
+            }
+          }
+        }
       }
     },
     {
@@ -5393,7 +7662,27 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5442,7 +7731,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5490,7 +7800,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5538,7 +7869,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5587,7 +7939,55 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": true,
+          "showCopyType": true,
+          "showBinding": true,
+          "showSetsPerBook": true,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Single Color (Red/Blue/Black)",
+            "Two Color"
+          ],
+          "ncrOptions": [
+            "NCR Carbonless",
+            "Non-NCR"
+          ],
+          "copyOptions": [
+            "Single Copy Pad",
+            "Duplicate (1+1)",
+            "Triplicate (1+2)"
+          ],
+          "bindingOptions": [
+            "Cloth Spine Strip + Perforation",
+            "Top Gummed Pad"
+          ],
+          "setsOptions": [
+            "50 Sets / Book",
+            "100 Sets / Book"
+          ],
+          "optionRateModifiers": {
+            "copyMultipliers": {
+              "Single Copy Pad": 0.85,
+              "Duplicate (1+1)": 1.0,
+              "Triplicate (1+2)": 1.35
+            },
+            "setsMultipliers": {
+              "50 Sets / Book": 1.0,
+              "100 Sets / Book": 1.75
+            }
+          }
+        }
       }
     },
     {
@@ -5680,7 +8080,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -5777,7 +8198,28 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
+        }
       },
       "packSize": 1000,
       "maxPacks": 100,
@@ -5830,7 +8272,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5876,7 +8339,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -5923,7 +8407,28 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30
+        "markupPercent": 30,
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
+        }
       }
     },
     {
@@ -6025,6 +8530,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6127,6 +8654,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6229,6 +8778,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6331,6 +8902,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6434,6 +9027,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6536,6 +9151,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6638,6 +9275,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6741,6 +9400,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6843,6 +9524,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -6945,6 +9648,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -7047,6 +9772,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -7149,6 +9896,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -7252,6 +10021,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -7355,6 +10146,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -7458,6 +10271,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -7561,6 +10396,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -7664,6 +10521,28 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Rich Black Back"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -7765,6 +10644,35 @@
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
+          }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {
+            "colourMultipliers": {
+              "Single Color": 0.88,
+              "Two Color": 0.95,
+              "Full Color (CMYK)": 1.0
+            }
           }
         }
       }
@@ -7868,6 +10776,35 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {
+            "colourMultipliers": {
+              "Single Color": 0.88,
+              "Two Color": 0.95,
+              "Full Color (CMYK)": 1.0
+            }
+          }
         }
       }
     },
@@ -7969,6 +10906,35 @@
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
+          }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {
+            "colourMultipliers": {
+              "Single Color": 0.88,
+              "Two Color": 0.95,
+              "Full Color (CMYK)": 1.0
+            }
           }
         }
       }
@@ -8072,6 +11038,35 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {
+            "colourMultipliers": {
+              "Single Color": 0.88,
+              "Two Color": 0.95,
+              "Full Color (CMYK)": 1.0
+            }
+          }
         }
       }
     },
@@ -8173,6 +11168,35 @@
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
+          }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {
+            "colourMultipliers": {
+              "Single Color": 0.88,
+              "Two Color": 0.95,
+              "Full Color (CMYK)": 1.0
+            }
           }
         }
       }
@@ -8276,6 +11300,35 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {
+            "colourMultipliers": {
+              "Single Color": 0.88,
+              "Two Color": 0.95,
+              "Full Color (CMYK)": 1.0
+            }
+          }
         }
       }
     },
@@ -8378,6 +11431,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -8480,6 +11556,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -8582,6 +11681,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -8684,6 +11806,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -8786,6 +11931,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -8888,6 +12056,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -8990,6 +12181,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9092,6 +12306,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9194,6 +12431,29 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Address)",
+            "Flap + Front Printing"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "Single Color",
+            "Two Color"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9296,6 +12556,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9398,6 +12679,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9500,6 +12802,26 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9602,6 +12924,26 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9704,6 +13046,26 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9806,6 +13168,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -9908,6 +13291,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10010,6 +13414,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10112,6 +13537,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10214,6 +13660,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10316,6 +13783,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Front Adhesive Die-Cut"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "High Contrast Monochrome"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10418,6 +13906,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10520,6 +14029,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10622,6 +14152,27 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": true,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side (Front Only)",
+            "Both Sides (Front & Back)"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10723,6 +14274,26 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": false,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Single Side"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10825,6 +14396,32 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
         }
       }
     },
@@ -10927,6 +14524,32 @@
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
+        },
+        "orderFields": {
+          "enabled": true,
+          "showMaterial": true,
+          "showSize": true,
+          "showFinishing": true,
+          "showPrinting": false,
+          "showColour": true,
+          "showDelivery": true,
+          "showNcr": false,
+          "showCopyType": false,
+          "showBinding": true,
+          "showSetsPerBook": false,
+          "printingOptions": [
+            "Outer Full-Color Offset"
+          ],
+          "colourOptions": [
+            "Full Color (CMYK)",
+            "CMYK + Metallic Pantone"
+          ],
+          "bindingOptions": [
+            "Auto Crash-Lock Folding",
+            "Tuck-Top Lock Flap",
+            "Rope / Ribbon Handle"
+          ],
+          "optionRateModifiers": {}
         }
       }
     }

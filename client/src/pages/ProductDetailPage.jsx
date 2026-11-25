@@ -1269,6 +1269,15 @@ Thank you!`;
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('configure', product.slug)}
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-2xl text-xs transition flex items-center justify-center space-x-2 shadow-xs cursor-pointer"
+                  >
+                    <Layers className="w-4 h-4" />
+                    <span>Add to Multi-Product Order Builder</span>
+                  </button>
+
                   <a
                     href={getWhatsAppEnquiryUrl()}
                     target="_blank"

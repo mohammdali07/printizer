@@ -10,6 +10,7 @@ import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import AdminDashboard from './pages/AdminDashboard.jsx';
+import OrderConfigurePage from './pages/OrderConfigurePage.jsx';
 
 import initialCatalog from './data/initialCatalog.json';
 
@@ -21,32 +22,50 @@ export default function App() {
   const [products, setProducts] = useState(initialCatalog.products || []);
   const [loading, setLoading] = useState(false);
 
+  // Persistent multi-product Order Configurator cart summary
+  const [orderItems, setOrderItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('prz_order_items');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const handleOrderItemsChange = (nextItems) => {
+    setOrderItems(nextItems);
+    try {
+      localStorage.setItem('prz_order_items', JSON.stringify(nextItems));
+    } catch {}
+  };
+
   // Global Quote Modal State
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [quoteModalProduct, setQuoteModalProduct] = useState(null);
 
+  const refreshCatalog = async () => {
+    try {
+      const [catRes, prodRes] = await Promise.all([
+        fetch('/api/categories'),
+        fetch('/api/products')
+      ]);
+      const [catJson, prodJson] = await Promise.all([
+        catRes.json(),
+        prodRes.json()
+      ]);
+
+      if (catJson.success) setCategories(catJson.data);
+      if (prodJson.success) setProducts(prodJson.data);
+    } catch (err) {
+      console.error('Failed to load catalog data:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Initial Data Fetch
   useEffect(() => {
-    async function initData() {
-      try {
-        const [catRes, prodRes] = await Promise.all([
-          fetch('/api/categories'),
-          fetch('/api/products')
-        ]);
-        const [catJson, prodJson] = await Promise.all([
-          catRes.json(),
-          prodRes.json()
-        ]);
-
-        if (catJson.success) setCategories(catJson.data);
-        if (prodJson.success) setProducts(prodJson.data);
-      } catch (err) {
-        console.error('Failed to load initial catalog data:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    initData();
+    refreshCatalog();
   }, []);
 
   // Universal Path & Hash Router listener (handles both /admin and /#admin)
@@ -76,6 +95,10 @@ export default function App() {
         setCurrentPage('product');
         const prodSlug = active.replace(/^(product|products)\//, '').split('/')[0];
         setCurrentParam(prodSlug);
+      } else if (active === 'configure' || active.startsWith('configure/') || active === 'add-order' || active.startsWith('add-order/')) {
+        setCurrentPage('configure');
+        const slugParam = active.includes('/') ? active.split('/').slice(1).join('/').split('/')[0] : null;
+        setCurrentParam(slugParam || null);
       } else if (active === 'products' || active === 'catalog') {
         setCurrentPage('home');
         setCurrentParam(null);
@@ -138,6 +161,7 @@ export default function App() {
           products={products}
           onRequestQuote={handleOpenQuoteModal}
           onOpenRateList={() => {}}
+          orderCount={orderItems.length}
           activePage={currentParam ? `${currentPage}-${currentParam}` : currentPage}
         />
       )}
@@ -183,6 +207,17 @@ export default function App() {
               />
             )}
 
+            {currentPage === 'configure' && (
+              <OrderConfigurePage
+                categories={categories}
+                products={products}
+                initialProductSlug={currentParam}
+                orderItems={orderItems}
+                onOrderItemsChange={handleOrderItemsChange}
+                onNavigate={navigate}
+              />
+            )}
+
             {currentPage === 'about' && (
               <AboutPage
                 onNavigate={navigate}
@@ -199,6 +234,7 @@ export default function App() {
             {currentPage === 'admin' && (
               <AdminDashboard
                 onNavigate={navigate}
+                onCatalogUpdated={refreshCatalog}
               />
             )}
           </>

@@ -93,10 +93,12 @@
         "Square (2.5\" x 2.5\")"
       ],
       "materials": [
+        "NT Card",
         "250g Art Card",
         "250g Art Card + Lamination",
         "350 GSM Matte Card",
         "500 GSM Matte Card + UV",
+        "400gsm Round Cut Drippoff UV",
         "350 GSM Velvet Touch"
       ],
       "finishes": [
@@ -195,10 +197,12 @@
           ],
           "optionRateModifiers": {
             "materialMultipliers": {
+              "NT Card": 1.35,
               "250g Art Card": 0.9,
               "250g Art Card + Lamination": 1.0,
               "350 GSM Matte Card": 1.15,
               "500 GSM Matte Card + UV": 1.45,
+              "400gsm Round Cut Drippoff UV": 1.55,
               "350 GSM Velvet Touch": 1.5
             },
             "colourMultipliers": {

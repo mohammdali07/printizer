@@ -713,17 +713,17 @@ Please share the final quotation and artwork instructions. Thank you!`;
                   </div>
                 </div>
               ) : (cfg?.showMaterial || cfg?.showSize) && (
-                <div className={`grid gap-3.5 ${cfg.showMaterial && cfg.showSize ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}>
+                <div className="space-y-4">
                   {cfg.showMaterial && (
                     <div>
                       <label htmlFor="order-material-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
-                        Paper / Material <span className="text-brand-crimson">*</span>
+                        {activeProduct?.slug === 'visiting-card' ? 'Select Card / Material Option' : 'Paper / Material'} <span className="text-brand-crimson">*</span>
                       </label>
                       <select
                         id="order-material-select"
                         value={material}
                         onChange={(e) => setMaterial(e.target.value)}
-                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800 transition"
+                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
                       >
                         {cfg.materials.map((m) => (
                           <option key={m} value={m}>{m}</option>
@@ -741,7 +741,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                         id="order-size-select"
                         value={size}
                         onChange={(e) => setSize(e.target.value)}
-                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800 transition"
+                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
                       >
                         {cfg.sizes.map((s) => (
                           <option key={s} value={s}>{s}</option>

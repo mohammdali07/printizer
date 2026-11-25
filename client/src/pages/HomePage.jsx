@@ -39,6 +39,7 @@ export default function HomePage({
       tagline: 'Rigid SBS Board & Clean Auto-Lock Folding',
       image: '/images/slides/packaging.webp',
       badge: 'Luxury Packaging',
+      fullBleed: true,
       circleBg: 'from-emerald-500/15 via-emerald-500/5 to-transparent',
       pill1: '📦 Custom Structural Dielines',
       pill2: '🌿 Certified Food-Grade Board',
@@ -304,18 +305,24 @@ export default function HomePage({
                 onMouseLeave={() => setHeroPaused(false)}
               >
                 {/* Ambient Studio Lighting Backdrop */}
-                <div className="relative w-full aspect-[4/3] xs:aspect-[16/11] sm:aspect-[16/10] max-h-[300px] xs:max-h-[340px] sm:max-h-[400px] lg:max-h-[460px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-100/90 via-slate-50/60 to-white/90 border border-slate-200/70 p-3 sm:p-6 flex items-center justify-center shadow-sm overflow-hidden">
+                <div className={`relative w-full aspect-[4/3] xs:aspect-[16/11] sm:aspect-[16/10] max-h-[300px] xs:max-h-[340px] sm:max-h-[400px] lg:max-h-[460px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-100/90 via-slate-50/60 to-white/90 border border-slate-200/70 ${activeHero.fullBleed ? 'p-0' : 'p-3 sm:p-6'} flex items-center justify-center shadow-sm overflow-hidden`}>
                   {/* Subtle ambient light pool */}
-                  <div 
-                    className={`absolute w-4/5 h-4/5 rounded-full bg-gradient-to-tr ${activeHero.circleBg} blur-2xl opacity-70 pointer-events-none transition-all duration-700`}
-                  />
+                  {!activeHero.fullBleed && (
+                    <div 
+                      className={`absolute w-4/5 h-4/5 rounded-full bg-gradient-to-tr ${activeHero.circleBg} blur-2xl opacity-70 pointer-events-none transition-all duration-700`}
+                    />
+                  )}
 
-                  {/* 100% Transparent Isolated Studio Mockup - Large, crisp, prominent */}
+                  {/* Studio Product Showcase - Full-bleed photo or isolated transparent mockup */}
                   <img
                     key={activeHero.id}
                     src={activeHero.image}
                     alt={activeHero.title}
-                    className="relative z-10 w-full h-full object-contain transition-transform duration-500 hover:scale-[1.03] drop-shadow-[0_16px_28px_rgba(0,0,0,0.12)] select-none"
+                    className={`relative z-10 w-full h-full transition-transform duration-500 hover:scale-[1.03] select-none ${
+                      activeHero.fullBleed
+                        ? 'object-cover'
+                        : 'object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.12)]'
+                    }`}
                   />
                 </div>
 

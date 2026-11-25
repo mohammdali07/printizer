@@ -85,9 +85,7 @@
       "minQuantity": 1000,
       "image": "/images/products/visiting-card.webp",
       "secondaryImages": [
-        "/images/products/visiting-card.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/visiting-card.webp"
       ],
       "standardSizes": [
         "Standard 3.5\" x 2.0\"",
@@ -190,9 +188,7 @@
       "minQuantity": 1000,
       "image": "/images/products/letterhead.webp",
       "secondaryImages": [
-        "/images/products/letterhead.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/letterhead.webp"
       ],
       "standardSizes": [
         "A4 (210 x 297 mm)",
@@ -292,9 +288,7 @@
       "minQuantity": 10,
       "image": "/images/products/bill-book.webp",
       "secondaryImages": [
-        "/images/products/bill-book.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/bill-book.webp"
       ],
       "standardSizes": [
         "1/8 Demy (5.5\" x 8.5\")",
@@ -345,9 +339,7 @@
       "minQuantity": 10,
       "image": "/images/products/cash-memo-book.webp",
       "secondaryImages": [
-        "/images/products/cash-memo-book.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/cash-memo-book.webp"
       ],
       "standardSizes": [
         "1/8 Demy (5.5\" x 8.5\")",
@@ -396,9 +388,7 @@
       "minQuantity": 10,
       "image": "/images/products/receipt-book.webp",
       "secondaryImages": [
-        "/images/products/receipt-book.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/receipt-book.webp"
       ],
       "standardSizes": [
         "1/8 Demy",
@@ -447,9 +437,7 @@
       "minQuantity": 10,
       "image": "/images/products/quotation-book.webp",
       "secondaryImages": [
-        "/images/products/quotation-book.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/quotation-book.webp"
       ],
       "standardSizes": [
         "A4 (8.27\" x 11.69\")",
@@ -498,9 +486,7 @@
       "minQuantity": 10,
       "image": "/images/products/invoice-book.webp",
       "secondaryImages": [
-        "/images/products/invoice-book.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/invoice-book.webp"
       ],
       "standardSizes": [
         "A4 Standard (8.27\" x 11.69\")",
@@ -550,9 +536,7 @@
       "minQuantity": 10,
       "image": "/images/products/delivery-challan-book.webp",
       "secondaryImages": [
-        "/images/products/delivery-challan-book.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/delivery-challan-book.webp"
       ],
       "standardSizes": [
         "1/4 Demy (8.5\" x 11\")",
@@ -602,9 +586,7 @@
       "minQuantity": 10,
       "image": "/images/products/purchase-order-book.webp",
       "secondaryImages": [
-        "/images/products/purchase-order-book.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/purchase-order-book.webp"
       ],
       "standardSizes": [
         "A4 Standard",
@@ -653,9 +635,7 @@
       "minQuantity": 20,
       "image": "/images/products/payment-voucher.webp",
       "secondaryImages": [
-        "/images/products/payment-voucher.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/payment-voucher.webp"
       ],
       "standardSizes": [
         "Pocket Size (7.5\" x 4.5\")",
@@ -704,9 +684,7 @@
       "minQuantity": 1000,
       "image": "/images/products/envelope.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/envelope.webp"
       ],
       "standardSizes": [
         "DL Size (9.5\" x 4.25\")",
@@ -806,9 +784,7 @@
       "minQuantity": 100,
       "image": "/images/products/office-file.webp",
       "secondaryImages": [
-        "/images/products/office-file.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/office-file.webp"
       ],
       "standardSizes": [
         "Standard A4 / Foolscap",
@@ -857,9 +833,7 @@
       "minQuantity": 250,
       "image": "/images/products/folder.webp",
       "secondaryImages": [
-        "/images/products/folder.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/folder.webp"
       ],
       "standardSizes": [
         "A4 Presentation Folder (9\" x 12\")"
@@ -907,9 +881,7 @@
       "minQuantity": 50,
       "image": "/images/products/id-card.webp",
       "secondaryImages": [
-        "/images/products/id-card.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/id-card.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -957,9 +929,7 @@
       "minQuantity": 50,
       "image": "/images/products/employee-id-card.webp",
       "secondaryImages": [
-        "/images/products/employee-id-card.webp",
-        "/images/categories/business-stationery.webp",
-        "/images/slides/cards.webp"
+        "/images/products/employee-id-card.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -1008,9 +978,7 @@
       "minQuantity": 1000,
       "image": "/images/products/pamphlet.webp",
       "secondaryImages": [
-        "/images/products/pamphlet.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/pamphlet.webp"
       ],
       "standardSizes": [
         "A5 (148 x 210 mm)",
@@ -1109,9 +1077,7 @@
       "minQuantity": 1000,
       "image": "/images/products/flyer.webp",
       "secondaryImages": [
-        "/images/products/flyer.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/flyer.webp"
       ],
       "standardSizes": [
         "A4 (210 x 297 mm)",
@@ -1210,9 +1176,7 @@
       "minQuantity": 1000,
       "image": "/images/products/brochure.webp",
       "secondaryImages": [
-        "/images/products/brochure.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/flyer.webp"
+        "/images/products/brochure.webp"
       ],
       "standardSizes": [
         "Tri-Fold (A4 Open)",
@@ -1311,9 +1275,7 @@
       "minQuantity": 100,
       "image": "/images/products/poster.webp",
       "secondaryImages": [
-        "/images/products/poster.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/poster.webp"
       ],
       "standardSizes": [
         "A3 (11.7\" x 16.5\")",
@@ -1362,9 +1324,7 @@
       "minQuantity": 200,
       "image": "/images/products/catalogue.webp",
       "secondaryImages": [
-        "/images/products/catalogue.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/catalogue.webp"
       ],
       "standardSizes": [
         "A4 Multi-Page",
@@ -1411,9 +1371,7 @@
       "minQuantity": 1000,
       "image": "/images/products/leaflet.webp",
       "secondaryImages": [
-        "/images/products/leaflet.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/leaflet.webp"
       ],
       "standardSizes": [
         "A5",
@@ -1512,9 +1470,7 @@
       "minQuantity": 200,
       "image": "/images/products/danglers.webp",
       "secondaryImages": [
-        "/images/products/danglers.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/danglers.webp"
       ],
       "standardSizes": [
         "8\" x 8\" Round / Die-Cut Shape",
@@ -1562,9 +1518,7 @@
       "minQuantity": 2,
       "image": "/images/products/standee.webp",
       "secondaryImages": [
-        "/images/products/standee.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/standee.webp"
       ],
       "standardSizes": [
         "Roll-Up Standee 3ft x 6ft",
@@ -1612,9 +1566,7 @@
       "minQuantity": 1,
       "image": "/images/products/banner.webp",
       "secondaryImages": [
-        "/images/products/banner.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/banner.webp"
       ],
       "standardSizes": [
         "Custom Width x Height (e.g. 8ft x 4ft)"
@@ -1661,9 +1613,7 @@
       "minQuantity": 1,
       "image": "/images/products/flex-printing.webp",
       "secondaryImages": [
-        "/images/products/flex-printing.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/flex-printing.webp"
       ],
       "standardSizes": [
         "Seamless up to 10ft Width"
@@ -1710,9 +1660,7 @@
       "minQuantity": 5,
       "image": "/images/products/sunboard-printing.webp",
       "secondaryImages": [
-        "/images/products/sunboard-printing.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/sunboard-printing.webp"
       ],
       "standardSizes": [
         "12\" x 18\"",
@@ -1761,9 +1709,7 @@
       "minQuantity": 1000,
       "image": "/images/products/promotional-cards.webp",
       "secondaryImages": [
-        "/images/products/promotional-cards.webp",
-        "/images/categories/marketing-advertising.webp",
-        "/images/products/brochure.webp"
+        "/images/products/promotional-cards.webp"
       ],
       "standardSizes": [
         "4\" x 6\" Postcard",
@@ -1862,9 +1808,7 @@
       "minQuantity": 200,
       "image": "/images/products/notebook.webp",
       "secondaryImages": [
-        "/images/products/notebook.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/office-diary.webp"
+        "/images/products/notebook.webp"
       ],
       "standardSizes": [
         "A5 (148 x 210 mm)",
@@ -1911,9 +1855,7 @@
       "minQuantity": 300,
       "image": "/images/products/pub-school-diary.webp",
       "secondaryImages": [
-        "/images/products/pub-school-diary.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/pub-school-diary.webp"
       ],
       "standardSizes": [
         "Custom A5",
@@ -1960,9 +1902,7 @@
       "minQuantity": 100,
       "image": "/images/products/office-diary.webp",
       "secondaryImages": [
-        "/images/products/office-diary.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/office-diary.webp"
       ],
       "standardSizes": [
         "Executive A5 / B5 Daily Planner"
@@ -2009,9 +1949,7 @@
       "minQuantity": 500,
       "image": "/images/products/exercise-book.webp",
       "secondaryImages": [
-        "/images/products/exercise-book.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/exercise-book.webp"
       ],
       "standardSizes": [
         "Four Line / Single Line / Square (Crown Size)"
@@ -2057,9 +1995,7 @@
       "minQuantity": 100,
       "image": "/images/products/book-printing.webp",
       "secondaryImages": [
-        "/images/products/book-printing.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/book-printing.webp"
       ],
       "standardSizes": [
         "Standard 5.5\" x 8.5\"",
@@ -2107,9 +2043,7 @@
       "minQuantity": 200,
       "image": "/images/products/magazine.webp",
       "secondaryImages": [
-        "/images/products/magazine.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/magazine.webp"
       ],
       "standardSizes": [
         "A4 (8.27\" x 11.69\")"
@@ -2155,9 +2089,7 @@
       "minQuantity": 100,
       "image": "/images/products/journal.webp",
       "secondaryImages": [
-        "/images/products/journal.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/journal.webp"
       ],
       "standardSizes": [
         "A5 Executive",
@@ -2204,9 +2136,7 @@
       "minQuantity": 100,
       "image": "/images/products/annual-report.webp",
       "secondaryImages": [
-        "/images/products/annual-report.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/annual-report.webp"
       ],
       "standardSizes": [
         "A4 Corporate"
@@ -2252,9 +2182,7 @@
       "minQuantity": 200,
       "image": "/images/products/calendar.webp",
       "secondaryImages": [
-        "/images/products/calendar.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/calendar.webp"
       ],
       "standardSizes": [
         "Desk Tent Calendar (8.5\" x 6\")",
@@ -2301,9 +2229,7 @@
       "minQuantity": 50,
       "image": "/images/products/e-book-printing.webp",
       "secondaryImages": [
-        "/images/products/e-book-printing.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/e-book-printing.webp"
       ],
       "standardSizes": [
         "A5",
@@ -2351,9 +2277,7 @@
       "minQuantity": 20,
       "image": "/images/products/project-report.webp",
       "secondaryImages": [
-        "/images/products/project-report.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/project-report.webp"
       ],
       "standardSizes": [
         "A4 Standard"
@@ -2400,9 +2324,7 @@
       "minQuantity": 10,
       "image": "/images/products/thesis-printing.webp",
       "secondaryImages": [
-        "/images/products/thesis-printing.webp",
-        "/images/categories/books-publications.webp",
-        "/images/products/notebook.webp"
+        "/images/products/thesis-printing.webp"
       ],
       "standardSizes": [
         "A4 Academic"
@@ -2449,9 +2371,7 @@
       "minQuantity": 250,
       "image": "/images/products/wedding-invitation-card.webp",
       "secondaryImages": [
-        "/images/products/wedding-invitation-card.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/engagement-card.webp"
+        "/images/products/wedding-invitation-card.webp"
       ],
       "standardSizes": [
         "Traditional Royal 7\" x 9\"",
@@ -2500,9 +2420,7 @@
       "minQuantity": 200,
       "image": "/images/products/engagement-card.webp",
       "secondaryImages": [
-        "/images/products/engagement-card.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/engagement-card.webp"
       ],
       "standardSizes": [
         "6\" x 8\"",
@@ -2549,9 +2467,7 @@
       "minQuantity": 100,
       "image": "/images/products/birthday-invitation.webp",
       "secondaryImages": [
-        "/images/products/birthday-invitation.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/birthday-invitation.webp"
       ],
       "standardSizes": [
         "5\" x 7\"",
@@ -2599,9 +2515,7 @@
       "minQuantity": 100,
       "image": "/images/products/anniversary-invitation.webp",
       "secondaryImages": [
-        "/images/products/anniversary-invitation.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/anniversary-invitation.webp"
       ],
       "standardSizes": [
         "5.5\" x 8.5\" Folded"
@@ -2647,9 +2561,7 @@
       "minQuantity": 1000,
       "image": "/images/products/invitation-envelope.webp",
       "secondaryImages": [
-        "/images/products/invitation-envelope.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/invitation-envelope.webp"
       ],
       "standardSizes": [
         "Custom Coordinated Sizes"
@@ -2747,9 +2659,7 @@
       "minQuantity": 150,
       "image": "/images/products/save-the-date-card.webp",
       "secondaryImages": [
-        "/images/products/save-the-date-card.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/save-the-date-card.webp"
       ],
       "standardSizes": [
         "4\" x 6\"",
@@ -2796,9 +2706,7 @@
       "minQuantity": 200,
       "image": "/images/products/thank-you-card.webp",
       "secondaryImages": [
-        "/images/products/thank-you-card.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/thank-you-card.webp"
       ],
       "standardSizes": [
         "Folded 4\" x 5.5\"",
@@ -2845,9 +2753,7 @@
       "minQuantity": 100,
       "image": "/images/products/greeting-card.webp",
       "secondaryImages": [
-        "/images/products/greeting-card.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/greeting-card.webp"
       ],
       "standardSizes": [
         "A5 Folded to A6",
@@ -2894,9 +2800,7 @@
       "minQuantity": 250,
       "image": "/images/products/religious-invitation-card.webp",
       "secondaryImages": [
-        "/images/products/religious-invitation-card.webp",
-        "/images/categories/wedding-invitation.webp",
-        "/images/products/wedding-invitation-card.webp"
+        "/images/products/religious-invitation-card.webp"
       ],
       "standardSizes": [
         "Traditional Accordion Fold",
@@ -2943,9 +2847,7 @@
       "minQuantity": 500,
       "image": "/images/products/paper-bag.webp",
       "secondaryImages": [
-        "/images/products/paper-bag.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/paper-bag.webp"
       ],
       "standardSizes": [
         "Medium (10\" x 12\" x 4\")",
@@ -2993,9 +2895,7 @@
       "minQuantity": 500,
       "image": "/images/products/shopping-bag.webp",
       "secondaryImages": [
-        "/images/products/shopping-bag.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/shopping-bag.webp"
       ],
       "standardSizes": [
         "Large (14\" x 16\" x 5\")",
@@ -3043,9 +2943,7 @@
       "minQuantity": 1000,
       "image": "/images/products/product-box.webp",
       "secondaryImages": [
-        "/images/products/product-box.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/product-box.webp"
       ],
       "standardSizes": [
         "Custom Structural Die-Line per Product"
@@ -3144,9 +3042,7 @@
       "minQuantity": 1000,
       "image": "/images/products/cake-box.webp",
       "secondaryImages": [
-        "/images/products/cake-box.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/cake-box.webp"
       ],
       "standardSizes": [
         "0.5 Kg (8\" x 8\" x 5\")",
@@ -3244,9 +3140,7 @@
       "minQuantity": 1000,
       "image": "/images/products/sweet-box.webp",
       "secondaryImages": [
-        "/images/products/sweet-box.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/sweet-box.webp"
       ],
       "standardSizes": [
         "250g, 500g, 1kg Traditional Mithai Sizes"
@@ -3343,9 +3237,7 @@
       "minQuantity": 1000,
       "image": "/images/products/food-packaging.webp",
       "secondaryImages": [
-        "/images/products/food-packaging.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/food-packaging.webp"
       ],
       "standardSizes": [
         "Meal Trays",
@@ -3393,9 +3285,7 @@
       "minQuantity": 1000,
       "image": "/images/products/pkg-product-label.webp",
       "secondaryImages": [
-        "/images/products/pkg-product-label.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/pkg-product-label.webp"
       ],
       "standardSizes": [
         "Custom Bottle / Jar / Pouch Wraparound"
@@ -3493,9 +3383,7 @@
       "minQuantity": 1000,
       "image": "/images/products/sticker-label.webp",
       "secondaryImages": [
-        "/images/products/sticker-label.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/sticker-label.webp"
       ],
       "standardSizes": [
         "Custom Shape Die-Cut"
@@ -3592,9 +3480,7 @@
       "minQuantity": 1000,
       "image": "/images/products/barcode-label.webp",
       "secondaryImages": [
-        "/images/products/barcode-label.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/barcode-label.webp"
       ],
       "standardSizes": [
         "50 x 25 mm",
@@ -3693,9 +3579,7 @@
       "minQuantity": 1000,
       "image": "/images/products/hang-tag.webp",
       "secondaryImages": [
-        "/images/products/hang-tag.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/hang-tag.webp"
       ],
       "standardSizes": [
         "2\" x 3.5\"",
@@ -3745,9 +3629,7 @@
       "minQuantity": 1000,
       "image": "/images/products/product-sleeve.webp",
       "secondaryImages": [
-        "/images/products/product-sleeve.webp",
-        "/images/categories/packaging-printing.webp",
-        "/images/slides/packaging.webp"
+        "/images/products/product-sleeve.webp"
       ],
       "standardSizes": [
         "Wraparound Belly Band per Container"
@@ -3794,9 +3676,7 @@
       "minQuantity": 1000,
       "image": "/images/products/round-sticker.webp",
       "secondaryImages": [
-        "/images/products/round-sticker.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/waterproof-sticker.webp"
+        "/images/products/round-sticker.webp"
       ],
       "standardSizes": [
         "2\" Diameter",
@@ -3896,9 +3776,7 @@
       "minQuantity": 1000,
       "image": "/images/products/square-sticker.webp",
       "secondaryImages": [
-        "/images/products/square-sticker.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/round-sticker.webp"
+        "/images/products/square-sticker.webp"
       ],
       "standardSizes": [
         "2\" x 2\"",
@@ -3998,9 +3876,7 @@
       "minQuantity": 1000,
       "image": "/images/products/transparent-sticker.webp",
       "secondaryImages": [
-        "/images/products/transparent-sticker.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/round-sticker.webp"
+        "/images/products/transparent-sticker.webp"
       ],
       "standardSizes": [
         "Custom Contour",
@@ -4098,9 +3974,7 @@
       "minQuantity": 1000,
       "image": "/images/products/waterproof-sticker.webp",
       "secondaryImages": [
-        "/images/products/waterproof-sticker.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/round-sticker.webp"
+        "/images/products/waterproof-sticker.webp"
       ],
       "standardSizes": [
         "Custom Bottle / Freezer Dimensions"
@@ -4197,9 +4071,7 @@
       "minQuantity": 1000,
       "image": "/images/products/vinyl-sticker.webp",
       "secondaryImages": [
-        "/images/products/vinyl-sticker.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/round-sticker.webp"
+        "/images/products/vinyl-sticker.webp"
       ],
       "standardSizes": [
         "Custom Contour / Kiss-Cut"
@@ -4296,9 +4168,7 @@
       "minQuantity": 1000,
       "image": "/images/products/logo-sticker.webp",
       "secondaryImages": [
-        "/images/products/logo-sticker.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/round-sticker.webp"
+        "/images/products/logo-sticker.webp"
       ],
       "standardSizes": [
         "Brand Shape Custom Die-Cut"
@@ -4396,9 +4266,7 @@
       "minQuantity": 1000,
       "image": "/images/products/qr-code-sticker.webp",
       "secondaryImages": [
-        "/images/products/qr-code-sticker.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/round-sticker.webp"
+        "/images/products/qr-code-sticker.webp"
       ],
       "standardSizes": [
         "1.5\" x 1.5\"",
@@ -4496,9 +4364,7 @@
       "minQuantity": 1000,
       "image": "/images/products/lbl-product-label.webp",
       "secondaryImages": [
-        "/images/products/lbl-product-label.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/round-sticker.webp"
+        "/images/products/lbl-product-label.webp"
       ],
       "standardSizes": [
         "Custom Box / Bottle Wrap"
@@ -4595,9 +4461,7 @@
       "minQuantity": 1000,
       "image": "/images/products/warning-label.webp",
       "secondaryImages": [
-        "/images/products/warning-label.webp",
-        "/images/categories/labels-stickers.webp",
-        "/images/products/round-sticker.webp"
+        "/images/products/warning-label.webp"
       ],
       "standardSizes": [
         "3\" x 4\"",
@@ -4696,9 +4560,7 @@
       "minQuantity": 20,
       "image": "/images/products/photo-printing.webp",
       "secondaryImages": [
-        "/images/products/photo-printing.webp",
-        "/images/categories/photo-digital-printing.webp",
-        "/images/products/photo-album.webp"
+        "/images/products/photo-printing.webp"
       ],
       "standardSizes": [
         "4\" x 6\"",
@@ -4748,9 +4610,7 @@
       "minQuantity": 32,
       "image": "/images/products/passport-size-photo.webp",
       "secondaryImages": [
-        "/images/products/passport-size-photo.webp",
-        "/images/categories/photo-digital-printing.webp",
-        "/images/products/photo-printing.webp"
+        "/images/products/passport-size-photo.webp"
       ],
       "standardSizes": [
         "35 x 45 mm (Sheet of 8, 16, 32)"
@@ -4797,9 +4657,7 @@
       "minQuantity": 1,
       "image": "/images/products/photo-album.webp",
       "secondaryImages": [
-        "/images/products/photo-album.webp",
-        "/images/categories/photo-digital-printing.webp",
-        "/images/products/photo-printing.webp"
+        "/images/products/photo-album.webp"
       ],
       "standardSizes": [
         "12\" x 15\" Karizma",
@@ -4846,9 +4704,7 @@
       "minQuantity": 1,
       "image": "/images/products/photo-frame.webp",
       "secondaryImages": [
-        "/images/products/photo-frame.webp",
-        "/images/categories/photo-digital-printing.webp",
-        "/images/products/photo-printing.webp"
+        "/images/products/photo-frame.webp"
       ],
       "standardSizes": [
         "8\" x 10\"",
@@ -4896,9 +4752,7 @@
       "minQuantity": 1,
       "image": "/images/products/canvas-printing.webp",
       "secondaryImages": [
-        "/images/products/canvas-printing.webp",
-        "/images/categories/photo-digital-printing.webp",
-        "/images/products/photo-printing.webp"
+        "/images/products/canvas-printing.webp"
       ],
       "standardSizes": [
         "12\" x 18\"",
@@ -4946,9 +4800,7 @@
       "minQuantity": 1,
       "image": "/images/products/customized-photo-mug.webp",
       "secondaryImages": [
-        "/images/products/customized-photo-mug.webp",
-        "/images/categories/photo-digital-printing.webp",
-        "/images/products/photo-printing.webp"
+        "/images/products/customized-photo-mug.webp"
       ],
       "standardSizes": [
         "Standard 11 Oz (325 ml) Ceramic"
@@ -4994,9 +4846,7 @@
       "minQuantity": 10,
       "image": "/images/products/personalized-gifts.webp",
       "secondaryImages": [
-        "/images/products/personalized-gifts.webp",
-        "/images/categories/photo-digital-printing.webp",
-        "/images/products/photo-printing.webp"
+        "/images/products/personalized-gifts.webp"
       ],
       "standardSizes": [
         "Custom Desk Acrylic Blocks / Pens / Keychains"
@@ -5043,9 +4893,7 @@
       "minQuantity": 25,
       "image": "/images/products/pvc-card-printing.webp",
       "secondaryImages": [
-        "/images/products/pvc-card-printing.webp",
-        "/images/categories/photo-digital-printing.webp",
-        "/images/products/photo-printing.webp"
+        "/images/products/pvc-card-printing.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -5092,9 +4940,7 @@
       "minQuantity": 100,
       "image": "/images/products/school-id-card.webp",
       "secondaryImages": [
-        "/images/products/school-id-card.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/certificate.webp"
+        "/images/products/school-id-card.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -5140,9 +4986,7 @@
       "minQuantity": 300,
       "image": "/images/products/edu-school-diary.webp",
       "secondaryImages": [
-        "/images/products/edu-school-diary.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/edu-school-diary.webp"
       ],
       "standardSizes": [
         "Custom School A5 (6\" x 9\")"
@@ -5188,9 +5032,7 @@
       "minQuantity": 500,
       "image": "/images/products/marksheet.webp",
       "secondaryImages": [
-        "/images/products/marksheet.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/marksheet.webp"
       ],
       "standardSizes": [
         "A4 Standard (210 x 297 mm)"
@@ -5238,9 +5080,7 @@
       "minQuantity": 100,
       "image": "/images/products/certificate.webp",
       "secondaryImages": [
-        "/images/products/certificate.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/certificate.webp"
       ],
       "standardSizes": [
         "A4 Landscape (11.7\" x 8.3\")"
@@ -5287,9 +5127,7 @@
       "minQuantity": 500,
       "image": "/images/products/question-paper.webp",
       "secondaryImages": [
-        "/images/products/question-paper.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/question-paper.webp"
       ],
       "standardSizes": [
         "A4",
@@ -5337,9 +5175,7 @@
       "minQuantity": 500,
       "image": "/images/products/admission-form.webp",
       "secondaryImages": [
-        "/images/products/admission-form.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/admission-form.webp"
       ],
       "standardSizes": [
         "A4 4-Page Folded",
@@ -5385,9 +5221,7 @@
       "minQuantity": 300,
       "image": "/images/products/school-prospectus.webp",
       "secondaryImages": [
-        "/images/products/school-prospectus.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/school-prospectus.webp"
       ],
       "standardSizes": [
         "A4 Multi-Page Brochure (8 - 16 Pages)"
@@ -5433,9 +5267,7 @@
       "minQuantity": 200,
       "image": "/images/products/exam-pad.webp",
       "secondaryImages": [
-        "/images/products/exam-pad.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/exam-pad.webp"
       ],
       "standardSizes": [
         "8.5\" x 14\" Standard Examination Clipboard"
@@ -5481,9 +5313,7 @@
       "minQuantity": 500,
       "image": "/images/products/student-notebook.webp",
       "secondaryImages": [
-        "/images/products/student-notebook.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/student-notebook.webp"
       ],
       "standardSizes": [
         "Standard Long Book (A4)",
@@ -5530,9 +5360,7 @@
       "minQuantity": 300,
       "image": "/images/products/school-calendar.webp",
       "secondaryImages": [
-        "/images/products/school-calendar.webp",
-        "/images/categories/school-educational-printing.webp",
-        "/images/products/school-id-card.webp"
+        "/images/products/school-calendar.webp"
       ],
       "standardSizes": [
         "Wall Calendar (12\" x 18\")",
@@ -5579,9 +5407,7 @@
       "minQuantity": 25,
       "image": "/images/products/restaurant-menu-card.webp",
       "secondaryImages": [
-        "/images/products/restaurant-menu-card.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/table-tent-card.webp"
+        "/images/products/restaurant-menu-card.webp"
       ],
       "standardSizes": [
         "A4 Bi-Fold (4 Page)",
@@ -5630,9 +5456,7 @@
       "minQuantity": 50,
       "image": "/images/products/food-menu.webp",
       "secondaryImages": [
-        "/images/products/food-menu.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/food-menu.webp"
       ],
       "standardSizes": [
         "A3 Folded to A4",
@@ -5680,9 +5504,7 @@
       "minQuantity": 50,
       "image": "/images/products/table-tent-card.webp",
       "secondaryImages": [
-        "/images/products/table-tent-card.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/table-tent-card.webp"
       ],
       "standardSizes": [
         "4\" x 6\" Freestanding Triangle",
@@ -5730,9 +5552,7 @@
       "minQuantity": 20,
       "image": "/images/products/rest-bill-book.webp",
       "secondaryImages": [
-        "/images/products/rest-bill-book.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/rest-bill-book.webp"
       ],
       "standardSizes": [
         "1/8 Demy (5.5\" x 8.5\")",
@@ -5781,9 +5601,7 @@
       "minQuantity": 1000,
       "image": "/images/products/parcel-sticker.webp",
       "secondaryImages": [
-        "/images/products/parcel-sticker.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/parcel-sticker.webp"
       ],
       "standardSizes": [
         "2\" x 3\" Seal Tape",
@@ -5881,9 +5699,7 @@
       "minQuantity": 1000,
       "image": "/images/products/rest-food-label.webp",
       "secondaryImages": [
-        "/images/products/rest-food-label.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/rest-food-label.webp"
       ],
       "standardSizes": [
         "Custom Box / Container Lid Label"
@@ -5980,9 +5796,7 @@
       "minQuantity": 1000,
       "image": "/images/products/takeaway-menu.webp",
       "secondaryImages": [
-        "/images/products/takeaway-menu.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/takeaway-menu.webp"
       ],
       "standardSizes": [
         "A4 Tri-Fold Pamphlet",
@@ -6030,9 +5844,7 @@
       "minQuantity": 100,
       "image": "/images/products/hotel-key-card.webp",
       "secondaryImages": [
-        "/images/products/hotel-key-card.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/hotel-key-card.webp"
       ],
       "standardSizes": [
         "Standard CR80 (86 x 54 mm)"
@@ -6078,9 +5890,7 @@
       "minQuantity": 100,
       "image": "/images/products/room-service-card.webp",
       "secondaryImages": [
-        "/images/products/room-service-card.webp",
-        "/images/categories/restaurant-hotel-printing.webp",
-        "/images/products/restaurant-menu-card.webp"
+        "/images/products/room-service-card.webp"
       ],
       "standardSizes": [
         "Door Knob Hanger (4\" x 9\")",
@@ -6230,9 +6040,9 @@
       "description": "Official PRINTIZER Visiting Card specification: 250 gsm Art Card. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": true,
       "featured": true,
-      "image": "/images/products/art-card.webp",
+      "image": "/images/products/250-gsm-art-card.webp",
       "secondaryImages": [
-        "/images/products/art-card.webp"
+        "/images/products/250-gsm-art-card.webp"
       ],
       "productClass": "Visiting Card",
       "paperQuality": "250 gsm Art Card",
@@ -6332,9 +6142,9 @@
       "description": "Official PRINTIZER Visiting Card specification: 250 gsm Art Card + Lamination. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": true,
       "featured": true,
-      "image": "/images/products/art-card-lamination.webp",
+      "image": "/images/products/250-gsm-art-card-lamination.webp",
       "secondaryImages": [
-        "/images/products/art-card-lamination.webp"
+        "/images/products/250-gsm-art-card-lamination.webp"
       ],
       "productClass": "Visiting Card",
       "paperQuality": "250 gsm Art Card + Lamination",
@@ -6434,9 +6244,9 @@
       "description": "Official PRINTIZER Visiting Card specification: 350 gsm Matt Card. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": true,
       "featured": true,
-      "image": "/images/products/matt-card.webp",
+      "image": "/images/products/350-gsm-matt-card.webp",
       "secondaryImages": [
-        "/images/products/matt-card.webp"
+        "/images/products/350-gsm-matt-card.webp"
       ],
       "productClass": "Visiting Card",
       "paperQuality": "350 gsm Matt Card",
@@ -6536,9 +6346,9 @@
       "description": "Official PRINTIZER Visiting Card specification: 500 gsm Matt Card + UV. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": true,
       "featured": true,
-      "image": "/images/products/matt-card-uv.webp",
+      "image": "/images/products/500-gsm-matt-card-uv.webp",
       "secondaryImages": [
-        "/images/products/matt-card-uv.webp"
+        "/images/products/500-gsm-matt-card-uv.webp"
       ],
       "productClass": "Visiting Card",
       "paperQuality": "500 gsm Matt Card + UV",
@@ -6639,9 +6449,9 @@
       "description": "Official PRINTIZER Visiting Card specification: 400 gsm Round Cut + Drip-off UV. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": true,
       "featured": false,
-      "image": "/images/products/round-cut-uv.webp",
+      "image": "/images/products/400-gsm-round-cut-drip-off-uv.webp",
       "secondaryImages": [
-        "/images/products/round-cut-uv.webp"
+        "/images/products/400-gsm-round-cut-drip-off-uv.webp"
       ],
       "productClass": "Visiting Card",
       "paperQuality": "400 gsm Round Cut + Drip-off UV",
@@ -6843,9 +6653,9 @@
       "description": "Official PRINTIZER Visiting Card specification: Gold Foil S/S 350 gsm Matt. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": true,
       "featured": false,
-      "image": "/images/products/gold-foil.webp",
+      "image": "/images/products/gold-foil-s-s-350-gsm-matt.webp",
       "secondaryImages": [
-        "/images/products/gold-foil.webp"
+        "/images/products/gold-foil-s-s-350-gsm-matt.webp"
       ],
       "productClass": "Visiting Card",
       "paperQuality": "Gold Foil S/S 350 gsm Matt",
@@ -6946,9 +6756,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: PRE - NT + Coating (87x51mm). Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": true,
       "featured": false,
-      "image": "/images/products/art-card-lamination.webp",
+      "image": "/images/products/premium-visiting-card-pre-nt-coating-87x51mm.webp",
       "secondaryImages": [
-        "/images/products/art-card-lamination.webp"
+        "/images/products/premium-visiting-card-pre-nt-coating-87x51mm.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "PRE - NT + Coating (87x51mm)",
@@ -7048,9 +6858,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: PRE - 250 gsm Art. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": true,
       "featured": false,
-      "image": "/images/products/art-card.webp",
+      "image": "/images/products/premium-visiting-card-pre-250-gsm-art.webp",
       "secondaryImages": [
-        "/images/products/art-card.webp"
+        "/images/products/premium-visiting-card-pre-250-gsm-art.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "PRE - 250 gsm Art",
@@ -7150,9 +6960,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: PRE - 250 gsm Art + UV Coating. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/art-card-lamination.webp",
+      "image": "/images/products/premium-visiting-card-pre-250-gsm-art-uv-coating.webp",
       "secondaryImages": [
-        "/images/products/art-card-lamination.webp"
+        "/images/products/premium-visiting-card-pre-250-gsm-art-uv-coating.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "PRE - 250 gsm Art + UV Coating",
@@ -7252,9 +7062,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: PRE - 350 gsm Matt. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/matt-card.webp",
+      "image": "/images/products/premium-visiting-card-pre-350-gsm-matt.webp",
       "secondaryImages": [
-        "/images/products/matt-card.webp"
+        "/images/products/premium-visiting-card-pre-350-gsm-matt.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "PRE - 350 gsm Matt",
@@ -7354,9 +7164,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: PRE - 350 gsm Matt + UV. Minimum order pack size of 1,000 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/matt-card-uv.webp",
+      "image": "/images/products/premium-visiting-card-pre-350-gsm-matt-uv.webp",
       "secondaryImages": [
-        "/images/products/matt-card-uv.webp"
+        "/images/products/premium-visiting-card-pre-350-gsm-matt-uv.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "PRE - 350 gsm Matt + UV",
@@ -7457,9 +7267,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: Velvet + UV 500 gsm (500 nos.). Minimum order pack size of 500 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/round-cut-uv.webp",
+      "image": "/images/products/premium-visiting-card-velvet-uv-500-gsm-500-nos.webp",
       "secondaryImages": [
-        "/images/products/round-cut-uv.webp"
+        "/images/products/premium-visiting-card-velvet-uv-500-gsm-500-nos.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "Velvet + UV 500 gsm (500 nos.)",
@@ -7560,9 +7370,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: Velvet + S/S Foil 500 gsm (500 nos.). Minimum order pack size of 500 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/gold-foil.webp",
+      "image": "/images/products/premium-visiting-card-velvet-s-s-foil-500-gsm-500-nos.webp",
       "secondaryImages": [
-        "/images/products/gold-foil.webp"
+        "/images/products/premium-visiting-card-velvet-s-s-foil-500-gsm-500-nos.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "Velvet + S/S Foil 500 gsm (500 nos.)",
@@ -7663,9 +7473,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: Matt 500 gsm + S/S Foil (500 nos.). Minimum order pack size of 500 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/gold-foil.webp",
+      "image": "/images/products/premium-visiting-card-matt-500-gsm-s-s-foil-500-nos.webp",
       "secondaryImages": [
-        "/images/products/gold-foil.webp"
+        "/images/products/premium-visiting-card-matt-500-gsm-s-s-foil-500-nos.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "Matt 500 gsm + S/S Foil (500 nos.)",
@@ -7766,9 +7576,9 @@
       "description": "Official PRINTIZER Premium Visiting Card specification: Matt 800 gsm UV (500 nos.). Minimum order pack size of 500 cards, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/matt-card-uv.webp",
+      "image": "/images/products/premium-visiting-card-matt-800-gsm-uv-500-nos.webp",
       "secondaryImages": [
-        "/images/products/matt-card-uv.webp"
+        "/images/products/premium-visiting-card-matt-800-gsm-uv-500-nos.webp"
       ],
       "productClass": "Premium Visiting Card",
       "paperQuality": "Matt 800 gsm UV (500 nos.)",
@@ -7869,9 +7679,9 @@
       "description": "Official PRINTIZER Letter Pad specification: 80 gsm Sunshine (210x285mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4820 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/letterhead.webp",
+      "image": "/images/products/80-gsm-sunshine-210x285mm.webp",
       "secondaryImages": [
-        "/images/products/letterhead.webp"
+        "/images/products/80-gsm-sunshine-210x285mm.webp"
       ],
       "productClass": "Letter Pad",
       "paperQuality": "80 gsm Sunshine (210x285mm)",
@@ -7971,9 +7781,9 @@
       "description": "Official PRINTIZER Letter Pad specification: 80 gsm Sunshine (210x297mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4820 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/letterhead.webp",
+      "image": "/images/products/80-gsm-sunshine-210x297mm.webp",
       "secondaryImages": [
-        "/images/products/letterhead.webp"
+        "/images/products/80-gsm-sunshine-210x297mm.webp"
       ],
       "productClass": "Letter Pad",
       "paperQuality": "80 gsm Sunshine (210x297mm)",
@@ -8073,9 +7883,9 @@
       "description": "Official PRINTIZER Letter Pad specification: 100 gsm Alabaster (210x297mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4820 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/letterhead.webp",
+      "image": "/images/products/100-gsm-alabaster-210x297mm.webp",
       "secondaryImages": [
-        "/images/products/letterhead.webp"
+        "/images/products/100-gsm-alabaster-210x297mm.webp"
       ],
       "productClass": "Letter Pad",
       "paperQuality": "100 gsm Alabaster (210x297mm)",
@@ -8175,9 +7985,9 @@
       "description": "Official PRINTIZER Letter Pad specification: 100 gsm Sunshine (210x297mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4820 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/letterhead.webp",
+      "image": "/images/products/100-gsm-sunshine-210x297mm.webp",
       "secondaryImages": [
-        "/images/products/letterhead.webp"
+        "/images/products/100-gsm-sunshine-210x297mm.webp"
       ],
       "productClass": "Letter Pad",
       "paperQuality": "100 gsm Sunshine (210x297mm)",
@@ -8277,9 +8087,9 @@
       "description": "Official PRINTIZER Letter Pad specification: 80 gsm Bond (210x297mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4820 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/letterhead.webp",
+      "image": "/images/products/80-gsm-bond-210x297mm.webp",
       "secondaryImages": [
-        "/images/products/letterhead.webp"
+        "/images/products/80-gsm-bond-210x297mm.webp"
       ],
       "productClass": "Letter Pad",
       "paperQuality": "80 gsm Bond (210x297mm)",
@@ -8379,9 +8189,9 @@
       "description": "Official PRINTIZER Letter Pad specification: 100 gsm Bond (210x297mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4820 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/letterhead.webp",
+      "image": "/images/products/100-gsm-bond-210x297mm.webp",
       "secondaryImages": [
-        "/images/products/letterhead.webp"
+        "/images/products/100-gsm-bond-210x297mm.webp"
       ],
       "productClass": "Letter Pad",
       "paperQuality": "100 gsm Bond (210x297mm)",
@@ -8481,9 +8291,9 @@
       "description": "Official PRINTIZER Cover specification: 7x4 Size 100 gsm Alabaster. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/7x4-size-100-gsm-alabaster.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/7x4-size-100-gsm-alabaster.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "7x4 Size 100 gsm Alabaster",
@@ -8583,9 +8393,9 @@
       "description": "Official PRINTIZER Cover specification: 7x4 Size 100 gsm SSP. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/7x4-size-100-gsm-ssp.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/7x4-size-100-gsm-ssp.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "7x4 Size 100 gsm SSP",
@@ -8685,9 +8495,9 @@
       "description": "Official PRINTIZER Cover specification: 9.5x4.25 Size 80 gsm SSP. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/9-5x4-25-size-80-gsm-ssp.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/9-5x4-25-size-80-gsm-ssp.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "9.5x4.25 Size 80 gsm SSP",
@@ -8787,9 +8597,9 @@
       "description": "Official PRINTIZER Cover specification: 9.5x4.25 Size 100 gsm Alabaster. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/9-5x4-25-size-100-gsm-alabaster.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/9-5x4-25-size-100-gsm-alabaster.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "9.5x4.25 Size 100 gsm Alabaster",
@@ -8889,9 +8699,9 @@
       "description": "Official PRINTIZER Cover specification: 9.5x4.25 Size 100 gsm SSP. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/9-5x4-25-size-100-gsm-ssp.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/9-5x4-25-size-100-gsm-ssp.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "9.5x4.25 Size 100 gsm SSP",
@@ -8991,9 +8801,9 @@
       "description": "Official PRINTIZER Cover specification: 9.5x4.25 Size 100 gsm Excel Bond. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/9-5x4-25-size-100-gsm-excel-bond.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/9-5x4-25-size-100-gsm-excel-bond.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "9.5x4.25 Size 100 gsm Excel Bond",
@@ -9093,9 +8903,9 @@
       "description": "Official PRINTIZER Cover specification: 11x5 Size 100 gsm SSP. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/11x5-size-100-gsm-ssp.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/11x5-size-100-gsm-ssp.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "11x5 Size 100 gsm SSP",
@@ -9195,9 +9005,9 @@
       "description": "Official PRINTIZER Cover specification: 11x5 Size 100 gsm Alabaster. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/11x5-size-100-gsm-alabaster.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/11x5-size-100-gsm-alabaster.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "11x5 Size 100 gsm Alabaster",
@@ -9297,9 +9107,9 @@
       "description": "Official PRINTIZER Cover specification: Window Cover 9.5x4.25 Size 100 gsm Alabaster. Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4817 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/envelope.webp",
+      "image": "/images/products/window-cover-9-5x4-25-size-100-gsm-alabaster.webp",
       "secondaryImages": [
-        "/images/products/envelope.webp"
+        "/images/products/window-cover-9-5x4-25-size-100-gsm-alabaster.webp"
       ],
       "productClass": "Cover",
       "paperQuality": "Window Cover 9.5x4.25 Size 100 gsm Alabaster",
@@ -9399,9 +9209,9 @@
       "description": "Official PRINTIZER 250 gsm Art / Mix specification: 250 gsm Art (210x285mm). Minimum order pack size of 100 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/art-card.webp",
+      "image": "/images/products/250-gsm-art-210x285mm.webp",
       "secondaryImages": [
-        "/images/products/art-card.webp"
+        "/images/products/250-gsm-art-210x285mm.webp"
       ],
       "productClass": "250 gsm Art / Mix",
       "paperQuality": "250 gsm Art (210x285mm)",
@@ -9501,9 +9311,9 @@
       "description": "Official PRINTIZER 250 gsm Art / Mix specification: 250 gsm Art + Lamination (210x285mm). Minimum order pack size of 100 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/art-card-lamination.webp",
+      "image": "/images/products/250-gsm-art-lamination-210x285mm.webp",
       "secondaryImages": [
-        "/images/products/art-card-lamination.webp"
+        "/images/products/250-gsm-art-lamination-210x285mm.webp"
       ],
       "productClass": "250 gsm Art / Mix",
       "paperQuality": "250 gsm Art + Lamination (210x285mm)",
@@ -9603,9 +9413,9 @@
       "description": "Official PRINTIZER 250 gsm Art / Mix specification: 250 gsm Art (Per Sq.In). Minimum order pack size of 100 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/art-card.webp",
+      "image": "/images/products/250-gsm-art-per-sq-in.webp",
       "secondaryImages": [
-        "/images/products/art-card.webp"
+        "/images/products/250-gsm-art-per-sq-in.webp"
       ],
       "productClass": "250 gsm Art / Mix",
       "paperQuality": "250 gsm Art (Per Sq.In)",
@@ -9705,9 +9515,9 @@
       "description": "Official PRINTIZER 250 gsm Art / Mix specification: 250 gsm Art + Lamination (Per Sq.In). Minimum order pack size of 100 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/art-card-lamination.webp",
+      "image": "/images/products/250-gsm-art-lamination-per-sq-in.webp",
       "secondaryImages": [
-        "/images/products/art-card-lamination.webp"
+        "/images/products/250-gsm-art-lamination-per-sq-in.webp"
       ],
       "productClass": "250 gsm Art / Mix",
       "paperQuality": "250 gsm Art + Lamination (Per Sq.In)",
@@ -9807,9 +9617,9 @@
       "description": "Official PRINTIZER 250 gsm Art / Mix specification: 350 gsm Matt Lamination (Per Sq.In). Minimum order pack size of 100 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/art-card-lamination.webp",
+      "image": "/images/products/350-gsm-matt-lamination-per-sq-in.webp",
       "secondaryImages": [
-        "/images/products/art-card-lamination.webp"
+        "/images/products/350-gsm-matt-lamination-per-sq-in.webp"
       ],
       "productClass": "250 gsm Art / Mix",
       "paperQuality": "350 gsm Matt Lamination (Per Sq.In)",
@@ -9909,9 +9719,9 @@
       "description": "Official PRINTIZER Sticker (Per Sq.Inch) specification: HM Sticker. Minimum order pack size of 1,000 labels, calibrated CMYK reproduction, and HSN 4821 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/round-sticker.webp",
+      "image": "/images/products/hm-sticker.webp",
       "secondaryImages": [
-        "/images/products/round-sticker.webp"
+        "/images/products/hm-sticker.webp"
       ],
       "productClass": "Sticker (Per Sq.Inch)",
       "paperQuality": "HM Sticker",
@@ -10011,9 +9821,9 @@
       "description": "Official PRINTIZER Sticker (Per Sq.Inch) specification: HM Sticker + UV Lamination. Minimum order pack size of 1,000 labels, calibrated CMYK reproduction, and HSN 4821 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/waterproof-sticker.webp",
+      "image": "/images/products/hm-sticker-uv-lamination.webp",
       "secondaryImages": [
-        "/images/products/waterproof-sticker.webp"
+        "/images/products/hm-sticker-uv-lamination.webp"
       ],
       "productClass": "Sticker (Per Sq.Inch)",
       "paperQuality": "HM Sticker + UV Lamination",
@@ -10113,9 +9923,9 @@
       "description": "Official PRINTIZER Sticker (Per Sq.Inch) specification: Silver Metallic + Drip-off UV. Minimum order pack size of 1,000 labels, calibrated CMYK reproduction, and HSN 4821 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/logo-sticker.webp",
+      "image": "/images/products/silver-metallic-drip-off-uv.webp",
       "secondaryImages": [
-        "/images/products/logo-sticker.webp"
+        "/images/products/silver-metallic-drip-off-uv.webp"
       ],
       "productClass": "Sticker (Per Sq.Inch)",
       "paperQuality": "Silver Metallic + Drip-off UV",
@@ -10215,9 +10025,9 @@
       "description": "Official PRINTIZER Sticker (Per Sq.Inch) specification: Every Sticker. Minimum order pack size of 1,000 labels, calibrated CMYK reproduction, and HSN 4821 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/round-sticker.webp",
+      "image": "/images/products/every-sticker.webp",
       "secondaryImages": [
-        "/images/products/round-sticker.webp"
+        "/images/products/every-sticker.webp"
       ],
       "productClass": "Sticker (Per Sq.Inch)",
       "paperQuality": "Every Sticker",
@@ -10317,9 +10127,9 @@
       "description": "Official PRINTIZER Sticker (Per Sq.Inch) specification: Every Sticker + Lamination. Minimum order pack size of 1,000 labels, calibrated CMYK reproduction, and HSN 4821 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/waterproof-sticker.webp",
+      "image": "/images/products/every-sticker-lamination.webp",
       "secondaryImages": [
-        "/images/products/waterproof-sticker.webp"
+        "/images/products/every-sticker-lamination.webp"
       ],
       "productClass": "Sticker (Per Sq.Inch)",
       "paperQuality": "Every Sticker + Lamination",
@@ -10419,9 +10229,9 @@
       "description": "Official PRINTIZER Sticker (Per Sq.Inch) specification: PVC Sticker + Lamination. Minimum order pack size of 1,000 labels, calibrated CMYK reproduction, and HSN 4821 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/vinyl-sticker.webp",
+      "image": "/images/products/pvc-sticker-lamination.webp",
       "secondaryImages": [
-        "/images/products/vinyl-sticker.webp"
+        "/images/products/pvc-sticker-lamination.webp"
       ],
       "productClass": "Sticker (Per Sq.Inch)",
       "paperQuality": "PVC Sticker + Lamination",
@@ -10521,9 +10331,9 @@
       "description": "Official PRINTIZER Art Paper (100/130/170 gsm) specification: 100 gsm Art Paper (210x285mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/pamphlet.webp",
+      "image": "/images/products/100-gsm-art-paper-210x285mm.webp",
       "secondaryImages": [
-        "/images/products/pamphlet.webp"
+        "/images/products/100-gsm-art-paper-210x285mm.webp"
       ],
       "productClass": "Art Paper (100/130/170 gsm)",
       "paperQuality": "100 gsm Art Paper (210x285mm)",
@@ -10623,9 +10433,9 @@
       "description": "Official PRINTIZER Art Paper (100/130/170 gsm) specification: 130 gsm Art Paper (210x285mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/flyer.webp",
+      "image": "/images/products/130-gsm-art-paper-210x285mm.webp",
       "secondaryImages": [
-        "/images/products/flyer.webp"
+        "/images/products/130-gsm-art-paper-210x285mm.webp"
       ],
       "productClass": "Art Paper (100/130/170 gsm)",
       "paperQuality": "130 gsm Art Paper (210x285mm)",
@@ -10725,9 +10535,9 @@
       "description": "Official PRINTIZER Art Paper (100/130/170 gsm) specification: 170 gsm Art Paper (210x285mm). Minimum order pack size of 1,000 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/brochure.webp",
+      "image": "/images/products/170-gsm-art-paper-210x285mm.webp",
       "secondaryImages": [
-        "/images/products/brochure.webp"
+        "/images/products/170-gsm-art-paper-210x285mm.webp"
       ],
       "productClass": "Art Paper (100/130/170 gsm)",
       "paperQuality": "170 gsm Art Paper (210x285mm)",
@@ -10827,9 +10637,9 @@
       "description": "Official PRINTIZER Special Job specification: Special Job Printing. Minimum order pack size of 1 units, calibrated CMYK reproduction, and HSN 4911 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/visiting-card.webp",
+      "image": "/images/products/special-job-printing.webp",
       "secondaryImages": [
-        "/images/products/visiting-card.webp"
+        "/images/products/special-job-printing.webp"
       ],
       "productClass": "Special Job",
       "paperQuality": "Special Job Printing",
@@ -10928,9 +10738,9 @@
       "description": "Official PRINTIZER Box (Per Sq.Inch) specification: 320 gsm Ultima + UV Lamination. Minimum order pack size of 1,000 boxes, calibrated CMYK reproduction, and HSN 4819 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/product-box.webp",
+      "image": "/images/products/320-gsm-ultima-uv-lamination.webp",
       "secondaryImages": [
-        "/images/products/product-box.webp"
+        "/images/products/320-gsm-ultima-uv-lamination.webp"
       ],
       "productClass": "Box (Per Sq.Inch)",
       "paperQuality": "320 gsm Ultima + UV Lamination",
@@ -11030,9 +10840,9 @@
       "description": "Official PRINTIZER Box (Per Sq.Inch) specification: 320 gsm Ultima + Drip-off UV. Minimum order pack size of 1,000 boxes, calibrated CMYK reproduction, and HSN 4819 tax billing support.",
       "popular": false,
       "featured": false,
-      "image": "/images/products/cake-box.webp",
+      "image": "/images/products/320-gsm-ultima-drip-off-uv.webp",
       "secondaryImages": [
-        "/images/products/cake-box.webp"
+        "/images/products/320-gsm-ultima-drip-off-uv.webp"
       ],
       "productClass": "Box (Per Sq.Inch)",
       "paperQuality": "320 gsm Ultima + Drip-off UV",
@@ -11380,7 +11190,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/art-card.webp"
+      "image": "/images/products/250-gsm-art-card.webp"
     },
     {
       "id": "rate-3",
@@ -11400,7 +11210,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/art-card-lamination.webp"
+      "image": "/images/products/250-gsm-art-card-lamination.webp"
     },
     {
       "id": "rate-4",
@@ -11420,7 +11230,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/matt-card.webp"
+      "image": "/images/products/350-gsm-matt-card.webp"
     },
     {
       "id": "rate-5",
@@ -11440,7 +11250,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/matt-card-uv.webp"
+      "image": "/images/products/500-gsm-matt-card-uv.webp"
     },
     {
       "id": "rate-6",
@@ -11460,7 +11270,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/round-cut-uv.webp"
+      "image": "/images/products/400-gsm-round-cut-drip-off-uv.webp"
     },
     {
       "id": "rate-7",
@@ -11500,7 +11310,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/gold-foil.webp"
+      "image": "/images/products/gold-foil-s-s-350-gsm-matt.webp"
     },
     {
       "id": "rate-9",
@@ -11520,7 +11330,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/art-card-lamination.webp"
+      "image": "/images/products/premium-visiting-card-pre-nt-coating-87x51mm.webp"
     },
     {
       "id": "rate-10",
@@ -11540,7 +11350,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/art-card.webp"
+      "image": "/images/products/premium-visiting-card-pre-250-gsm-art.webp"
     },
     {
       "id": "rate-11",
@@ -11560,7 +11370,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/art-card-lamination.webp"
+      "image": "/images/products/premium-visiting-card-pre-250-gsm-art-uv-coating.webp"
     },
     {
       "id": "rate-12",
@@ -11580,7 +11390,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/matt-card.webp"
+      "image": "/images/products/premium-visiting-card-pre-350-gsm-matt.webp"
     },
     {
       "id": "rate-13",
@@ -11600,7 +11410,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/matt-card-uv.webp"
+      "image": "/images/products/premium-visiting-card-pre-350-gsm-matt-uv.webp"
     },
     {
       "id": "rate-14",
@@ -11620,7 +11430,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/round-cut-uv.webp"
+      "image": "/images/products/premium-visiting-card-velvet-uv-500-gsm-500-nos.webp"
     },
     {
       "id": "rate-15",
@@ -11640,7 +11450,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/gold-foil.webp"
+      "image": "/images/products/premium-visiting-card-velvet-s-s-foil-500-gsm-500-nos.webp"
     },
     {
       "id": "rate-16",
@@ -11660,7 +11470,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/gold-foil.webp"
+      "image": "/images/products/premium-visiting-card-matt-500-gsm-s-s-foil-500-nos.webp"
     },
     {
       "id": "rate-17",
@@ -11680,7 +11490,7 @@
       "minimum": null,
       "retailSingleStr": "₹455",
       "retailBothStr": "₹637",
-      "image": "/images/products/matt-card-uv.webp"
+      "image": "/images/products/premium-visiting-card-matt-800-gsm-uv-500-nos.webp"
     },
     {
       "id": "rate-18",
@@ -11700,7 +11510,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/letterhead.webp"
+      "image": "/images/products/80-gsm-sunshine-210x285mm.webp"
     },
     {
       "id": "rate-19",
@@ -11720,7 +11530,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/letterhead.webp"
+      "image": "/images/products/80-gsm-sunshine-210x297mm.webp"
     },
     {
       "id": "rate-20",
@@ -11740,7 +11550,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/letterhead.webp"
+      "image": "/images/products/100-gsm-alabaster-210x297mm.webp"
     },
     {
       "id": "rate-21",
@@ -11760,7 +11570,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/letterhead.webp"
+      "image": "/images/products/100-gsm-sunshine-210x297mm.webp"
     },
     {
       "id": "rate-22",
@@ -11780,7 +11590,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/letterhead.webp"
+      "image": "/images/products/80-gsm-bond-210x297mm.webp"
     },
     {
       "id": "rate-23",
@@ -11800,7 +11610,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/letterhead.webp"
+      "image": "/images/products/100-gsm-bond-210x297mm.webp"
     },
     {
       "id": "rate-24",
@@ -11820,7 +11630,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/7x4-size-100-gsm-alabaster.webp"
     },
     {
       "id": "rate-25",
@@ -11840,7 +11650,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/7x4-size-100-gsm-ssp.webp"
     },
     {
       "id": "rate-26",
@@ -11860,7 +11670,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/9-5x4-25-size-80-gsm-ssp.webp"
     },
     {
       "id": "rate-27",
@@ -11880,7 +11690,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/9-5x4-25-size-100-gsm-alabaster.webp"
     },
     {
       "id": "rate-28",
@@ -11900,7 +11710,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/9-5x4-25-size-100-gsm-ssp.webp"
     },
     {
       "id": "rate-29",
@@ -11920,7 +11730,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/9-5x4-25-size-100-gsm-excel-bond.webp"
     },
     {
       "id": "rate-30",
@@ -11940,7 +11750,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/11x5-size-100-gsm-ssp.webp"
     },
     {
       "id": "rate-31",
@@ -11960,7 +11770,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/11x5-size-100-gsm-alabaster.webp"
     },
     {
       "id": "rate-32",
@@ -11980,7 +11790,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/envelope.webp"
+      "image": "/images/products/window-cover-9-5x4-25-size-100-gsm-alabaster.webp"
     },
     {
       "id": "rate-33",
@@ -12000,7 +11810,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹1,170",
       "retailBothStr": "₹1,638",
-      "image": "/images/products/art-card.webp"
+      "image": "/images/products/250-gsm-art-210x285mm.webp"
     },
     {
       "id": "rate-34",
@@ -12020,7 +11830,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹1,170",
       "retailBothStr": "₹1,638",
-      "image": "/images/products/art-card-lamination.webp"
+      "image": "/images/products/250-gsm-art-lamination-210x285mm.webp"
     },
     {
       "id": "rate-35",
@@ -12040,7 +11850,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/art-card.webp"
+      "image": "/images/products/250-gsm-art-per-sq-in.webp"
     },
     {
       "id": "rate-36",
@@ -12060,7 +11870,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/art-card-lamination.webp"
+      "image": "/images/products/250-gsm-art-lamination-per-sq-in.webp"
     },
     {
       "id": "rate-37",
@@ -12080,7 +11890,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/art-card-lamination.webp"
+      "image": "/images/products/350-gsm-matt-lamination-per-sq-in.webp"
     },
     {
       "id": "rate-38",
@@ -12100,7 +11910,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/round-sticker.webp"
+      "image": "/images/products/hm-sticker.webp"
     },
     {
       "id": "rate-39",
@@ -12120,7 +11930,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/waterproof-sticker.webp"
+      "image": "/images/products/hm-sticker-uv-lamination.webp"
     },
     {
       "id": "rate-40",
@@ -12140,7 +11950,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/logo-sticker.webp"
+      "image": "/images/products/silver-metallic-drip-off-uv.webp"
     },
     {
       "id": "rate-41",
@@ -12160,7 +11970,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/round-sticker.webp"
+      "image": "/images/products/every-sticker.webp"
     },
     {
       "id": "rate-42",
@@ -12180,7 +11990,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/waterproof-sticker.webp"
+      "image": "/images/products/every-sticker-lamination.webp"
     },
     {
       "id": "rate-43",
@@ -12200,7 +12010,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/vinyl-sticker.webp"
+      "image": "/images/products/pvc-sticker-lamination.webp"
     },
     {
       "id": "rate-44",
@@ -12220,7 +12030,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/pamphlet.webp"
+      "image": "/images/products/100-gsm-art-paper-210x285mm.webp"
     },
     {
       "id": "rate-45",
@@ -12240,7 +12050,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/flyer.webp"
+      "image": "/images/products/130-gsm-art-paper-210x285mm.webp"
     },
     {
       "id": "rate-46",
@@ -12260,7 +12070,7 @@
       "minimum": null,
       "retailSingleStr": "₹585",
       "retailBothStr": "₹819",
-      "image": "/images/products/brochure.webp"
+      "image": "/images/products/170-gsm-art-paper-210x285mm.webp"
     },
     {
       "id": "rate-47",
@@ -12280,7 +12090,7 @@
       "minimum": null,
       "retailSingleStr": "Quoted Individually",
       "retailBothStr": "-",
-      "image": "/images/products/visiting-card.webp"
+      "image": "/images/products/special-job-printing.webp"
     },
     {
       "id": "rate-48",
@@ -12300,7 +12110,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/product-box.webp"
+      "image": "/images/products/320-gsm-ultima-uv-lamination.webp"
     },
     {
       "id": "rate-49",
@@ -12320,7 +12130,7 @@
       "minimum": 650.0,
       "retailSingleStr": "₹455",
       "retailBothStr": "-",
-      "image": "/images/products/cake-box.webp"
+      "image": "/images/products/320-gsm-ultima-drip-off-uv.webp"
     }
   ],
   "businessInfo": {

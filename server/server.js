@@ -26,9 +26,13 @@ app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 const uploadDir = process.env.VERCEL
   ? path.join('/tmp', 'uploads')
   : path.join(__dirname, 'uploads');
+const productUploadDir = path.join(uploadDir, 'products');
 try {
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
+  }
+  if (!fs.existsSync(productUploadDir)) {
+    fs.mkdirSync(productUploadDir, { recursive: true });
   }
 } catch (e) {
   console.warn('Upload dir init warning:', e.message);
@@ -53,6 +57,34 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage,
   limits: { fileSize: 50 * 1024 * 1024 } // 50MB max file size
+});
+
+// Dedicated Multer Storage for Product Images (isolated per product ID / unique timestamp)
+const productImageStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, productUploadDir);
+  },
+  filename: (req, file, cb) => {
+    const pid = (req.body.productId || 'new')
+      .toString()
+      .toLowerCase()
+      .replace(/[^a-z0-9-_]/g, '');
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e6);
+    const ext = path.extname(file.originalname) || '.webp';
+    const base = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9-_]/g, '_').slice(0, 40);
+    cb(null, `${pid}-${uniqueSuffix}-${base}${ext}`);
+  }
+});
+
+const productImageUpload = multer({
+  storage: productImageStorage,
+  limits: { fileSize: 15 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!file.mimetype || !file.mimetype.startsWith('image/')) {
+      return cb(new Error('Only image files (WebP, PNG, JPG, GIF) are allowed.'));
+    }
+    cb(null, true);
+  }
 });
 
 // ======================== API ROUTES ========================
@@ -106,6 +138,50 @@ app.get('/api/products/:slug', (req, res) => {
       return res.status(404).json({ success: false, error: 'Product not found' });
     }
     res.json({ success: true, data: product });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.post('/api/products/upload-image', (req, res) => {
+  productImageUpload.array('images', 10)(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err.message });
+    }
+    const files = req.files || [];
+    if (files.length === 0) {
+      return res.status(400).json({ success: false, error: 'No image files uploaded.' });
+    }
+    const results = files.map(f => {
+      let url = `/uploads/products/${f.filename}`;
+      if (process.env.VERCEL) {
+        try {
+          const buf = fs.readFileSync(f.path);
+          url = `data:${f.mimetype || 'image/webp'};base64,${buf.toString('base64')}`;
+        } catch (e) {
+          // keep file path fallback
+        }
+      }
+      return {
+        url,
+        filename: f.filename,
+        originalName: f.originalname,
+        size: f.size,
+        mimetype: f.mimetype
+      };
+    });
+    res.status(201).json({ success: true, files: results });
+  });
+});
+
+app.put('/api/products/:id/images', (req, res) => {
+  try {
+    const { image, secondaryImages } = req.body;
+    const updated = db.updateProduct(req.params.id, { image, secondaryImages });
+    if (!updated) {
+      return res.status(404).json({ success: false, error: 'Product not found' });
+    }
+    res.json({ success: true, data: updated });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

@@ -131,7 +131,8 @@ for idx, prod in enumerate(sorted_prods):
     retail_sheet = build_price_sheet(pr.get('retail'))
     gst_sheet = build_price_sheet(pr.get('gst'))
 
-    img_path = pick_image(g_slug, p_name)
+    prod_slug = f'{slugify(g_slug)}-{slugify(p_name)}' if g_slug == 'premium-visiting-card' else slugify(p_name)
+    img_path = f'/images/products/{prod_slug}.webp'
 
     unit_label = f"{pack_size:,} pcs" if pack_size > 1 else "Custom"
     if dimensions:
@@ -204,7 +205,7 @@ for idx, prod in enumerate(sorted_prods):
 
     main_products_normalized.append({
         'id': f'pm-{slugify(g_slug)}-{slugify(p_name)}',
-        'slug': f'{slugify(g_slug)}-{slugify(p_name)}' if g_slug == 'premium-visiting-card' else slugify(p_name),
+        'slug': prod_slug,
         'categoryId': cat_id,
         'categoryName': cat_name,
         'sourceGroup': g_name,
@@ -351,8 +352,12 @@ for p in catalog['products']:
         pc['supportsFoil'] = bool(ret['foilGold'] or ret['foilSilver'])
         pc['supportsSpotUv'] = bool(ret['spotUvSingle'] or ret['spotUvBoth'])
         pc['priceSheets'] = {'retail': ret, 'gst': spec['gst']}
+        p['image'] = f'/images/products/{slug}.webp'
+        p['secondaryImages'] = [f'/images/products/{slug}.webp']
         updated_count += 1
     elif not p['id'].startswith('pm-'):
+        p['image'] = f'/images/products/{slug}.webp'
+        p['secondaryImages'] = [f'/images/products/{slug}.webp']
         pc = p.setdefault('pricingConfig', {})
         if pc.get('markupPercent') != 30:
             if p.get('baseRate') is not None:

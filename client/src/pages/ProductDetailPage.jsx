@@ -6,6 +6,7 @@ import {
   FileCheck, Printer, ArrowLeft, Send
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import ProductImage from '../components/ProductImage';
 
 export default function ProductDetailPage({ 
   product, 
@@ -113,12 +114,13 @@ export default function ProductDetailPage({
     setIsModalOpen(false);
   }, [product.slug]);
 
-  // Gallery images array
-  const galleryImages = product.secondaryImages && product.secondaryImages.length > 0
-    ? product.secondaryImages
-    : [product.image];
+  // Gallery images array (always deduped, never substituting another product's photo)
+  const galleryImages = Array.from(new Set([
+    ...(product.image ? [product.image] : []),
+    ...(Array.isArray(product.secondaryImages) ? product.secondaryImages : [])
+  ].filter(Boolean)));
 
-  const currentMainImage = activeImage || product.image;
+  const currentMainImage = activeImage || galleryImages[0] || '';
 
   // Active quantity numeric value
   const rawQty = isCustomQty
@@ -441,10 +443,12 @@ Thank you!`;
             {/* Primary Photo Showcase Frame */}
             <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm relative">
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
-                <img
+                <ProductImage
                   src={currentMainImage}
                   alt={product.name}
-                  className="w-full h-full object-cover transition-all duration-500"
+                  placeholderLabel={product.name}
+                  eager={true}
+                  imgClassName="w-full h-full object-cover transition-all duration-500"
                 />
                 
                 {/* Category Badge */}
@@ -463,20 +467,21 @@ Thank you!`;
               {galleryImages.length > 1 && (
                 <div className="p-3.5 bg-slate-50/80 border-t border-slate-100 flex items-center space-x-3 overflow-x-auto">
                   <span className="text-[10px] uppercase font-bold text-slate-400 shrink-0 px-1">
-                    Angles & Details:
+                    Gallery ({galleryImages.length}):
                   </span>
                   {galleryImages.map((img, idx) => (
                     <button
                       key={idx}
+                      type="button"
                       onClick={() => setActiveImage(img)}
-                      className={`h-16 w-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                      className={`h-16 w-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 bg-slate-100 ${
                         currentMainImage === img 
                           ? 'border-brand-crimson ring-2 ring-brand-crimson/20 shadow-sm scale-102' 
                           : 'border-slate-200 opacity-80 hover:opacity-100 hover:border-slate-300'
                       }`}
                       title={`View angle ${idx + 1}`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                      <ProductImage src={img} alt={`${product.name} view ${idx + 1}`} />
                     </button>
                   ))}
                 </div>
@@ -484,7 +489,7 @@ Thank you!`;
             </div>
 
             {/* Product Title, Tagline & Overview */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-2xs space-y-3">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-2xs space-y-4">
               <div className="flex items-center space-x-2 text-xs font-bold text-brand-crimson uppercase tracking-widest">
                 <Sparkles className="w-4 h-4 text-brand-crimson" />
                 <span>Commercial Print Standard</span>
@@ -504,8 +509,74 @@ Thank you!`;
                 {product.description}
               </p>
 
+              {/* Available Paper, Size, Printing & Finishing Specifications */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 space-y-1.5">
+                  <span className="text-[10px] text-slate-400 uppercase font-extrabold tracking-wider block">
+                    Paper Options &amp; Substrates
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {materials.map((m, i) => (
+                      <span key={i} className="text-[11px] font-semibold text-slate-700 bg-white border border-slate-200 px-2 py-0.5 rounded-lg">
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 space-y-1.5">
+                  <span className="text-[10px] text-slate-400 uppercase font-extrabold tracking-wider block">
+                    Available Finishing Options
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {finishes.map((f, i) => (
+                      <span key={i} className="text-[11px] font-semibold text-slate-700 bg-white border border-slate-200 px-2 py-0.5 rounded-lg">
+                        {f}
+                      </span>
+                    ))}
+                    {supportsFoil && (
+                      <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-lg">
+                        Gold / Silver Foil
+                      </span>
+                    )}
+                    {supportsSpotUv && (
+                      <span className="text-[11px] font-semibold text-indigo-800 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-lg">
+                        Raised Spot UV
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 space-y-1.5">
+                  <span className="text-[10px] text-slate-400 uppercase font-extrabold tracking-wider block">
+                    Sizes &amp; Dimensions
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {sizes.map((s, i) => (
+                      <span key={i} className="text-[11px] font-semibold text-slate-700 bg-white border border-slate-200 px-2 py-0.5 rounded-lg">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 space-y-1.5">
+                  <span className="text-[10px] text-slate-400 uppercase font-extrabold tracking-wider block">
+                    Printing Options &amp; MOQ
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    <span className="text-[11px] font-semibold text-slate-700 bg-white border border-slate-200 px-2 py-0.5 rounded-lg">
+                      {supportsBothSides ? 'Single Side & Both Sides CMYK' : 'Single Side Full-Color CMYK'}
+                    </span>
+                    <span className="text-[11px] font-bold text-brand-crimson bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-lg">
+                      Min Qty: {(product.minQuantity || 100).toLocaleString('en-IN')} {pricingConfig.unitName || 'units'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
               {/* Key Features Badges */}
-              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+              <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
                 <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">Turnaround</span>
                   <span className="font-bold text-slate-800">{product.productionTime || '3-4 Business Days'}</span>

@@ -37,7 +37,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/art-card.webp"
+    "image": "/images/products/250-gsm-art-card.webp"
   },
   {
     "id": "rate-3",
@@ -57,7 +57,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/art-card-lamination.webp"
+    "image": "/images/products/250-gsm-art-card-lamination.webp"
   },
   {
     "id": "rate-4",
@@ -77,7 +77,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/matt-card.webp"
+    "image": "/images/products/350-gsm-matt-card.webp"
   },
   {
     "id": "rate-5",
@@ -97,7 +97,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/matt-card-uv.webp"
+    "image": "/images/products/500-gsm-matt-card-uv.webp"
   },
   {
     "id": "rate-6",
@@ -117,7 +117,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/round-cut-uv.webp"
+    "image": "/images/products/400-gsm-round-cut-drip-off-uv.webp"
   },
   {
     "id": "rate-7",
@@ -157,7 +157,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/gold-foil.webp"
+    "image": "/images/products/gold-foil-s-s-350-gsm-matt.webp"
   },
   {
     "id": "rate-9",
@@ -177,7 +177,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/art-card-lamination.webp"
+    "image": "/images/products/premium-visiting-card-pre-nt-coating-87x51mm.webp"
   },
   {
     "id": "rate-10",
@@ -197,7 +197,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/art-card.webp"
+    "image": "/images/products/premium-visiting-card-pre-250-gsm-art.webp"
   },
   {
     "id": "rate-11",
@@ -217,7 +217,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/art-card-lamination.webp"
+    "image": "/images/products/premium-visiting-card-pre-250-gsm-art-uv-coating.webp"
   },
   {
     "id": "rate-12",
@@ -237,7 +237,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/matt-card.webp"
+    "image": "/images/products/premium-visiting-card-pre-350-gsm-matt.webp"
   },
   {
     "id": "rate-13",
@@ -257,7 +257,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/matt-card-uv.webp"
+    "image": "/images/products/premium-visiting-card-pre-350-gsm-matt-uv.webp"
   },
   {
     "id": "rate-14",
@@ -277,7 +277,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/round-cut-uv.webp"
+    "image": "/images/products/premium-visiting-card-velvet-uv-500-gsm-500-nos.webp"
   },
   {
     "id": "rate-15",
@@ -297,7 +297,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/gold-foil.webp"
+    "image": "/images/products/premium-visiting-card-velvet-s-s-foil-500-gsm-500-nos.webp"
   },
   {
     "id": "rate-16",
@@ -317,7 +317,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/gold-foil.webp"
+    "image": "/images/products/premium-visiting-card-matt-500-gsm-s-s-foil-500-nos.webp"
   },
   {
     "id": "rate-17",
@@ -337,7 +337,7 @@
     "minimum": null,
     "retailSingleStr": "₹455",
     "retailBothStr": "₹637",
-    "image": "/images/products/matt-card-uv.webp"
+    "image": "/images/products/premium-visiting-card-matt-800-gsm-uv-500-nos.webp"
   },
   {
     "id": "rate-18",
@@ -357,7 +357,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/letterhead.webp"
+    "image": "/images/products/80-gsm-sunshine-210x285mm.webp"
   },
   {
     "id": "rate-19",
@@ -377,7 +377,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/letterhead.webp"
+    "image": "/images/products/80-gsm-sunshine-210x297mm.webp"
   },
   {
     "id": "rate-20",
@@ -397,7 +397,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/letterhead.webp"
+    "image": "/images/products/100-gsm-alabaster-210x297mm.webp"
   },
   {
     "id": "rate-21",
@@ -417,7 +417,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/letterhead.webp"
+    "image": "/images/products/100-gsm-sunshine-210x297mm.webp"
   },
   {
     "id": "rate-22",
@@ -437,7 +437,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/letterhead.webp"
+    "image": "/images/products/80-gsm-bond-210x297mm.webp"
   },
   {
     "id": "rate-23",
@@ -457,7 +457,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/letterhead.webp"
+    "image": "/images/products/100-gsm-bond-210x297mm.webp"
   },
   {
     "id": "rate-24",
@@ -477,7 +477,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/7x4-size-100-gsm-alabaster.webp"
   },
   {
     "id": "rate-25",
@@ -497,7 +497,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/7x4-size-100-gsm-ssp.webp"
   },
   {
     "id": "rate-26",
@@ -517,7 +517,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/9-5x4-25-size-80-gsm-ssp.webp"
   },
   {
     "id": "rate-27",
@@ -537,7 +537,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/9-5x4-25-size-100-gsm-alabaster.webp"
   },
   {
     "id": "rate-28",
@@ -557,7 +557,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/9-5x4-25-size-100-gsm-ssp.webp"
   },
   {
     "id": "rate-29",
@@ -577,7 +577,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/9-5x4-25-size-100-gsm-excel-bond.webp"
   },
   {
     "id": "rate-30",
@@ -597,7 +597,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/11x5-size-100-gsm-ssp.webp"
   },
   {
     "id": "rate-31",
@@ -617,7 +617,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/11x5-size-100-gsm-alabaster.webp"
   },
   {
     "id": "rate-32",
@@ -637,7 +637,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/envelope.webp"
+    "image": "/images/products/window-cover-9-5x4-25-size-100-gsm-alabaster.webp"
   },
   {
     "id": "rate-33",
@@ -657,7 +657,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹1,170",
     "retailBothStr": "₹1,638",
-    "image": "/images/products/art-card.webp"
+    "image": "/images/products/250-gsm-art-210x285mm.webp"
   },
   {
     "id": "rate-34",
@@ -677,7 +677,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹1,170",
     "retailBothStr": "₹1,638",
-    "image": "/images/products/art-card-lamination.webp"
+    "image": "/images/products/250-gsm-art-lamination-210x285mm.webp"
   },
   {
     "id": "rate-35",
@@ -697,7 +697,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/art-card.webp"
+    "image": "/images/products/250-gsm-art-per-sq-in.webp"
   },
   {
     "id": "rate-36",
@@ -717,7 +717,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/art-card-lamination.webp"
+    "image": "/images/products/250-gsm-art-lamination-per-sq-in.webp"
   },
   {
     "id": "rate-37",
@@ -737,7 +737,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/art-card-lamination.webp"
+    "image": "/images/products/350-gsm-matt-lamination-per-sq-in.webp"
   },
   {
     "id": "rate-38",
@@ -757,7 +757,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/round-sticker.webp"
+    "image": "/images/products/hm-sticker.webp"
   },
   {
     "id": "rate-39",
@@ -777,7 +777,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/waterproof-sticker.webp"
+    "image": "/images/products/hm-sticker-uv-lamination.webp"
   },
   {
     "id": "rate-40",
@@ -797,7 +797,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/logo-sticker.webp"
+    "image": "/images/products/silver-metallic-drip-off-uv.webp"
   },
   {
     "id": "rate-41",
@@ -817,7 +817,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/round-sticker.webp"
+    "image": "/images/products/every-sticker.webp"
   },
   {
     "id": "rate-42",
@@ -837,7 +837,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/waterproof-sticker.webp"
+    "image": "/images/products/every-sticker-lamination.webp"
   },
   {
     "id": "rate-43",
@@ -857,7 +857,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/vinyl-sticker.webp"
+    "image": "/images/products/pvc-sticker-lamination.webp"
   },
   {
     "id": "rate-44",
@@ -877,7 +877,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/pamphlet.webp"
+    "image": "/images/products/100-gsm-art-paper-210x285mm.webp"
   },
   {
     "id": "rate-45",
@@ -897,7 +897,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/flyer.webp"
+    "image": "/images/products/130-gsm-art-paper-210x285mm.webp"
   },
   {
     "id": "rate-46",
@@ -917,7 +917,7 @@
     "minimum": null,
     "retailSingleStr": "₹585",
     "retailBothStr": "₹819",
-    "image": "/images/products/brochure.webp"
+    "image": "/images/products/170-gsm-art-paper-210x285mm.webp"
   },
   {
     "id": "rate-47",
@@ -937,7 +937,7 @@
     "minimum": null,
     "retailSingleStr": "Quoted Individually",
     "retailBothStr": "-",
-    "image": "/images/products/visiting-card.webp"
+    "image": "/images/products/special-job-printing.webp"
   },
   {
     "id": "rate-48",
@@ -957,7 +957,7 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/product-box.webp"
+    "image": "/images/products/320-gsm-ultima-uv-lamination.webp"
   },
   {
     "id": "rate-49",
@@ -977,6 +977,6 @@
     "minimum": 650.0,
     "retailSingleStr": "₹455",
     "retailBothStr": "-",
-    "image": "/images/products/cake-box.webp"
+    "image": "/images/products/320-gsm-ultima-drip-off-uv.webp"
   }
 ]

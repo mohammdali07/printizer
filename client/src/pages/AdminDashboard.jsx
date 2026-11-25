@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { 
   Lock, LogOut, FileText, CheckCircle2, Clock, AlertCircle, 
   Send, Download, MessageCircle, RefreshCw, Plus, Trash2, 
-  Edit, Eye, Search, Filter, ChevronRight, X, ExternalLink, ShieldCheck, DollarSign
+  Edit, Eye, Search, Filter, ChevronRight, X, ExternalLink, ShieldCheck, DollarSign,
+  UploadCloud, Image as ImageIcon, Star
 } from 'lucide-react';
+import ProductImage from '../components/ProductImage';
 
 export default function AdminDashboard({ onNavigate }) {
   const [authToken, setAuthToken] = useState(localStorage.getItem('prz_admin_token') || '');
@@ -42,6 +44,10 @@ export default function AdminDashboard({ onNavigate }) {
   // Product Add / Edit Modal State
   const [showProductModal, setShowProductModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [productSearch, setProductSearch] = useState('');
+  const [productCategoryFilter, setProductCategoryFilter] = useState('all');
+  const [uploadingImages, setUploadingImages] = useState(false);
+  const [imageUploadError, setImageUploadError] = useState('');
   const [productFormData, setProductFormData] = useState({
     name: '',
     slug: '',
@@ -50,8 +56,9 @@ export default function AdminDashboard({ onNavigate }) {
     tagline: '',
     description: '',
     minQuantity: 100,
-    image: '/images/visiting-card-red-gloss.jpg',
-    standardSizes: 'Standard (3.5" x 2.0")',
+    image: '',
+    secondaryImages: [],
+    standardSizes: 'Standard Size',
     materials: '250g Art Card, 300g Art Card, 350g Art Card',
     finishes: 'Gloss Lamination, Matte Lamination, Raised Spot UV'
   });
@@ -324,27 +331,190 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
     window.open(url, '_blank');
   };
 
+  // Optimize image to WebP (<=1200px wide) cleanly on client before upload
+  const optimizeImageFile = (file) => new Promise((resolve) => {
+    if (!file || !file.type.startsWith('image/')) {
+      resolve(file);
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const img = new window.Image();
+      img.onload = () => {
+        const maxDim = 1200;
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          const ratio = Math.min(maxDim / width, maxDim / height);
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              const base = file.name.replace(/\.[^.]+$/, '');
+              resolve(new File([blob], `${base}.webp`, { type: 'image/webp' }));
+            } else {
+              resolve(file);
+            }
+          },
+          'image/webp',
+          0.86
+        );
+      };
+      img.onerror = () => resolve(file);
+      img.src = ev.target.result;
+    };
+    reader.onerror = () => resolve(file);
+    reader.readAsDataURL(file);
+  });
+
+  // Upload one or more files for the active product (isolated per product ID)
+  const uploadFilesToServer = async (fileList) => {
+    const rawFiles = Array.from(fileList || []).filter(f => f && f.type.startsWith('image/'));
+    if (rawFiles.length === 0) return [];
+    setImageUploadError('');
+    setUploadingImages(true);
+    try {
+      const optimized = await Promise.all(rawFiles.map(optimizeImageFile));
+      const fd = new FormData();
+      fd.append('productId', editingProduct?.id || productFormData.slug || 'new-product');
+      optimized.forEach(f => fd.append('images', f));
+
+      const res = await fetch('/api/products/upload-image', {
+        method: 'POST',
+        body: fd
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Image upload failed');
+      }
+      return (data.files || []).map(f => f.url);
+    } catch (err) {
+      setImageUploadError(err.message || 'Could not upload image.');
+      return [];
+    } finally {
+      setUploadingImages(false);
+    }
+  };
+
+  const handleUploadPrimaryImage = async (e) => {
+    const urls = await uploadFilesToServer(e.target.files);
+    e.target.value = '';
+    if (urls.length === 0) return;
+    const primaryUrl = urls[0];
+    setProductFormData(prev => {
+      const existingOthers = (prev.secondaryImages || []).filter(u => u && u !== primaryUrl);
+      const mergedGallery = [primaryUrl, ...urls.slice(1), ...existingOthers];
+      return {
+        ...prev,
+        image: primaryUrl,
+        secondaryImages: Array.from(new Set(mergedGallery))
+      };
+    });
+  };
+
+  const handleUploadGalleryImages = async (e) => {
+    const urls = await uploadFilesToServer(e.target.files);
+    e.target.value = '';
+    if (urls.length === 0) return;
+    setProductFormData(prev => {
+      const nextPrimary = prev.image || urls[0];
+      const merged = Array.from(new Set([
+        nextPrimary,
+        ...(prev.secondaryImages || []),
+        ...urls
+      ].filter(Boolean)));
+      return {
+        ...prev,
+        image: nextPrimary,
+        secondaryImages: merged
+      };
+    });
+  };
+
+  const handleReplaceGallerySlot = async (slotIndex, e) => {
+    const urls = await uploadFilesToServer(e.target.files);
+    e.target.value = '';
+    if (urls.length === 0) return;
+    const newUrl = urls[0];
+    setProductFormData(prev => {
+      const currentGallery = Array.from(new Set([
+        ...(prev.image ? [prev.image] : []),
+        ...(prev.secondaryImages || [])
+      ].filter(Boolean)));
+      const oldUrl = currentGallery[slotIndex];
+      currentGallery[slotIndex] = newUrl;
+      const nextPrimary = prev.image === oldUrl ? newUrl : prev.image;
+      return {
+        ...prev,
+        image: nextPrimary,
+        secondaryImages: Array.from(new Set(currentGallery.filter(Boolean)))
+      };
+    });
+  };
+
+  const handleSetPrimaryGalleryImage = (url) => {
+    setProductFormData(prev => {
+      const merged = Array.from(new Set([
+        url,
+        ...(prev.secondaryImages || []).filter(u => u !== url),
+        ...(prev.image && prev.image !== url ? [prev.image] : [])
+      ].filter(Boolean)));
+      return {
+        ...prev,
+        image: url,
+        secondaryImages: merged
+      };
+    });
+  };
+
+  const handleRemoveGalleryImage = (url) => {
+    setProductFormData(prev => {
+      const remaining = (prev.secondaryImages || []).filter(u => u && u !== url);
+      const nextPrimary = prev.image === url ? (remaining[0] || '') : prev.image;
+      return {
+        ...prev,
+        image: nextPrimary,
+        secondaryImages: remaining
+      };
+    });
+  };
+
   // Product Add / Edit Handler
   const handleSaveProduct = async (e) => {
     e.preventDefault();
     try {
+      const primaryImg = (productFormData.image || '').trim();
+      const rawGallery = Array.isArray(productFormData.secondaryImages)
+        ? productFormData.secondaryImages.map(u => (u || '').trim()).filter(Boolean)
+        : [];
+      const normalizedGallery = primaryImg
+        ? Array.from(new Set([primaryImg, ...rawGallery]))
+        : Array.from(new Set(rawGallery));
+
       const payload = {
         name: productFormData.name,
-        slug: productFormData.slug || productFormData.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+        slug: productFormData.slug || productFormData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
         categoryId: productFormData.categoryId,
         categoryName: categories.find(c => c.id === productFormData.categoryId)?.name || 'Custom',
         tagline: productFormData.tagline,
         description: productFormData.description,
         minQuantity: Number(productFormData.minQuantity) || 100,
-        image: productFormData.image,
+        image: primaryImg,
+        secondaryImages: normalizedGallery,
         standardSizes: typeof productFormData.standardSizes === 'string' 
-          ? productFormData.standardSizes.split(',').map(s => s.trim()) 
+          ? productFormData.standardSizes.split(',').map(s => s.trim()).filter(Boolean)
           : productFormData.standardSizes,
         materials: typeof productFormData.materials === 'string'
-          ? productFormData.materials.split(',').map(s => s.trim())
+          ? productFormData.materials.split(',').map(s => s.trim()).filter(Boolean)
           : productFormData.materials,
         finishes: typeof productFormData.finishes === 'string'
-          ? productFormData.finishes.split(',').map(s => s.trim())
+          ? productFormData.finishes.split(',').map(s => s.trim()).filter(Boolean)
           : productFormData.finishes
       };
 
@@ -784,15 +954,52 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         )}
 
         {/* ==================== TAB 2: PRODUCTS ==================== */}
-        {activeTab === 'products' && (
+        {activeTab === 'products' && (() => {
+          const filteredAdminProducts = products.filter(p => {
+            const matchesCat = productCategoryFilter === 'all' || p.categoryId === productCategoryFilter;
+            const q = productSearch.trim().toLowerCase();
+            const matchesSearch = !q ||
+              (p.name || '').toLowerCase().includes(q) ||
+              (p.slug || '').toLowerCase().includes(q) ||
+              (p.categoryName || '').toLowerCase().includes(q);
+            return matchesCat && matchesSearch;
+          });
+
+          return (
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <p className="text-xs text-slate-500 font-semibold">
-                Manage products without editing code. All changes reflect instantly on the website.
-              </p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 flex-1">
+                <div className="relative flex-1 max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Search products by name or slug..."
+                    value={productSearch}
+                    onChange={(e) => setProductSearch(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl py-1.5 pl-8 pr-3 text-xs text-slate-900 focus:bg-white focus:border-brand-crimson focus:outline-none"
+                  />
+                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
+                </div>
+
+                <select
+                  value={productCategoryFilter}
+                  onChange={(e) => setProductCategoryFilter(e.target.value)}
+                  className="bg-slate-50 border border-slate-300 rounded-xl py-1.5 px-3 text-xs text-slate-800 font-semibold focus:bg-white focus:outline-none"
+                >
+                  <option value="all">All Categories ({products.length})</option>
+                  {categories.map(c => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+
+                <span className="text-[11px] text-slate-500 font-semibold">
+                  Showing <strong className="text-slate-900">{filteredAdminProducts.length}</strong> products
+                </span>
+              </div>
+
               <button
                 onClick={() => {
                   setEditingProduct(null);
+                  setImageUploadError('');
                   setProductFormData({
                     name: '',
                     slug: '',
@@ -801,14 +1008,15 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                     tagline: '',
                     description: '',
                     minQuantity: 100,
-                    image: '/images/visiting-card-red-gloss.jpg',
+                    image: '',
+                    secondaryImages: [],
                     standardSizes: 'Standard Size',
                     materials: '250g Art Card, 350g Art Card',
                     finishes: 'Gloss Lamination, Matte Lamination, Spot UV'
                   });
                   setShowProductModal(true);
                 }}
-                className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-bold py-2 px-3.5 rounded-xl flex items-center space-x-1.5 shadow-sm"
+                className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-bold py-2 px-3.5 rounded-xl flex items-center justify-center space-x-1.5 shadow-sm shrink-0"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Product</span>
@@ -816,21 +1024,34 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              {products.map((p) => (
+              {filteredAdminProducts.map((p) => {
+                const galleryCount = Array.from(new Set([
+                  ...(p.image ? [p.image] : []),
+                  ...(Array.isArray(p.secondaryImages) ? p.secondaryImages : [])
+                ].filter(Boolean))).length;
+
+                return (
                 <div key={p.id} className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs flex space-x-3 items-start justify-between">
-                  <div className="flex space-x-3">
-                    <img 
-                      src={p.image} 
-                      alt={p.name} 
-                      className="w-14 h-14 object-cover rounded-xl border border-slate-100 shrink-0"
-                    />
-                    <div>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                  <div className="flex space-x-3 min-w-0">
+                    <div className="w-16 h-16 rounded-xl border border-slate-100 overflow-hidden shrink-0 bg-slate-50">
+                      <ProductImage
+                        src={p.image}
+                        alt={p.name}
+                        placeholderLabel={p.name}
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block truncate">
                         {p.categoryName}
                       </span>
                       <h4 className="text-xs font-bold text-slate-900 line-clamp-1">{p.name}</h4>
                       <p className="text-[11px] text-slate-500 line-clamp-1">{p.tagline}</p>
-                      <span className="text-[10px] text-slate-600 font-medium">Min: {p.minQuantity} units</span>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <span className="text-[10px] text-slate-600 font-medium">Min: {p.minQuantity}</span>
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${galleryCount > 0 ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>
+                          {galleryCount} {galleryCount === 1 ? 'photo' : 'photos'}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -838,6 +1059,11 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                     <button
                       onClick={() => {
                         setEditingProduct(p);
+                        setImageUploadError('');
+                        const initialGallery = Array.from(new Set([
+                          ...(p.image ? [p.image] : []),
+                          ...(Array.isArray(p.secondaryImages) ? p.secondaryImages : [])
+                        ].filter(Boolean)));
                         setProductFormData({
                           name: p.name,
                           slug: p.slug,
@@ -847,30 +1073,33 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                           description: p.description || '',
                           minQuantity: p.minQuantity || 100,
                           image: p.image || '',
-                          standardSizes: Array.isArray(p.standardSizes) ? p.standardSizes.join(', ') : p.standardSizes,
-                          materials: Array.isArray(p.materials) ? p.materials.join(', ') : p.materials,
-                          finishes: Array.isArray(p.finishes) ? p.finishes.join(', ') : p.finishes
+                          secondaryImages: initialGallery,
+                          standardSizes: Array.isArray(p.standardSizes) ? p.standardSizes.join(', ') : (p.standardSizes || ''),
+                          materials: Array.isArray(p.materials) ? p.materials.join(', ') : (p.materials || ''),
+                          finishes: Array.isArray(p.finishes) ? p.finishes.join(', ') : (p.finishes || '')
                         });
                         setShowProductModal(true);
                       }}
-                      className="p-1 text-slate-400 hover:text-slate-800 rounded"
-                      title="Edit Product"
+                      className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100"
+                      title="Edit Product & Images"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteProduct(p.id)}
-                      className="p-1 text-slate-400 hover:text-rose-600 rounded"
+                      className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
                       title="Delete Product"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
-        )}
+          );
+        })()}
       </main>
 
       {/* ==================== MODAL: QUOTATION BUILDER & GENERATOR ==================== */}
@@ -1129,29 +1358,52 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         </div>
       )}
 
-      {/* ==================== MODAL: PRODUCT ADD / EDIT ==================== */}
-      {showProductModal && (
+      {/* ==================== MODAL: PRODUCT ADD / EDIT WITH IMAGE GALLERY MANAGER ==================== */}
+      {showProductModal && (() => {
+        const currentGallery = Array.from(new Set([
+          ...(productFormData.image ? [productFormData.image] : []),
+          ...(Array.isArray(productFormData.secondaryImages) ? productFormData.secondaryImages : [])
+        ].filter(Boolean)));
+
+        return (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-150">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-xl w-full border border-slate-200 overflow-hidden">
-            <div className="bg-brand-navy p-4 text-white flex items-center justify-between">
-              <h3 className="text-xs sm:text-sm font-extrabold">
-                {editingProduct ? 'Edit Printing Product' : 'Add New Printing Product'}
-              </h3>
+          <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]">
+            <div className="bg-brand-navy p-4 text-white flex items-center justify-between shrink-0">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-crimson block">
+                  {editingProduct ? `Product ID: ${editingProduct.id}` : 'Independent Product & Image Entry'}
+                </span>
+                <h3 className="text-xs sm:text-sm font-extrabold">
+                  {editingProduct ? `Edit: ${editingProduct.name}` : 'Add New Printing Product'}
+                </h3>
+              </div>
               <button onClick={() => setShowProductModal(false)} className="text-slate-400 hover:text-white">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleSaveProduct} className="p-4 sm:p-6 space-y-3.5 text-xs">
-              <div>
-                <label className="block font-bold text-slate-700 mb-1">Product Name *</label>
-                <input
-                  type="text"
-                  required
-                  value={productFormData.name}
-                  onChange={(e) => setProductFormData({ ...productFormData, name: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs text-slate-900 focus:bg-white focus:outline-none"
-                />
+            <form onSubmit={handleSaveProduct} className="p-4 sm:p-6 space-y-4 text-xs overflow-y-auto flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">Product Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={productFormData.name}
+                    onChange={(e) => setProductFormData({ ...productFormData, name: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs text-slate-900 focus:bg-white focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">URL Slug (auto if blank)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. executive-bill-book"
+                    value={productFormData.slug}
+                    onChange={(e) => setProductFormData({ ...productFormData, slug: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs text-slate-900 focus:bg-white focus:outline-none"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -1181,12 +1433,190 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                 </div>
               </div>
 
+              {/* ==================== PRODUCT IMAGE & GALLERY MANAGER ==================== */}
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <ImageIcon className="w-4 h-4 text-brand-crimson" />
+                    <h4 className="font-extrabold text-slate-900 text-xs uppercase tracking-wider">
+                      Product Image & Gallery Manager
+                    </h4>
+                  </div>
+                  {uploadingImages && (
+                    <span className="text-[11px] font-bold text-brand-crimson animate-pulse">
+                      Optimizing & uploading...
+                    </span>
+                  )}
+                </div>
+
+                {imageUploadError && (
+                  <div className="bg-rose-50 border border-rose-200 text-rose-700 px-3 py-2 rounded-xl text-[11px] font-semibold">
+                    {imageUploadError}
+                  </div>
+                )}
+
+                {/* Primary Photo Preview + Upload Control */}
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center bg-white p-3 rounded-xl border border-slate-200">
+                  <div className="sm:col-span-5 aspect-[4/3] rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+                    <ProductImage
+                      src={productFormData.image}
+                      alt={productFormData.name || 'Primary Preview'}
+                      placeholderLabel={productFormData.name || 'No Primary Image Selected'}
+                    />
+                  </div>
+                  <div className="sm:col-span-7 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-extrabold text-slate-800 uppercase tracking-wide">
+                        Primary / Featured Photograph
+                      </span>
+                      {productFormData.image && (
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveGalleryImage(productFormData.image)}
+                          className="text-[11px] font-bold text-rose-600 hover:underline flex items-center space-x-1"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                          <span>Remove</span>
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <label className="cursor-pointer bg-brand-navy hover:bg-slate-800 text-white font-bold px-3 py-1.5 rounded-xl text-[11px] inline-flex items-center space-x-1.5 transition">
+                        <UploadCloud className="w-3.5 h-3.5" />
+                        <span>{productFormData.image ? 'Replace Main Photo' : 'Upload Main Photo'}</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          disabled={uploadingImages}
+                          onChange={handleUploadPrimaryImage}
+                          className="hidden"
+                        />
+                      </label>
+
+                      <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded-xl text-[11px] inline-flex items-center space-x-1.5 transition">
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Add Gallery Photos</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          disabled={uploadingImages}
+                          onChange={handleUploadGalleryImages}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-semibold text-slate-500 mb-0.5">
+                        Or enter direct image path / URL
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="/uploads/products/..."
+                        value={productFormData.image}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setProductFormData(prev => ({
+                            ...prev,
+                            image: val,
+                            secondaryImages: val
+                              ? Array.from(new Set([val, ...(prev.secondaryImages || [])]))
+                              : prev.secondaryImages
+                          }));
+                        }}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-[11px] text-slate-800 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Gallery Thumbnails Grid */}
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[11px] font-bold text-slate-700">
+                      Product Gallery ({currentGallery.length} {currentGallery.length === 1 ? 'image' : 'images'})
+                    </span>
+                    <span className="text-[10px] text-slate-400">
+                      Preview, set primary, replace, or delete independently
+                    </span>
+                  </div>
+
+                  {currentGallery.length > 0 ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                      {currentGallery.map((imgUrl, idx) => {
+                        const isPrimary = productFormData.image === imgUrl;
+                        return (
+                          <div
+                            key={`${idx}-${imgUrl.slice(0, 24)}`}
+                            className={`bg-white rounded-xl border p-1.5 space-y-1.5 ${isPrimary ? 'border-brand-crimson ring-1 ring-brand-crimson/30' : 'border-slate-200'}`}
+                          >
+                            <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-slate-100">
+                              <ProductImage src={imgUrl} alt={`Gallery ${idx + 1}`} />
+                              {isPrimary && (
+                                <span className="absolute top-1 left-1 bg-brand-crimson text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded">
+                                  Primary
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="flex items-center justify-between gap-1 text-[10px]">
+                              {!isPrimary ? (
+                                <button
+                                  type="button"
+                                  onClick={() => handleSetPrimaryGalleryImage(imgUrl)}
+                                  className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-1 rounded flex items-center justify-center space-x-0.5"
+                                  title="Set as Primary Image"
+                                >
+                                  <Star className="w-2.5 h-2.5" />
+                                  <span>Primary</span>
+                                </button>
+                              ) : (
+                                <span className="flex-1 text-center font-bold text-brand-crimson py-1">Featured</span>
+                              )}
+
+                              <label
+                                className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-1.5 py-1 rounded"
+                                title="Replace Image"
+                              >
+                                Replace
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  disabled={uploadingImages}
+                                  onChange={(e) => handleReplaceGallerySlot(idx, e)}
+                                  className="hidden"
+                                />
+                              </label>
+
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveGalleryImage(imgUrl)}
+                                className="bg-rose-50 hover:bg-rose-100 text-rose-600 p-1 rounded"
+                                title="Delete Image"
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="bg-white border border-dashed border-slate-300 rounded-xl p-4 text-center text-[11px] text-slate-500">
+                      No photographs uploaded yet for this product. Upload a unique main photo and optional gallery shots above.
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Image URL</label>
+                <label className="block font-bold text-slate-700 mb-1">Tagline / Short Summary</label>
                 <input
                   type="text"
-                  value={productFormData.image}
-                  onChange={(e) => setProductFormData({ ...productFormData, image: e.target.value })}
+                  value={productFormData.tagline}
+                  onChange={(e) => setProductFormData({ ...productFormData, tagline: e.target.value })}
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs text-slate-900 focus:bg-white focus:outline-none"
                 />
               </div>
@@ -1201,6 +1631,36 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                 ></textarea>
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">Sizes (comma-separated)</label>
+                  <input
+                    type="text"
+                    value={productFormData.standardSizes}
+                    onChange={(e) => setProductFormData({ ...productFormData, standardSizes: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:bg-white focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">Paper / Materials</label>
+                  <input
+                    type="text"
+                    value={productFormData.materials}
+                    onChange={(e) => setProductFormData({ ...productFormData, materials: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:bg-white focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">Finishes</label>
+                  <input
+                    type="text"
+                    value={productFormData.finishes}
+                    onChange={(e) => setProductFormData({ ...productFormData, finishes: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-[11px] text-slate-900 focus:bg-white focus:outline-none"
+                  />
+                </div>
+              </div>
+
               <div className="pt-2 flex justify-end space-x-2">
                 <button
                   type="button"
@@ -1211,15 +1671,17 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                 </button>
                 <button
                   type="submit"
-                  className="bg-brand-crimson hover:bg-brand-red text-white px-4 py-1.5 rounded-xl font-bold"
+                  disabled={uploadingImages}
+                  className="bg-brand-crimson hover:bg-brand-red disabled:opacity-50 text-white px-4 py-1.5 rounded-xl font-bold"
                 >
-                  Save Product
+                  {uploadingImages ? 'Uploading...' : 'Save Product'}
                 </button>
               </div>
             </form>
           </div>
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }

@@ -771,29 +771,6 @@ function loadData() {
   try {
     const raw = fs.readFileSync(DB_FILE, 'utf-8');
     const parsed = JSON.parse(raw);
-    
-    // Ensure visiting cards have the real user reference images
-    if (parsed.products) {
-      const vc = parsed.products.find(p => p.slug === 'visiting-cards');
-      if (vc) {
-        vc.image = '/images/visiting-card-red-gloss.jpg';
-        vc.secondaryImages = [
-          '/images/visiting-card-red-gloss.jpg',
-          '/images/visiting-cards-reference-strip.jpg',
-          '/images/visiting-card-madhuram-showcase.jpg'
-        ];
-        vc.paperQuality = '250 GSM / 300 GSM / 350 GSM Art Card';
-        vc.laminationType = 'Gloss Lamination / Thermal Matte';
-      }
-      const bc = parsed.products.find(p => p.slug === 'business-cards');
-      if (bc) {
-        bc.image = '/images/visiting-cards-reference-strip.jpg';
-        bc.secondaryImages = [
-          '/images/visiting-cards-reference-strip.jpg',
-          '/images/visiting-card-red-gloss.jpg'
-        ];
-      }
-    }
     return parsed;
   } catch (err) {
     console.error('Error reading DB_FILE:', err);
@@ -814,10 +791,17 @@ function saveData(data) {
 }
 
 export const db = {
-  // Categories
+  // Categories (always compute accurate live product counts)
   getCategories: () => {
     const data = loadData();
-    return data.categories || [];
+    const prods = data.products || [];
+    return (data.categories || []).map(cat => {
+      const cnt = prods.filter(p => p.categoryId === cat.id).length;
+      return {
+        ...cat,
+        badge: `${cnt} Products`
+      };
+    });
   },
 
   // Products
@@ -845,10 +829,27 @@ export const db = {
 
   addProduct: (productData) => {
     const data = loadData();
-    const id = 'prd-' + (productData.slug || Date.now());
+    const baseSlug = (productData.slug || productData.name || String(Date.now()))
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    const id = 'prd-' + baseSlug + '-' + Date.now().toString(36);
+    const slugExists = (data.products || []).some(p => p.slug === baseSlug);
+    const finalSlug = slugExists ? `${baseSlug}-${Date.now().toString(36)}` : baseSlug;
+    const primaryImage = typeof productData.image === 'string' ? productData.image.trim() : '';
+    const galleryInput = Array.isArray(productData.secondaryImages)
+      ? productData.secondaryImages.map(u => (typeof u === 'string' ? u.trim() : '')).filter(Boolean)
+      : [];
+    const normalizedGallery = primaryImage
+      ? [primaryImage, ...galleryInput.filter(u => u !== primaryImage)]
+      : galleryInput;
+
     const newProduct = {
       id,
       ...productData,
+      slug: finalSlug,
+      image: primaryImage,
+      secondaryImages: normalizedGallery,
       createdAt: new Date().toISOString()
     };
     data.products.push(newProduct);
@@ -860,7 +861,26 @@ export const db = {
     const data = loadData();
     const idx = data.products.findIndex(p => p.id === id || p.slug === id);
     if (idx === -1) return null;
-    data.products[idx] = { ...data.products[idx], ...updates, updatedAt: new Date().toISOString() };
+    const current = data.products[idx];
+    const nextPrimary = updates.image !== undefined
+      ? (typeof updates.image === 'string' ? updates.image.trim() : '')
+      : (current.image || '');
+    const nextGalleryRaw = updates.secondaryImages !== undefined
+      ? (Array.isArray(updates.secondaryImages)
+          ? updates.secondaryImages.map(u => (typeof u === 'string' ? u.trim() : '')).filter(Boolean)
+          : [])
+      : (Array.isArray(current.secondaryImages) ? current.secondaryImages : []);
+    const normalizedGallery = nextPrimary
+      ? [nextPrimary, ...nextGalleryRaw.filter(u => u !== nextPrimary)]
+      : nextGalleryRaw;
+
+    data.products[idx] = {
+      ...current,
+      ...updates,
+      image: nextPrimary,
+      secondaryImages: normalizedGallery,
+      updatedAt: new Date().toISOString()
+    };
     saveData(data);
     return data.products[idx];
   },

@@ -6,6 +6,7 @@ import {
   ExternalLink, Search
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import ProductImage from '../components/ProductImage';
 
 export default function HomePage({ 
   categories = [], 
@@ -411,11 +412,11 @@ export default function HomePage({
             >
               {/* Large Studio Product Photograph */}
               <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5 sm:mb-4">
-                <img
+                <ProductImage
                   src={card.image}
                   alt={card.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  placeholderLabel={card.title}
+                  imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 <span className="absolute top-2 right-2 sm:top-3.5 sm:right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-[9px] sm:text-[11px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-slate-200/80 shadow-sm">
                   {card.badge}
@@ -469,11 +470,11 @@ export default function HomePage({
             >
               <div>
                 <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 mb-2.5 sm:mb-3.5 border border-slate-200/60 shadow-sm">
-                  <img
+                  <ProductImage
                     src={item.image}
                     alt={item.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    placeholderLabel={item.name}
+                    imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <span className="absolute bottom-1.5 left-1.5 sm:bottom-2.5 sm:left-2.5 bg-slate-900/90 backdrop-blur-sm text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2.5 py-0.5 rounded-md shadow-sm">
                     MOQ: {item.minQty}

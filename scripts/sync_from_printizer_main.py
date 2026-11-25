@@ -14,10 +14,15 @@ def slugify(text):
     s = re.sub(r'[^a-z0-9]+', '-', s)
     return s.strip('-')
 
-def paise_to_inr(val):
+PRICE_MARKUP = 1.30
+
+def paise_to_inr(val, apply_markup=True):
     if val is None:
         return None
-    return round(val / 100.0, 2)
+    inr = val / 100.0
+    if apply_markup:
+        inr *= PRICE_MARKUP
+    return round(inr, 2)
 
 conn = sqlite3.connect(MAIN_DB_PATH)
 conn.row_factory = sqlite3.Row
@@ -51,8 +56,8 @@ def build_price_sheet(pr_row):
             'punching': paise_to_inr(pr_row['punching']),
             'folding': paise_to_inr(pr_row['folding']),
         },
-        'courierPerPack': paise_to_inr(pr_row['courier_per_pack']),
-        'transportPerParcel': paise_to_inr(pr_row['transport_per_parcel']),
+        'courierPerPack': paise_to_inr(pr_row['courier_per_pack'], apply_markup=False),
+        'transportPerParcel': paise_to_inr(pr_row['transport_per_parcel'], apply_markup=False),
     }
 
 # Image helper matching existing files in client/public/images/products/
@@ -101,7 +106,7 @@ GROUP_TO_CATEGORY = {
     'box': ('packaging-printing', 'Packaging Printing'),
 }
 
-# Build exact rateList.json from printizer.db (NO +30% markup, exact printizer-main prices!)
+# Build rateList.json from printizer.db with +30% price increase
 rate_list = []
 main_products_normalized = []
 
@@ -153,8 +158,8 @@ for idx, prod in enumerate(sorted_prods):
         'retailSingle': ret_single,
         'retailBoth': ret_both,
         'minimum': retail_sheet['minimum'] if retail_sheet else None,
-        'retailSingleStr': f'₹{ret_single:,.0f}' if ret_single else 'Quoted Individually',
-        'retailBothStr': f'₹{ret_both:,.0f}' if ret_both else '-',
+        'retailSingleStr': (f'₹{int(ret_single):,}' if float(ret_single).is_integer() else f'₹{ret_single:,.2f}') if ret_single else 'Quoted Individually',
+        'retailBothStr': (f'₹{int(ret_both):,}' if float(ret_both).is_integer() else f'₹{ret_both:,.2f}') if ret_both else '-',
         'image': img_path
     })
 
@@ -236,7 +241,8 @@ for idx, prod in enumerate(sorted_prods):
             'gstPercent': gst_rate_pct,
             'baseRate': per_piece_rate,
             'minQuantity': pack_size,
-            'startingPrice': retail_sheet['minimum'] if (dimensions and retail_sheet and retail_sheet['minimum']) else (int(ret_single) if ret_single else 0),
+            'startingPrice': round(retail_sheet['minimum'], 2) if (dimensions and retail_sheet and retail_sheet['minimum']) else (round(ret_single, 2) if ret_single else 0),
+            'markupPercent': 30,
             'unitName': unit_name,
             'supportsBothSides': supports_both,
             'supportsFoil': supports_foil,
@@ -338,13 +344,25 @@ for p in catalog['products']:
         pc['gstPercent'] = 18
         pc['baseRate'] = per_unit
         pc['minQuantity'] = pack_size
-        pc['startingPrice'] = ret['minimum'] if (is_dim and ret['minimum']) else int(ret_s)
+        pc['startingPrice'] = round(ret['minimum'], 2) if (is_dim and ret['minimum']) else round(ret_s, 2)
+        pc['markupPercent'] = 30
         pc['supportsBothSides'] = ret_b is not None and ret_b > 0
         pc['bothSidesMultiplier'] = round(ret_b / ret_s, 4) if (ret_b and ret_s) else 1.0
         pc['supportsFoil'] = bool(ret['foilGold'] or ret['foilSilver'])
         pc['supportsSpotUv'] = bool(ret['spotUvSingle'] or ret['spotUvBoth'])
         pc['priceSheets'] = {'retail': ret, 'gst': spec['gst']}
         updated_count += 1
+    elif not p['id'].startswith('pm-'):
+        pc = p.setdefault('pricingConfig', {})
+        if pc.get('markupPercent') != 30:
+            if p.get('baseRate') is not None:
+                p['baseRate'] = round(float(p['baseRate']) * PRICE_MARKUP, 4)
+            if pc.get('baseRate') is not None:
+                pc['baseRate'] = round(float(pc['baseRate']) * PRICE_MARKUP, 4)
+            if pc.get('startingPrice') is not None:
+                pc['startingPrice'] = round(float(pc['startingPrice']) * PRICE_MARKUP, 2)
+            pc['markupPercent'] = 30
+            updated_count += 1
 
 # Add or update all 49 exact products from printizer-main (idempotent)
 existing_by_slug = {p['slug']: i for i, p in enumerate(catalog['products'])}

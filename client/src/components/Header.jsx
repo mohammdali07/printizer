@@ -82,24 +82,25 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-2xs border-b border-slate-200/80">
-      {/* MAIN NAVBAR */}
-      <div className="max-w-7xl mx-auto px-4.5 xs:px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-6">
-        {/* Brand Logo */}
-        <button 
-          onClick={() => onNavigate('home')} 
-          className="flex items-center shrink-0 text-left focus:outline-none group py-0.5"
-          title="PRINTIZER Commercial Printing"
-        >
-          <img 
-            src="/images/printizer-logo-horizontal.png" 
-            alt="PRINTIZER - Everything Your Business Needs to Print" 
-            className="h-8 xs:h-9 sm:h-10 md:h-12 w-auto max-w-[140px] sm:max-w-none object-contain transition-transform duration-200 group-hover:scale-[1.02]"
-            onError={(e) => {
-              e.target.src = "/images/printizer-logo-horizontal.jpeg";
-            }}
-          />
-        </button>
+    <>
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80">
+        {/* MAIN NAVBAR */}
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-6">
+          {/* Brand Logo */}
+          <button 
+            onClick={() => onNavigate('home')} 
+            className="flex items-center shrink-0 text-left focus:outline-none group py-0.5"
+            title="PRINTIZER Commercial Printing"
+          >
+            <img 
+              src="/images/printizer-logo-horizontal.png" 
+              alt="PRINTIZER - Everything Your Business Needs to Print" 
+              className="h-8 xs:h-9 sm:h-10 md:h-12 w-auto max-w-[140px] sm:max-w-none object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+              onError={(e) => {
+                e.target.src = "/images/printizer-logo-horizontal.jpeg";
+              }}
+            />
+          </button>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center space-x-7 text-xs sm:text-sm font-semibold text-slate-700">
@@ -224,13 +225,13 @@ export default function Header({
             className="md:hidden w-9 h-9 flex items-center justify-center text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition"
             aria-label="Search"
           >
-            <Search className="w-4.5 h-4.5" />
+            <Search className="w-5 h-5" />
           </button>
 
           {/* Primary Action Button - Compact & Crisp on Mobile */}
           <button
             onClick={() => onRequestQuote()}
-            className="bg-brand-crimson hover:bg-brand-red text-white font-extrabold text-[11px] sm:text-xs h-9 px-3 sm:px-4 rounded-xl shadow-xs hover:shadow-md transition flex items-center space-x-1 active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+            className="bg-brand-crimson hover:bg-brand-red text-white font-extrabold text-[11px] sm:text-xs h-9 px-3 sm:px-4 rounded-xl shadow-sm hover:shadow-md transition flex items-center space-x-1 active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
             title="Request Official Quotation"
           >
             <span className="hidden sm:inline">Request </span>
@@ -251,7 +252,7 @@ export default function Header({
 
       {/* 3. MOBILE SEARCH DROPDOWN STRIP */}
       {mobileSearchOpen && (
-        <div className="md:hidden bg-slate-50 border-t border-slate-200 px-3 py-2.5 animate-in fade-in slide-in-from-top-1 text-left">
+        <div className="md:hidden bg-slate-50 border-t border-slate-200 px-5 py-2.5 text-left">
           <div className="relative">
             <input
               type="text"
@@ -295,19 +296,20 @@ export default function Header({
           )}
         </div>
       )}
+    </header>
 
-      {/* 4. LUXURY MOBILE SLIDE-OVER DRAWER */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end animate-in fade-in duration-200">
-          {/* Backdrop Blur Overlay */}
-          <div 
-            onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
-            aria-hidden="true"
-          />
+    {/* 4. LUXURY MOBILE SLIDE-OVER DRAWER (Rendered outside sticky backdrop-blur header so fixed inset-0 covers full viewport) */}
+    {mobileMenuOpen && (
+      <div className="fixed inset-0 z-50 flex justify-end">
+        {/* Backdrop Blur Overlay */}
+        <div 
+          onClick={() => setMobileMenuOpen(false)}
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+          aria-hidden="true"
+        />
 
-          {/* Drawer Pane */}
-          <div className="relative w-full max-w-xs sm:max-w-sm bg-white h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-300 text-left">
+        {/* Drawer Pane */}
+        <div className="relative w-full max-w-xs sm:max-w-sm bg-white h-[100dvh] shadow-2xl flex flex-col z-10 text-left">
             
             {/* Drawer Header */}
             <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
@@ -451,6 +453,6 @@ export default function Header({
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

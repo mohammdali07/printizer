@@ -240,12 +240,12 @@ export default function HomePage({
     <div className="space-y-10 sm:space-y-20 lg:space-y-24 pb-20 bg-[#fafbfc]">
       {/* 1. HERO SECTION (Expanded Full-Width Mobile-First Showcase) */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9]/60 to-[#fafbfc] pt-4 pb-8 xs:pt-6 xs:pb-10 sm:pt-12 sm:pb-16 lg:pt-16 lg:pb-20 border-b border-slate-200/70">
-        <div className="max-w-7xl mx-auto px-4.5 xs:px-5 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-3.5 sm:space-y-5 text-left">
               {/* Small Professional Eyebrow Label */}
-              <div className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 rounded-full py-1 px-3 shadow-2xs">
+              <div className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 rounded-full py-1 px-3 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson animate-pulse"></span>
                 <span className="text-[10px] xs:text-[11px] sm:text-xs font-bold tracking-widest text-slate-700 uppercase">
                   Professional Printing Solutions
@@ -253,7 +253,7 @@ export default function HomePage({
               </div>
 
               {/* Expanded Powerful Headline */}
-              <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] font-extrabold tracking-tight text-slate-900 leading-[1.12]">
+              <h1 className="text-[26px] min-[350px]:text-3xl xs:text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] font-extrabold tracking-tight text-slate-900 leading-[1.12]">
                 Make Every Print <br />
                 <span className="text-brand-crimson relative inline-block">
                   Stand Out.
@@ -282,7 +282,7 @@ export default function HomePage({
                 <div className="flex items-center gap-2 w-full xs:w-auto">
                   <button
                     onClick={() => onNavigate('contact')}
-                    className="flex-1 xs:flex-none bg-white hover:bg-slate-50 text-slate-800 font-bold px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm border border-slate-300 shadow-2xs hover:border-slate-400 transition flex items-center justify-center active:scale-[0.98] cursor-pointer min-h-[46px]"
+                    className="flex-1 xs:flex-none bg-white hover:bg-slate-50 text-slate-800 font-bold px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm border border-slate-300 shadow-sm hover:border-slate-400 transition flex items-center justify-center active:scale-[0.98] cursor-pointer min-h-[46px]"
                   >
                     <span>Contact Us</span>
                   </button>
@@ -302,14 +302,14 @@ export default function HomePage({
             </div>
 
             {/* Right Visual Column: Expanded Large Studio Product Photography Showcase */}
-            <div className="lg:col-span-6 relative flex flex-col items-center justify-center w-full pt-3 sm:pt-4 lg:pt-0">
+            <div className="lg:col-span-6 relative flex flex-col items-center justify-center w-full pt-2 sm:pt-4 lg:pt-0">
               <div 
                 className="relative w-full max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto flex flex-col items-center justify-center"
                 onMouseEnter={() => setHeroPaused(true)}
                 onMouseLeave={() => setHeroPaused(false)}
               >
                 {/* Ambient Studio Lighting Backdrop */}
-                <div className="relative w-full aspect-[4/3] xs:aspect-[16/11] sm:aspect-[16/10] max-h-[300px] xs:max-h-[340px] sm:max-h-[400px] lg:max-h-[460px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-100/90 via-slate-50/60 to-white/90 border border-slate-200/70 p-3 sm:p-6 flex items-center justify-center shadow-xs overflow-hidden">
+                <div className="relative w-full aspect-[4/3] xs:aspect-[16/11] sm:aspect-[16/10] max-h-[300px] xs:max-h-[340px] sm:max-h-[400px] lg:max-h-[460px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-100/90 via-slate-50/60 to-white/90 border border-slate-200/70 p-3 sm:p-6 flex items-center justify-center shadow-sm overflow-hidden">
                   {/* Subtle ambient light pool */}
                   <div 
                     className={`absolute w-4/5 h-4/5 rounded-full bg-gradient-to-tr ${activeHero.circleBg} blur-2xl opacity-70 pointer-events-none transition-all duration-700`}
@@ -324,7 +324,7 @@ export default function HomePage({
                   />
 
                   {/* Subtle Corner Badge: Product Classification */}
-                  <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-lg py-1 px-2.5 shadow-2xs text-[10px] sm:text-xs font-bold text-slate-700 flex items-center space-x-1.5 pointer-events-none">
+                  <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 z-20 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-lg py-1 px-2.5 shadow-sm text-[10px] sm:text-xs font-bold text-slate-700 flex items-center space-x-1.5 pointer-events-none">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson"></span>
                     <span>{activeHero.badge}</span>
                   </div>
@@ -351,7 +351,7 @@ export default function HomePage({
                         onClick={() => setCurrentHeroSlide(idx)}
                         className={`transition-all duration-300 rounded-full cursor-pointer ${
                           currentHeroSlide === idx
-                            ? 'w-6 sm:w-7 h-2 bg-slate-900 shadow-xs'
+                            ? 'w-6 sm:w-7 h-2 bg-slate-900 shadow-sm'
                             : 'w-2 h-2 bg-slate-300 hover:bg-slate-500'
                         }`}
                         aria-label={`Jump to slide ${idx + 1}`}
@@ -366,7 +366,7 @@ export default function HomePage({
           {/* Trust Indicators: 3 Balanced Compact Cards (Full Width & Clean on All Viewports) */}
           <div className="w-full mt-6 sm:mt-10 pt-4 sm:pt-6 border-t border-slate-200/80">
             <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6 text-center sm:text-left">
-              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-xs">
+              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-md">
                 <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0 text-emerald-600">
                   <Check className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
@@ -380,7 +380,7 @@ export default function HomePage({
                 </div>
               </div>
 
-              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-xs">
+              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-md">
                 <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 text-blue-600">
                   <Truck className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
@@ -394,7 +394,7 @@ export default function HomePage({
                 </div>
               </div>
 
-              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-xs">
+              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-md">
                 <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center shrink-0 text-purple-600">
                   <Palette className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
@@ -413,7 +413,7 @@ export default function HomePage({
       </section>
 
       {/* 2. EXPLORE OUR PRINTING SOLUTIONS (Category Showcase Grid) */}
-      <section id="categories-showcase" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
+      <section id="categories-showcase" className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 scroll-mt-20">
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-1.5 sm:space-y-2">
           <span className="text-[10px] sm:text-xs font-bold text-brand-crimson uppercase tracking-widest block">
             Commercial Printing Catalogue
@@ -426,23 +426,23 @@ export default function HomePage({
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 min-[350px]:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
           {showcaseCategories.map((card) => (
             <div
               key={card.id}
               onClick={() => onNavigate('category', card.targetCategory)}
-              className="group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between"
+              className="group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between"
               title={`View ${card.title} Catalogue`}
             >
               {/* Large Studio Product Photograph */}
-              <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-xs mb-2.5 sm:mb-4">
+              <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5 sm:mb-4">
                 <img
                   src={card.image}
                   alt={card.title}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <span className="absolute top-2 right-2 sm:top-3.5 sm:right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-[9px] sm:text-[11px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-slate-200/80 shadow-xs">
+                <span className="absolute top-2 right-2 sm:top-3.5 sm:right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-[9px] sm:text-[11px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-slate-200/80 shadow-sm">
                   {card.badge}
                 </span>
               </div>
@@ -472,7 +472,7 @@ export default function HomePage({
       </section>
 
       {/* 3. FEATURED COMMERCIAL PRODUCTS (Phase 5.3 - Real Products Grid) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
             Featured Collaterals
@@ -485,22 +485,22 @@ export default function HomePage({
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-5">
+        <div className="grid grid-cols-1 min-[350px]:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-5">
           {featuredProducts.map((item) => (
             <div
               key={item.id}
               onClick={() => onNavigate('product', item.slug)}
-              className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-slate-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-left"
+              className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-left"
             >
               <div>
-                <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 mb-2.5 sm:mb-3.5 border border-slate-200/60 shadow-xs">
+                <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 mb-2.5 sm:mb-3.5 border border-slate-200/60 shadow-sm">
                   <img
                     src={item.image}
                     alt={item.name}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <span className="absolute bottom-1.5 left-1.5 sm:bottom-2.5 sm:left-2.5 bg-slate-900/90 backdrop-blur-xs text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2.5 py-0.5 rounded-md shadow-xs">
+                  <span className="absolute bottom-1.5 left-1.5 sm:bottom-2.5 sm:left-2.5 bg-slate-900/90 backdrop-blur-sm text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2.5 py-0.5 rounded-md shadow-sm">
                     MOQ: {item.minQty}
                   </span>
                 </div>
@@ -536,8 +536,8 @@ export default function HomePage({
       </section>
 
       {/* 4. WHY CHOOSE PRINTIZER (Phase 5.4 - Genuine Business Standards) */}
-      <section className="bg-slate-50 border-y border-slate-200 py-16 sm:py-20 text-left">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="bg-slate-50 border-y border-slate-200 py-14 sm:py-20 text-left">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-2">
             <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
               Our Commitment
@@ -610,7 +610,7 @@ export default function HomePage({
       </section>
 
       {/* 5. HOW IT WORKS (Phase 5.5 - 4-Step Process) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
             Ordering Process
@@ -667,10 +667,10 @@ export default function HomePage({
       </section>
 
       {/* 6. BESTSELLING COLLATERALS BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl bg-slate-900 text-white overflow-hidden shadow-xl border border-slate-800">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-            <div className="lg:col-span-5 p-8 sm:p-12 lg:p-14 space-y-4 text-left">
+            <div className="lg:col-span-5 p-6 sm:p-12 lg:p-14 space-y-4 text-left">
               <span className="text-[10px] font-bold tracking-widest text-rose-300 uppercase bg-white/10 px-3 py-1 rounded-full inline-block">
                 Executive Stationery
               </span>
@@ -704,7 +704,7 @@ export default function HomePage({
       </section>
 
       {/* 7. PRINTING CAPABILITIES & FINISHING STANDARDS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
             Quality Assurance
@@ -751,8 +751,8 @@ export default function HomePage({
       </section>
 
       {/* 9. BUSINESS CONTACT & CONSULTATION BANNER (Phase 5.6) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-        <div className="rounded-3xl bg-slate-900 p-8 sm:p-12 text-white shadow-xl relative overflow-hidden border border-slate-800">
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
+        <div className="rounded-3xl bg-slate-900 p-6 sm:p-12 text-white shadow-xl relative overflow-hidden border border-slate-800">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-3">

@@ -217,6 +217,7 @@ export default function App() {
       {currentPage !== 'admin' && (
         <WhatsAppFloating
           defaultProduct={activeProduct ? activeProduct.name : null}
+          currentPage={currentPage}
         />
       )}
 

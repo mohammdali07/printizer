@@ -220,12 +220,12 @@ export default function Footer({ onNavigate, categories = [] }) {
       </div>
 
       {/* 3. BOTTOM COPYRIGHT BAR */}
-      <div className="border-t border-slate-100 py-6 px-4 sm:px-6 lg:px-8 bg-slate-50/50">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <div className="border-t border-slate-100 py-6 pb-20 lg:pb-6 px-5 sm:px-6 lg:px-8 bg-slate-50/50">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 text-center sm:text-left">
           <p>
             &copy; {new Date().getFullYear()} <strong>PRINTIZER</strong> &bull; Everything Your Business Needs to Print. All rights reserved.
           </p>
-          <div className="flex items-center space-x-3 text-[11px] font-medium text-slate-500">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] font-medium text-slate-500">
             <span>PAN India Delivery</span>
             <span>&bull;</span>
             <span>CMYK True Color Calibration</span>

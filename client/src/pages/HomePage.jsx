@@ -515,18 +515,10 @@ export default function HomePage({
                 </p>
               </div>
 
-              <div className="pt-2 sm:pt-3.5 mt-2.5 sm:mt-4 border-t border-slate-100 flex flex-col xs:flex-row xs:items-center justify-between gap-1 text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
-                <div>
-                  <span className="text-[9px] sm:text-[10px] text-slate-400 font-medium block">Starting from</span>
-                  <span className="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-brand-crimson">
-                    ₹{item.startingPrice ? item.startingPrice.toLocaleString('en-IN') : 'Quote'}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-1 text-brand-crimson text-[10px] sm:text-xs font-bold self-end xs:self-auto">
-                  <span>Configure</span>
-                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
-                    <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 transform group-hover:translate-x-0.5 transition-transform" />
-                  </div>
+              <div className="pt-2.5 sm:pt-3.5 mt-2.5 sm:mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
+                <span className="tracking-wide text-[10px] sm:text-xs">View Product</span>
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
+                  <ArrowRight className="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </div>
             </div>

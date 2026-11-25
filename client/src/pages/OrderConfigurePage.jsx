@@ -439,10 +439,10 @@ Please share the final quotation and artwork instructions. Thank you!`;
   };
 
   return (
-    <div className="bg-white min-h-screen pb-24">
+    <div className="bg-[#f4f6f9] min-h-screen pb-24">
       {/* Top Breadcrumb & Page Title Strip */}
-      <div className="bg-slate-50 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+      <div className="bg-white border-b border-slate-200/80">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="space-y-1">
               <div className="flex items-center space-x-1.5 text-xs text-slate-500">
@@ -465,7 +465,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                   {getConfigHeading(activeProduct?.name)}
                 </span>
               </div>
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-lg sm:text-2xl font-extrabold text-slate-900 tracking-tight">
                 {getConfigHeading(activeProduct?.name)}
               </h1>
             </div>
@@ -475,7 +475,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                 <button
                   type="button"
                   onClick={() => onNavigate('product', activeProduct.slug)}
-                  className="bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5"
+                  className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2 rounded-lg transition flex items-center space-x-1.5"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span>View Details &amp; Gallery</span>
@@ -484,7 +484,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
               <button
                 type="button"
                 onClick={() => summaryRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-brand-navy hover:bg-slate-800 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5 shadow-xs"
+                className="bg-brand-navy hover:bg-slate-800 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition flex items-center space-x-1.5 shadow-xs"
               >
                 <ShoppingBag className="w-3.5 h-3.5 text-brand-crimson" />
                 <span>Order Summary ({orderItems.length})</span>
@@ -495,13 +495,13 @@ Please share the final quotation and artwork instructions. Thank you!`;
       </div>
 
       {/* Main Content Container */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-8" ref={formRef}>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-5" ref={formRef}>
 
-        {/* SECTION 2: CLEAN TOP CATEGORY SELECTION */}
-        <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs">
+        {/* CARD 1: SELECT CATEGORY (CLEAN WHITE CARD MATCHING REFERENCE) */}
+        <div className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-6 shadow-2xs">
           <label
             htmlFor="config-category-select"
-            className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-2"
+            className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-2"
           >
             Select Category
           </label>
@@ -509,7 +509,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
             id="config-category-select"
             value={selectedCategoryId}
             onChange={(e) => handleCategoryChange(e.target.value)}
-            className="w-full bg-white border border-slate-300 hover:border-slate-400 focus:border-brand-navy focus:outline-none rounded-xl py-3 px-4 text-sm font-bold text-slate-900 shadow-2xs cursor-pointer"
+            className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition cursor-pointer"
           >
             {categories.map((cat) => {
               const count = products.filter(p => p.categoryId === cat.id).length;
@@ -522,16 +522,28 @@ Please share the final quotation and artwork instructions. Thank you!`;
           </select>
         </div>
 
-        {/* SECTION 3: ADD ORDER FORM (CLEAN LIGHT-GREY TWO-COLUMN WORKBENCH) */}
+        {/* CARD 2: ADD ORDER FORM (CLEAN WHITE TWO-COLUMN WORKBENCH MATCHING REFERENCE) */}
         <form
           onSubmit={handleAddOrUpdateOrder}
-          className="bg-slate-100/80 border border-slate-200 rounded-3xl p-4 sm:p-8 shadow-sm space-y-6"
+          className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-7 shadow-2xs space-y-5"
         >
-          {/* Active Product Context Header Strip */}
-          {activeProduct && (
-            <div className="bg-white rounded-2xl border border-slate-200 p-3.5 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center space-x-3.5">
-                <div className="w-20 h-16 sm:w-24 sm:h-18 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 shrink-0">
+          {/* Header Row: Add Order + Compact Product Strip */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div className="flex items-center space-x-2.5">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-crimson to-indigo-600 text-white flex items-center justify-center shadow-xs shrink-0">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <div>
+                <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 leading-tight">
+                  {editingItemId ? 'Edit Order Item' : 'Add Order'}
+                </h2>
+                <div className="h-0.5 w-20 bg-gradient-to-r from-brand-crimson via-rose-400 to-indigo-500 rounded-full mt-0.5"></div>
+              </div>
+            </div>
+
+            {activeProduct && (
+              <div className="flex items-center space-x-3 bg-slate-50/90 border border-slate-200/70 rounded-lg px-3 py-1.5">
+                <div className="w-10 h-8 rounded overflow-hidden border border-slate-200 bg-white shrink-0">
                   <ProductImage
                     src={activeProduct.image}
                     alt={activeProduct.name}
@@ -539,74 +551,61 @@ Please share the final quotation and artwork instructions. Thank you!`;
                     eager={true}
                   />
                 </div>
-                <div className="space-y-0.5">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-brand-crimson bg-rose-50 px-2 py-0.5 rounded-full">
-                      {activeProduct.categoryName}
-                    </span>
-                    {cfg?.hsnCode && (
-                      <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
-                        HSN {cfg.hsnCode}
-                      </span>
-                    )}
-                    <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
-                      MOQ: {cfg?.minQuantity?.toLocaleString('en-IN')} {cfg?.unitName}
-                    </span>
-                  </div>
-                  <h2 className="text-base sm:text-lg font-extrabold text-slate-900">
+                <div className="min-w-0">
+                  <div className="text-xs font-bold text-slate-900 truncate max-w-[190px] sm:max-w-[240px]">
                     {activeProduct.name}
-                  </h2>
-                  <p className="text-xs text-slate-500 line-clamp-1">
-                    {activeProduct.tagline || activeProduct.description}
-                  </p>
+                  </div>
+                  <div className="text-[10px] font-semibold text-slate-500">
+                    MOQ: {cfg?.minQuantity?.toLocaleString('en-IN')} {cfg?.unitName}
+                    {cfg?.hsnCode ? ` • HSN ${cfg.hsnCode}` : ''}
+                  </div>
                 </div>
+                {editingItemId && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditingItemId(null);
+                      resetFieldsForProduct(activeProduct);
+                      setFormNotice('');
+                    }}
+                    className="text-[11px] font-bold text-brand-crimson hover:underline shrink-0 ml-1"
+                  >
+                    Cancel Edit
+                  </button>
+                )}
               </div>
-
-              {editingItemId && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEditingItemId(null);
-                    resetFieldsForProduct(activeProduct);
-                    setFormNotice('');
-                  }}
-                  className="text-xs font-bold text-slate-500 hover:text-slate-800 underline shrink-0"
-                >
-                  Cancel Editing Item
-                </button>
-              )}
-            </div>
-          )}
+            )}
+          </div>
 
           {formNotice && (
-            <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-xl text-xs font-semibold flex items-center space-x-2">
+            <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center space-x-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{formNotice}</span>
             </div>
           )}
 
           {formError && (
-            <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-xs font-semibold flex items-center space-x-2">
+            <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center space-x-2">
               <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
               <span>{formError}</span>
             </div>
           )}
 
           {/* TWO-COLUMN RESPONSIVE FORM GRID */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 items-start">
 
             {/* ==================== LEFT COLUMN ==================== */}
             <div className="space-y-4">
               {/* 1. Select Product */}
               <div>
-                <label htmlFor="order-product-select" className="block text-xs font-bold text-slate-800 mb-1.5">
-                  Select Product *
+                <label htmlFor="order-product-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                  Select Product <span className="text-brand-crimson">*</span>
                 </label>
                 <select
                   id="order-product-select"
                   value={activeProduct?.slug || ''}
                   onChange={(e) => handleProductChange(e.target.value)}
-                  className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3.5 text-xs sm:text-sm font-semibold text-slate-900 shadow-2xs"
+                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
                 >
                   {categoryProducts.map((p) => (
                     <option key={p.id} value={p.slug}>
@@ -616,58 +615,99 @@ Please share the final quotation and artwork instructions. Thank you!`;
                 </select>
               </div>
 
-              {/* 2. Select Product Material / Paper Type */}
-              {cfg?.showMaterial && (
-                <div>
-                  <label htmlFor="order-material-select" className="block text-xs font-bold text-slate-800 mb-1.5">
-                    Select Product Material / Paper Type *
-                  </label>
-                  <select
-                    id="order-material-select"
-                    value={material}
-                    onChange={(e) => setMaterial(e.target.value)}
-                    className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3.5 text-xs sm:text-sm font-semibold text-slate-900 shadow-2xs"
-                  >
-                    {cfg.materials.map((m) => (
-                      <option key={m} value={m}>{m}</option>
-                    ))}
-                  </select>
+              {/* 2. Foil & Spot UV side-by-side (matching screenshot) */}
+              {(cfg?.supportsFoil || cfg?.supportsSpotUv) && (
+                <div className="grid grid-cols-2 gap-3.5">
+                  {cfg.supportsFoil && (
+                    <div>
+                      <label htmlFor="order-foil-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                        Foil
+                      </label>
+                      <select
+                        id="order-foil-select"
+                        value={foil}
+                        onChange={(e) => setFoil(e.target.value)}
+                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800 transition"
+                      >
+                        <option value="none">No Foil</option>
+                        <option value="gold">
+                          Gold Foil {cfg.priceSheets?.[customerClass]?.foilGold ? `(+₹${cfg.priceSheets[customerClass].foilGold})` : ''}
+                        </option>
+                        <option value="silver">
+                          Silver Foil {cfg.priceSheets?.[customerClass]?.foilSilver ? `(+₹${cfg.priceSheets[customerClass].foilSilver})` : ''}
+                        </option>
+                      </select>
+                    </div>
+                  )}
+
+                  {cfg.supportsSpotUv && (
+                    <div>
+                      <label htmlFor="order-spotuv-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                        Spot UV
+                      </label>
+                      <select
+                        id="order-spotuv-select"
+                        value={spotUv}
+                        onChange={(e) => setSpotUv(e.target.value)}
+                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800 transition"
+                      >
+                        <option value="none">No Spot UV</option>
+                        <option value="spot-uv">
+                          Spot UV {cfg.priceSheets?.[customerClass]?.spotUvSingle ? `(+₹${cfg.priceSheets[customerClass].spotUvSingle})` : ''}
+                        </option>
+                      </select>
+                    </div>
+                  )}
                 </div>
               )}
 
-              {/* 3. Select Size (Standard Dropdown OR Custom Area Width x Height) */}
-              {cfg?.showSize && (
-                cfg.pricingKind === 'area' && cfg.hasDimensions ? (
+              {/* 3. Material & Size (paired cleanly when standard; dimensions if area-priced) */}
+              {cfg?.pricingKind === 'area' && cfg?.hasDimensions ? (
+                <div className="space-y-3">
+                  {cfg?.showMaterial && (
+                    <div>
+                      <label htmlFor="order-material-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                        Select Material / Paper Type <span className="text-brand-crimson">*</span>
+                      </label>
+                      <select
+                        id="order-material-select"
+                        value={material}
+                        onChange={(e) => setMaterial(e.target.value)}
+                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
+                      >
+                        {cfg.materials.map((m) => (
+                          <option key={m} value={m}>{m}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="text-xs font-bold text-slate-800">
-                        Custom Size / Dimensions (Inches) *
+                      <label className="text-xs sm:text-[13px] font-bold text-slate-800">
+                        Dimensions (Inches) <span className="text-brand-crimson">*</span>
                       </label>
-                      <span className="text-[11px] font-bold text-brand-crimson">Rounded to ¼"</span>
+                      <span className="text-[11px] font-semibold text-brand-crimson">Rounded to ¼&quot;</span>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-[10px] font-semibold text-slate-500 mb-1">Width (in)</label>
-                        <input
-                          type="number"
-                          min="0.25"
-                          step="0.25"
-                          value={dimWidth}
-                          onChange={(e) => setDimWidth(e.target.value)}
-                          className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3 text-xs sm:text-sm font-bold text-slate-900"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] font-semibold text-slate-500 mb-1">Height (in)</label>
-                        <input
-                          type="number"
-                          min="0.25"
-                          step="0.25"
-                          value={dimHeight}
-                          onChange={(e) => setDimHeight(e.target.value)}
-                          className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3 text-xs sm:text-sm font-bold text-slate-900"
-                        />
-                      </div>
+                    <div className="grid grid-cols-2 gap-3.5">
+                      <input
+                        type="number"
+                        min="0.25"
+                        step="0.25"
+                        placeholder="Width (in)"
+                        value={dimWidth}
+                        onChange={(e) => setDimWidth(e.target.value)}
+                        className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
+                      />
+                      <input
+                        type="number"
+                        min="0.25"
+                        step="0.25"
+                        placeholder="Height (in)"
+                        value={dimHeight}
+                        onChange={(e) => setDimHeight(e.target.value)}
+                        className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
+                      />
                     </div>
                     {pricing.areaSqIn && (
                       <p className="text-[11px] text-slate-500 mt-1">
@@ -675,37 +715,59 @@ Please share the final quotation and artwork instructions. Thank you!`;
                       </p>
                     )}
                   </div>
-                ) : (
-                  <div>
-                    <label htmlFor="order-size-select" className="block text-xs font-bold text-slate-800 mb-1.5">
-                      Select Size *
-                    </label>
-                    <select
-                      id="order-size-select"
-                      value={size}
-                      onChange={(e) => setSize(e.target.value)}
-                      className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3.5 text-xs sm:text-sm font-semibold text-slate-900 shadow-2xs"
-                    >
-                      {cfg.sizes.map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </select>
-                  </div>
-                )
+                </div>
+              ) : (cfg?.showMaterial || cfg?.showSize) && (
+                <div className={`grid gap-3.5 ${cfg.showMaterial && cfg.showSize ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}>
+                  {cfg.showMaterial && (
+                    <div>
+                      <label htmlFor="order-material-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                        Paper / Material <span className="text-brand-crimson">*</span>
+                      </label>
+                      <select
+                        id="order-material-select"
+                        value={material}
+                        onChange={(e) => setMaterial(e.target.value)}
+                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800 transition"
+                      >
+                        {cfg.materials.map((m) => (
+                          <option key={m} value={m}>{m}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+
+                  {cfg.showSize && (
+                    <div>
+                      <label htmlFor="order-size-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                        Size <span className="text-brand-crimson">*</span>
+                      </label>
+                      <select
+                        id="order-size-select"
+                        value={size}
+                        onChange={(e) => setSize(e.target.value)}
+                        className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800 transition"
+                      >
+                        {cfg.sizes.map((s) => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                </div>
               )}
 
-              {/* 4. Select Finishing Options + Foil / Spot UV / Job Finishing Add-ons */}
+              {/* 4. Finishing Options + sheet finishing toggles */}
               {cfg?.showFinishing && (
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   <div>
-                    <label htmlFor="order-finishing-select" className="block text-xs font-bold text-slate-800 mb-1.5">
-                      Select Finishing Options
+                    <label htmlFor="order-finishing-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                      Finishing Options
                     </label>
                     <select
                       id="order-finishing-select"
                       value={finishing}
                       onChange={(e) => setFinishing(e.target.value)}
-                      className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3.5 text-xs sm:text-sm font-semibold text-slate-900 shadow-2xs"
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
                     >
                       {cfg.finishes.map((f) => (
                         <option key={f} value={f}>{f}</option>
@@ -713,51 +775,6 @@ Please share the final quotation and artwork instructions. Thank you!`;
                     </select>
                   </div>
 
-                  {/* Embellishments when supported */}
-                  {(cfg.supportsFoil || cfg.supportsSpotUv) && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white p-3 rounded-xl border border-slate-200">
-                      {cfg.supportsFoil && (
-                        <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                            Hot Foil Stamping
-                          </label>
-                          <select
-                            value={foil}
-                            onChange={(e) => setFoil(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-300 rounded-lg py-2 px-2.5 text-xs font-semibold text-slate-900"
-                          >
-                            <option value="none">No Foil</option>
-                            <option value="gold">
-                              Gold Foil {cfg.priceSheets?.[customerClass]?.foilGold ? `(+₹${cfg.priceSheets[customerClass].foilGold}/pack)` : ''}
-                            </option>
-                            <option value="silver">
-                              Silver Foil {cfg.priceSheets?.[customerClass]?.foilSilver ? `(+₹${cfg.priceSheets[customerClass].foilSilver}/pack)` : ''}
-                            </option>
-                          </select>
-                        </div>
-                      )}
-
-                      {cfg.supportsSpotUv && (
-                        <div>
-                          <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                            Raised Spot UV Gloss
-                          </label>
-                          <select
-                            value={spotUv}
-                            onChange={(e) => setSpotUv(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-300 rounded-lg py-2 px-2.5 text-xs font-semibold text-slate-900"
-                          >
-                            <option value="none">No Spot UV</option>
-                            <option value="spot-uv">
-                              Raised Spot UV {cfg.priceSheets?.[customerClass]?.spotUvSingle ? `(+₹${cfg.priceSheets[customerClass].spotUvSingle}/pack)` : ''}
-                            </option>
-                          </select>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Finishing add-ons from price sheet (Creasing, Perforation, Die, Half Blade, etc.) */}
                   {cfg.priceSheets?.[customerClass]?.finishing && (
                     <div className="flex flex-wrap gap-1.5">
                       {[
@@ -777,10 +794,10 @@ Please share the final quotation and artwork instructions. Thank you!`;
                               key={addon.key}
                               type="button"
                               onClick={() => setSelectedAddons(prev => ({ ...prev, [addon.key]: !prev[addon.key] }))}
-                              className={`px-2.5 py-1.5 rounded-lg border text-[11px] font-bold transition ${
+                              className={`px-2.5 py-1 rounded-md border text-[11px] font-semibold transition ${
                                 active
                                   ? 'bg-brand-navy text-white border-brand-navy'
-                                  : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
+                                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
                               }`}
                             >
                               {addon.label} (+₹{fee})
@@ -792,18 +809,18 @@ Please share the final quotation and artwork instructions. Thank you!`;
                 </div>
               )}
 
-              {/* 5. Product-Specific Additional Specifications (NCR / Copy Type / Binding / Sets per Book) */}
+              {/* 5. Conditional Product-Specific Book Fields (NCR / Copy Type / Binding / Sets) */}
               {(cfg?.showNcr || cfg?.showCopyType || cfg?.showBinding || cfg?.showSetsPerBook) && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {cfg.showNcr && (
                     <div>
-                      <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                      <label className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
                         NCR / Paper Carbon Option
                       </label>
                       <select
                         value={ncrOption}
                         onChange={(e) => setNcrOption(e.target.value)}
-                        className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3 text-xs font-semibold text-slate-900"
+                        className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
                       >
                         {cfg.ncrOptions.map(opt => (
                           <option key={opt} value={opt}>{opt}</option>
@@ -814,13 +831,13 @@ Please share the final quotation and artwork instructions. Thank you!`;
 
                   {cfg.showCopyType && (
                     <div>
-                      <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                      <label className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
                         Copy Type (Duplicate / Triplicate)
                       </label>
                       <select
                         value={copyType}
                         onChange={(e) => setCopyType(e.target.value)}
-                        className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3 text-xs font-semibold text-slate-900"
+                        className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
                       >
                         {cfg.copyOptions.map(opt => (
                           <option key={opt} value={opt}>{opt}</option>
@@ -831,13 +848,13 @@ Please share the final quotation and artwork instructions. Thank you!`;
 
                   {cfg.showBinding && (
                     <div>
-                      <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                      <label className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
                         Binding Option
                       </label>
                       <select
                         value={bindingOption}
                         onChange={(e) => setBindingOption(e.target.value)}
-                        className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3 text-xs font-semibold text-slate-900"
+                        className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
                       >
                         {cfg.bindingOptions.map(opt => (
                           <option key={opt} value={opt}>{opt}</option>
@@ -848,13 +865,13 @@ Please share the final quotation and artwork instructions. Thank you!`;
 
                   {cfg.showSetsPerBook && (
                     <div>
-                      <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                      <label className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
                         Number of Sets
                       </label>
                       <select
                         value={setsPerBook}
                         onChange={(e) => setSetsPerBook(e.target.value)}
-                        className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3 text-xs font-semibold text-slate-900"
+                        className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
                       >
                         {cfg.setsOptions.map(opt => (
                           <option key={opt} value={opt}>{opt}</option>
@@ -864,6 +881,21 @@ Please share the final quotation and artwork instructions. Thank you!`;
                   )}
                 </div>
               )}
+
+              {/* 6. Job Name (clean input matching screenshot bottom-left) */}
+              <div>
+                <label htmlFor="order-job-name" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                  Job Name
+                </label>
+                <input
+                  id="order-job-name"
+                  type="text"
+                  placeholder="Please enter job name"
+                  value={jobName}
+                  onChange={(e) => setJobName(e.target.value)}
+                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 placeholder:text-slate-400 transition"
+                />
+              </div>
             </div>
 
             {/* ==================== RIGHT COLUMN ==================== */}
@@ -871,14 +903,14 @@ Please share the final quotation and artwork instructions. Thank you!`;
               {/* 1. Select Printing */}
               {cfg?.showPrinting && (
                 <div>
-                  <label htmlFor="order-printing-select" className="block text-xs font-bold text-slate-800 mb-1.5">
-                    Select Printing *
+                  <label htmlFor="order-printing-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                    Select Printing <span className="text-brand-crimson">*</span>
                   </label>
                   <select
                     id="order-printing-select"
                     value={printing}
                     onChange={(e) => setPrinting(e.target.value)}
-                    className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3.5 text-xs sm:text-sm font-semibold text-slate-900 shadow-2xs"
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
                   >
                     {cfg.printingOptions.map((opt) => (
                       <option key={opt} value={opt}>{opt}</option>
@@ -890,14 +922,14 @@ Please share the final quotation and artwork instructions. Thank you!`;
               {/* 2. Select Colour Options */}
               {cfg?.showColour && (
                 <div>
-                  <label htmlFor="order-colour-select" className="block text-xs font-bold text-slate-800 mb-1.5">
-                    Select Colour Options *
+                  <label htmlFor="order-colour-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                    Select Colour Options <span className="text-brand-crimson">*</span>
                   </label>
                   <select
                     id="order-colour-select"
                     value={colour}
                     onChange={(e) => setColour(e.target.value)}
-                    className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3.5 text-xs sm:text-sm font-semibold text-slate-900 shadow-2xs"
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
                   >
                     {cfg.colourOptions.map((opt) => (
                       <option key={opt} value={opt}>{opt}</option>
@@ -909,11 +941,11 @@ Please share the final quotation and artwork instructions. Thank you!`;
               {/* 3. Select Quantity */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label htmlFor="order-qty-select" className="text-xs font-bold text-slate-800">
-                    Select Quantity ({cfg?.unitName || 'Units'}) *
+                  <label htmlFor="order-qty-select" className="text-xs sm:text-[13px] font-bold text-slate-800">
+                    Select Quantity <span className="text-brand-crimson">*</span>
                   </label>
-                  <span className="text-[11px] font-bold text-brand-crimson">
-                    Min Qty: {cfg?.minQuantity?.toLocaleString('en-IN')}
+                  <span className="text-[11px] font-semibold text-slate-500">
+                    Min: {cfg?.minQuantity?.toLocaleString('en-IN')} {cfg?.unitName}
                   </span>
                 </div>
 
@@ -929,7 +961,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                       setQuantity(Number(e.target.value));
                     }
                   }}
-                  className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3.5 text-xs sm:text-sm font-semibold text-slate-900 shadow-2xs"
+                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
                 >
                   {(cfg?.quantityTiers || []).map((q) => (
                     <option key={q} value={String(q)}>
@@ -947,157 +979,108 @@ Please share the final quotation and artwork instructions. Thank you!`;
                     placeholder={`Minimum ${cfg?.minQuantity || 1}`}
                     value={customQty}
                     onChange={(e) => setCustomQty(e.target.value)}
-                    className="mt-2 w-full bg-white border border-brand-navy rounded-xl py-2.5 px-3.5 text-xs sm:text-sm font-bold text-slate-900 focus:outline-none"
+                    className="mt-2 w-full bg-white border border-blue-400 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-semibold text-slate-900"
                   />
                 )}
               </div>
 
-              {/* 4. Select Delivery Option (if supported) + Billing Class */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                {cfg?.showDelivery && (
-                  <div>
-                    <label htmlFor="order-delivery-select" className="block text-xs font-bold text-slate-800 mb-1.5">
-                      Select Delivery Option
-                    </label>
-                    <select
-                      id="order-delivery-select"
-                      value={deliveryMode}
-                      onChange={(e) => setDeliveryMode(e.target.value)}
-                      className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3 text-xs font-semibold text-slate-900"
-                    >
-                      <option value="collect">Office Pickup (Free)</option>
-                      <option value="courier">
-                        Courier (+₹{cfg.priceSheets?.[customerClass]?.courierPerPack || 60}/pack)
-                      </option>
-                      <option value="transport">
-                        Transport (+₹{cfg.priceSheets?.[customerClass]?.transportPerParcel || 300}/parcel)
-                      </option>
-                    </select>
-                  </div>
-                )}
+              {/* 4. Delivery & Billing Class */}
+              {(cfg?.showDelivery || cfg?.priceSheets) && (
+                <div className={`grid gap-3.5 ${cfg?.showDelivery && cfg?.priceSheets ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}>
+                  {cfg?.showDelivery && (
+                    <div>
+                      <label htmlFor="order-delivery-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                        Delivery Option
+                      </label>
+                      <select
+                        id="order-delivery-select"
+                        value={deliveryMode}
+                        onChange={(e) => setDeliveryMode(e.target.value)}
+                        className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
+                      >
+                        <option value="collect">Office Pickup (Free)</option>
+                        <option value="courier">
+                          Courier (+₹{cfg.priceSheets?.[customerClass]?.courierPerPack || 60}/pack)
+                        </option>
+                        <option value="transport">
+                          Transport (+₹{cfg.priceSheets?.[customerClass]?.transportPerParcel || 300}/parcel)
+                        </option>
+                      </select>
+                    </div>
+                  )}
 
-                {cfg?.priceSheets && (
-                  <div>
-                    <label htmlFor="order-billing-select" className="block text-xs font-bold text-slate-800 mb-1.5">
-                      Billing Class
-                    </label>
-                    <select
-                      id="order-billing-select"
-                      value={customerClass}
-                      onChange={(e) => setCustomerClass(e.target.value)}
-                      className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3 text-xs font-semibold text-slate-900"
-                    >
-                      <option value="retail">Retail Rate (Direct Net)</option>
-                      <option value="gst">GST Invoice (+18% GST)</option>
-                    </select>
-                  </div>
-                )}
-              </div>
+                  {cfg?.priceSheets && (
+                    <div>
+                      <label htmlFor="order-billing-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                        Billing Class
+                      </label>
+                      <select
+                        id="order-billing-select"
+                        value={customerClass}
+                        onChange={(e) => setCustomerClass(e.target.value)}
+                        className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
+                      >
+                        <option value="retail">Retail Rate (Net)</option>
+                        <option value="gst">GST Invoice (+18%)</option>
+                      </select>
+                    </div>
+                  )}
+                </div>
+              )}
 
-              {/* Job Name / Reference */}
+              {/* 5. AMOUNT (CLEAN GREY READ-ONLY BOX MATCHING SCREENSHOT) */}
               <div>
-                <label htmlFor="order-job-name" className="block text-xs font-bold text-slate-800 mb-1.5">
-                  Job / Project Reference Name (Optional)
-                </label>
-                <input
-                  id="order-job-name"
-                  type="text"
-                  placeholder="e.g. Q4 Corporate Stationery Reorder"
-                  value={jobName}
-                  onChange={(e) => setJobName(e.target.value)}
-                  className="w-full bg-white border border-slate-300 focus:border-brand-navy focus:outline-none rounded-xl py-2.5 px-3.5 text-xs font-semibold text-slate-900"
-                />
-              </div>
-
-              {/* 5. AMOUNT (AUTOMATICALLY CALCULATED) */}
-              <div className="bg-white rounded-2xl border-2 border-slate-200/90 p-4 sm:p-5 space-y-3 shadow-xs">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-slate-800">
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs sm:text-[13px] font-bold text-slate-800">
                     Amount
-                  </span>
-                  <span className="text-[11px] font-bold text-slate-500">
-                    {pricing.hasPrice ? `${pricing.qty.toLocaleString('en-IN')} ${pricing.unitName}` : 'Custom Specification'}
+                  </label>
+                  <span className="text-[11px] font-medium text-slate-500">
+                    {pricing.hasPrice
+                      ? `Estimated Total Amount • ₹${pricing.unitPrice.toLocaleString('en-IN')}/${cfg?.unitName?.replace(/s$/i, '').toLowerCase() || 'unit'}`
+                      : 'Custom Specification'}
                   </span>
                 </div>
 
                 {pricing.hasPrice ? (
-                  <>
-                    <div className="space-y-1 text-xs text-slate-600">
-                      <div className="flex justify-between">
-                        <span>Base Printing:</span>
-                        <span className="font-semibold text-slate-900">₹ {pricing.baseAmount.toLocaleString('en-IN')}</span>
-                      </div>
-                      {pricing.foilExtra > 0 && (
-                        <div className="flex justify-between">
-                          <span>Foil Embellishment:</span>
-                          <span className="font-semibold text-slate-900">+₹ {pricing.foilExtra.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-                      {pricing.spotUvExtra > 0 && (
-                        <div className="flex justify-between">
-                          <span>Raised Spot UV:</span>
-                          <span className="font-semibold text-slate-900">+₹ {pricing.spotUvExtra.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-                      {pricing.finishingExtra > 0 && (
-                        <div className="flex justify-between">
-                          <span>Finishing Add-ons:</span>
-                          <span className="font-semibold text-slate-900">+₹ {pricing.finishingExtra.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-                      {pricing.deliveryCharge > 0 && (
-                        <div className="flex justify-between">
-                          <span>Delivery Charge:</span>
-                          <span className="font-semibold text-slate-900">+₹ {pricing.deliveryCharge.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-                      {pricing.gstAmount > 0 && (
-                        <div className="flex justify-between text-brand-crimson font-semibold">
-                          <span>GST ({cfg?.gstPercent || 18}%):</span>
-                          <span>+₹ {pricing.gstAmount.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
+                  <div className="space-y-2">
+                    <div
+                      data-testid="order-estimated-total"
+                      className="w-full bg-[#e5e9f0] border border-slate-200 rounded-lg py-2.5 px-3.5 flex items-center justify-between text-slate-900"
+                    >
+                      <span className="text-base font-extrabold tracking-tight">
+                        ₹ {pricing.totalAmount.toLocaleString('en-IN')}.00
+                      </span>
+                      <span className="text-[11px] font-bold text-slate-600">
+                        {pricing.qty.toLocaleString('en-IN')} {pricing.unitName}
+                      </span>
                     </div>
 
-                    <div className="bg-brand-navy text-white rounded-xl p-3.5 flex items-center justify-between">
-                      <div>
-                        <span className="text-[10px] uppercase tracking-wider text-slate-300 font-bold block">
-                          Estimated Total Amount
-                        </span>
-                        <span className="text-[11px] text-slate-300">
-                          Unit Price: ₹ {pricing.unitPrice.toLocaleString('en-IN')} / {cfg?.unitName?.replace(/s$/i, '') || 'unit'}
-                        </span>
+                    {(pricing.foilExtra > 0 || pricing.spotUvExtra > 0 || pricing.finishingExtra > 0 || pricing.deliveryCharge > 0 || pricing.gstAmount > 0) && (
+                      <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500 px-0.5">
+                        <span>Base: ₹{pricing.baseAmount.toLocaleString('en-IN')}</span>
+                        {pricing.foilExtra > 0 && <span>Foil: +₹{pricing.foilExtra.toLocaleString('en-IN')}</span>}
+                        {pricing.spotUvExtra > 0 && <span>Spot UV: +₹{pricing.spotUvExtra.toLocaleString('en-IN')}</span>}
+                        {pricing.finishingExtra > 0 && <span>Finishing: +₹{pricing.finishingExtra.toLocaleString('en-IN')}</span>}
+                        {pricing.deliveryCharge > 0 && <span>Delivery: +₹{pricing.deliveryCharge.toLocaleString('en-IN')}</span>}
+                        {pricing.gstAmount > 0 && <span className="text-brand-crimson font-semibold">GST: +₹{pricing.gstAmount.toLocaleString('en-IN')}</span>}
                       </div>
-                      <span className="text-xl sm:text-2xl font-black text-white">
-                        ₹ {pricing.totalAmount.toLocaleString('en-IN')}
-                      </span>
-                    </div>
-                  </>
+                    )}
+                  </div>
                 ) : (
-                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs font-extrabold text-amber-900 block">Request a Quote</span>
-                      <span className="text-[11px] text-amber-700">
-                        Custom job specifications are quoted directly by our prepress team.
-                      </span>
-                    </div>
-                    <span className="text-xs font-extrabold bg-amber-600 text-white px-3 py-1.5 rounded-lg shrink-0">
-                      Request a Quote
-                    </span>
+                  <div className="w-full bg-amber-50 border border-amber-200 rounded-lg py-2.5 px-3.5 flex items-center justify-between">
+                    <span className="text-xs font-extrabold text-amber-900">Request a Quote</span>
+                    <span className="text-[11px] font-semibold text-amber-700">Custom quoted by prepress team</span>
                   </div>
                 )}
               </div>
             </div>
           </div>
 
-          {/* BOTTOM ACTION: ADD ORDER */}
-          <div className="pt-2 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <p className="text-xs text-slate-500">
-              Configured items are added to your <strong>Order Summary</strong> below so you can combine multiple products in one quote.
-            </p>
+          {/* BOTTOM-RIGHT ACTION BUTTON: ADD ORDER (MATCHING SCREENSHOT) */}
+          <div className="pt-2 flex justify-end">
             <button
               type="submit"
-              className="w-full sm:w-auto min-w-[210px] bg-brand-crimson hover:bg-brand-red text-white font-extrabold text-sm py-3.5 px-7 rounded-xl shadow-lg shadow-brand-crimson/25 transition flex items-center justify-center space-x-2 cursor-pointer"
+              className="w-full sm:w-auto min-w-[165px] bg-gradient-to-r from-[#e83e8c] via-brand-crimson to-[#5a67f2] hover:opacity-95 text-white font-bold text-sm py-3 px-8 rounded-tl-2xl rounded-tr-sm rounded-b-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>{editingItemId ? 'Update Order Item' : 'Add Order'}</span>

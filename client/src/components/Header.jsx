@@ -73,7 +73,7 @@ export default function Header({
     setSearchQuery('');
     setMobileMenuOpen(false);
     setMobileSearchOpen(false);
-    onNavigate('product', slug);
+    onNavigate('configure', slug);
   };
 
   const handleSelectCategory = (catId) => {

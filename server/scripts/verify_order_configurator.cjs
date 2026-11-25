@@ -142,18 +142,42 @@ async function run() {
       console.log(`PASS: ${msg}`);
     };
 
-    // --- TEST 1: Desktop (1440x900) Category -> "Configure & Get Quote" on Bill Book ---
+    // --- TEST 0: HomePage tap on any product card opens clean Add Order Configuration view ---
     await send(pWs, 'Emulation.setDeviceMetricsOverride', {
       width: 1440,
       height: 900,
       deviceScaleFactor: 1,
       mobile: false
     });
-    await send(pWs, 'Page.navigate', { url: `${BASE_URL}/#category/business-stationery` });
+    await send(pWs, 'Page.navigate', { url: `${BASE_URL}/#home` });
     await sleep(1000);
     await evalJs(`localStorage.removeItem('prz_order_items');`);
     await send(pWs, 'Page.reload', { ignoreCache: true });
-    await sleep(1300);
+    await sleep(1000);
+
+    const tappedHomeCard = await evalJs(`(() => {
+      const h4 = Array.from(document.querySelectorAll('h4')).find(el => el.textContent.includes('Visiting Card'));
+      if (!h4) return false;
+      h4.click();
+      return true;
+    })()`);
+    assert(tappedHomeCard, 'Clicked Featured Product card on HomePage');
+    await sleep(700);
+    const homeTapState = await evalJs(`(() => ({
+      hash: location.hash,
+      h1: document.querySelector('h1')?.textContent?.trim() || '',
+      hasAddOrderHeading: document.body.innerText.includes('Add Order'),
+      hasFoil: !!document.querySelector('#order-foil-select'),
+      hasSpotUv: !!document.querySelector('#order-spotuv-select')
+    }))()`);
+    assert(homeTapState.hash === '#configure/visiting-card' && homeTapState.h1 === 'Visiting Card Configuration', `Tapping HomePage product card opens Visiting Card Configuration (${homeTapState.hash} / ${homeTapState.h1})`);
+    assert(homeTapState.hasAddOrderHeading && homeTapState.hasFoil && homeTapState.hasSpotUv, 'Clean Add Order view renders Foil, Spot UV, and Add Order form cleanly');
+    const vcDeskShot = await send(pWs, 'Page.captureScreenshot', { format: 'png' });
+    fs.writeFileSync(path.join(ARTIFACT_DIR, 'verify_cfg_vc_desktop.png'), Buffer.from(vcDeskShot.data, 'base64'));
+
+    // --- TEST 1: Desktop (1440x900) Category -> "Configure & Get Quote" on Bill Book ---
+    await send(pWs, 'Page.navigate', { url: `${BASE_URL}/#category/business-stationery` });
+    await sleep(1000);
 
     const clickedBillBook = await evalJs(`(() => {
       const cards = Array.from(document.querySelectorAll('h3, h2, h4'));
@@ -218,10 +242,9 @@ async function run() {
     await sleep(400);
 
     const readEstimatedTotal = () => evalJs(`(() => {
-      const spans = Array.from(document.querySelectorAll('span'));
-      const totalEl = spans.find(s => /text-xl|text-2xl/.test(s.className) && s.closest('.bg-brand-navy') && s.textContent.includes('₹'));
+      const totalEl = document.querySelector('[data-testid="order-estimated-total"]');
       if (!totalEl) return 0;
-      const m = totalEl.textContent.match(/₹\\s*([\\d,\\.]+)/);
+      const m = totalEl.textContent.match(/₹\\s*([\\d,]+(?:\\.\\d+)?)/);
       return m ? Number(m[1].replace(/,/g, '')) : 0;
     })()`);
 

@@ -465,7 +465,7 @@ export default function HomePage({
           {featuredProducts.map((item) => (
             <div
               key={item.id}
-              onClick={() => onNavigate('product', item.slug)}
+              onClick={() => onNavigate('configure', item.slug)}
               className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-left"
             >
               <div>

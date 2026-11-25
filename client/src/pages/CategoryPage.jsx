@@ -119,7 +119,7 @@ Thank you.`;
                 >
                   {/* Unique Studio Product Photograph */}
                   <div 
-                    onClick={() => onNavigate('product', p.slug)}
+                    onClick={() => onNavigate('configure', p.slug)}
                     className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 cursor-pointer border-b border-slate-100 shrink-0"
                   >
                     <ProductImage
@@ -137,7 +137,7 @@ Thank you.`;
                   <div className="p-2.5 sm:p-5 flex-1 flex flex-col justify-between gap-2.5 sm:gap-3">
                     <div className="space-y-1 sm:space-y-1.5">
                       <h3 
-                        onClick={() => onNavigate('product', p.slug)}
+                        onClick={() => onNavigate('configure', p.slug)}
                         className="text-[13px] sm:text-base font-bold text-slate-900 hover:text-brand-crimson transition cursor-pointer line-clamp-2 leading-snug"
                       >
                         {p.name}

@@ -8615,7 +8615,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -8623,43 +8623,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -8740,7 +8740,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -8748,43 +8748,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -8865,7 +8865,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -8873,43 +8873,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -8991,7 +8991,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -8999,43 +8999,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -9116,7 +9116,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -9124,43 +9124,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -9241,7 +9241,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -9249,43 +9249,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -9367,7 +9367,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -9375,43 +9375,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -9492,7 +9492,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -9500,43 +9500,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -9617,7 +9617,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -9625,43 +9625,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -9742,7 +9742,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -9750,43 +9750,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -9867,7 +9867,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -9875,43 +9875,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -9993,7 +9993,7 @@
         "gstPercent": 18,
         "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -10001,43 +10001,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -10119,7 +10119,7 @@
         "gstPercent": 18,
         "baseRate": 0.91,
         "minQuantity": 500,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -10127,43 +10127,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -10245,7 +10245,7 @@
         "gstPercent": 18,
         "baseRate": 0.91,
         "minQuantity": 500,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -10253,43 +10253,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -10371,7 +10371,7 @@
         "gstPercent": 18,
         "baseRate": 0.91,
         "minQuantity": 500,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -10379,43 +10379,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -10497,7 +10497,7 @@
         "gstPercent": 18,
         "baseRate": 0.91,
         "minQuantity": 500,
-        "startingPrice": 455,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Cards",
         "supportsBothSides": true,
@@ -10505,43 +10505,43 @@
         "supportsSpotUv": true,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": 637,
-            "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": 65,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": 573.3,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 195.0,
+              "punching": 65.0,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": 637.0,
+            "minimum": null,
+            "foilGold": 325.0,
+            "foilSilver": 286.0,
+            "spotUvSingle": 195.0,
+            "spotUvBoth": 325.0,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": 65.0,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
@@ -10622,7 +10622,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -10630,25 +10630,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -10659,24 +10640,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -10696,7 +10696,8 @@
               "Two Color": 0.95,
               "Full Color (CMYK)": 1.0
             }
-          }
+          },
+          "showBilling": false
         }
       }
     },
@@ -10753,7 +10754,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -10761,25 +10762,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -10790,24 +10772,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -10827,7 +10828,8 @@
               "Two Color": 0.95,
               "Full Color (CMYK)": 1.0
             }
-          }
+          },
+          "showBilling": false
         }
       }
     },
@@ -10884,7 +10886,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -10892,25 +10894,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -10921,24 +10904,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -10958,7 +10960,8 @@
               "Two Color": 0.95,
               "Full Color (CMYK)": 1.0
             }
-          }
+          },
+          "showBilling": false
         }
       }
     },
@@ -11015,7 +11018,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -11023,25 +11026,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -11052,24 +11036,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -11089,7 +11092,8 @@
               "Two Color": 0.95,
               "Full Color (CMYK)": 1.0
             }
-          }
+          },
+          "showBilling": false
         }
       }
     },
@@ -11146,7 +11150,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -11154,25 +11158,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -11183,24 +11168,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -11220,7 +11224,8 @@
               "Two Color": 0.95,
               "Full Color (CMYK)": 1.0
             }
-          }
+          },
+          "showBilling": false
         }
       }
     },
@@ -11277,7 +11282,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -11285,25 +11290,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -11314,24 +11300,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -11351,7 +11356,8 @@
               "Two Color": 0.95,
               "Full Color (CMYK)": 1.0
             }
-          }
+          },
+          "showBilling": false
         }
       }
     },
@@ -11408,7 +11414,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -11416,25 +11422,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -11445,24 +11432,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -11476,7 +11482,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -11533,7 +11540,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -11541,25 +11548,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -11570,24 +11558,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -11601,7 +11608,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -11658,7 +11666,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -11666,25 +11674,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -11695,24 +11684,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -11726,7 +11734,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -11783,7 +11792,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -11791,25 +11800,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -11820,24 +11810,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -11851,7 +11860,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -11908,7 +11918,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -11916,25 +11926,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -11945,24 +11936,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -11976,7 +11986,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12033,7 +12044,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -12041,25 +12052,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -12070,24 +12062,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -12101,7 +12112,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12158,7 +12170,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -12166,25 +12178,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -12195,24 +12188,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -12226,7 +12238,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12283,7 +12296,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -12291,25 +12304,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -12320,24 +12314,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -12351,7 +12364,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12408,7 +12422,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -12416,25 +12430,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -12445,24 +12440,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -12476,7 +12490,8 @@
             "Single Color",
             "Two Color"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12533,7 +12548,7 @@
         "gstPercent": 18,
         "baseRate": 11.7,
         "minQuantity": 100,
-        "startingPrice": 1170,
+        "startingPrice": 1170.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -12541,53 +12556,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 1170,
-            "both": 1638,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
-            "single": 1053,
+            "single": 1053.0,
             "both": 1474.2,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 1170.0,
+            "both": 1638.0,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -12599,7 +12614,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12656,7 +12672,7 @@
         "gstPercent": 18,
         "baseRate": 11.7,
         "minQuantity": 100,
-        "startingPrice": 1170,
+        "startingPrice": 1170.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -12664,53 +12680,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 1170,
-            "both": 1638,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
-            "single": 1053,
+            "single": 1053.0,
             "both": 1474.2,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 1170.0,
+            "both": 1638.0,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -12722,7 +12738,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12753,7 +12770,7 @@
       "hsnCode": "4911",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 4.55,
       "quantityTiers": [
         100,
         200,
@@ -12777,9 +12794,9 @@
         "dimensions": true,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 4.55,
         "minQuantity": 100,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": false,
@@ -12787,53 +12804,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -12844,7 +12861,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12875,7 +12893,7 @@
       "hsnCode": "4911",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 4.55,
       "quantityTiers": [
         100,
         200,
@@ -12899,9 +12917,9 @@
         "dimensions": true,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 4.55,
         "minQuantity": 100,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": false,
@@ -12909,53 +12927,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -12966,7 +12984,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -12997,7 +13016,7 @@
       "hsnCode": "4911",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 4.55,
       "quantityTiers": [
         100,
         200,
@@ -13021,9 +13040,9 @@
         "dimensions": true,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 4.55,
         "minQuantity": 100,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": false,
@@ -13031,53 +13050,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -13088,7 +13107,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -13119,7 +13139,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 0.455,
       "quantityTiers": [
         1000,
         2000,
@@ -13143,9 +13163,9 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Labels",
         "supportsBothSides": false,
@@ -13153,53 +13173,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -13211,7 +13231,8 @@
             "Full Color (CMYK)",
             "High Contrast Monochrome"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -13242,7 +13263,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 0.455,
       "quantityTiers": [
         1000,
         2000,
@@ -13266,9 +13287,9 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Labels",
         "supportsBothSides": false,
@@ -13276,53 +13297,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -13334,7 +13355,8 @@
             "Full Color (CMYK)",
             "High Contrast Monochrome"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -13365,7 +13387,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 0.455,
       "quantityTiers": [
         1000,
         2000,
@@ -13389,9 +13411,9 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Labels",
         "supportsBothSides": false,
@@ -13399,53 +13421,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -13457,7 +13479,8 @@
             "Full Color (CMYK)",
             "High Contrast Monochrome"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -13488,7 +13511,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 0.455,
       "quantityTiers": [
         1000,
         2000,
@@ -13512,9 +13535,9 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Labels",
         "supportsBothSides": false,
@@ -13522,53 +13545,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -13580,7 +13603,8 @@
             "Full Color (CMYK)",
             "High Contrast Monochrome"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -13611,7 +13635,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 0.455,
       "quantityTiers": [
         1000,
         2000,
@@ -13635,9 +13659,9 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Labels",
         "supportsBothSides": false,
@@ -13645,53 +13669,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -13703,7 +13727,8 @@
             "Full Color (CMYK)",
             "High Contrast Monochrome"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -13734,7 +13759,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 0.455,
       "quantityTiers": [
         1000,
         2000,
@@ -13758,9 +13783,9 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Labels",
         "supportsBothSides": false,
@@ -13768,53 +13793,53 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -13826,7 +13851,8 @@
             "Full Color (CMYK)",
             "High Contrast Monochrome"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -13883,7 +13909,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -13891,25 +13917,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -13920,24 +13927,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -13949,7 +13975,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -14006,7 +14033,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -14014,25 +14041,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -14043,24 +14051,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -14072,7 +14099,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -14129,7 +14157,7 @@
         "gstPercent": 18,
         "baseRate": 0.585,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 585.0,
         "markupPercent": 30,
         "unitName": "Units",
         "supportsBothSides": true,
@@ -14137,25 +14165,6 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
-          "retail": {
-            "single": 585,
-            "both": 819,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
-              "die": null,
-              "punching": null,
-              "folding": 6.5
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 526.5,
             "both": 737.1,
@@ -14166,24 +14175,43 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 39.0,
+              "perforation": 39.0,
               "die": null,
               "punching": null,
               "folding": 6.5
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 585.0,
+            "both": 819.0,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": 39.0,
+              "perforation": 39.0,
+              "die": null,
+              "punching": null,
+              "folding": 6.5
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": true,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -14195,7 +14223,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -14259,28 +14288,9 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 0,
-            "both": 0,
-            "minimum": null,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": null,
-              "creasing": null,
-              "perforation": null,
-              "die": null,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 0,
-            "both": 0,
+            "both": null,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -14294,18 +14304,37 @@
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 0,
+            "both": null,
+            "minimum": null,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": null,
+              "creasing": null,
+              "perforation": null,
+              "die": null,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
-          "showSize": true,
-          "showFinishing": true,
+          "showMaterial": false,
+          "showSize": false,
+          "showFinishing": false,
           "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
           "showBinding": false,
@@ -14316,7 +14345,8 @@
           "colourOptions": [
             "Full Color (CMYK)"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -14347,7 +14377,7 @@
       "hsnCode": "4819",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 0.455,
       "quantityTiers": [
         1000,
         2000,
@@ -14371,9 +14401,9 @@
         "dimensions": true,
         "hsnCode": "4819",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Boxes",
         "supportsBothSides": false,
@@ -14381,56 +14411,56 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
-          "showBinding": true,
+          "showBinding": false,
           "showSetsPerBook": false,
           "printingOptions": [
             "Outer Full-Color Offset"
@@ -14444,7 +14474,8 @@
             "Tuck-Top Lock Flap",
             "Rope / Ribbon Handle"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     },
@@ -14475,7 +14506,7 @@
       "hsnCode": "4819",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 455,
+      "baseRate": 0.455,
       "quantityTiers": [
         1000,
         2000,
@@ -14499,9 +14530,9 @@
         "dimensions": true,
         "hsnCode": "4819",
         "gstPercent": 18,
-        "baseRate": 455,
+        "baseRate": 0.455,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 455.0,
         "markupPercent": 30,
         "unitName": "Boxes",
         "supportsBothSides": false,
@@ -14509,56 +14540,56 @@
         "supportsSpotUv": false,
         "bothSidesMultiplier": 1,
         "priceSheets": {
-          "retail": {
-            "single": 455,
-            "both": null,
-            "minimum": 650,
-            "foilGold": null,
-            "foilSilver": null,
-            "spotUvSingle": null,
-            "spotUvBoth": null,
-            "finishing": {
-              "halfBlade": 130,
-              "creasing": null,
-              "perforation": null,
-              "die": 195,
-              "punching": null,
-              "folding": null
-            },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
-          },
           "gst": {
             "single": 409.5,
             "both": null,
-            "minimum": 650,
+            "minimum": 650.0,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 130.0,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 195.0,
               "punching": null,
               "folding": null
             },
-            "courierPerPack": 60,
-            "transportPerParcel": 300
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
+          },
+          "retail": {
+            "single": 455.0,
+            "both": null,
+            "minimum": 650.0,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
+            "finishing": {
+              "halfBlade": 130.0,
+              "creasing": null,
+              "perforation": null,
+              "die": 195.0,
+              "punching": null,
+              "folding": null
+            },
+            "courierPerPack": 6000,
+            "transportPerParcel": 30000
           }
         },
         "orderFields": {
           "enabled": true,
-          "showMaterial": true,
+          "showMaterial": false,
           "showSize": true,
-          "showFinishing": true,
-          "showPrinting": false,
-          "showColour": true,
-          "showDelivery": true,
+          "showFinishing": false,
+          "showPrinting": true,
+          "showColour": false,
+          "showDelivery": false,
           "showNcr": false,
           "showCopyType": false,
-          "showBinding": true,
+          "showBinding": false,
           "showSetsPerBook": false,
           "printingOptions": [
             "Outer Full-Color Offset"
@@ -14572,7 +14603,8 @@
             "Tuck-Top Lock Flap",
             "Rope / Ribbon Handle"
           ],
-          "optionRateModifiers": {}
+          "optionRateModifiers": {},
+          "showBilling": false
         }
       }
     }

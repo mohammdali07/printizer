@@ -537,25 +537,16 @@ export default function HomePage({
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <div className="flex items-center gap-2 w-full xs:w-auto">
-                  <button
-                    onClick={() => onNavigate('contact')}
-                    className="flex-1 xs:flex-none bg-white hover:bg-slate-50 text-slate-800 font-bold px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm border border-slate-300 shadow-sm hover:border-slate-400 transition flex items-center justify-center active:scale-[0.98] cursor-pointer min-h-[46px]"
-                  >
-                    <span>Contact Us</span>
-                  </button>
-
-                  <a
-                    href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20am%20interested%20in%20getting%20a%20quotation%20for%20business%20printing."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-none px-3.5 py-3 sm:py-3.5 rounded-xl sm:rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition flex items-center justify-center active:scale-[0.98] text-xs font-bold min-h-[46px]"
-                    title="Chat on WhatsApp"
-                  >
-                    <MessageCircle className="w-4 h-4 text-emerald-600" />
-                    <span className="hidden sm:inline ml-1.5">WhatsApp</span>
-                  </a>
-                </div>
+                <a
+                  href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20am%20interested%20in%20getting%20a%20quotation%20for%20business%20printing."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full xs:w-auto px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition flex items-center justify-center active:scale-[0.98] text-xs sm:text-sm font-bold min-h-[46px]"
+                  title="Chat on WhatsApp"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <span className="ml-1.5">WhatsApp</span>
+                </a>
               </div>
             </div>
 

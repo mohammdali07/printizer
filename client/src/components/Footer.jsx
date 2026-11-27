@@ -7,54 +7,7 @@ import {
 export default function Footer({ onNavigate, categories = [] }) {
   return (
     <footer className="bg-white text-slate-600 border-t border-slate-200 text-left">
-      {/* 1. TOP TRUST BADGES STRIP */}
-      <div className="border-b border-slate-100 bg-slate-50/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="flex items-center space-x-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-brand-crimson shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-black text-slate-900">100% Quality Guarantee</h4>
-                <p className="text-[11px] text-slate-500">Strict CMYK color & finish calibration</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-black text-slate-900">Free Digital Soft Proofs</h4>
-                <p className="text-[11px] text-slate-500">Artwork reviewed prior to print</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-                <Truck className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-black text-slate-900">PAN India Shipping</h4>
-                <p className="text-[11px] text-slate-500">Secure, moisture-proof transit</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600 shrink-0">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-black text-slate-900">Rapid B2B Quotations</h4>
-                <p className="text-[11px] text-slate-500">Itemized pricing within hours</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. MAIN 5-COLUMN FOOTER LINKS (Matching Printec reference layout) */}
+      {/* MAIN 5-COLUMN FOOTER LINKS (Matching Printec reference layout) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Column 1: Brand Info */}

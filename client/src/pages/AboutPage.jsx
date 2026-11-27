@@ -6,45 +6,6 @@ import {
 import ProductImage from '../components/ProductImage';
 
 export default function AboutPage({ onNavigate, onRequestQuote }) {
-  const showcaseGallery = [
-    {
-      title: '350 GSM Matte Visiting Cards',
-      tag: 'Executive Satin Finish',
-      image: '/images/products/350-gsm-matt-card.webp',
-      slug: 'visiting-card'
-    },
-    {
-      title: '500 GSM Velvet + Raised Spot UV',
-      tag: 'Tactile Luxury Card',
-      image: '/images/products/500-gsm-matt-card-uv.webp',
-      slug: 'visiting-card'
-    },
-    {
-      title: 'Metallic Gold Foil Stamping',
-      tag: 'Hot Foil Embossing',
-      image: '/images/products/gold-foil.webp',
-      slug: 'visiting-card'
-    },
-    {
-      title: 'Non-Tearable Waterproof NT Card',
-      tag: 'Synthetic Tear-Proof',
-      image: '/images/products/nt-card-waterproof.jpg',
-      slug: 'visiting-card'
-    },
-    {
-      title: 'Corporate Letterheads & Stationery',
-      tag: '100 GSM Executive Bond',
-      image: '/images/products/letterhead.webp',
-      slug: 'letterhead'
-    },
-    {
-      title: '320 GSM Ultima Packaging Boxes',
-      tag: 'Custom Structural Die-Cut',
-      image: '/images/products/product-box.webp',
-      slug: 'product-box'
-    }
-  ];
-
   return (
     <div className="pb-20 space-y-16 bg-[#fafbfc]">
       {/* 1. HERO HEADER WITH REAL PRINT COLLAGE */}
@@ -74,11 +35,7 @@ export default function AboutPage({ onNavigate, onRequestQuote }) {
               </p>
 
               {/* Key Trust Metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
-                  <span className="text-lg sm:text-xl font-black text-white block">500+</span>
-                  <span className="text-[11px] text-slate-300">Business Clients</span>
-                </div>
+              <div className="grid grid-cols-3 gap-3 pt-2">
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
                   <span className="text-lg sm:text-xl font-black text-white block">10+</span>
                   <span className="text-[11px] text-slate-300">Print Divisions</span>
@@ -137,53 +94,7 @@ export default function AboutPage({ onNavigate, onRequestQuote }) {
         </div>
       </div>
 
-      {/* 2. ORIGINAL PRINT FINISH SHOWCASE GALLERY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
-            Craftsmanship &amp; Finishes
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Original Print Samples &amp; Finishes
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
-            Explore real studio finishes across our visiting cards, waterproof synthetic stock, corporate stationery, and custom packaging.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7">
-          {showcaseGallery.map((item) => (
-            <div
-              key={item.title}
-              onClick={() => onNavigate('configure', item.slug)}
-              className="group bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 border border-slate-200/90 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between text-left"
-            >
-              <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 mb-3.5">
-                <ProductImage
-                  src={item.image}
-                  alt={item.title}
-                  placeholderLabel={item.title}
-                  imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute bottom-2.5 left-2.5 bg-slate-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
-                  {item.tag}
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2 px-1">
-                <h3 className="text-sm font-extrabold text-slate-900 group-hover:text-brand-crimson transition-colors truncate">
-                  {item.title}
-                </h3>
-                <div className="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-colors text-slate-500 shrink-0">
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. MAIN NARRATIVE & PRINTIZER STANDARDS */}
+      {/* 2. MAIN NARRATIVE & PRINTIZER STANDARDS */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center text-left">
           <div className="space-y-4 text-sm text-slate-600 leading-relaxed">

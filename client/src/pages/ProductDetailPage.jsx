@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import ProductImage from '../components/ProductImage';
+import ImportantInstructionsModal from '../components/ImportantInstructionsModal';
 import { getEffectiveOrderFields } from '../utils/orderPricing';
 
 export default function ProductDetailPage({ 
@@ -1050,6 +1051,8 @@ Thank you!`;
           </div>
         </div>
       )}
+
+      <ImportantInstructionsModal />
     </div>
   );
 }

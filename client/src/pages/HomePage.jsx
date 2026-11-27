@@ -6,6 +6,7 @@ import {
   ExternalLink, Search, Star, ShoppingCart
 } from 'lucide-react';
 import ProductImage from '../components/ProductImage';
+import InfiniteMobileSlider from '../components/InfiniteMobileSlider';
 
 export default function HomePage({ 
   categories = [], 
@@ -370,23 +371,30 @@ export default function HomePage({
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  // Auto-advance Categories carousel
+  // Auto-advance Categories carousel (mobile slider)
+  const catTouchStartXRef = useRef(null);
+  const prodTouchStartXRef = useRef(null);
+
   useEffect(() => {
     if (isCategoryPaused) return;
     const timer = setInterval(() => {
-      stepInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, 'next');
+      setActiveCatIndex((prev) => (prev + 1) % showcaseCategories.length);
     }, 3600);
     return () => clearInterval(timer);
-  }, [isCategoryPaused]);
+  }, [isCategoryPaused, showcaseCategories.length]);
 
-  // Auto-advance "Our Products" carousel
+  // Auto-advance "Our Products" carousel (desktop horizontal + mobile slider)
   useEffect(() => {
     if (isProductsPaused) return;
     const timer = setInterval(() => {
-      stepInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, 'next');
+      if (productsCarouselRef.current && productsCarouselRef.current.offsetParent !== null) {
+        stepInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, 'next');
+      } else {
+        setActiveProductIndex((prev) => (prev + 1) % ourProductsList.length);
+      }
     }, 3200);
     return () => clearInterval(timer);
-  }, [isProductsPaused]);
+  }, [isProductsPaused, ourProductsList.length]);
 
   // Commercial Capabilities & Production Quality
   const printingGuides = [
@@ -672,29 +680,19 @@ export default function HomePage({
           </p>
         </div>
 
-        {/* Swipe Carousel for Mobile */}
-        <div className="block sm:hidden relative">
-          <div
-            ref={categoryCarouselRef}
-            onScroll={() => handleInfiniteScroll(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, setActiveCatIndex, categoryScrollTimerRef)}
-            onMouseEnter={() => setIsCategoryPaused(true)}
-            onMouseLeave={() => setIsCategoryPaused(false)}
-            onTouchStart={() => setIsCategoryPaused(true)}
-            onTouchEnd={() => {
-              setTimeout(() => setIsCategoryPaused(false), 2000);
-            }}
-            className="flex items-stretch gap-0 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 no-scrollbar"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {loopedCategories.map((card, loopIdx) => (
+        {/* Seamless Infinite Mobile Slider */}
+        <div className="block sm:hidden">
+          <InfiniteMobileSlider
+            items={showcaseCategories}
+            autoPlayMs={3600}
+            prevLabel="Previous Category"
+            nextLabel="Next Category"
+            renderItem={(card) => (
               <div
-                key={`${card.id}-${loopIdx}`}
-                data-category-card
                 onClick={() => onNavigate('category', card.targetCategory)}
-                className="w-full shrink-0 snap-center px-1"
+                className="bg-white rounded-2xl p-3.5 shadow-md border border-slate-200/80 cursor-pointer flex flex-col justify-between h-full"
                 title={`View ${card.title} Catalogue`}
               >
-                <div className="bg-white rounded-2xl p-3.5 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between h-full">
                 <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-3">
                   <ProductImage
                     src={card.image}
@@ -721,45 +719,9 @@ export default function HomePage({
                     </div>
                   </div>
                 </div>
-                </div>
               </div>
-            ))}
-          </div>
-
-          {/* Circular Arrow Buttons for Mobile Carousel */}
-          <button
-            type="button"
-            onClick={() => stepInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, 'prev')}
-            aria-label="Previous Category"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border border-slate-200 bg-white/95 backdrop-blur-sm text-slate-700 shadow-lg flex items-center justify-center cursor-pointer active:scale-90"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => stepInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, 'next')}
-            aria-label="Next Category"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border border-slate-200 bg-white/95 backdrop-blur-sm text-slate-700 shadow-lg flex items-center justify-center cursor-pointer active:scale-90"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-
-          {/* Pagination Dots for Mobile Categories Carousel */}
-          <div className="flex items-center justify-center space-x-1.5 pt-3">
-            {showcaseCategories.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => jumpInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, idx, setActiveCatIndex)}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  activeCatIndex === idx
-                    ? 'w-5 h-1.5 bg-brand-crimson shadow-sm'
-                    : 'w-1.5 h-1.5 bg-slate-300 hover:bg-slate-500'
-                }`}
-                aria-label={`Jump to category ${idx + 1}`}
-              />
-            ))}
-          </div>
+            )}
+          />
         </div>
 
         {/* Grid View for Desktop */}
@@ -819,8 +781,41 @@ export default function HomePage({
           </p>
         </div>
 
-        {/* Carousel Container with Circular Navigation Buttons */}
-        <div className="relative px-1 sm:px-6">
+        {/* Seamless Infinite Mobile Slider for "Our Products" */}
+        <div className="block sm:hidden">
+          <InfiniteMobileSlider
+            items={ourProductsList}
+            autoPlayMs={3200}
+            prevLabel="Previous Product"
+            nextLabel="Next Product"
+            renderItem={(product) => (
+              <div
+                onClick={() => onNavigate('configure', product.slug)}
+                className="bg-white rounded-2xl p-3.5 border border-slate-200/80 shadow-md cursor-pointer flex flex-col justify-between text-center h-full"
+              >
+                <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5">
+                  <ProductImage
+                    src={product.image}
+                    alt={product.title}
+                    placeholderLabel={product.title}
+                    imgClassName="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="pt-1.5 pb-1 text-center">
+                  <h3 className="text-sm font-extrabold text-slate-900 tracking-tight uppercase">
+                    {product.title}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                    {product.subtitle}
+                  </p>
+                </div>
+              </div>
+            )}
+          />
+        </div>
+
+        {/* Desktop Carousel Container with Circular Navigation Buttons */}
+        <div className="hidden sm:block relative px-6">
           {/* Circular Left Arrow Button */}
           <button
             type="button"

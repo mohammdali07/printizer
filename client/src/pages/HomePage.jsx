@@ -21,6 +21,8 @@ export default function HomePage({
   // Hero Carousel Slides with 100% Transparent Isolated Mockups
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
   const [heroPaused, setHeroPaused] = useState(false);
+  const [heroDragX, setHeroDragX] = useState(0);
+  const heroTouchStartXRef = useRef(null);
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
 
   const homeFaqs = [
@@ -562,8 +564,34 @@ export default function HomePage({
                 onMouseEnter={() => setHeroPaused(true)}
                 onMouseLeave={() => setHeroPaused(false)}
               >
-                {/* Ambient Studio Lighting Backdrop */}
-                <div className={`relative w-full aspect-[4/3] xs:aspect-[16/11] sm:aspect-[16/10] max-h-[300px] xs:max-h-[340px] sm:max-h-[400px] lg:max-h-[460px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-100/90 via-slate-50/60 to-white/90 border border-slate-200/70 ${activeHero.fullBleed ? 'p-0' : 'p-3 sm:p-6'} flex items-center justify-center shadow-sm overflow-hidden`}>
+                {/* Ambient Studio Lighting Backdrop - Thumb Swipe Enabled */}
+                <div
+                  onTouchStart={(e) => {
+                    setHeroPaused(true);
+                    heroTouchStartXRef.current = e.touches[0].clientX;
+                    setHeroDragX(0);
+                  }}
+                  onTouchMove={(e) => {
+                    if (heroTouchStartXRef.current === null) return;
+                    const delta = e.touches[0].clientX - heroTouchStartXRef.current;
+                    setHeroDragX(Math.max(-90, Math.min(90, delta)));
+                  }}
+                  onTouchEnd={(e) => {
+                    const startX = heroTouchStartXRef.current;
+                    if (startX !== null) {
+                      const diff = startX - e.changedTouches[0].clientX;
+                      if (diff > 35) {
+                        setCurrentHeroSlide((prev) => (prev + 1) % heroSlides.length);
+                      } else if (diff < -35) {
+                        setCurrentHeroSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+                      }
+                    }
+                    heroTouchStartXRef.current = null;
+                    setHeroDragX(0);
+                    setTimeout(() => setHeroPaused(false), 2500);
+                  }}
+                  className={`relative w-full aspect-[4/3] xs:aspect-[16/11] sm:aspect-[16/10] max-h-[300px] xs:max-h-[340px] sm:max-h-[400px] lg:max-h-[460px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-100/90 via-slate-50/60 to-white/90 border border-slate-200/70 ${activeHero.fullBleed ? 'p-0' : 'p-3 sm:p-6'} flex items-center justify-center shadow-sm overflow-hidden touch-pan-y select-none`}
+                >
                   {/* Subtle ambient light pool */}
                   {!activeHero.fullBleed && (
                     <div 
@@ -571,13 +599,16 @@ export default function HomePage({
                     />
                   )}
 
-                  {/* Studio Product Showcase - Animated Crossfade + Subtle Zoom */}
+                  {/* Studio Product Showcase - Animated Crossfade + Thumb Swipe */}
                   {heroSlides.map((slide, idx) => {
                     const isActive = idx === currentHeroSlide;
                     return (
                       <div
                         key={slide.id}
-                        className={`absolute inset-0 p-3 sm:p-6 flex items-center justify-center transition-all duration-700 ease-out ${
+                        style={isActive && heroDragX !== 0 ? { transform: `translateX(${heroDragX}px)` } : undefined}
+                        className={`absolute inset-0 p-3 sm:p-6 flex items-center justify-center ${
+                          heroDragX !== 0 ? 'transition-none' : 'transition-all duration-700 ease-out'
+                        } ${
                           isActive
                             ? 'opacity-100 scale-100 translate-y-0 z-10'
                             : 'opacity-0 scale-95 translate-y-2 pointer-events-none z-0'
@@ -586,6 +617,7 @@ export default function HomePage({
                         <img
                           src={slide.image}
                           alt={slide.title}
+                          draggable={false}
                           className={`w-full h-full transition-transform duration-500 hover:scale-[1.03] select-none ${
                             slide.fullBleed
                               ? 'object-cover'
@@ -915,61 +947,52 @@ export default function HomePage({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {/* 01: Professional Printing */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center font-bold text-xs">
-                01
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
+            {[
+              {
+                num: '01',
+                title: 'Professional Printing',
+                desc: 'Rigorous 300 DPI CMYK color reproduction calibrated against official corporate identity standards.',
+                tone: 'bg-slate-100 text-slate-900'
+              },
+              {
+                num: '02',
+                title: 'Quality Presentation',
+                desc: 'Verified substrate grammages (GSM), rigid SBS packaging boards, and precise structural die-cutting.',
+                tone: 'bg-rose-50 text-brand-crimson'
+              },
+              {
+                num: '03',
+                title: 'Custom Printing Options',
+                desc: 'Thermal matte, velvet touch lamination, raised spot UV gloss, and metallic gold hot foil stamping.',
+                tone: 'bg-amber-50 text-amber-700'
+              },
+              {
+                num: '04',
+                title: 'Attention to Detail',
+                desc: 'Checked for 3mm bleeds, font curves, and typography resolution prior to print.',
+                tone: 'bg-blue-50 text-blue-600'
+              },
+              {
+                num: '05',
+                title: 'Customer Support',
+                desc: 'Direct phone and WhatsApp consultation with seasoned print specialists from requirement to delivery.',
+                tone: 'bg-emerald-50 text-emerald-600'
+              }
+            ].map((step) => (
+              <div
+                key={step.num}
+                className="bg-white p-3.5 sm:p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-row md:flex-col items-start gap-3 md:gap-3"
+              >
+                <div className={`w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center font-extrabold text-xs shrink-0 ${step.tone}`}>
+                  {step.num}
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm font-bold text-slate-900 leading-snug">{step.title}</h3>
+                  <p className="text-xs text-slate-500 leading-relaxed mt-1">{step.desc}</p>
+                </div>
               </div>
-              <h3 className="text-sm font-bold text-slate-900">Professional Printing</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Rigorous 300 DPI CMYK color reproduction calibrated against official corporate identity standards.
-              </p>
-            </div>
-
-            {/* 02: Quality Presentation */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-rose-50 text-brand-crimson flex items-center justify-center font-bold text-xs">
-                02
-              </div>
-              <h3 className="text-sm font-bold text-slate-900">Quality Presentation</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Verified substrate grammages (GSM), rigid SBS packaging boards, and precise structural die-cutting.
-              </p>
-            </div>
-
-            {/* 03: Custom Options */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs">
-                03
-              </div>
-              <h3 className="text-sm font-bold text-slate-900">Custom Printing Options</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Thermal matte, velvet touch lamination, raised spot UV gloss, and metallic gold hot foil stamping.
-              </p>
-            </div>
-
-            {/* 04: Attention to Detail */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">
-                04
-              </div>
-              <h3 className="text-sm font-bold text-slate-900">Attention to Detail</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Complimentary digital soft proofs checked for 3mm bleeds, font curves, and typography resolution prior to print.
-              </p>
-            </div>
-
-            {/* 05: Customer Support */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs">
-                05
-              </div>
-              <h3 className="text-sm font-bold text-slate-900">Customer Support</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Direct phone and WhatsApp consultation with seasoned print specialists from requirement to doorstep delivery.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>

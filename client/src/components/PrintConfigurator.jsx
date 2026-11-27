@@ -204,7 +204,7 @@ Estimated Amount: ₹ ${calculateAmount()}
 
 Please confirm quotation and ordering details.
 Thank you!`;
-    window.open(`https://wa.me/919898351920?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/917574927200?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const handleAddOrder = () => {

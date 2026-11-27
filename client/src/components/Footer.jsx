@@ -103,8 +103,8 @@ export default function Footer({ onNavigate, categories = [] }) {
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
-                <a href="https://wa.me/919898351920" target="_blank" rel="noopener noreferrer" className="hover:text-brand-crimson font-medium">
-                  +91 98983 51920
+                <a href="https://wa.me/917574927200" target="_blank" rel="noopener noreferrer" className="hover:text-brand-crimson font-medium">
+                  +91 75749 27200
                 </a>
               </li>
               <li className="flex items-center space-x-2">
@@ -201,7 +201,7 @@ export default function Footer({ onNavigate, categories = [] }) {
                 </button>
               </li>
               <li>
-                <a href="https://wa.me/919898351920" target="_blank" rel="noopener noreferrer" className="hover:text-brand-crimson transition text-emerald-600 font-bold">
+                <a href="https://wa.me/917574927200" target="_blank" rel="noopener noreferrer" className="hover:text-brand-crimson transition text-emerald-600 font-bold">
                   WhatsApp Support Hub
                 </a>
               </li>

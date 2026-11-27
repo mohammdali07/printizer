@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  ChevronLeft, ChevronRight, Plus, CheckCircle2, AlertCircle, Trash2, Edit,
+  ArrowLeft, ChevronLeft, ChevronRight, Plus, CheckCircle2, AlertCircle, Trash2, Edit,
   ShoppingBag, FileText, ArrowRight, MessageCircle, UploadCloud,
   Sparkles, Package, Layers, Send, ExternalLink, Info, X
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import ProductImage from '../components/ProductImage';
 import { getEffectiveOrderFields, calculateConfiguredOrderPrice } from '../utils/orderPricing';
+import { PRODUCT_GROUP_DEFS, getProductGroupDef } from '../utils/productGroups';
 
 export default function OrderConfigurePage({
   categories = [],
@@ -44,6 +45,7 @@ export default function OrderConfigurePage({
   const [size, setSize] = useState('');
   const [dimWidth, setDimWidth] = useState('3.5');
   const [dimHeight, setDimHeight] = useState('2.0');
+  const [specialUnitPrice, setSpecialUnitPrice] = useState('10');
   const [finishing, setFinishing] = useState('');
   const [foil, setFoil] = useState('none');
   const [spotUv, setSpotUv] = useState('none');
@@ -78,16 +80,49 @@ export default function OrderConfigurePage({
   const [submitError, setSubmitError] = useState('');
   const [submittedResult, setSubmittedResult] = useState(null);
 
+  const selectedProductObj = products.find(p => p.slug === selectedProductSlug);
   const categoryProductsRaw = products.filter(p => p.categoryId === selectedCategoryId);
-  const hasNtCardInCat = categoryProductsRaw.some(p => p.slug === 'nt-card');
-  const categoryProducts = hasNtCardInCat
-    ? categoryProductsRaw.filter(p => p.slug !== 'visiting-card')
-    : categoryProductsRaw;
+  const categoryProductsBase = categoryProductsRaw.filter((p) => {
+    const g = getProductGroupDef(p);
+    if (!g || !g.genericSlug || p.slug !== g.genericSlug) return true;
+    const hasSpecificVariants = categoryProductsRaw.some((other) => other.slug !== g.genericSlug && g.match(other));
+    return !hasSpecificVariants;
+  });
+
+  const selectedGroupDef = getProductGroupDef(selectedProductObj);
+  const categoryProducts = selectedGroupDef
+    ? categoryProductsBase.filter(selectedGroupDef.match)
+    : categoryProductsBase;
+
+  const groupRepresentativeSlug = {};
+  for (const g of PRODUCT_GROUP_DEFS) {
+    const firstMatch = categoryProductsBase.find(g.match);
+    if (firstMatch) groupRepresentativeSlug[g.key] = firstMatch.slug;
+  }
+
+  const topLevelCategoryProducts = (() => {
+    const list = [];
+    const seenGroups = new Set();
+    for (const p of categoryProductsBase) {
+      const g = getProductGroupDef(p);
+      if (g) {
+        if (!seenGroups.has(g.key) && groupRepresentativeSlug[g.key]) {
+          list.push({ id: `group-${g.key}`, slug: groupRepresentativeSlug[g.key], name: g.groupName });
+          seenGroups.add(g.key);
+        }
+      } else {
+        list.push(p);
+      }
+    }
+    return list;
+  })();
+
   const activeProduct =
     categoryProducts.find(p => p.slug === selectedProductSlug) ||
     categoryProducts[0] ||
     products[0] ||
     null;
+  const activeGroupDef = getProductGroupDef(activeProduct);
 
   const activeCategoryObj = categories.find(c => c.id === (activeProduct?.categoryId || selectedCategoryId));
   const cfg = activeProduct ? getEffectiveOrderFields(activeProduct) : null;
@@ -113,6 +148,7 @@ export default function OrderConfigurePage({
     setSize(preset?.size ?? (c.sizes[0] || ''));
     setDimWidth(preset?.dimWidth || '3.5');
     setDimHeight(preset?.dimHeight || '2.0');
+    setSpecialUnitPrice(preset?.specialUnitPrice || (prod.pricingConfig?.pricingKind === 'special_job' ? '10' : ''));
     setFinishing(preset?.finishing ?? (c.finishes[0] || ''));
     setFoil(preset?.foil || 'none');
     setSpotUv(preset?.spotUv || 'none');
@@ -193,6 +229,7 @@ export default function OrderConfigurePage({
         size,
         dimWidth,
         dimHeight,
+        specialUnitPrice,
         finishing,
         foil,
         spotUv,
@@ -228,33 +265,49 @@ export default function OrderConfigurePage({
       setFormError('Please select a valid product to configure.');
       return;
     }
-    if (cfg.showMaterial && !material) {
-      setFormError('Please select a product material / paper stock.');
-      return;
-    }
-    if (cfg.showSize && !cfg.hasDimensions && !size) {
-      setFormError('Please select a product size.');
-      return;
-    }
-    if (cfg.pricingKind === 'area' && cfg.hasDimensions) {
-      const w = parseFloat(dimWidth);
-      const h = parseFloat(dimHeight);
-      if (!Number.isFinite(w) || w <= 0 || !Number.isFinite(h) || h <= 0) {
-        setFormError('Please enter valid positive Width and Height dimensions in inches.');
+    if (cfg.pricingKind === 'special_job') {
+      if (!jobName.trim()) {
+        setFormError('Please enter a Job Name for this special job.');
         return;
       }
-    }
-    if (cfg.showPrinting && !printing) {
-      setFormError('Please select a printing option.');
-      return;
-    }
-    if (cfg.showColour && !colour) {
-      setFormError('Please select a colour option.');
-      return;
-    }
-    if (!Number.isFinite(activeNumericQty) || activeNumericQty < cfg.minQuantity) {
-      setFormError(`Minimum order quantity for ${activeProduct.name} is ${cfg.minQuantity.toLocaleString('en-IN')} ${cfg.unitName}.`);
-      return;
+      const unitP = parseFloat(specialUnitPrice);
+      if (!Number.isFinite(unitP) || unitP <= 0) {
+        setFormError('Please enter a valid rate / price per piece (₹).');
+        return;
+      }
+      if (!Number.isFinite(activeNumericQty) || activeNumericQty <= 0) {
+        setFormError('Please enter a valid quantity.');
+        return;
+      }
+    } else {
+      if (cfg.showMaterial && !material) {
+        setFormError('Please select a product material / paper stock.');
+        return;
+      }
+      if (cfg.showSize && !cfg.hasDimensions && !size) {
+        setFormError('Please select a product size.');
+        return;
+      }
+      if (cfg.pricingKind === 'area' && cfg.hasDimensions) {
+        const w = parseFloat(dimWidth);
+        const h = parseFloat(dimHeight);
+        if (!Number.isFinite(w) || w <= 0 || !Number.isFinite(h) || h <= 0) {
+          setFormError('Please enter valid positive Width and Height dimensions in inches.');
+          return;
+        }
+      }
+      if (cfg.showPrinting && !printing) {
+        setFormError('Please select a printing option.');
+        return;
+      }
+      if (cfg.showColour && !colour) {
+        setFormError('Please select a colour option.');
+        return;
+      }
+      if (!Number.isFinite(activeNumericQty) || activeNumericQty < cfg.minQuantity) {
+        setFormError(`Minimum order quantity for ${activeProduct.name} is ${cfg.minQuantity.toLocaleString('en-IN')} ${cfg.unitName}.`);
+        return;
+      }
     }
 
     const activeAddonsList = Object.entries(selectedAddons)
@@ -262,6 +315,9 @@ export default function OrderConfigurePage({
       .map(([k]) => k);
 
     const specSummary = [];
+    if (cfg.pricingKind === 'special_job') {
+      specSummary.push({ label: 'Rate/Piece', value: `₹${parseFloat(specialUnitPrice) || 0}` });
+    }
     if (cfg.showMaterial && material) specSummary.push({ label: 'Material', value: material });
     if (cfg.pricingKind === 'area' && cfg.hasDimensions) {
       specSummary.push({ label: 'Size', value: `${dimWidth}" × ${dimHeight}" (${pricing.areaSqIn || ''} sq.in)` });
@@ -314,6 +370,7 @@ export default function OrderConfigurePage({
         size,
         dimWidth,
         dimHeight,
+        specialUnitPrice,
         finishing,
         foil,
         spotUv,
@@ -398,7 +455,7 @@ ${businessName ? `Business: ${businessName}` : ''}
 
 Please share the final quotation and artwork instructions. Thank you!`;
 
-    return `https://wa.me/919898351920?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/917574927200?text=${encodeURIComponent(text)}`;
   };
 
   const handleSubmitFinalQuote = async (e) => {
@@ -450,6 +507,46 @@ Please share the final quotation and artwork instructions. Thank you!`;
         throw new Error(json.error || 'Could not submit quotation enquiry.');
       }
 
+      // Also record customer order into Orders DB + localStorage fallback for Admin Order Management
+      try {
+        const firstItem = orderItems[0];
+        const totalQty = orderItems.reduce((s, i) => s + (Number(i.quantity) || 0), 0);
+        const totalAmt = Number(orderTotals.pricedTotal) || 0;
+        const unitSell = totalQty > 0 && totalAmt > 0 ? Math.round((totalAmt / totalQty) * 100) / 100 : 0;
+        const orderPayload = {
+          customerName: customerName.trim(),
+          phone: whatsappNumber.trim(),
+          email: email.trim(),
+          productName: summaryProductName,
+          material: firstItem?.specs?.find((s) => s.label === 'Material')?.value || 'Standard',
+          size: firstItem?.specs?.find((s) => s.label === 'Size')?.value || 'Standard',
+          quantity: totalQty || 1,
+          sellingPrice: unitSell,
+          totalAmount: totalAmt,
+          supplierCost: 0,
+          paymentStatus: 'Pending',
+          orderStatus: 'Pending',
+          notes: additionalNotes.trim()
+        };
+        const ordRes = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderPayload)
+        }).catch(() => null);
+        if (!ordRes?.ok) {
+          const existing = JSON.parse(localStorage.getItem('prz_custom_orders') || '[]');
+          localStorage.setItem('prz_custom_orders', JSON.stringify([
+            {
+              ...orderPayload,
+              id: `ord-${Date.now()}`,
+              orderNumber: `PRZ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+              orderDate: new Date().toISOString()
+            },
+            ...existing
+          ]));
+        }
+      } catch {}
+
       try {
         confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
       } catch {}
@@ -468,27 +565,15 @@ Please share the final quotation and artwork instructions. Thank you!`;
       <div className="bg-white border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="space-y-1">
-              <div className="flex items-center space-x-1.5 text-xs text-slate-500">
-                <button onClick={() => onNavigate('home')} className="hover:text-slate-900 font-medium">
-                  Home
-                </button>
-                <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-                {activeCategoryObj && (
-                  <>
-                    <button
-                      onClick={() => onNavigate('category', activeCategoryObj.id)}
-                      className="hover:text-slate-900 font-medium"
-                    >
-                      {activeCategoryObj.name}
-                    </button>
-                    <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-                  </>
-                )}
-                <span className="text-brand-crimson font-bold truncate">
-                  {getConfigHeading(activeProduct?.name)}
-                </span>
-              </div>
+            <div className="space-y-1.5">
+              <button
+                type="button"
+                onClick={() => activeCategoryObj ? onNavigate('category', activeCategoryObj.id) : onNavigate('home')}
+                className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200/80 text-slate-700 hover:text-slate-900 border border-slate-200/80 px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer active:scale-95"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>{activeCategoryObj ? `Back to ${activeCategoryObj.name}` : 'Back to Home'}</span>
+              </button>
               <h1 className="text-lg sm:text-2xl font-extrabold text-slate-900 tracking-tight">
                 {getConfigHeading(activeProduct?.name)}
               </h1>
@@ -525,29 +610,58 @@ Please share the final quotation and artwork instructions. Thank you!`;
           {/* LEFT COLUMN (Category + Add Order Form) */}
           <div className="lg:col-span-6 space-y-4 min-w-0">
 
-            {/* CARD 1: SELECT CATEGORY */}
-            <div className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-6 shadow-2xs">
-              <label
-                htmlFor="config-category-select"
-                className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-2"
-              >
-                Select Category
-              </label>
-              <select
-                id="config-category-select"
-                value={selectedCategoryId}
-                onChange={(e) => handleCategoryChange(e.target.value)}
-                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition cursor-pointer"
-              >
-                {categories.map((cat) => {
-                  const count = products.filter(p => p.categoryId === cat.id).length;
-                  return (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.name} ({count} Products)
-                    </option>
-                  );
-                })}
-              </select>
+            {/* CARD 1: SELECT CATEGORY & PRODUCT */}
+            <div className="bg-white border border-slate-200/80 rounded-xl p-5 sm:p-6 shadow-2xs space-y-4">
+              <div>
+                <label
+                  htmlFor="config-category-select"
+                  className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-2"
+                >
+                  Select Category
+                </label>
+                <select
+                  id="config-category-select"
+                  value={selectedCategoryId}
+                  onChange={(e) => handleCategoryChange(e.target.value)}
+                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition cursor-pointer"
+                >
+                  {categories.map((cat) => {
+                    const count = products.filter(p => p.categoryId === cat.id).length;
+                    return (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name} ({count} Products)
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+
+              {topLevelCategoryProducts.length > 0 && (
+                <div>
+                  <label
+                    htmlFor="config-top-product-select"
+                    className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-2"
+                  >
+                    Select Product
+                  </label>
+                  <select
+                    id="config-top-product-select"
+                    value={
+                      activeGroupDef && groupRepresentativeSlug[activeGroupDef.key]
+                        ? groupRepresentativeSlug[activeGroupDef.key]
+                        : (activeProduct?.slug || '')
+                    }
+                    onChange={(e) => handleProductChange(e.target.value)}
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition cursor-pointer"
+                  >
+                    {topLevelCategoryProducts.map((p) => (
+                      <option key={p.id} value={p.slug}>
+                        {p.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
 
             {/* CARD 2: ADD ORDER FORM */}
@@ -616,27 +730,48 @@ Please share the final quotation and artwork instructions. Thank you!`;
 
             {/* ==================== LEFT COLUMN ==================== */}
             <div className="space-y-4">
-              {/* 1. Select Product */}
-              <div>
-                <label htmlFor="order-product-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
-                  Select Product <span className="text-brand-crimson">*</span>
-                </label>
-                <select
-                  id="order-product-select"
-                  value={activeProduct?.slug || ''}
-                  onChange={(e) => handleProductChange(e.target.value)}
-                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
-                >
-                  {categoryProducts.map((p) => (
-                    <option key={p.id} value={p.slug}>
-                      {p.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {/* 1. Select Sub-Product / Option (Shown only for grouped multi-variant products like Visiting Card, Letterhead, Envelope, Art Paper, Stickers, Ultima Box) */}
+              {activeGroupDef && (
+                <div>
+                  <label htmlFor="order-product-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                    {activeGroupDef.subLabel} <span className="text-brand-crimson">*</span>
+                  </label>
+                  <select
+                    id="order-product-select"
+                    value={activeProduct?.slug || ''}
+                    onChange={(e) => handleProductChange(e.target.value)}
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
+                  >
+                    {categoryProducts.map((p) => (
+                      <option key={p.id} value={p.slug}>
+                        {p.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {/* Special Job Rate Input */}
+              {cfg?.pricingKind === 'special_job' && (
+                <div>
+                  <label htmlFor="order-special-price" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                    Price Per Piece / Rate (₹) <span className="text-brand-crimson">*</span>
+                  </label>
+                  <input
+                    id="order-special-price"
+                    type="number"
+                    min="0.1"
+                    step="any"
+                    placeholder="Enter price per piece (₹)"
+                    value={specialUnitPrice}
+                    onChange={(e) => setSpecialUnitPrice(e.target.value)}
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-semibold text-slate-900 transition"
+                  />
+                </div>
+              )}
 
               {/* 2. Foil & Spot UV side-by-side (matching screenshot) */}
-              {(cfg?.supportsFoil || cfg?.supportsSpotUv) && (
+              {cfg?.pricingKind !== 'special_job' && (cfg?.supportsFoil || cfg?.supportsSpotUv) && (
                 <div className="grid grid-cols-2 gap-3.5">
                   {cfg.supportsFoil && (
                     <div>
@@ -717,6 +852,12 @@ Please share the final quotation and artwork instructions. Thank you!`;
                         placeholder="Width (in)"
                         value={dimWidth}
                         onChange={(e) => setDimWidth(e.target.value)}
+                        onBlur={() => {
+                          const val = parseFloat(dimWidth);
+                          if (Number.isFinite(val) && val > 0) {
+                            setDimWidth((Math.round(val * 4) / 4).toFixed(2));
+                          }
+                        }}
                         className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
                       />
                       <input
@@ -726,6 +867,12 @@ Please share the final quotation and artwork instructions. Thank you!`;
                         placeholder="Height (in)"
                         value={dimHeight}
                         onChange={(e) => setDimHeight(e.target.value)}
+                        onBlur={() => {
+                          const val = parseFloat(dimHeight);
+                          if (Number.isFinite(val) && val > 0) {
+                            setDimHeight((Math.round(val * 4) / 4).toFixed(2));
+                          }
+                        }}
                         className="w-full bg-white border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3 text-sm font-medium text-slate-800"
                       />
                     </div>
@@ -905,7 +1052,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
               {/* 6. Job Name (clean input matching screenshot bottom-left) */}
               <div>
                 <label htmlFor="order-job-name" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
-                  Job Name
+                  Job Name {cfg?.pricingKind === 'special_job' && <span className="text-brand-crimson">*</span>}
                 </label>
                 <input
                   id="order-job-name"
@@ -921,7 +1068,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
             {/* ==================== RIGHT COLUMN ==================== */}
             <div className="space-y-4">
               {/* 1. Select Printing */}
-              {cfg?.showPrinting && (
+              {cfg?.showPrinting && cfg?.pricingKind !== 'special_job' && (
                 <div>
                   <label htmlFor="order-printing-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
                     Select Printing <span className="text-brand-crimson">*</span>
@@ -940,7 +1087,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
               )}
 
               {/* 2. Select Colour Options */}
-              {cfg?.showColour && (
+              {cfg?.showColour && cfg?.pricingKind !== 'special_job' && (
                 <div>
                   <label htmlFor="order-colour-select" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
                     Select Colour Options <span className="text-brand-crimson">*</span>
@@ -959,50 +1106,71 @@ Please share the final quotation and artwork instructions. Thank you!`;
               )}
 
               {/* 3. Select Quantity */}
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label htmlFor="order-qty-select" className="text-xs sm:text-[13px] font-bold text-slate-800">
-                    Select Quantity <span className="text-brand-crimson">*</span>
+              {cfg?.pricingKind === 'special_job' ? (
+                <div>
+                  <label htmlFor="order-special-qty" className="block text-xs sm:text-[13px] font-bold text-slate-800 mb-1.5">
+                    Quantity <span className="text-brand-crimson">*</span>
                   </label>
-                  <span className="text-[11px] font-semibold text-slate-500">
-                    Min: {cfg?.minQuantity?.toLocaleString('en-IN')} {cfg?.unitName}
-                  </span>
-                </div>
-
-                <select
-                  id="order-qty-select"
-                  value={quantityMode === 'custom' ? '__custom__' : String(quantity)}
-                  onChange={(e) => {
-                    if (e.target.value === '__custom__') {
-                      setQuantityMode('custom');
-                      setCustomQty(String(quantity || cfg?.minQuantity || 100));
-                    } else {
-                      setQuantityMode('tier');
-                      setQuantity(Number(e.target.value));
-                    }
-                  }}
-                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
-                >
-                  {(cfg?.quantityTiers || []).map((q) => (
-                    <option key={q} value={String(q)}>
-                      {q.toLocaleString('en-IN')} {cfg?.unitName}
-                    </option>
-                  ))}
-                  <option value="__custom__">Custom Quantity (Enter Exact Count)</option>
-                </select>
-
-                {quantityMode === 'custom' && (
                   <input
+                    id="order-special-qty"
                     type="number"
-                    min={cfg?.minQuantity || 1}
-                    step={cfg?.packSize || 1}
-                    placeholder={`Minimum ${cfg?.minQuantity || 1}`}
-                    value={customQty}
-                    onChange={(e) => setCustomQty(e.target.value)}
-                    className="mt-2 w-full bg-white border border-blue-400 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-semibold text-slate-900"
+                    min="1"
+                    step="1"
+                    placeholder="Enter quantity"
+                    value={quantityMode === 'custom' ? customQty : quantity}
+                    onChange={(e) => {
+                      setQuantityMode('custom');
+                      setCustomQty(e.target.value);
+                    }}
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-semibold text-slate-900 transition"
                   />
-                )}
-              </div>
+                </div>
+              ) : (
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label htmlFor="order-qty-select" className="text-xs sm:text-[13px] font-bold text-slate-800">
+                      Select Quantity <span className="text-brand-crimson">*</span>
+                    </label>
+                    <span className="text-[11px] font-semibold text-slate-500">
+                      Min: {cfg?.minQuantity?.toLocaleString('en-IN')} {cfg?.unitName}
+                    </span>
+                  </div>
+
+                  <select
+                    id="order-qty-select"
+                    value={quantityMode === 'custom' ? '__custom__' : String(quantity)}
+                    onChange={(e) => {
+                      if (e.target.value === '__custom__') {
+                        setQuantityMode('custom');
+                        setCustomQty(String(quantity || cfg?.minQuantity || 100));
+                      } else {
+                        setQuantityMode('tier');
+                        setQuantity(Number(e.target.value));
+                      }
+                    }}
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition"
+                  >
+                    {(cfg?.quantityTiers || []).map((q) => (
+                      <option key={q} value={String(q)}>
+                        {q.toLocaleString('en-IN')} {cfg?.unitName}
+                      </option>
+                    ))}
+                    <option value="__custom__">Custom Quantity (Enter Exact Count)</option>
+                  </select>
+
+                  {quantityMode === 'custom' && (
+                    <input
+                      type="number"
+                      min={cfg?.minQuantity || 1}
+                      step={cfg?.packSize || 1}
+                      placeholder={`Minimum ${cfg?.minQuantity || 1}`}
+                      value={customQty}
+                      onChange={(e) => setCustomQty(e.target.value)}
+                      className="mt-2 w-full bg-white border border-blue-400 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-semibold text-slate-900"
+                    />
+                  )}
+                </div>
+              )}
 
               {/* 4. Delivery & Billing Class */}
               {((cfg?.showDelivery) || (cfg?.showBilling && cfg?.priceSheets)) && (
@@ -1517,7 +1685,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                     className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-md"
                   >
                     <MessageCircle className="w-4 h-4" />
-                    <span>Continue on WhatsApp (+91 98983 51920)</span>
+                    <span>Continue on WhatsApp (+91 75749 27200)</span>
                   </a>
 
                   <button
@@ -1565,7 +1733,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                       <input
                         type="tel"
                         required
-                        placeholder="+91 98983 51920"
+                        placeholder="+91 75749 27200"
                         value={whatsappNumber}
                         onChange={(e) => setWhatsappNumber(e.target.value)}
                         className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-xs text-slate-900"

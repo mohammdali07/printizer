@@ -32,7 +32,7 @@ I would like to contact your team regarding printing solutions.
 Name: ${formData.name || 'Customer'}
 Message: ${formData.message || 'Please connect with me.'}
 Thank you.`;
-    return `https://wa.me/919898351920?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/917574927200?text=${encodeURIComponent(text)}`;
   };
 
   return (
@@ -72,12 +72,12 @@ Thank you.`;
                       WhatsApp / Helpline
                     </h4>
                     <a
-                      href="https://wa.me/919898351920"
+                      href="https://wa.me/917574927200"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-base font-bold text-slate-900 hover:text-emerald-600 transition block mt-0.5"
                     >
-                      +91 98983 51920
+                      +91 75749 27200
                     </a>
                     <span className="text-xs text-emerald-600 font-semibold">● Active for Instant Quotations</span>
                   </div>
@@ -138,7 +138,7 @@ Thank you.`;
               {/* Direct WhatsApp Action Button */}
               <div className="pt-2">
                 <a
-                  href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20would%20like%20to%20connect%20with%20your%20printing%20team."
+                  href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20would%20like%20to%20connect%20with%20your%20printing%20team."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm flex items-center justify-center space-x-2 transition shadow-md shadow-emerald-500/20"
@@ -200,7 +200,7 @@ Thank you.`;
                       <input
                         type="tel"
                         required
-                        placeholder="+91 98983 51920"
+                        placeholder="+91 75749 27200"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2.5 px-3 text-xs text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"

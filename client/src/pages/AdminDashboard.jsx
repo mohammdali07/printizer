@@ -1,11 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Lock, LogOut, FileText, CheckCircle2, Clock, AlertCircle, 
   Send, Download, MessageCircle, RefreshCw, Plus, Trash2, 
-  Edit, Eye, Search, Filter, ChevronRight, X, ExternalLink, ShieldCheck, DollarSign,
-  UploadCloud, Image as ImageIcon, Star
+  Edit, Eye, EyeOff, Search, Filter, ChevronRight, X, ExternalLink, ShieldCheck, DollarSign,
+  UploadCloud, Image as ImageIcon, Star, Copy, Layers, ArrowLeft,
+  LayoutDashboard, Package, ShoppingCart, Users, FolderTree, Megaphone, BarChart3, Settings, Menu, ArrowUp, ArrowDown
 } from 'lucide-react';
 import ProductImage from '../components/ProductImage';
+import initialCatalog from '../data/initialCatalog.json';
+import { PRODUCT_GROUP_DEFS, getProductGroupDef } from '../utils/productGroups';
+import {
+  exportProductsAsCsv,
+  exportProductsAsExcel,
+  downloadBulkTemplateExcel,
+  parseBulkCatalogFile
+} from '../utils/catalogSpreadsheet';
+import {
+  ORDERS_STORAGE_KEY,
+  PROMOS_STORAGE_KEY,
+  SETTINGS_STORAGE_KEY,
+  adminFetch,
+  readLocalJson,
+  writeLocalJson
+} from '../utils/adminApi';
+import AdminOverview from '../components/admin/AdminOverview';
+import AdminOrders from '../components/admin/AdminOrders';
+import AdminCustomers from '../components/admin/AdminCustomers';
+import AdminPromotions from '../components/admin/AdminPromotions';
+import AdminAnalytics from '../components/admin/AdminAnalytics';
+import AdminSettings from '../components/admin/AdminSettings';
+
+const LOCAL_CATALOG_KEY = 'prz_custom_catalog';
+
+const readLocalCatalog = () => {
+  try {
+    const raw = localStorage.getItem(LOCAL_CATALOG_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed.categories) && Array.isArray(parsed.products)) {
+        return parsed;
+      }
+    }
+  } catch {}
+  return {
+    categories: initialCatalog.categories || [],
+    products: initialCatalog.products || []
+  };
+};
+
+const writeLocalCatalog = (categories, products) => {
+  try {
+    localStorage.setItem(LOCAL_CATALOG_KEY, JSON.stringify({ categories, products }));
+  } catch {}
+};
 
 const parseCsvList = (val) =>
   typeof val === 'string'
@@ -26,6 +73,9 @@ const createDefaultOrderFormState = (p = null, fallbackCat = null) => {
     categoryName: p?.categoryName || fallbackCat?.name || 'Business Stationery',
     tagline: p?.tagline || '',
     description: p?.description || '',
+    enabled: p?.enabled !== false,
+    supplierCost: p?.supplierCost ?? pc.supplierCost ?? '',
+    supplierName: p?.supplierName || '',
     minQuantity: p?.minQuantity ?? pc.minQuantity ?? 100,
     packSize: p?.packSize ?? pc.packSize ?? p?.minQuantity ?? 100,
     unitName: pc.unitName || 'Units',
@@ -34,6 +84,9 @@ const createDefaultOrderFormState = (p = null, fallbackCat = null) => {
     retailSingleRate: pc.priceSheets?.retail?.single ?? '',
     retailBothRate: pc.priceSheets?.retail?.both ?? '',
     priceUnavailable: Boolean(pc.priceUnavailable),
+    supportsFoil: Boolean(pc.supportsFoil),
+    supportsSpotUv: Boolean(pc.supportsSpotUv),
+    dimensions: Boolean(pc.dimensions),
     quantityTiers: Array.isArray(p?.quantityTiers) ? p.quantityTiers.join(', ') : '',
     image: p?.image || '',
     secondaryImages: initialGallery,
@@ -63,16 +116,27 @@ const createDefaultOrderFormState = (p = null, fallbackCat = null) => {
 
 export default function AdminDashboard({ onNavigate, onCatalogUpdated }) {
   const [authToken, setAuthToken] = useState(localStorage.getItem('prz_admin_token') || '');
+  const [adminUser, setAdminUser] = useState(() => readLocalJson('prz_admin_user', { username: 'admin', name: 'Super Admin', role: 'Super Admin' }));
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('printizer@2026');
   const [loginError, setLoginError] = useState('');
 
   // Dashboard Data State
-  const [activeTab, setActiveTab] = useState('enquiries'); // 'enquiries' | 'products'
+  const [activeTab, setActiveTab] = useState('overview');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [stats, setStats] = useState(null);
   const [enquiries, setEnquiries] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [orders, setOrders] = useState(() => readLocalJson(ORDERS_STORAGE_KEY, []));
+  const [customers, setCustomers] = useState([]);
+  const [promotions, setPromotions] = useState(() => readLocalJson(PROMOS_STORAGE_KEY, {
+    announcementBar: { enabled: false, text: '', bgColor: '#be123c' },
+    banners: [],
+    featuredProductIds: []
+  }));
+  const [settings, setSettings] = useState(() => readLocalJson(SETTINGS_STORAGE_KEY, {}));
+  const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -100,9 +164,21 @@ export default function AdminDashboard({ onNavigate, onCatalogUpdated }) {
   const [editingProduct, setEditingProduct] = useState(null);
   const [productSearch, setProductSearch] = useState('');
   const [productCategoryFilter, setProductCategoryFilter] = useState('all');
+  const [activeAdminGroupKey, setActiveAdminGroupKey] = useState(null);
   const [uploadingImages, setUploadingImages] = useState(false);
   const [imageUploadError, setImageUploadError] = useState('');
   const [productFormData, setProductFormData] = useState(() => createDefaultOrderFormState());
+
+  // Category Add / Edit Modal State
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [editingCategory, setEditingCategory] = useState(null);
+  const [categoryFormData, setCategoryFormData] = useState({
+    id: '',
+    name: '',
+    description: '',
+    image: ''
+  });
+  const [deleteTarget, setDeleteTarget] = useState(null); // { type: 'product' | 'category', id, name }
 
   const [actionSuccess, setActionSuccess] = useState('');
   const [actionError, setActionError] = useState('');
@@ -118,27 +194,43 @@ export default function AdminDashboard({ onNavigate, onCatalogUpdated }) {
     }
   }, [actionSuccess, actionError]);
 
-  // Handle Login
+  // Handle Login (Express API with static-hosting fallback)
   const handleLogin = async (e) => {
     if (e && e.preventDefault) e.preventDefault();
     setLoginError('');
+    const u = username.trim() || 'admin';
+    const p = password.trim() || 'printizer@2026';
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          username: username.trim() || 'admin', 
-          password: password.trim() || 'printizer@2026' 
-        })
+        body: JSON.stringify({ username: u, password: p })
       });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem('prz_admin_token', data.token);
+          if (data.user) {
+            localStorage.setItem('prz_admin_user', JSON.stringify(data.user));
+            setAdminUser(data.user);
+          }
+          setAuthToken(data.token);
+          return;
+        }
         throw new Error(data.error || 'Invalid credentials');
       }
-      localStorage.setItem('prz_admin_token', data.token);
-      setAuthToken(data.token);
+      throw new Error('API_UNAVAILABLE');
     } catch (err) {
-      setLoginError(err.message || 'Login failed. Please check credentials.');
+      if (u === 'admin' && p === 'printizer@2026') {
+        const localToken = 'local-admin-session';
+        const fallbackUser = { username: 'admin', name: 'Super Admin', role: 'Super Admin' };
+        localStorage.setItem('prz_admin_token', localToken);
+        localStorage.setItem('prz_admin_user', JSON.stringify(fallbackUser));
+        setAdminUser(fallbackUser);
+        setAuthToken(localToken);
+        return;
+      }
+      setLoginError(err.message === 'API_UNAVAILABLE' ? 'Invalid credentials' : (err.message || 'Login failed.'));
     }
   };
 
@@ -150,33 +242,171 @@ export default function AdminDashboard({ onNavigate, onCatalogUpdated }) {
 
   const handleLogout = () => {
     localStorage.removeItem('prz_admin_token');
+    localStorage.removeItem('prz_admin_user');
     setAuthToken('');
   };
 
-  // Fetch Dashboard Data
+  // Derive customers & stats locally when API is unavailable
+  const computeCustomersFromOrders = (orderList = [], enquiryList = []) => {
+    const map = new Map();
+    orderList.forEach((o) => {
+      const key = (o.phone || o.email || o.customerName || o.id).toString().trim().toLowerCase();
+      if (!key) return;
+      const existing = map.get(key) || {
+        id: key,
+        name: o.customerName || 'Customer',
+        phone: o.phone || '',
+        email: o.email || '',
+        totalOrders: 0,
+        totalSpending: 0,
+        lastOrderDate: null,
+        orders: []
+      };
+      existing.totalOrders += 1;
+      if (o.orderStatus !== 'Cancelled') {
+        existing.totalSpending += Number(o.totalAmount) || 0;
+      }
+      if (!existing.lastOrderDate || new Date(o.orderDate) > new Date(existing.lastOrderDate)) {
+        existing.lastOrderDate = o.orderDate;
+      }
+      existing.orders.push(o);
+      map.set(key, existing);
+    });
+    enquiryList.forEach((e) => {
+      const key = (e.whatsappNumber || e.email || e.customerName || '').toString().trim().toLowerCase();
+      if (!key || map.has(key)) return;
+      map.set(key, {
+        id: key,
+        name: e.customerName || 'Lead',
+        phone: e.whatsappNumber || '',
+        email: e.email || '',
+        totalOrders: 0,
+        totalSpending: 0,
+        lastOrderDate: e.createdAt || null,
+        orders: []
+      });
+    });
+    return Array.from(map.values());
+  };
+
+  // Fetch Dashboard Data (Express API with static localStorage/initialCatalog fallback)
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [statsRes, enqRes, prodRes, catRes] = await Promise.all([
-        fetch('/api/stats'),
-        fetch(`/api/enquiries?status=${statusFilter}&search=${encodeURIComponent(searchQuery)}`),
-        fetch('/api/products'),
-        fetch('/api/categories')
+      const [statsRes, enqRes, prodRes, catRes, ordRes, custRes, promoRes, setRes, anaRes] = await Promise.all([
+        adminFetch('/api/stats', {}, authToken).catch(() => null),
+        adminFetch(`/api/enquiries?status=${statusFilter}&search=${encodeURIComponent(searchQuery)}`, {}, authToken).catch(() => null),
+        adminFetch('/api/admin/products', {}, authToken).catch(() => null),
+        adminFetch('/api/admin/categories', {}, authToken).catch(() => null),
+        adminFetch('/api/orders', {}, authToken).catch(() => null),
+        adminFetch('/api/customers', {}, authToken).catch(() => null),
+        fetch('/api/promotions').catch(() => null),
+        fetch('/api/settings').catch(() => null),
+        adminFetch('/api/analytics?period=monthly', {}, authToken).catch(() => null)
       ]);
 
-      const [statsData, enqData, prodData, catData] = await Promise.all([
-        statsRes.json(),
-        enqRes.json(),
-        prodRes.json(),
-        catRes.json()
-      ]);
+      if ([statsRes, enqRes, prodRes, catRes, ordRes].some((r) => r && r.status === 401)) {
+        handleLogout();
+        setLoginError('Session expired. Please sign in again.');
+        return;
+      }
 
-      if (statsData.success) setStats(statsData.data);
-      if (enqData.success) setEnquiries(enqData.data);
-      if (prodData.success) setProducts(prodData.data);
-      if (catData.success) setCategories(catData.data);
+      let currentProducts = products;
+      let gotApiCatalog = false;
+      if (prodRes?.ok && catRes?.ok) {
+        const [prodData, catData] = await Promise.all([prodRes.json(), catRes.json()]);
+        if (prodData.success && catData.success) {
+          setProducts(prodData.data);
+          setCategories(catData.data);
+          currentProducts = prodData.data;
+          gotApiCatalog = true;
+        }
+      }
+
+      if (!gotApiCatalog) {
+        const local = readLocalCatalog();
+        setProducts(local.products);
+        setCategories(local.categories);
+        currentProducts = local.products;
+      }
+
+      let currentOrders = readLocalJson(ORDERS_STORAGE_KEY, []);
+      if (ordRes?.ok) {
+        const ordData = await ordRes.json();
+        if (ordData.success) {
+          currentOrders = ordData.data || [];
+          setOrders(currentOrders);
+          writeLocalJson(ORDERS_STORAGE_KEY, currentOrders);
+        }
+      } else {
+        setOrders(currentOrders);
+      }
+
+      let currentEnquiries = enquiries;
+      if (enqRes?.ok) {
+        const enqData = await enqRes.json();
+        if (enqData.success) {
+          currentEnquiries = enqData.data || [];
+          setEnquiries(currentEnquiries);
+        }
+      }
+
+      if (custRes?.ok) {
+        const custData = await custRes.json();
+        if (custData.success) setCustomers(custData.data || []);
+      } else {
+        setCustomers(computeCustomersFromOrders(currentOrders, currentEnquiries));
+      }
+
+      if (promoRes?.ok) {
+        const promoData = await promoRes.json();
+        if (promoData.success && promoData.data) {
+          setPromotions(promoData.data);
+          writeLocalJson(PROMOS_STORAGE_KEY, promoData.data);
+        }
+      }
+
+      if (setRes?.ok) {
+        const setData = await setRes.json();
+        if (setData.success && setData.data) {
+          setSettings(setData.data);
+          writeLocalJson(SETTINGS_STORAGE_KEY, setData.data);
+        }
+      }
+
+      if (anaRes?.ok) {
+        const anaData = await anaRes.json();
+        if (anaData.success) setAnalytics(anaData.data);
+      }
+
+      if (statsRes?.ok) {
+        const statsData = await statsRes.json();
+        if (statsData.success) setStats(statsData.data);
+      } else {
+        const nonCancelled = currentOrders.filter((o) => o.orderStatus !== 'Cancelled');
+        const totalRevenue = nonCancelled.reduce((s, o) => s + (Number(o.totalAmount) || 0), 0);
+        const totalSupplierCost = nonCancelled.reduce((s, o) => s + (Number(o.supplierCost) || 0), 0);
+        setStats({
+          totalEnquiries: currentEnquiries.length,
+          newEnquiries: currentEnquiries.filter((e) => ['New', 'New Enquiry'].includes(e.status)).length,
+          quotationPrepared: currentEnquiries.filter((e) => ['Quoted', 'Quotation Prepared'].includes(e.status)).length,
+          quotationSent: currentEnquiries.filter((e) => e.status === 'Quotation Sent').length,
+          confirmed: currentEnquiries.filter((e) => ['Converted', 'Confirmed'].includes(e.status)).length,
+          totalProducts: currentProducts.length,
+          totalOrders: currentOrders.length,
+          pendingOrders: currentOrders.filter((o) => o.orderStatus === 'Pending').length,
+          confirmedOrders: currentOrders.filter((o) => ['Confirmed', 'Processing', 'Ready', 'Dispatched'].includes(o.orderStatus)).length,
+          completedOrders: currentOrders.filter((o) => o.orderStatus === 'Completed').length,
+          totalCustomers: computeCustomersFromOrders(currentOrders, currentEnquiries).length,
+          totalRevenue: Math.round(totalRevenue * 100) / 100,
+          totalSupplierCost: Math.round(totalSupplierCost * 100) / 100,
+          estimatedProfit: Math.round((totalRevenue - totalSupplierCost) * 100) / 100
+        });
+      }
     } catch (err) {
-      console.error('Fetch error:', err);
+      const local = readLocalCatalog();
+      setProducts(local.products);
+      setCategories(local.categories);
     } finally {
       setLoading(false);
     }
@@ -317,7 +547,7 @@ export default function AdminDashboard({ onNavigate, onCatalogUpdated }) {
   // Send Quotation to Customer Email
   const handleSendEmail = async (enquiryId) => {
     try {
-      const res = await fetch(`/api/enquiries/${enquiryId}/send-email`, { method: 'POST' });
+      const res = await adminFetch(`/api/enquiries/${enquiryId}/send-email`, { method: 'POST' }, authToken);
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.error || 'Failed to send email');
       setActionSuccess('Quotation email dispatched to customer successfully!');
@@ -330,11 +560,10 @@ export default function AdminDashboard({ onNavigate, onCatalogUpdated }) {
   // Update Status
   const handleUpdateStatus = async (enquiryId, newStatus) => {
     try {
-      const res = await fetch(`/api/enquiries/${enquiryId}/status`, {
+      const res = await adminFetch(`/api/enquiries/${enquiryId}/status`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
-      });
+      }, authToken);
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.error || 'Failed to update status');
       setActionSuccess(`Status updated to: ${newStatus}`);
@@ -426,17 +655,34 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
       fd.append('productId', editingProduct?.id || productFormData.slug || 'new-product');
       optimized.forEach(f => fd.append('images', f));
 
-      const res = await fetch('/api/products/upload-image', {
-        method: 'POST',
-        body: fd
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Image upload failed');
-      }
-      return (data.files || []).map(f => f.url);
+      try {
+        const res = await fetch('/api/products/upload-image', {
+          method: 'POST',
+          body: fd
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            return (data.files || []).map(f => f.url);
+          }
+        }
+      } catch {}
+
+      // Fallback for static hosting: convert optimized images to Data URLs
+      const dataUrls = await Promise.all(
+        optimized.map(
+          (file) =>
+            new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onload = () => resolve(String(reader.result || ''));
+              reader.onerror = () => resolve('');
+              reader.readAsDataURL(file);
+            })
+        )
+      );
+      return dataUrls.filter(Boolean);
     } catch (err) {
-      setImageUploadError(err.message || 'Could not upload image.');
+      setImageUploadError(err.message || 'Could not process image.');
       return [];
     } finally {
       setUploadingImages(false);
@@ -561,7 +807,7 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         showFinishing: Boolean(ofForm.showFinishing),
         showPrinting: Boolean(ofForm.showPrinting),
         showColour: Boolean(ofForm.showColour),
-        showDelivery: Boolean(ofForm.showDelivery),
+        showDelivery: false,
         showNcr: Boolean(ofForm.showNcr),
         showCopyType: Boolean(ofForm.showCopyType),
         showBinding: Boolean(ofForm.showBinding),
@@ -593,6 +839,10 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         };
       }
 
+      const supplierCostNum = productFormData.supplierCost !== '' && productFormData.supplierCost !== null
+        ? Number(productFormData.supplierCost)
+        : undefined;
+
       const nextPricingConfig = {
         ...existingPc,
         minQuantity: minQtyNum,
@@ -600,7 +850,12 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         unitName: (productFormData.unitName || 'Units').trim(),
         ...(Number.isFinite(baseRateNum) ? { baseRate: baseRateNum } : {}),
         ...(Number.isFinite(startingPriceNum) ? { startingPrice: startingPriceNum } : {}),
+        ...(Number.isFinite(supplierCostNum) ? { supplierCost: supplierCostNum } : {}),
         priceUnavailable: Boolean(productFormData.priceUnavailable),
+        supportsFoil: Boolean(productFormData.supportsFoil),
+        supportsSpotUv: Boolean(productFormData.supportsSpotUv),
+        dimensions: Boolean(productFormData.dimensions),
+        ...(productFormData.dimensions ? { pricingKind: 'area' } : {}),
         supportsBothSides: updatedOrderFields.printingOptions.some((opt) => /both|double/i.test(opt)) || Boolean(existingPc.supportsBothSides),
         ...(nextPriceSheets ? { priceSheets: nextPriceSheets } : {}),
         orderFields: updatedOrderFields
@@ -613,6 +868,9 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         categoryName: categories.find(c => c.id === productFormData.categoryId)?.name || 'Custom',
         tagline: productFormData.tagline,
         description: productFormData.description,
+        enabled: productFormData.enabled !== false,
+        ...(Number.isFinite(supplierCostNum) ? { supplierCost: supplierCostNum } : {}),
+        ...(productFormData.supplierName?.trim() ? { supplierName: productFormData.supplierName.trim() } : {}),
         minQuantity: minQtyNum,
         packSize: packSizeNum,
         ...(Number.isFinite(baseRateNum) ? { baseRate: baseRateNum } : {}),
@@ -626,45 +884,323 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
         finishes: parseCsvList(productFormData.finishes)
       };
 
-      let res;
-      if (editingProduct) {
-        res = await fetch(`/api/products/${editingProduct.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      } else {
-        res = await fetch('/api/products', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+      let savedToApi = false;
+      try {
+        const res = editingProduct
+          ? await adminFetch(`/api/products/${editingProduct.id}`, {
+              method: 'PUT',
+              body: JSON.stringify(payload)
+            }, authToken)
+          : await adminFetch('/api/products', {
+              method: 'POST',
+              body: JSON.stringify(payload)
+            }, authToken);
+
+        if (res.ok) {
+          const data = await res.json();
+          if (!data.success) throw new Error(data.error || 'Failed to save product');
+          savedToApi = true;
+        }
+      } catch (apiErr) {
+        if (apiErr.message && !/fetch|network|json/i.test(apiErr.message)) {
+          throw apiErr;
+        }
       }
 
-      const data = await res.json();
-      if (!res.ok || !data.success) throw new Error(data.error || 'Failed to save product');
+      if (!savedToApi) {
+        const nextProducts = editingProduct
+          ? products.map((item) => (item.id === editingProduct.id ? { ...item, ...payload } : item))
+          : [{ id: `prd-${payload.slug}-${Date.now()}`, ...payload }, ...products];
+        setProducts(nextProducts);
+        writeLocalCatalog(categories, nextProducts);
+      }
 
       setActionSuccess(editingProduct ? 'Product updated successfully!' : 'New product created!');
       setShowProductModal(false);
       setEditingProduct(null);
-      fetchData();
+      if (savedToApi) fetchData();
       onCatalogUpdated?.();
     } catch (err) {
       setActionError(err.message);
     }
   };
 
-  const handleDeleteProduct = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this product?')) return;
+  const handleDuplicateProduct = (p) => {
+    setEditingProduct(null);
+    setImageUploadError('');
+    const baseState = createDefaultOrderFormState(p, categories[0]);
+    setProductFormData({
+      ...baseState,
+      name: `${p.name} (Copy)`,
+      slug: `${p.slug}-copy`
+    });
+    setShowProductModal(true);
+  };
+
+  const handleDeleteProduct = (p) => {
+    setDeleteTarget({ type: 'product', id: p.id, name: p.name });
+  };
+
+  const handleDeleteCategory = (cat) => {
+    setDeleteTarget({ type: 'category', id: cat.id, name: cat.name });
+  };
+
+  const confirmDeleteTarget = async () => {
+    if (!deleteTarget) return;
+    const { type, id } = deleteTarget;
+    setDeleteTarget(null);
+    if (type === 'category') {
+      try {
+        await adminFetch(`/api/categories/${id}`, { method: 'DELETE' }, authToken).catch(() => null);
+      } catch {}
+      const nextCategories = categories.filter((c) => c.id !== id);
+      setCategories(nextCategories);
+      writeLocalCatalog(nextCategories, products);
+      setActionSuccess('Category removed');
+      onCatalogUpdated?.();
+      return;
+    }
     try {
-      const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
-      const data = await res.json();
-      if (!res.ok || !data.success) throw new Error(data.error || 'Failed to delete');
+      let deletedOnApi = false;
+      try {
+        const res = await adminFetch(`/api/products/${id}`, { method: 'DELETE' }, authToken);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) deletedOnApi = true;
+        }
+      } catch {}
+
+      if (!deletedOnApi) {
+        const nextProducts = products.filter((p) => p.id !== id);
+        setProducts(nextProducts);
+        writeLocalCatalog(categories, nextProducts);
+      }
+
       setActionSuccess('Product deleted successfully');
-      fetchData();
+      if (deletedOnApi) fetchData();
       onCatalogUpdated?.();
     } catch (err) {
       setActionError(err.message);
+    }
+  };
+
+  const handleToggleProductEnabled = async (p) => {
+    const nextEnabled = p.enabled === false;
+    try {
+      const res = await adminFetch(`/api/products/${p.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ enabled: nextEnabled })
+      }, authToken).catch(() => null);
+      if (res?.ok) {
+        fetchData();
+      } else {
+        const nextProducts = products.map((item) => (item.id === p.id ? { ...item, enabled: nextEnabled } : item));
+        setProducts(nextProducts);
+        writeLocalCatalog(categories, nextProducts);
+      }
+      setActionSuccess(`Product "${p.name}" ${nextEnabled ? 'enabled' : 'hidden'} on storefront`);
+      onCatalogUpdated?.();
+    } catch (err) {
+      setActionError(err.message);
+    }
+  };
+
+  const handleSaveCategory = async (e) => {
+    e.preventDefault();
+    const cleanName = (categoryFormData.name || '').trim();
+    if (!cleanName) return;
+    const cleanId = (categoryFormData.id || cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')).trim();
+    const newCat = {
+      id: editingCategory ? editingCategory.id : cleanId,
+      name: cleanName,
+      description: (categoryFormData.description || '').trim(),
+      image: (categoryFormData.image || '/images/categories/business-stationery.webp').trim(),
+      enabled: editingCategory ? editingCategory.enabled !== false : true,
+      sortOrder: editingCategory?.sortOrder ?? categories.length,
+      badge: `${products.filter((p) => p.categoryId === cleanId).length} Products`
+    };
+    try {
+      const res = editingCategory
+        ? await adminFetch(`/api/categories/${editingCategory.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(newCat)
+          }, authToken).catch(() => null)
+        : await adminFetch('/api/categories', {
+            method: 'POST',
+            body: JSON.stringify(newCat)
+          }, authToken).catch(() => null);
+      if (res?.ok) {
+        await fetchData();
+      } else {
+        const nextCategories = editingCategory
+          ? categories.map((c) => (c.id === editingCategory.id ? { ...c, ...newCat } : c))
+          : [...categories, newCat];
+        const nextProducts = editingCategory
+          ? products.map((p) => (p.categoryId === editingCategory.id ? { ...p, categoryName: cleanName } : p))
+          : products;
+        setCategories(nextCategories);
+        setProducts(nextProducts);
+        writeLocalCatalog(nextCategories, nextProducts);
+      }
+    } catch {}
+    setShowCategoryModal(false);
+    setEditingCategory(null);
+    setActionSuccess(editingCategory ? 'Category updated!' : 'New category added!');
+    onCatalogUpdated?.();
+  };
+
+  const handleToggleCategoryEnabled = async (cat) => {
+    const nextEnabled = cat.enabled === false;
+    try {
+      const res = await adminFetch(`/api/categories/${cat.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ enabled: nextEnabled })
+      }, authToken).catch(() => null);
+      if (res?.ok) {
+        fetchData();
+      } else {
+        const nextCategories = categories.map((c) => (c.id === cat.id ? { ...c, enabled: nextEnabled } : c));
+        setCategories(nextCategories);
+        writeLocalCatalog(nextCategories, products);
+      }
+      setActionSuccess(`Category "${cat.name}" ${nextEnabled ? 'enabled' : 'hidden'}`);
+      onCatalogUpdated?.();
+    } catch (err) {
+      setActionError(err.message);
+    }
+  };
+
+  const handleMoveCategory = async (catId, direction) => {
+    const idx = categories.findIndex((c) => c.id === catId);
+    const targetIdx = idx + direction;
+    if (idx < 0 || targetIdx < 0 || targetIdx >= categories.length) return;
+    const reordered = [...categories];
+    const [moved] = reordered.splice(idx, 1);
+    reordered.splice(targetIdx, 0, moved);
+    const withOrder = reordered.map((c, i) => ({ ...c, sortOrder: i }));
+    setCategories(withOrder);
+    writeLocalCatalog(withOrder, products);
+    try {
+      await adminFetch('/api/categories/reorder', {
+        method: 'PUT',
+        body: JSON.stringify({ orderedIds: withOrder.map((c) => c.id) })
+      }, authToken).catch(() => null);
+    } catch {}
+    onCatalogUpdated?.();
+  };
+
+  // Order Management Handlers
+  const handleCreateOrder = async (orderPayload) => {
+    const res = await adminFetch('/api/orders', {
+      method: 'POST',
+      body: JSON.stringify(orderPayload)
+    }, authToken).catch(() => null);
+    if (res?.ok) {
+      const data = await res.json();
+      if (data.success) {
+        setActionSuccess(`Order ${data.data.orderNumber} created`);
+        await fetchData();
+        return;
+      }
+    }
+    const localOrder = {
+      ...orderPayload,
+      id: `ord-${Date.now()}`,
+      orderNumber: `PRZ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+      orderDate: new Date().toISOString()
+    };
+    const nextOrders = [localOrder, ...orders];
+    setOrders(nextOrders);
+    writeLocalJson(ORDERS_STORAGE_KEY, nextOrders);
+    setCustomers(computeCustomersFromOrders(nextOrders, enquiries));
+    setActionSuccess(`Order ${localOrder.orderNumber} created`);
+  };
+
+  const handleUpdateOrder = async (id, patch) => {
+    const res = await adminFetch(`/api/orders/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(patch)
+    }, authToken).catch(() => null);
+    if (res?.ok) {
+      await fetchData();
+      setActionSuccess('Order updated');
+      return;
+    }
+    const nextOrders = orders.map((o) => (o.id === id ? { ...o, ...patch, updatedAt: new Date().toISOString() } : o));
+    setOrders(nextOrders);
+    writeLocalJson(ORDERS_STORAGE_KEY, nextOrders);
+    setCustomers(computeCustomersFromOrders(nextOrders, enquiries));
+    setActionSuccess('Order updated');
+  };
+
+  const handleDeleteOrder = async (id) => {
+    const res = await adminFetch(`/api/orders/${id}`, { method: 'DELETE' }, authToken).catch(() => null);
+    if (res?.ok) {
+      await fetchData();
+      setActionSuccess('Order deleted');
+      return;
+    }
+    const nextOrders = orders.filter((o) => o.id !== id);
+    setOrders(nextOrders);
+    writeLocalJson(ORDERS_STORAGE_KEY, nextOrders);
+    setCustomers(computeCustomersFromOrders(nextOrders, enquiries));
+    setActionSuccess('Order deleted');
+  };
+
+  const handleSavePromotions = async (nextPromos) => {
+    setPromotions(nextPromos);
+    writeLocalJson(PROMOS_STORAGE_KEY, nextPromos);
+    await adminFetch('/api/promotions', {
+      method: 'PUT',
+      body: JSON.stringify(nextPromos)
+    }, authToken).catch(() => null);
+    setActionSuccess('Promotions & Banners saved!');
+    onCatalogUpdated?.();
+  };
+
+  const handleSaveSettings = async (nextSettings) => {
+    setSettings(nextSettings);
+    writeLocalJson(SETTINGS_STORAGE_KEY, nextSettings);
+    await adminFetch('/api/settings', {
+      method: 'PUT',
+      body: JSON.stringify(nextSettings)
+    }, authToken).catch(() => null);
+    setActionSuccess('Website settings saved!');
+    onCatalogUpdated?.();
+  };
+
+  const handleExportCatalogJson = () => {
+    const payload = {
+      ...initialCatalog,
+      categories,
+      products
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'initialCatalog.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    setActionSuccess('Downloaded updated initialCatalog.json!');
+  };
+
+  const handleBulkImportFile = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    try {
+      const { nextProducts, nextCategories, addedCount, updatedCount, skippedCount } =
+        await parseBulkCatalogFile(file, categories, products);
+      setProducts(nextProducts);
+      setCategories(nextCategories);
+      writeLocalCatalog(nextCategories, nextProducts);
+      setActionSuccess(
+        `Bulk import complete: ${addedCount} added, ${updatedCount} updated${skippedCount ? `, ${skippedCount} skipped` : ''}!`
+      );
+      onCatalogUpdated?.();
+    } catch (err) {
+      setActionError(err.message || 'Failed to import CSV/Excel file.');
     }
   };
 
@@ -763,111 +1299,205 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
     );
   }
 
+  const navItems = [
+    { id: 'overview', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'orders', label: 'Orders', icon: ShoppingCart, badge: orders.length },
+    { id: 'products', label: 'Products', icon: Package, badge: products.length },
+    { id: 'customers', label: 'Customers', icon: Users, badge: customers.length },
+    { id: 'enquiries', label: 'Enquiries', icon: FileText, badge: enquiries.length },
+    { id: 'categories', label: 'Categories', icon: FolderTree, badge: categories.length },
+    { id: 'promotions', label: 'Promotions & Banners', icon: Megaphone },
+    { id: 'analytics', label: 'Reports & Analytics', icon: BarChart3 },
+    { id: 'settings', label: 'Website Settings', icon: Settings }
+  ];
+
+  const activeNavLabel = navItems.find((n) => n.id === activeTab)?.label || 'Dashboard';
+
   // ======================== RENDER MAIN ADMIN DASHBOARD ========================
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col">
-      {/* Top Admin Bar */}
-      <header className="bg-brand-navy text-white px-3 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between sticky top-0 z-30 shadow-md">
-        <div className="flex items-center space-x-3">
-          <img 
-            src="/images/printizer-logo-horizontal.png" 
-            alt="PRINTIZER" 
-            className="h-8 sm:h-9 w-auto object-contain bg-white rounded-md p-1"
-            onError={(e) => {
-              e.target.src = "/images/printizer-logo-horizontal.jpeg";
-            }}
-          />
-          <div>
-            <h1 className="text-xs sm:text-sm font-extrabold tracking-wider text-white">
-              PRINTIZER <span className="text-brand-crimson">ADMIN</span>
-            </h1>
-            <p className="text-[10px] text-slate-400 hidden sm:block">Everything Your Business Needs to Print.</p>
+    <div className="min-h-screen bg-slate-50 flex">
+      {/* Mobile Sidebar Backdrop */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 bg-slate-900/40 z-40 lg:hidden"
+        />
+      )}
+
+      {/* Left SaaS Sidebar */}
+      <aside
+        className={`fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-white border-r border-slate-200 flex flex-col transition-transform duration-200 ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
+      >
+        <div className="px-4 py-4 border-b border-slate-200 flex items-center justify-between">
+          <div className="flex items-center space-x-2.5">
+            <img
+              src="/images/printizer-logo-horizontal.png"
+              alt="PRINTIZER"
+              className="h-8 w-auto object-contain"
+              onError={(e) => {
+                e.target.src = '/images/printizer-logo-horizontal.jpeg';
+              }}
+            />
+            <div>
+              <h1 className="text-xs font-extrabold tracking-wider text-slate-900">
+                PRINTIZER <span className="text-brand-crimson">ADMIN</span>
+              </h1>
+              <p className="text-[10px] text-slate-400">Business Suite</p>
+            </div>
           </div>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="lg:hidden p-1 text-slate-400 hover:text-slate-700"
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
 
-        {/* Global Notifications */}
-        {actionSuccess && (
-          <div className="hidden md:flex items-center space-x-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1 rounded-full text-xs">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>{actionSuccess}</span>
+        <nav className="flex-1 overflow-y-auto p-3 space-y-1">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveTab(item.id);
+                  setSidebarOpen(false);
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition ${
+                  isActive
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                }`}
+              >
+                <span className="flex items-center space-x-2.5">
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-brand-crimson' : 'text-slate-400'}`} />
+                  <span>{item.label}</span>
+                </span>
+                {typeof item.badge === 'number' && (
+                  <span
+                    className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                      isActive ? 'bg-white/15 text-white' : 'bg-slate-100 text-slate-600'
+                    }`}
+                  >
+                    {item.badge}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </nav>
+
+        <div className="p-3 border-t border-slate-200 space-y-2 bg-slate-50/70">
+          <div className="flex items-center justify-between px-2 py-1">
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-slate-900 truncate">{adminUser?.name || 'Admin'}</p>
+              <p className="text-[10px] font-semibold text-emerald-700">{adminUser?.role || 'Super Admin'}</p>
+            </div>
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
           </div>
-        )}
-
-        <div className="flex items-center space-x-2 text-xs">
-          <button
-            onClick={() => onNavigate('home')}
-            className="text-slate-300 hover:text-white flex items-center space-x-1 bg-slate-800 px-2.5 py-1.5 rounded-lg border border-slate-700 text-[11px]"
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Website</span>
-          </button>
-
           <button
             onClick={handleLogout}
-            className="text-rose-300 hover:text-white flex items-center space-x-1 bg-rose-950/60 hover:bg-rose-900 border border-rose-800/60 px-2.5 py-1.5 rounded-lg text-[11px]"
+            className="w-full flex items-center justify-center space-x-1.5 bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 px-3 py-2 rounded-xl text-xs font-bold transition"
           >
             <LogOut className="w-3.5 h-3.5" />
-            <span>Logout</span>
+            <span>Sign Out</span>
           </button>
         </div>
-      </header>
+      </aside>
 
-      {/* Main Admin Content */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 space-y-5">
-        {/* Metric Cards Row */}
-        {stats && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-4">
-            <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1 block">{stats.totalEnquiries}</span>
-            </div>
-
-            <div className="bg-white p-3 sm:p-4 rounded-2xl border border-rose-100 bg-rose-50/30 shadow-2xs">
-              <span className="text-[10px] font-bold text-rose-600 uppercase tracking-wider block">New</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-rose-600 mt-1 block">{stats.newEnquiries}</span>
-            </div>
-
-            <div className="bg-white p-3 sm:p-4 rounded-2xl border border-blue-100 bg-blue-50/30 shadow-2xs">
-              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider block">Quoted</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-blue-700 mt-1 block">{stats.quotationPrepared}</span>
-            </div>
-
-            <div className="bg-white p-3 sm:p-4 rounded-2xl border border-purple-100 bg-purple-50/30 shadow-2xs">
-              <span className="text-[10px] font-bold text-purple-600 uppercase tracking-wider block">Sent</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-purple-700 mt-1 block">{stats.quotationSent}</span>
-            </div>
-
-            <div className="bg-white p-3 sm:p-4 rounded-2xl border border-emerald-100 bg-emerald-50/30 shadow-2xs">
-              <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block">Confirmed</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 mt-1 block">{stats.confirmed}</span>
-            </div>
-
-            <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Products</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-slate-700 mt-1 block">{stats.totalProducts}</span>
+      {/* Main Content Shell */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Top Bar */}
+        <header className="bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex items-center justify-between sticky top-0 z-30">
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="lg:hidden p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100"
+            >
+              <Menu className="w-4 h-4" />
+            </button>
+            <div>
+              <h2 className="text-sm sm:text-base font-extrabold text-slate-900">{activeNavLabel}</h2>
+              <p className="text-[11px] text-slate-400 hidden sm:block">Centralized printing business management</p>
             </div>
           </div>
-        )}
 
-        {/* Navigation Tabs */}
-        <div className="flex border-b border-slate-200 space-x-6 text-xs font-bold uppercase tracking-wider">
-          <button
-            onClick={() => setActiveTab('enquiries')}
-            className={`pb-3 border-b-2 transition ${
-              activeTab === 'enquiries' ? 'border-brand-crimson text-brand-crimson' : 'border-transparent text-slate-500 hover:text-slate-800'
-            }`}
-          >
-            Quotation Enquiries ({enquiries.length})
-          </button>
-          <button
-            onClick={() => setActiveTab('products')}
-            className={`pb-3 border-b-2 transition ${
-              activeTab === 'products' ? 'border-brand-crimson text-brand-crimson' : 'border-transparent text-slate-500 hover:text-slate-800'
-            }`}
-          >
-            Product Catalogue ({products.length})
-          </button>
-        </div>
+          <div className="flex items-center space-x-2 text-xs">
+            {actionSuccess && (
+              <div className="hidden md:flex items-center space-x-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full text-xs font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>{actionSuccess}</span>
+              </div>
+            )}
+            {actionError && (
+              <div className="hidden md:flex items-center space-x-1.5 bg-rose-50 text-rose-700 border border-rose-200 px-3 py-1 rounded-full text-xs font-semibold">
+                <AlertCircle className="w-3.5 h-3.5" />
+                <span>{actionError}</span>
+              </div>
+            )}
+            <button
+              onClick={fetchData}
+              disabled={loading}
+              className="text-slate-600 hover:text-slate-900 flex items-center space-x-1 bg-slate-100 hover:bg-slate-200 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold"
+              title="Refresh Data"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+              <span className="hidden sm:inline">Refresh</span>
+            </button>
+            <button
+              onClick={() => onNavigate('home')}
+              className="text-slate-700 hover:text-slate-900 flex items-center space-x-1 bg-white border border-slate-200 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Storefront</span>
+            </button>
+          </div>
+        </header>
+
+        {/* Main Workspace */}
+        <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-5">
+          {activeTab === 'overview' && (
+            <AdminOverview
+              stats={stats || {}}
+              orders={orders || []}
+              enquiries={enquiries || []}
+              analytics={analytics || {}}
+              onSwitchTab={setActiveTab}
+            />
+          )}
+
+          {activeTab === 'orders' && (
+            <AdminOrders
+              orders={orders}
+              products={products}
+              onCreateOrder={handleCreateOrder}
+              onUpdateOrder={handleUpdateOrder}
+              onDeleteOrder={handleDeleteOrder}
+            />
+          )}
+
+          {activeTab === 'customers' && (
+            <AdminCustomers customers={customers} />
+          )}
+
+          {activeTab === 'promotions' && (
+            <AdminPromotions
+              promotions={promotions}
+              products={products}
+              onSavePromotions={handleSavePromotions}
+            />
+          )}
+
+          {activeTab === 'analytics' && (
+            <AdminAnalytics orders={orders} />
+          )}
+
+          {activeTab === 'settings' && (
+            <AdminSettings settings={settings} onSaveSettings={handleSaveSettings} />
+          )}
 
         {/* ==================== TAB 1: ENQUIRIES ==================== */}
         {activeTab === 'enquiries' && (
@@ -877,6 +1507,11 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
               <div className="flex flex-wrap items-center gap-1.5 text-xs w-full sm:w-auto">
                 {[
                   'all',
+                  'New',
+                  'Contacted',
+                  'Quoted',
+                  'Converted',
+                  'Closed',
                   'New Enquiry',
                   'Quotation Prepared',
                   'Quotation Sent',
@@ -989,6 +1624,11 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                                 className="text-[11px] font-bold rounded-lg px-2 py-1 border bg-white focus:outline-none"
                               >
                                 {[
+                                  'New',
+                                  'Contacted',
+                                  'Quoted',
+                                  'Converted',
+                                  'Closed',
                                   'New Enquiry',
                                   'Under Review',
                                   'Quotation Prepared',
@@ -1065,24 +1705,114 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
 
         {/* ==================== TAB 2: PRODUCTS ==================== */}
         {activeTab === 'products' && (() => {
+          const activeGroupDef = activeAdminGroupKey
+            ? PRODUCT_GROUP_DEFS.find((g) => g.key === activeAdminGroupKey) || null
+            : null;
+
           const filteredAdminProducts = products.filter(p => {
-            const matchesCat = productCategoryFilter === 'all' || p.categoryId === productCategoryFilter;
+            if (activeGroupDef) {
+              if (!activeGroupDef.match(p)) return false;
+              if (activeGroupDef.genericSlug && p.slug === activeGroupDef.genericSlug) {
+                const hasVariants = products.some((o) => o.slug !== activeGroupDef.genericSlug && activeGroupDef.match(o));
+                if (hasVariants) return false;
+              }
+            } else {
+              const matchesCat = productCategoryFilter === 'all' || p.categoryId === productCategoryFilter;
+              if (!matchesCat) return false;
+            }
             const q = productSearch.trim().toLowerCase();
             const matchesSearch = !q ||
               (p.name || '').toLowerCase().includes(q) ||
               (p.slug || '').toLowerCase().includes(q) ||
               (p.categoryName || '').toLowerCase().includes(q);
-            return matchesCat && matchesSearch;
+            return matchesSearch;
           });
+
+          // Collapse multi-variant groups into 1 clean card unless inside a group or searching
+          const displayedCards = (() => {
+            if (activeGroupDef || productSearch.trim()) {
+              return filteredAdminProducts.map((p) => ({ product: p, groupDef: null, variantCount: 0 }));
+            }
+            const list = [];
+            const seenGroups = new Set();
+            for (const p of filteredAdminProducts) {
+              const g = getProductGroupDef(p);
+              if (!g) {
+                list.push({ product: p, groupDef: null, variantCount: 0 });
+                continue;
+              }
+              if (seenGroups.has(g.key)) continue;
+              seenGroups.add(g.key);
+              const variants = filteredAdminProducts.filter((item) => {
+                if (!g.match(item)) return false;
+                if (g.genericSlug && item.slug === g.genericSlug) {
+                  return !filteredAdminProducts.some((o) => o.slug !== g.genericSlug && g.match(o));
+                }
+                return true;
+              });
+              const rep = (g.genericSlug && filteredAdminProducts.find((item) => item.slug === g.genericSlug)) || p;
+              list.push({
+                product: { ...rep, name: g.groupName },
+                groupDef: g,
+                variantCount: variants.length
+              });
+            }
+            return list;
+          })();
 
           return (
           <div className="space-y-4">
+            {activeGroupDef && (
+              <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900 text-white p-3.5 rounded-2xl shadow-sm">
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveAdminGroupKey(null);
+                      setProductSearch('');
+                    }}
+                    className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span>Back to All Products</span>
+                  </button>
+                  <div>
+                    <span className="text-[10px] font-bold text-rose-300 uppercase tracking-wider block">
+                      Product Options Group
+                    </span>
+                    <h3 className="text-sm font-extrabold text-white">
+                      {activeGroupDef.groupName} ({filteredAdminProducts.length} Options)
+                    </h3>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const sample = filteredAdminProducts[0] || products.find(activeGroupDef.match) || null;
+                    setEditingProduct(null);
+                    setImageUploadError('');
+                    const base = createDefaultOrderFormState(sample, categories[0]);
+                    setProductFormData({
+                      ...base,
+                      name: '',
+                      slug: ''
+                    });
+                    setShowProductModal(true);
+                  }}
+                  className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-bold py-2 px-3.5 rounded-xl flex items-center space-x-1.5 shadow-sm cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Add {activeGroupDef.groupName} Option</span>
+                </button>
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 flex-1">
                 <div className="relative flex-1 max-w-xs">
                   <input
                     type="text"
-                    placeholder="Search products by name or slug..."
+                    placeholder={activeGroupDef ? `Search ${activeGroupDef.groupName} options...` : 'Search products by name or slug...'}
                     value={productSearch}
                     onChange={(e) => setProductSearch(e.target.value)}
                     className="w-full bg-slate-50 border border-slate-300 rounded-xl py-1.5 pl-8 pr-3 text-xs text-slate-900 focus:bg-white focus:border-brand-crimson focus:outline-none"
@@ -1090,45 +1820,102 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                   <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
                 </div>
 
-                <select
-                  value={productCategoryFilter}
-                  onChange={(e) => setProductCategoryFilter(e.target.value)}
-                  className="bg-slate-50 border border-slate-300 rounded-xl py-1.5 px-3 text-xs text-slate-800 font-semibold focus:bg-white focus:outline-none"
-                >
-                  <option value="all">All Categories ({products.length})</option>
-                  {categories.map(c => (
-                    <option key={c.id} value={c.id}>{c.name}</option>
-                  ))}
-                </select>
+                {!activeGroupDef && (
+                  <select
+                    value={productCategoryFilter}
+                    onChange={(e) => setProductCategoryFilter(e.target.value)}
+                    className="bg-slate-50 border border-slate-300 rounded-xl py-1.5 px-3 text-xs text-slate-800 font-semibold focus:bg-white focus:outline-none"
+                  >
+                    <option value="all">All Categories ({products.length})</option>
+                    {categories.map(c => (
+                      <option key={c.id} value={c.id}>{c.name}</option>
+                    ))}
+                  </select>
+                )}
 
                 <span className="text-[11px] text-slate-500 font-semibold">
-                  Showing <strong className="text-slate-900">{filteredAdminProducts.length}</strong> products
+                  Showing <strong className="text-slate-900">{displayedCards.length}</strong> {activeGroupDef ? 'options' : 'items'}
                 </span>
               </div>
 
-              <button
-                onClick={() => {
-                  setEditingProduct(null);
-                  setImageUploadError('');
-                  setProductFormData(createDefaultOrderFormState(null, categories[0]));
-                  setShowProductModal(true);
-                }}
-                className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-bold py-2 px-3.5 rounded-xl flex items-center justify-center space-x-1.5 shadow-sm shrink-0"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Add Product</span>
-              </button>
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <label className="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center space-x-1.5 transition cursor-pointer">
+                  <UploadCloud className="w-3.5 h-3.5" />
+                  <span>Bulk Import CSV/Excel</span>
+                  <input
+                    type="file"
+                    accept=".csv,.xlsx,.xls"
+                    onChange={handleBulkImportFile}
+                    className="hidden"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={downloadBulkTemplateExcel}
+                  className="bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold py-2 px-2.5 rounded-xl flex items-center justify-center space-x-1 transition"
+                  title="Download sample Excel template for bulk upload"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>Template</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => exportProductsAsCsv(filteredAdminProducts)}
+                  className="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold py-2 px-2.5 rounded-xl flex items-center justify-center space-x-1 transition"
+                  title="Export filtered products as CSV"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>CSV</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => exportProductsAsExcel(filteredAdminProducts)}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-2.5 rounded-xl flex items-center justify-center space-x-1 transition shadow-xs"
+                  title="Export filtered products as Excel (.xlsx)"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Excel</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleExportCatalogJson}
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 text-xs font-bold py-2 px-2.5 rounded-xl flex items-center justify-center space-x-1 transition"
+                  title="Download updated initialCatalog.json"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>JSON</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setEditingProduct(null);
+                    setImageUploadError('');
+                    setProductFormData(createDefaultOrderFormState(null, categories[0]));
+                    setShowProductModal(true);
+                  }}
+                  className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-bold py-2 px-3.5 rounded-xl flex items-center justify-center space-x-1.5 shadow-sm shrink-0"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Add Product</span>
+                </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              {filteredAdminProducts.map((p) => {
+              {displayedCards.map(({ product: p, groupDef, variantCount }) => {
                 const galleryCount = Array.from(new Set([
                   ...(p.image ? [p.image] : []),
                   ...(Array.isArray(p.secondaryImages) ? p.secondaryImages : [])
                 ].filter(Boolean))).length;
 
                 return (
-                <div key={p.id} className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs flex space-x-3 items-start justify-between">
+                <div
+                  key={groupDef ? `grp-${groupDef.key}` : p.id}
+                  onClick={groupDef ? () => {
+                    setProductSearch('');
+                    setActiveAdminGroupKey(groupDef.key);
+                  } : undefined}
+                  className={`bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs flex space-x-3 items-start justify-between ${groupDef ? 'cursor-pointer hover:border-brand-crimson/50 hover:shadow-md transition' : ''}`}
+                >
                   <div className="flex space-x-3 min-w-0">
                     <div className="w-16 h-16 rounded-xl border border-slate-100 overflow-hidden shrink-0 bg-slate-50">
                       <ProductImage
@@ -1144,35 +1931,80 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                       <h4 className="text-xs font-bold text-slate-900 line-clamp-1">{p.name}</h4>
                       <p className="text-[11px] text-slate-500 line-clamp-1">{p.tagline}</p>
                       <div className="flex items-center space-x-2 mt-1">
-                        <span className="text-[10px] text-slate-600 font-medium">Min: {p.minQuantity}</span>
-                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${galleryCount > 0 ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>
-                          {galleryCount} {galleryCount === 1 ? 'photo' : 'photos'}
-                        </span>
+                        {groupDef ? (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-brand-crimson border border-rose-200">
+                            <span>{variantCount} Options</span>
+                            <ChevronRight className="w-3 h-3" />
+                          </span>
+                        ) : (
+                          <>
+                            <span className="text-[10px] text-slate-600 font-medium">Min: {p.minQuantity}</span>
+                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${galleryCount > 0 ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>
+                              {galleryCount} {galleryCount === 1 ? 'photo' : 'photos'}
+                            </span>
+                            {p.enabled === false && (
+                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-200 text-slate-600">Hidden</span>
+                            )}
+                            {Number(p.supplierCost || p.pricingConfig?.supplierCost) > 0 && (
+                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700">
+                                Cost: ₹{p.supplierCost || p.pricingConfig?.supplierCost}
+                              </span>
+                            )}
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-1 shrink-0">
+                  {groupDef ? (
                     <button
-                      onClick={() => {
-                        setEditingProduct(p);
-                        setImageUploadError('');
-                        setProductFormData(createDefaultOrderFormState(p, categories[0]));
-                        setShowProductModal(true);
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setProductSearch('');
+                        setActiveAdminGroupKey(groupDef.key);
                       }}
-                      className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100"
-                      title="Edit Product & Images"
+                      className="px-2.5 py-1.5 bg-slate-900 hover:bg-brand-crimson text-white text-[11px] font-bold rounded-lg transition shrink-0 cursor-pointer"
                     >
-                      <Edit className="w-4 h-4" />
+                      Open
                     </button>
-                    <button
-                      onClick={() => handleDeleteProduct(p.id)}
-                      className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
-                      title="Delete Product"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
+                  ) : (
+                    <div className="flex items-center space-x-1 shrink-0">
+                      <button
+                        onClick={() => handleToggleProductEnabled(p)}
+                        className={`p-1.5 rounded-lg ${p.enabled === false ? 'text-amber-600 bg-amber-50 hover:bg-amber-100' : 'text-emerald-600 hover:bg-emerald-50'}`}
+                        title={p.enabled === false ? 'Hidden on Storefront (Click to Enable)' : 'Visible on Storefront (Click to Hide)'}
+                      >
+                        {p.enabled === false ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                      <button
+                        onClick={() => handleDuplicateProduct(p)}
+                        className="p-1.5 text-slate-400 hover:text-blue-600 rounded-lg hover:bg-blue-50"
+                        title="Duplicate Product"
+                      >
+                        <Copy className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingProduct(p);
+                          setImageUploadError('');
+                          setProductFormData(createDefaultOrderFormState(p, categories[0]));
+                          setShowProductModal(true);
+                        }}
+                        className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100"
+                        title="Edit Product & Images"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteProduct(p)}
+                        className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
+                        title="Delete Product"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
                 </div>
                 );
               })}
@@ -1180,7 +2012,222 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
           </div>
           );
         })()}
-      </main>
+
+        {/* ==================== TAB 3: CATEGORIES ==================== */}
+        {activeTab === 'categories' && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs">
+              <span className="text-xs font-bold text-slate-700">
+                Manage Printing Categories ({categories.length})
+              </span>
+              <button
+                onClick={() => {
+                  setEditingCategory(null);
+                  setCategoryFormData({ id: '', name: '', description: '', image: '' });
+                  setShowCategoryModal(true);
+                }}
+                className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-bold py-2 px-3.5 rounded-xl flex items-center space-x-1.5 shadow-sm"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add Category</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+              {categories.map((cat, idx) => {
+                const count = products.filter((p) => p.categoryId === cat.id).length;
+                const isHidden = cat.enabled === false;
+                return (
+                  <div key={cat.id} className={`bg-white p-3.5 rounded-2xl border shadow-2xs flex space-x-3 items-start justify-between ${isHidden ? 'border-amber-200 opacity-75' : 'border-slate-200'}`}>
+                    <div className="flex space-x-3 min-w-0">
+                      <div className="w-16 h-16 rounded-xl border border-slate-100 overflow-hidden shrink-0 bg-slate-50">
+                        <ProductImage src={cat.image} alt={cat.name} placeholderLabel={cat.name} />
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="text-xs font-bold text-slate-900 line-clamp-1">{cat.name}</h4>
+                        <p className="text-[11px] text-slate-500 line-clamp-2 mt-0.5">{cat.description}</p>
+                        <div className="flex items-center space-x-1.5 mt-1">
+                          <span className="inline-block text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                            {count} Products
+                          </span>
+                          {isHidden && (
+                            <span className="inline-block text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">
+                              Hidden
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-0.5 shrink-0">
+                      <button
+                        onClick={() => handleMoveCategory(cat.id, -1)}
+                        disabled={idx === 0}
+                        className="p-1 text-slate-400 hover:text-slate-800 disabled:opacity-30 rounded-lg hover:bg-slate-100"
+                        title="Move Up"
+                      >
+                        <ArrowUp className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => handleMoveCategory(cat.id, 1)}
+                        disabled={idx === categories.length - 1}
+                        className="p-1 text-slate-400 hover:text-slate-800 disabled:opacity-30 rounded-lg hover:bg-slate-100"
+                        title="Move Down"
+                      >
+                        <ArrowDown className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => handleToggleCategoryEnabled(cat)}
+                        className={`p-1.5 rounded-lg ${isHidden ? 'text-amber-600 bg-amber-50 hover:bg-amber-100' : 'text-emerald-600 hover:bg-emerald-50'}`}
+                        title={isHidden ? 'Enable Category' : 'Hide Category'}
+                      >
+                        {isHidden ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingCategory(cat);
+                          setCategoryFormData({
+                            id: cat.id,
+                            name: cat.name,
+                            description: cat.description || '',
+                            image: cat.image || ''
+                          });
+                          setShowCategoryModal(true);
+                        }}
+                        className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100"
+                        title="Edit Category"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteCategory(cat)}
+                        className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
+                        title="Delete Category"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        </main>
+      </div>
+
+      {/* ==================== MODAL: DELETE CONFIRMATION ==================== */}
+      {deleteTarget && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 shadow-2xl border border-slate-200 text-center space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center mx-auto">
+              <Trash2 className="w-6 h-6" />
+            </div>
+            <div className="space-y-1.5">
+              <h3 className="text-base font-extrabold text-slate-900">
+                Delete {deleteTarget.type === 'category' ? 'Category' : 'Product'}?
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Are you sure you want to delete <strong className="text-slate-900">&ldquo;{deleteTarget.name}&rdquo;</strong>?
+                {deleteTarget.type === 'category'
+                  ? ' Products inside this category will remain in the catalog.'
+                  : ' This action cannot be undone.'}
+              </p>
+            </div>
+            <div className="flex items-center justify-center gap-2.5 pt-1">
+              <button
+                type="button"
+                onClick={() => setDeleteTarget(null)}
+                className="flex-1 px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50 transition cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmDeleteTarget}
+                className="flex-1 px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-sm transition cursor-pointer"
+              >
+                Yes, Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ==================== MODAL: ADD / EDIT CATEGORY ==================== */}
+      {showCategoryModal && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-sm font-extrabold text-slate-900">
+                {editingCategory ? 'Edit Category' : 'Add New Category'}
+              </h3>
+              <button onClick={() => setShowCategoryModal(false)} className="text-slate-400 hover:text-slate-700">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <form onSubmit={handleSaveCategory} className="space-y-3 text-xs">
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Category Name *</label>
+                <input
+                  type="text"
+                  required
+                  value={categoryFormData.name}
+                  onChange={(e) => setCategoryFormData({ ...categoryFormData, name: e.target.value })}
+                  placeholder="e.g. Hospital & Medical Printing"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-900 focus:bg-white focus:outline-none"
+                />
+              </div>
+              {!editingCategory && (
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">Category Slug / ID</label>
+                  <input
+                    type="text"
+                    value={categoryFormData.id}
+                    onChange={(e) => setCategoryFormData({ ...categoryFormData, id: e.target.value })}
+                    placeholder="Auto-generated if blank"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-900 focus:bg-white focus:outline-none"
+                  />
+                </div>
+              )}
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Description</label>
+                <textarea
+                  rows="2"
+                  value={categoryFormData.description}
+                  onChange={(e) => setCategoryFormData({ ...categoryFormData, description: e.target.value })}
+                  placeholder="Short description of products in this category..."
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-900 focus:bg-white focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Banner Image URL</label>
+                <input
+                  type="text"
+                  value={categoryFormData.image}
+                  onChange={(e) => setCategoryFormData({ ...categoryFormData, image: e.target.value })}
+                  placeholder="/images/categories/..."
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-900 focus:bg-white focus:outline-none"
+                />
+              </div>
+              <div className="flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowCategoryModal(false)}
+                  className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 font-bold hover:bg-slate-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2 rounded-xl bg-brand-crimson hover:bg-brand-red text-white font-bold shadow-sm"
+                >
+                  {editingCategory ? 'Save Category' : 'Create Category'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* ==================== MODAL: QUOTATION BUILDER & GENERATOR ==================== */}
       {showQuoteBuilder && selectedEnquiry && (
@@ -1759,6 +2806,44 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                   </label>
                 </div>
 
+                {/* Admin-Only Visibility & Confidential Supplier Pricing */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-amber-50/60 border border-amber-200/80 rounded-xl p-2.5">
+                  <label className="flex items-center space-x-2 text-[11px] font-bold text-slate-800 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={productFormData.enabled !== false}
+                      onChange={(e) => setProductFormData({ ...productFormData, enabled: e.target.checked })}
+                      className="rounded text-emerald-600"
+                    />
+                    <span>Visible on Storefront</span>
+                  </label>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-0.5 text-[10px] uppercase tracking-wide">
+                      Supplier Cost (₹) — Confidential
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={productFormData.supplierCost}
+                      onChange={(e) => setProductFormData({ ...productFormData, supplierCost: e.target.value })}
+                      placeholder="Internal cost per unit/pack"
+                      className="w-full bg-white border border-amber-300 rounded-lg p-1.5 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-0.5 text-[10px] uppercase tracking-wide">
+                      Supplier Name — Confidential
+                    </label>
+                    <input
+                      type="text"
+                      value={productFormData.supplierName}
+                      onChange={(e) => setProductFormData({ ...productFormData, supplierName: e.target.value })}
+                      placeholder="e.g. PrintHub Press"
+                      className="w-full bg-white border border-amber-300 rounded-lg p-1.5 text-[11px] text-slate-900 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   <div>
                     <label className="block font-bold text-slate-700 mb-1">Starting Price (₹)</label>
@@ -1847,7 +2932,6 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                       ['showFinishing', 'Finishing'],
                       ['showPrinting', 'Printing'],
                       ['showColour', 'Colour Options'],
-                      ['showDelivery', 'Delivery Mode'],
                       ['showNcr', 'NCR / Non-NCR'],
                       ['showCopyType', 'Copy Type'],
                       ['showBinding', 'Binding'],
@@ -1860,6 +2944,24 @@ Thank you for choosing PRINTIZER — Everything Your Business Needs to Print.`;
                           onChange={(e) => setProductFormData((prev) => ({
                             ...prev,
                             orderFields: { ...prev.orderFields, [key]: e.target.checked }
+                          }))}
+                          className="rounded text-brand-crimson"
+                        />
+                        <span>{label}</span>
+                      </label>
+                    ))}
+                    {[
+                      ['supportsFoil', 'Foil Stamping'],
+                      ['supportsSpotUv', 'Spot UV Gloss'],
+                      ['dimensions', 'Per Sq.In Size']
+                    ].map(([key, label]) => (
+                      <label key={key} className="flex items-center space-x-1.5 bg-amber-50/70 border border-amber-200 rounded-lg px-2 py-1.5 text-[11px] font-semibold text-amber-900 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={Boolean(productFormData[key])}
+                          onChange={(e) => setProductFormData((prev) => ({
+                            ...prev,
+                            [key]: e.target.checked
                           }))}
                           className="rounded text-brand-crimson"
                         />

@@ -3,6 +3,7 @@ import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { db } from './db.js';
@@ -10,6 +11,51 @@ import { generateQuotationPdf } from './pdfGenerator.js';
 import { sendAdminEnquiryNotification, sendCustomerAcknowledgment, sendCustomerQuotationEmail } from './emailService.js';
 
 dotenv.config();
+
+const AUTH_SECRET = process.env.ADMIN_JWT_SECRET || crypto.createHash('sha256').update(process.env.ADMIN_PASS || 'printizer@2026-secret-key').digest('hex');
+
+function signAdminToken(payload) {
+  const data = Buffer.from(JSON.stringify({
+    ...payload,
+    exp: Date.now() + 24 * 60 * 60 * 1000 // 24h session
+  })).toString('base64url');
+  const sig = crypto.createHmac('sha256', AUTH_SECRET).update(data).digest('base64url');
+  return `${data}.${sig}`;
+}
+
+function verifyAdminToken(token) {
+  if (!token || typeof token !== 'string' || !token.includes('.')) return null;
+  const [data, sig] = token.split('.');
+  const expectedSig = crypto.createHmac('sha256', AUTH_SECRET).update(data).digest('base64url');
+  const sigBuf = Buffer.from(sig);
+  const expBuf = Buffer.from(expectedSig);
+  if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+    return null;
+  }
+  try {
+    const parsed = JSON.parse(Buffer.from(data, 'base64url').toString('utf-8'));
+    if (!parsed.exp || Date.now() > parsed.exp) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function requireAdminAuth(allowedRoles = ['Super Admin', 'Manager', 'Staff']) {
+  return (req, res, next) => {
+    const header = req.headers.authorization || '';
+    const token = header.startsWith('Bearer ') ? header.slice(7).trim() : (req.query.token || '');
+    const user = verifyAdminToken(token);
+    if (!user) {
+      return res.status(401).json({ success: false, error: 'Unauthorized: Valid admin session required.' });
+    }
+    if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+      return res.status(403).json({ success: false, error: 'Forbidden: Insufficient role permissions.' });
+    }
+    req.adminUser = user;
+    next();
+  };
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -99,21 +145,78 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 2. Categories
+// 2. Categories (Public: enabled only; Admin: all)
 app.get('/api/categories', (req, res) => {
   try {
-    const categories = db.getCategories();
+    const categories = db.getCategories(false);
     res.json({ success: true, count: categories.length, data: categories });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-// 3. Products
+app.get('/api/admin/categories', requireAdminAuth(), (req, res) => {
+  try {
+    const categories = db.getCategories(true);
+    res.json({ success: true, count: categories.length, data: categories });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.post('/api/categories', requireAdminAuth(['Super Admin', 'Manager']), (req, res) => {
+  try {
+    const created = db.addCategory(req.body);
+    res.status(201).json({ success: true, data: created });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+app.put('/api/categories/reorder', requireAdminAuth(['Super Admin', 'Manager']), (req, res) => {
+  try {
+    const updated = db.reorderCategories(req.body.orderedIds || []);
+    res.json({ success: true, data: updated });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.put('/api/categories/:id', requireAdminAuth(['Super Admin', 'Manager']), (req, res) => {
+  try {
+    const updated = db.updateCategory(req.params.id, req.body);
+    if (!updated) return res.status(404).json({ success: false, error: 'Category not found' });
+    res.json({ success: true, data: updated });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.delete('/api/categories/:id', requireAdminAuth(['Super Admin']), (req, res) => {
+  try {
+    const ok = db.deleteCategory(req.params.id);
+    if (!ok) return res.status(404).json({ success: false, error: 'Category not found' });
+    res.json({ success: true, message: 'Category deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 3. Products (Public: enabled only & no supplier pricing; Admin: all)
 app.get('/api/products', (req, res) => {
   try {
     const { category, search } = req.query;
-    const products = db.getProducts(category, search);
+    const products = db.getProducts(category, search, false);
+    res.json({ success: true, count: products.length, data: products });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/admin/products', requireAdminAuth(), (req, res) => {
+  try {
+    const { category, search } = req.query;
+    const products = db.getProducts(category, search, true);
     res.json({ success: true, count: products.length, data: products });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -143,7 +246,7 @@ app.get('/api/products/:slug', (req, res) => {
   }
 });
 
-app.post('/api/products/upload-image', (req, res) => {
+app.post('/api/products/upload-image', requireAdminAuth(['Super Admin', 'Manager']), (req, res) => {
   productImageUpload.array('images', 10)(req, res, (err) => {
     if (err) {
       return res.status(400).json({ success: false, error: err.message });
@@ -174,7 +277,7 @@ app.post('/api/products/upload-image', (req, res) => {
   });
 });
 
-app.put('/api/products/:id/images', (req, res) => {
+app.put('/api/products/:id/images', requireAdminAuth(['Super Admin', 'Manager']), (req, res) => {
   try {
     const { image, secondaryImages } = req.body;
     const updated = db.updateProduct(req.params.id, { image, secondaryImages });
@@ -187,7 +290,7 @@ app.put('/api/products/:id/images', (req, res) => {
   }
 });
 
-app.post('/api/products', (req, res) => {
+app.post('/api/products', requireAdminAuth(['Super Admin', 'Manager']), (req, res) => {
   try {
     const newProduct = db.addProduct(req.body);
     res.status(201).json({ success: true, data: newProduct });
@@ -196,7 +299,7 @@ app.post('/api/products', (req, res) => {
   }
 });
 
-app.put('/api/products/:id', (req, res) => {
+app.put('/api/products/:id', requireAdminAuth(['Super Admin', 'Manager']), (req, res) => {
   try {
     const updated = db.updateProduct(req.params.id, req.body);
     if (!updated) {
@@ -208,7 +311,7 @@ app.put('/api/products/:id', (req, res) => {
   }
 });
 
-app.delete('/api/products/:id', (req, res) => {
+app.delete('/api/products/:id', requireAdminAuth(['Super Admin']), (req, res) => {
   try {
     const deleted = db.deleteProduct(req.params.id);
     if (!deleted) {
@@ -284,7 +387,7 @@ Enquiry Ref: ${enquiry.referenceNo}
 Please share the official quotation and artwork review.
 Thank you.`;
 
-    const whatsappUrl = `https://wa.me/919898351920?text=${encodeURIComponent(waText)}`;
+    const whatsappUrl = `https://wa.me/917574927200?text=${encodeURIComponent(waText)}`;
 
     // Dispatch background email notifications
     sendAdminEnquiryNotification(enquiry).catch(e => console.error('Admin email error:', e));
@@ -304,7 +407,7 @@ Thank you.`;
   }
 });
 
-app.get('/api/enquiries', (req, res) => {
+app.get('/api/enquiries', requireAdminAuth(), (req, res) => {
   try {
     const { status, search } = req.query;
     const list = db.getEnquiries(status, search);
@@ -314,7 +417,7 @@ app.get('/api/enquiries', (req, res) => {
   }
 });
 
-app.get('/api/enquiries/:id', (req, res) => {
+app.get('/api/enquiries/:id', requireAdminAuth(), (req, res) => {
   try {
     const item = db.getEnquiryById(req.params.id);
     if (!item) {
@@ -326,10 +429,15 @@ app.get('/api/enquiries/:id', (req, res) => {
   }
 });
 
-app.put('/api/enquiries/:id/status', (req, res) => {
+app.put('/api/enquiries/:id/status', requireAdminAuth(), (req, res) => {
   try {
     const { status } = req.body;
     const validStatuses = [
+      'New',
+      'Contacted',
+      'Quoted',
+      'Converted',
+      'Closed',
       'New Enquiry',
       'Under Review',
       'Quotation Prepared',
@@ -359,7 +467,7 @@ app.put('/api/enquiries/:id/status', (req, res) => {
 });
 
 // 5. Quotation Generation & Management
-app.post('/api/enquiries/:id/quote', (req, res) => {
+app.post('/api/enquiries/:id/quote', requireAdminAuth(), (req, res) => {
   try {
     const enquiry = db.getEnquiryById(req.params.id);
     if (!enquiry) {
@@ -417,7 +525,7 @@ app.get('/api/enquiries/:id/pdf', (req, res) => {
 });
 
 // 7. Send Quotation via Email to Customer
-app.post('/api/enquiries/:id/send-email', async (req, res) => {
+app.post('/api/enquiries/:id/send-email', requireAdminAuth(), async (req, res) => {
   try {
     const enquiry = db.getEnquiryById(req.params.id);
     if (!enquiry || !enquiry.quotation) {
@@ -442,25 +550,38 @@ app.post('/api/enquiries/:id/send-email', async (req, res) => {
   }
 });
 
-// 8. Admin Authentication
+// 8. Admin Authentication & Session Verification
 app.post('/api/auth/login', (req, res) => {
   const { username, password } = req.body;
   const adminUser = process.env.ADMIN_USER || 'admin';
   const adminPass = process.env.ADMIN_PASS || 'printizer@2026';
 
-  if (username === adminUser && password === adminPass) {
+  const users = [
+    { username: adminUser, password: adminPass, role: 'Super Admin', name: 'PRINTIZER Admin' },
+    { username: process.env.MANAGER_USER || 'manager', password: process.env.MANAGER_PASS || 'manager@2026', role: 'Manager', name: 'Print Manager' },
+    { username: process.env.STAFF_USER || 'staff', password: process.env.STAFF_PASS || 'staff@2026', role: 'Staff', name: 'Operations Staff' }
+  ];
+
+  const matched = users.find(u => u.username === username && u.password === password);
+  if (matched) {
+    const userPayload = { username: matched.username, role: matched.role, name: matched.name, brand: 'PRINTIZER' };
+    const token = signAdminToken(userPayload);
     res.json({
       success: true,
-      token: 'printizer-admin-session-token-' + Date.now(),
-      user: { username: 'admin', role: 'Super Admin', brand: 'PRINTIZER' }
+      token,
+      user: userPayload
     });
   } else {
     res.status(401).json({ success: false, error: 'Invalid username or password.' });
   }
 });
 
-// 9. Stats
-app.get('/api/stats', (req, res) => {
+app.get('/api/auth/verify', requireAdminAuth(), (req, res) => {
+  res.json({ success: true, user: req.adminUser });
+});
+
+// 9. Stats & Analytics (Protected)
+app.get('/api/stats', requireAdminAuth(), (req, res) => {
   try {
     const stats = db.getStats();
     res.json({ success: true, data: stats });
@@ -469,12 +590,98 @@ app.get('/api/stats', (req, res) => {
   }
 });
 
-// 10. Settings
+app.get('/api/analytics', requireAdminAuth(), (req, res) => {
+  try {
+    const { startDate, endDate } = req.query;
+    const analytics = db.getAnalytics({ startDate, endDate });
+    res.json({ success: true, data: analytics });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 9b. Orders Management (POST public for checkout; GET/PUT/DELETE protected)
+app.post('/api/orders', (req, res) => {
+  try {
+    const created = db.createOrder(req.body);
+    res.status(201).json({ success: true, data: created });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/orders', requireAdminAuth(), (req, res) => {
+  try {
+    const { status, search, startDate, endDate } = req.query;
+    const orders = db.getOrders({ status, search, startDate, endDate });
+    res.json({ success: true, count: orders.length, data: orders });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.put('/api/orders/:id', requireAdminAuth(), (req, res) => {
+  try {
+    const updated = db.updateOrder(req.params.id, req.body);
+    if (!updated) return res.status(404).json({ success: false, error: 'Order not found' });
+    res.json({ success: true, data: updated });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.delete('/api/orders/:id', requireAdminAuth(['Super Admin']), (req, res) => {
+  try {
+    const ok = db.deleteOrder(req.params.id);
+    if (!ok) return res.status(404).json({ success: false, error: 'Order not found' });
+    res.json({ success: true, message: 'Order deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 9c. Customers Database (Protected)
+app.get('/api/customers', requireAdminAuth(), (req, res) => {
+  try {
+    const customers = db.getCustomers(req.query.search || '');
+    res.json({ success: true, count: customers.length, data: customers });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 9d. Promotions & Banners (Public active; Admin full)
+app.get('/api/promotions', (req, res) => {
+  try {
+    res.json({ success: true, data: db.getPromotions(false) });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/admin/promotions', requireAdminAuth(), (req, res) => {
+  try {
+    res.json({ success: true, data: db.getPromotions(true) });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.put('/api/promotions', requireAdminAuth(['Super Admin', 'Manager']), (req, res) => {
+  try {
+    const updated = db.updatePromotions(req.body);
+    res.json({ success: true, data: updated });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 10. Settings (Public read; Admin update)
 app.get('/api/settings', (req, res) => {
   res.json({ success: true, data: db.getSettings() });
 });
 
-app.put('/api/settings', (req, res) => {
+app.put('/api/settings', requireAdminAuth(['Super Admin']), (req, res) => {
   try {
     const updated = db.updateSettings(req.body);
     res.json({ success: true, data: updated });

@@ -217,7 +217,7 @@ export default function QuoteModal({
                   className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm flex items-center justify-center space-x-2 transition shadow-md shadow-emerald-500/20"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Continue on WhatsApp (+91 98983 51920)</span>
+                  <span>Continue on WhatsApp (+91 75749 27200)</span>
                 </a>
               </div>
 

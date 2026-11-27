@@ -756,8 +756,8 @@ function loadData() {
         tagline: 'Everything Your Business Needs to Print.',
         website: 'https://Printizer.in',
         email: 'Printizerdesign@gmail.com',
-        phone: '+91 98983 51920',
-        whatsappLink: 'https://wa.me/919898351920',
+        phone: '+91 75749 27200',
+        whatsappLink: 'https://wa.me/917574927200',
         address: 'PRINTIZER Solutions, Corporate Printing Hub, India',
         gstNumber: '24AAACP1234F1Z8',
         currency: '₹',
@@ -790,41 +790,124 @@ function saveData(data) {
   }
 }
 
+function stripSupplierFields(p) {
+  if (!p) return p;
+  const { supplierCost, supplierPricing, supplierName, supplierNotes, ...rest } = p;
+  if (rest.pricingConfig && typeof rest.pricingConfig === 'object') {
+    const { supplierCost: _sc, supplierRate: _sr, ...pcRest } = rest.pricingConfig;
+    rest.pricingConfig = pcRest;
+  }
+  return rest;
+}
+
 export const db = {
-  // Categories (always compute accurate live product counts)
-  getCategories: () => {
+  // Categories (always compute accurate live product counts; public filters disabled)
+  getCategories: (includeDisabled = false) => {
     const data = loadData();
     const prods = data.products || [];
-    return (data.categories || []).map(cat => {
-      const cnt = prods.filter(p => p.categoryId === cat.id).length;
+    let cats = (data.categories || []).map((cat, idx) => {
+      const cnt = prods.filter(p => p.categoryId === cat.id && p.enabled !== false).length;
       return {
         ...cat,
+        enabled: cat.enabled !== false,
+        sortOrder: cat.sortOrder ?? idx,
         badge: `${cnt} Products`
       };
     });
+    if (!includeDisabled) {
+      cats = cats.filter(c => c.enabled !== false);
+    }
+    return cats.sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
+  },
+
+  addCategory: (catData) => {
+    const data = loadData();
+    const name = (catData.name || '').trim();
+    if (!name) throw new Error('Category name is required');
+    const baseId = (catData.id || name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const exists = (data.categories || []).some(c => c.id === baseId);
+    const id = exists ? `${baseId}-${Date.now().toString(36)}` : baseId;
+    const newCat = {
+      id,
+      name,
+      slug: id,
+      description: (catData.description || '').trim(),
+      image: (catData.image || '/images/categories/business-stationery.webp').trim(),
+      enabled: catData.enabled !== false,
+      sortOrder: (data.categories || []).length,
+      createdAt: new Date().toISOString()
+    };
+    data.categories = [...(data.categories || []), newCat];
+    saveData(data);
+    return newCat;
+  },
+
+  updateCategory: (id, updates) => {
+    const data = loadData();
+    const idx = (data.categories || []).findIndex(c => c.id === id);
+    if (idx === -1) return null;
+    data.categories[idx] = {
+      ...data.categories[idx],
+      ...updates,
+      updatedAt: new Date().toISOString()
+    };
+    if (updates.name) {
+      data.products = (data.products || []).map(p =>
+        p.categoryId === id ? { ...p, categoryName: updates.name } : p
+      );
+    }
+    saveData(data);
+    return data.categories[idx];
+  },
+
+  deleteCategory: (id) => {
+    const data = loadData();
+    const before = (data.categories || []).length;
+    data.categories = (data.categories || []).filter(c => c.id !== id);
+    if (data.categories.length === before) return false;
+    saveData(data);
+    return true;
+  },
+
+  reorderCategories: (orderedIds = []) => {
+    const data = loadData();
+    const orderMap = new Map(orderedIds.map((id, i) => [id, i]));
+    data.categories = (data.categories || []).map((c, idx) => ({
+      ...c,
+      sortOrder: orderMap.has(c.id) ? orderMap.get(c.id) : idx + orderedIds.length
+    })).sort((a, b) => a.sortOrder - b.sortOrder);
+    saveData(data);
+    return data.categories;
   },
 
   // Products
-  getProducts: (categoryId = null, search = '') => {
+  getProducts: (categoryId = null, search = '', includeAdminFields = false) => {
     const data = loadData();
     let prods = data.products || [];
+    if (!includeAdminFields) {
+      const disabledCatIds = new Set((data.categories || []).filter(c => c.enabled === false).map(c => c.id));
+      prods = prods.filter(p => p.enabled !== false && !disabledCatIds.has(p.categoryId));
+    }
     if (categoryId) {
       prods = prods.filter(p => p.categoryId === categoryId);
     }
     if (search && search.trim()) {
       const q = search.toLowerCase().trim();
       prods = prods.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        p.categoryName.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q)
+        (p.name || '').toLowerCase().includes(q) ||
+        (p.categoryName || '').toLowerCase().includes(q) ||
+        (p.description || '').toLowerCase().includes(q)
       );
     }
-    return prods;
+    return includeAdminFields ? prods : prods.map(stripSupplierFields);
   },
 
-  getProductBySlug: (slug) => {
+  getProductBySlug: (slug, includeAdminFields = false) => {
     const data = loadData();
-    return (data.products || []).find(p => p.slug === slug || p.id === slug);
+    const prod = (data.products || []).find(p => p.slug === slug || p.id === slug);
+    if (!prod) return null;
+    if (!includeAdminFields && prod.enabled === false) return null;
+    return includeAdminFields ? prod : stripSupplierFields(prod);
   },
 
   addProduct: (productData) => {
@@ -1000,18 +1083,284 @@ export const db = {
   getStats: () => {
     const data = loadData();
     const enquiries = data.enquiries || [];
+    const orders = data.orders || [];
+    const products = data.products || [];
+    const totalRevenue = orders
+      .filter(o => o.orderStatus !== 'Cancelled')
+      .reduce((sum, o) => sum + (Number(o.totalAmount) || 0), 0);
+    const totalSupplierCost = orders
+      .filter(o => o.orderStatus !== 'Cancelled')
+      .reduce((sum, o) => sum + (Number(o.supplierCost) || 0), 0);
+
+    const customerKeys = new Set();
+    orders.forEach(o => customerKeys.add((o.phone || o.email || o.customerName || '').toLowerCase().trim()));
+    enquiries.forEach(e => customerKeys.add((e.whatsappNumber || e.email || e.customerName || '').toLowerCase().trim()));
+    customerKeys.delete('');
+
     return {
+      totalOrders: orders.length,
+      pendingOrders: orders.filter(o => o.orderStatus === 'Pending').length,
+      confirmedOrders: orders.filter(o => ['Confirmed', 'Processing', 'Ready', 'Dispatched'].includes(o.orderStatus)).length,
+      completedOrders: orders.filter(o => o.orderStatus === 'Completed').length,
       totalEnquiries: enquiries.length,
-      newEnquiries: enquiries.filter(e => e.status === 'New Enquiry').length,
-      underReview: enquiries.filter(e => e.status === 'Under Review').length,
-      quotationPrepared: enquiries.filter(e => e.status === 'Quotation Prepared').length,
+      newEnquiries: enquiries.filter(e => e.status === 'New Enquiry' || e.status === 'New').length,
+      underReview: enquiries.filter(e => e.status === 'Under Review' || e.status === 'Contacted').length,
+      quotationPrepared: enquiries.filter(e => e.status === 'Quotation Prepared' || e.status === 'Quoted').length,
       quotationSent: enquiries.filter(e => e.status === 'Quotation Sent').length,
       awaitingApproval: enquiries.filter(e => e.status === 'Awaiting Customer Approval').length,
-      confirmed: enquiries.filter(e => e.status === 'Confirmed').length,
-      completed: enquiries.filter(e => e.status === 'Completed').length,
+      confirmed: enquiries.filter(e => e.status === 'Confirmed' || e.status === 'Converted').length,
+      completed: enquiries.filter(e => e.status === 'Completed' || e.status === 'Closed').length,
       cancelled: enquiries.filter(e => e.status === 'Cancelled').length,
-      totalProducts: (data.products || []).length,
-      totalCategories: (data.categories || []).length
+      totalProducts: products.length,
+      totalCategories: (data.categories || []).length,
+      totalCustomers: customerKeys.size,
+      totalRevenue: Math.round(totalRevenue * 100) / 100,
+      totalSupplierCost: Math.round(totalSupplierCost * 100) / 100,
+      estimatedProfit: Math.round((totalRevenue - totalSupplierCost) * 100) / 100
+    };
+  },
+
+  // Orders Management
+  getOrders: ({ status = 'all', search = '', startDate = '', endDate = '' } = {}) => {
+    const data = loadData();
+    let orders = data.orders || [];
+    if (status && status !== 'all') {
+      orders = orders.filter(o => (o.orderStatus || '').toLowerCase() === status.toLowerCase());
+    }
+    if (startDate) {
+      const start = new Date(startDate).getTime();
+      orders = orders.filter(o => new Date(o.createdAt).getTime() >= start);
+    }
+    if (endDate) {
+      const end = new Date(endDate).getTime() + 86400000;
+      orders = orders.filter(o => new Date(o.createdAt).getTime() <= end);
+    }
+    if (search && search.trim()) {
+      const q = search.toLowerCase().trim();
+      orders = orders.filter(o =>
+        (o.orderId || '').toLowerCase().includes(q) ||
+        (o.customerName || '').toLowerCase().includes(q) ||
+        (o.phone || '').toLowerCase().includes(q) ||
+        (o.email || '').toLowerCase().includes(q) ||
+        (o.productName || '').toLowerCase().includes(q)
+      );
+    }
+    return orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  },
+
+  createOrder: (orderPayload) => {
+    const data = loadData();
+    data.orders = data.orders || [];
+    const year = new Date().getFullYear();
+    const orderId = orderPayload.orderId || `ORD-${year}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const matchedProd = (data.products || []).find(
+      p => p.slug === orderPayload.productSlug || p.name === orderPayload.productName
+    );
+    const qty = Number(orderPayload.quantity) || 1;
+    const sellingPrice = Number(orderPayload.sellingPrice ?? orderPayload.totalAmount ?? 0);
+    const totalAmount = Number(orderPayload.totalAmount ?? sellingPrice);
+    // Use actual recorded supplierCost if provided, or product's configured supplierCost
+    const unitSupplier = Number(matchedProd?.supplierCost ?? matchedProd?.pricingConfig?.supplierCost ?? 0);
+    const supplierCost = orderPayload.supplierCost !== undefined && orderPayload.supplierCost !== ''
+      ? Number(orderPayload.supplierCost)
+      : (unitSupplier > 0 ? Math.round(unitSupplier * (qty / (matchedProd?.packSize || matchedProd?.minQuantity || 1))) : 0);
+
+    const newOrder = {
+      id: orderId,
+      orderId,
+      customerName: orderPayload.customerName || 'Walk-in / WhatsApp Customer',
+      phone: orderPayload.phone || '',
+      email: orderPayload.email || '',
+      productSlug: orderPayload.productSlug || matchedProd?.slug || '',
+      productName: orderPayload.productName || matchedProd?.name || 'Custom Print',
+      selectedMaterial: orderPayload.selectedMaterial || '',
+      selectedSize: orderPayload.selectedSize || '',
+      selectedFinishing: orderPayload.selectedFinishing || '',
+      quantity: qty,
+      sellingPrice,
+      supplierCost,
+      totalAmount,
+      paymentStatus: orderPayload.paymentStatus || 'Unpaid',
+      orderStatus: orderPayload.orderStatus || 'Pending',
+      notes: orderPayload.notes || '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    data.orders.unshift(newOrder);
+    saveData(data);
+    return newOrder;
+  },
+
+  updateOrder: (id, updates) => {
+    const data = loadData();
+    data.orders = data.orders || [];
+    const idx = data.orders.findIndex(o => o.id === id || o.orderId === id);
+    if (idx === -1) return null;
+    data.orders[idx] = {
+      ...data.orders[idx],
+      ...updates,
+      updatedAt: new Date().toISOString()
+    };
+    saveData(data);
+    return data.orders[idx];
+  },
+
+  deleteOrder: (id) => {
+    const data = loadData();
+    const before = (data.orders || []).length;
+    data.orders = (data.orders || []).filter(o => o.id !== id && o.orderId !== id);
+    if (data.orders.length === before) return false;
+    saveData(data);
+    return true;
+  },
+
+  // Customer Database (derived from real orders & enquiries)
+  getCustomers: (search = '') => {
+    const data = loadData();
+    const map = new Map();
+    const upsert = (key, name, phone, email, amount, dateStr, orderObj = null) => {
+      if (!key) return;
+      const existing = map.get(key) || {
+        id: key,
+        name: name || 'Customer',
+        phone: phone || '',
+        email: email || '',
+        totalOrders: 0,
+        totalSpending: 0,
+        lastOrderDate: null,
+        orders: []
+      };
+      if (name && existing.name === 'Customer') existing.name = name;
+      if (phone && !existing.phone) existing.phone = phone;
+      if (email && !existing.email) existing.email = email;
+      if (orderObj) {
+        existing.totalOrders += 1;
+        if (orderObj.orderStatus !== 'Cancelled') {
+          existing.totalSpending += Number(amount || 0);
+        }
+        existing.orders.push(orderObj);
+      }
+      if (dateStr && (!existing.lastOrderDate || new Date(dateStr) > new Date(existing.lastOrderDate))) {
+        existing.lastOrderDate = dateStr;
+      }
+      map.set(key, existing);
+    };
+
+    for (const o of (data.orders || [])) {
+      const k = (o.phone || o.email || o.customerName || '').toLowerCase().trim();
+      upsert(k, o.customerName, o.phone, o.email, o.totalAmount, o.createdAt, o);
+    }
+    for (const e of (data.enquiries || [])) {
+      const k = (e.whatsappNumber || e.email || e.customerName || '').toLowerCase().trim();
+      upsert(k, e.customerName, e.whatsappNumber, e.email, 0, e.createdAt, null);
+    }
+
+    let list = Array.from(map.values());
+    if (search && search.trim()) {
+      const q = search.toLowerCase().trim();
+      list = list.filter(c =>
+        c.name.toLowerCase().includes(q) ||
+        c.phone.toLowerCase().includes(q) ||
+        c.email.toLowerCase().includes(q)
+      );
+    }
+    return list.sort((a, b) => b.totalSpending - a.totalSpending);
+  },
+
+  // Promotions & Banners
+  getPromotions: (includeInactive = false) => {
+    const data = loadData();
+    const promos = data.promotions || {
+      announcementBar: { enabled: false, text: '', linkText: '', targetPage: 'home' },
+      campaigns: [],
+      featuredProductIds: []
+    };
+    if (includeInactive) return promos;
+    const now = Date.now();
+    const activeCampaigns = (promos.campaigns || []).filter(c => {
+      if (c.enabled === false) return false;
+      if (c.startDate && new Date(c.startDate).getTime() > now) return false;
+      if (c.endDate && new Date(c.endDate).getTime() + 86400000 < now) return false;
+      return true;
+    });
+    return {
+      announcementBar: promos.announcementBar?.enabled ? promos.announcementBar : { enabled: false, text: '' },
+      campaigns: activeCampaigns,
+      featuredProductIds: promos.featuredProductIds || []
+    };
+  },
+
+  updatePromotions: (nextPromos) => {
+    const data = loadData();
+    data.promotions = {
+      ...(data.promotions || {}),
+      ...nextPromos
+    };
+    saveData(data);
+    return data.promotions;
+  },
+
+  // Real Reports & Analytics (strictly calculated from recorded orders)
+  getAnalytics: ({ startDate = '', endDate = '' } = {}) => {
+    const data = loadData();
+    let orders = (data.orders || []).filter(o => o.orderStatus !== 'Cancelled');
+    if (startDate) {
+      const s = new Date(startDate).getTime();
+      orders = orders.filter(o => new Date(o.createdAt).getTime() >= s);
+    }
+    if (endDate) {
+      const e = new Date(endDate).getTime() + 86400000;
+      orders = orders.filter(o => new Date(o.createdAt).getTime() <= e);
+    }
+
+    const totalOrders = orders.length;
+    const totalRevenue = orders.reduce((s, o) => s + (Number(o.totalAmount) || 0), 0);
+    const totalSupplierCost = orders.reduce((s, o) => s + (Number(o.supplierCost) || 0), 0);
+    const grossProfit = totalRevenue - totalSupplierCost;
+    const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+
+    const monthlyMap = new Map();
+    const prodMap = new Map();
+    const custMap = new Map();
+
+    for (const o of orders) {
+      const d = new Date(o.createdAt);
+      const monthKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      const rev = Number(o.totalAmount) || 0;
+      const cost = Number(o.supplierCost) || 0;
+
+      const m = monthlyMap.get(monthKey) || { month: monthKey, orders: 0, revenue: 0, supplierCost: 0, profit: 0 };
+      m.orders += 1;
+      m.revenue += rev;
+      m.supplierCost += cost;
+      m.profit += (rev - cost);
+      monthlyMap.set(monthKey, m);
+
+      const pKey = o.productName || 'Custom Print';
+      const pr = prodMap.get(pKey) || { productName: pKey, orders: 0, quantity: 0, revenue: 0, supplierCost: 0, profit: 0 };
+      pr.orders += 1;
+      pr.quantity += Number(o.quantity) || 0;
+      pr.revenue += rev;
+      pr.supplierCost += cost;
+      pr.profit += (rev - cost);
+      prodMap.set(pKey, pr);
+
+      const cKey = o.customerName || o.phone || 'Customer';
+      const cu = custMap.get(cKey) || { customerName: cKey, phone: o.phone || '', orders: 0, spending: 0 };
+      cu.orders += 1;
+      cu.spending += rev;
+      custMap.set(cKey, cu);
+    }
+
+    return {
+      totalOrders,
+      totalRevenue: Math.round(totalRevenue * 100) / 100,
+      totalSupplierCost: Math.round(totalSupplierCost * 100) / 100,
+      grossProfit: Math.round(grossProfit * 100) / 100,
+      avgOrderValue: Math.round(avgOrderValue * 100) / 100,
+      monthlySales: Array.from(monthlyMap.values()).sort((a, b) => a.month.localeCompare(b.month)),
+      productPerformance: Array.from(prodMap.values()).sort((a, b) => b.revenue - a.revenue),
+      customerPerformance: Array.from(custMap.values()).sort((a, b) => b.spending - a.spending)
     };
   },
 

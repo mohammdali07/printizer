@@ -119,13 +119,13 @@ export default function AboutPage({ onNavigate, onRequestQuote }) {
               Request a Quotation
             </button>
             <a
-              href="https://wa.me/919898351920"
+              href="https://wa.me/917574927200"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-xl text-xs transition flex items-center space-x-1.5"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp +91 98983 51920</span>
+              <span>WhatsApp +91 75749 27200</span>
             </a>
           </div>
         </div>

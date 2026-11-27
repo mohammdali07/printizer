@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import ProductImage from '../components/ProductImage';
+import { getEffectiveOrderFields } from '../utils/orderPricing';
 
 export default function ProductDetailPage({ 
   product, 
@@ -46,20 +47,19 @@ export default function ProductDetailPage({
     ? product.finishes
     : ['Standard Commercial Finish'];
 
+  const cfg = getEffectiveOrderFields(product);
   const pricingConfig = product.pricingConfig || {};
   const priceSheets = pricingConfig.priceSheets || null;
-  const pricingKind = pricingConfig.pricingKind || product.pricingKind || 'pack';
-  const hasDimensions = Boolean(pricingConfig.dimensions ?? product.dimensions);
-  const packSize = Number(pricingConfig.packSize || product.packSize || product.minQuantity || 100);
-  const hsnCode = pricingConfig.hsnCode || product.hsnCode || '';
+  const pricingKind = cfg.pricingKind;
+  const hasDimensions = cfg.hasDimensions;
+  const packSize = cfg.packSize;
+  const hsnCode = cfg.hsnCode;
 
-  const supportsBothSides = Boolean(pricingConfig.supportsBothSides);
-  const supportsFoil = Boolean(pricingConfig.supportsFoil);
-  const supportsSpotUv = Boolean(pricingConfig.supportsSpotUv);
+  const supportsBothSides = cfg.supportsBoth;
+  const supportsFoil = cfg.supportsFoil;
+  const supportsSpotUv = cfg.supportsSpotUv;
 
-  const quantityTiers = product.quantityTiers && product.quantityTiers.length > 0
-    ? product.quantityTiers
-    : [packSize, packSize * 2, packSize * 3, packSize * 5, packSize * 10];
+  const quantityTiers = cfg.quantityTiers;
 
   // Configurator state
   const [customerClass, setCustomerClass] = useState('retail'); // 'retail' | 'gst'
@@ -316,7 +316,7 @@ ${pricing.hasPrice ? `Estimated Amount: ₹ ${pricing.finalTotal.toLocaleString(
 Please verify vector artwork and share official quotation.
 Thank you!`;
 
-    return `https://wa.me/919898351920?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/917574927200?text=${encodeURIComponent(text)}`;
   };
 
   // Handle Form Submission
@@ -402,43 +402,28 @@ Thank you!`;
 
   return (
     <div className="pb-24 bg-[#f8fafc] text-left">
-      {/* 1. BREADCRUMB STRIP */}
-      <div className="bg-white border-b border-slate-200/80 py-3.5 px-4 sm:px-6 lg:px-8 shadow-2xs">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs text-slate-500 overflow-x-auto whitespace-nowrap">
-          <div className="flex items-center space-x-2">
-            <button 
-              onClick={() => onNavigate('home')} 
-              className="hover:text-slate-900 transition flex items-center space-x-1"
-            >
-              <span>Home</span>
-            </button>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <button 
-              onClick={() => onNavigate('category', product.categoryId)} 
-              className="hover:text-slate-900 transition font-medium"
-            >
-              {product.categoryName}
-            </button>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span className="text-brand-crimson font-bold truncate">{product.name}</span>
-          </div>
-
+      {/* 1. BACK NAVIGATION STRIP */}
+      <div className="bg-white border-b border-slate-200/80 py-3 px-4 sm:px-6 lg:px-8 shadow-2xs">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
           <button
+            type="button"
             onClick={() => onNavigate('category', product.categoryId)}
-            className="hidden sm:inline-flex items-center space-x-1 text-slate-600 hover:text-slate-900 text-xs font-semibold"
+            className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200/80 text-slate-700 hover:text-slate-900 border border-slate-200/80 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer active:scale-95"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to {product.categoryName}</span>
           </button>
+
+          <span className="text-xs font-bold text-slate-400 truncate hidden sm:block">
+            {product.name}
+          </span>
         </div>
       </div>
 
-      {/* 2. MAIN TWO-COLUMN WORKFLOW */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          
-          {/* ==================== LEFT COLUMN: PRODUCT PRESENTATION (7 COLS) ==================== */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+      {/* 2. MAIN PRODUCT PRESENTATION */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
+        <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             
             {/* Primary Photo Showcase Frame */}
             <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm relative">
@@ -673,625 +658,6 @@ Thank you!`;
             </div>
           </div>
 
-          {/* ==================== RIGHT COLUMN: DEDICATED PRODUCT CONFIGURATOR (5 COLS) ==================== */}
-          <div className="lg:col-span-5">
-            <div className="sticky top-20 bg-white rounded-3xl border-2 border-slate-200/90 shadow-xl overflow-hidden">
-              
-              {/* Header Strip */}
-              <div className="bg-brand-navy p-5 text-white flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-crimson block">
-                    Product Specification Panel
-                  </span>
-                  <h3 className="text-base sm:text-lg font-extrabold text-white mt-0.5">
-                    Configure {product.name}
-                  </h3>
-                  <p className="text-xs text-slate-300 mt-0.5">
-                    Live dynamic quotation based on configured commercial specifications
-                  </p>
-                </div>
-                <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center text-white shrink-0">
-                  <FileText className="w-4 h-4" />
-                </div>
-              </div>
-
-              {/* Configurator Form Body */}
-              <div className="p-5 sm:p-6 space-y-5">
-
-                {/* Billing Class Toggle (Retail vs GST Tax Invoice from printizer.in) */}
-                {priceSheets && (
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs">
-                      <label className="font-extrabold text-slate-800">
-                        Billing Class
-                      </label>
-                      {hsnCode && (
-                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
-                          HSN {hsnCode}
-                        </span>
-                      )}
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setCustomerClass('retail')}
-                        className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${
-                          customerClass === 'retail'
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
-                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                        }`}
-                      >
-                        <span className="block">Retail Rate</span>
-                        <span className="text-[10px] text-slate-500 font-medium">Direct Net Price</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setCustomerClass('gst')}
-                        className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${
-                          customerClass === 'gst'
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
-                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                        }`}
-                      >
-                        <span className="block">GST Invoice</span>
-                        <span className="text-[10px] text-brand-crimson font-semibold">GST Base + 18% GST</span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* 1. Finished Size / Dimensions (Interactive Width x Height for Per Sq.Inch products) */}
-                {pricingKind === 'area' && hasDimensions ? (
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <label className="font-extrabold text-slate-800">
-                        1. Custom Dimensions (Inches)
-                      </label>
-                      <span className="text-[11px] text-brand-crimson font-bold">
-                        Rounded up to ¼"
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2.5">
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 mb-1">Width (inch)</label>
-                        <input
-                          type="number"
-                          min="0.25"
-                          step="0.25"
-                          value={dimWidth}
-                          onChange={(e) => setDimWidth(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 mb-1">Height (inch)</label>
-                        <input
-                          type="number"
-                          min="0.25"
-                          step="0.25"
-                          value={dimHeight}
-                          onChange={(e) => setDimHeight(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
-                        />
-                      </div>
-                    </div>
-                    {pricing.areaSqIn && (
-                      <p className="text-[11px] text-slate-500 font-medium">
-                        Billable Area: <strong className="text-slate-800">{pricing.areaSqIn} sq. inch</strong>
-                        {priceSheets?.[customerClass]?.minimum ? ` • Min Order Base ₹${priceSheets[customerClass].minimum}` : ''}
-                      </p>
-                    )}
-                  </div>
-                ) : (
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <label className="font-extrabold text-slate-800">
-                        1. Finished Size / Dimensions
-                      </label>
-                      <span className="text-[11px] text-slate-400 font-medium">Standard Trim</span>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {sizes.map((s) => (
-                        <button
-                          key={s}
-                          type="button"
-                          onClick={() => setSelectedSize(s)}
-                          className={`text-left p-3 rounded-xl border text-xs font-semibold transition-all ${
-                            selectedSize === s
-                              ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson shadow-sm'
-                              : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="truncate">{s}</span>
-                            {selectedSize === s && (
-                              <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 ml-1" />
-                            )}
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* 2. Paper Stock / GSM */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <label className="font-extrabold text-slate-800">
-                      2. Paper Quality & Grammage (GSM)
-                    </label>
-                    <span className="text-[11px] text-slate-400 font-medium">Substrate</span>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    {materials.map((m) => (
-                      <button
-                        key={m}
-                        type="button"
-                        onClick={() => setSelectedMaterial(m)}
-                        className={`w-full text-left p-2.5 sm:p-3 rounded-xl border text-xs font-semibold transition-all flex items-center justify-between ${
-                          selectedMaterial === m
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson shadow-sm'
-                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                        }`}
-                      >
-                        <span className="truncate">{m}</span>
-                        {selectedMaterial === m && (
-                          <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 ml-2" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 3. Printing Sides (Only if supported by product) */}
-                {supportsBothSides && (
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <label className="font-extrabold text-slate-800">
-                        3. Printing Sides
-                      </label>
-                      <span className="text-[11px] text-slate-400 font-medium">Per Pack Rate</span>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedSides('single-side')}
-                        className={`p-3 rounded-xl border text-xs font-semibold transition-all text-center ${
-                          selectedSides === 'single-side'
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
-                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                        }`}
-                      >
-                        <span className="block">Single Side (Front)</span>
-                        {priceSheets?.[customerClass]?.single && (
-                          <span className="text-[10px] text-slate-500 font-bold">
-                            ₹{priceSheets[customerClass].single}/{packSize}
-                          </span>
-                        )}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setSelectedSides('both-sides')}
-                        className={`p-3 rounded-xl border text-xs font-semibold transition-all text-center ${
-                          selectedSides === 'both-sides'
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
-                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                        }`}
-                      >
-                        <span className="block">Both Sides (Front & Back)</span>
-                        <span className="text-[10px] text-brand-crimson font-bold">
-                          {priceSheets?.[customerClass]?.both ? `₹${priceSheets[customerClass].both}/${packSize}` : '+40%'}
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* 4. Surface Finishing & Lamination + Optional Job Add-ons */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <label className="font-extrabold text-slate-800">
-                      {supportsBothSides ? '4' : '3'}. Lamination & Finishing
-                    </label>
-                    <span className="text-[11px] text-slate-400 font-medium">Protection</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {finishes.map((f) => (
-                      <button
-                        key={f}
-                        type="button"
-                        onClick={() => setSelectedFinish(f)}
-                        className={`text-left p-2.5 rounded-xl border text-xs font-semibold transition-all ${
-                          selectedFinish === f
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
-                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="truncate">{f}</span>
-                          {selectedFinish === f && (
-                            <CheckCircle2 className="w-3.5 h-3.5 text-brand-crimson shrink-0 ml-1" />
-                          )}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Exact Optional Finishing Add-ons from printizer-main */}
-                  {priceSheets?.[customerClass]?.finishing && (
-                    <div className="pt-1 flex flex-wrap gap-1.5">
-                      {[
-                        { key: 'halfBlade', label: 'Half Blade' },
-                        { key: 'creasing', label: 'Creasing' },
-                        { key: 'perforation', label: 'Perforate' },
-                        { key: 'die', label: 'Die Cutting' },
-                        { key: 'punching', label: 'Punching' },
-                        { key: 'folding', label: 'Folding' }
-                      ].filter(a => priceSheets[customerClass].finishing[a.key] != null).map(addon => {
-                        const fee = priceSheets[customerClass].finishing[addon.key];
-                        const active = Boolean(selectedAddons[addon.key]);
-                        return (
-                          <button
-                            key={addon.key}
-                            type="button"
-                            onClick={() => setSelectedAddons(prev => ({ ...prev, [addon.key]: !prev[addon.key] }))}
-                            className={`px-2.5 py-1.5 rounded-lg border text-[11px] font-bold transition flex items-center space-x-1 ${
-                              active
-                                ? 'bg-slate-900 text-white border-slate-900'
-                                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span>{addon.label}</span>
-                            <span className={active ? 'text-rose-300' : 'text-brand-crimson'}>+₹{fee}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-
-                {/* Optional Embellishments: Foil & Spot UV (When supported) */}
-                {(supportsFoil || supportsSpotUv) && (
-                  <div className="p-3.5 rounded-2xl bg-amber-50/60 border border-amber-200/80 space-y-3">
-                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 flex items-center space-x-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                      <span>Optional Luxury Embellishments</span>
-                    </span>
-
-                    {/* Foil Stamping */}
-                    {supportsFoil && (
-                      <div className="space-y-1.5">
-                        <label className="block text-[11px] font-bold text-slate-700">
-                          Metallic Hot Foil Stamping
-                        </label>
-                        <div className="grid grid-cols-3 gap-1.5 text-xs font-semibold">
-                          {[
-                            { id: 'none', label: 'None' },
-                            { id: 'gold', label: priceSheets?.[customerClass]?.foilGold ? `Gold (+₹${priceSheets[customerClass].foilGold}/pk)` : 'Gold Foil' },
-                            { id: 'silver', label: priceSheets?.[customerClass]?.foilSilver ? `Silver (+₹${priceSheets[customerClass].foilSilver}/pk)` : 'Silver Foil' }
-                          ].map(opt => (
-                            <button
-                              key={opt.id}
-                              type="button"
-                              onClick={() => setSelectedFoil(opt.id)}
-                              className={`py-1.5 px-2 rounded-lg border text-[10px] sm:text-[11px] font-bold transition text-center ${
-                                selectedFoil === opt.id
-                                  ? 'bg-amber-600 text-white border-amber-600 shadow-sm'
-                                  : 'bg-white text-slate-700 border-amber-200 hover:border-amber-400'
-                              }`}
-                            >
-                              {opt.label}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Spot UV */}
-                    {supportsSpotUv && (
-                      <div className="space-y-1.5">
-                        <label className="block text-[11px] font-bold text-slate-700">
-                          Tactile Raised Spot UV Gloss
-                        </label>
-                        <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
-                          {[
-                            { id: 'none', label: 'No Spot UV' },
-                            {
-                              id: 'spot-uv',
-                              label: priceSheets?.[customerClass]?.spotUvSingle
-                                ? `Spot UV (+₹${(selectedSides === 'both-sides' && priceSheets[customerClass].spotUvBoth) ? priceSheets[customerClass].spotUvBoth : priceSheets[customerClass].spotUvSingle}/pk)`
-                                : 'Raised Spot UV (+15%)'
-                            }
-                          ].map(opt => (
-                            <button
-                              key={opt.id}
-                              type="button"
-                              onClick={() => setSelectedSpotUv(opt.id)}
-                              className={`py-1.5 px-2 rounded-lg border text-[11px] font-bold transition text-center ${
-                                selectedSpotUv === opt.id
-                                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
-                                  : 'bg-white text-slate-700 border-amber-200 hover:border-amber-400'
-                              }`}
-                            >
-                              {opt.label}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* 5. Quantity Selection (Product-Specific Pack Tiers or Special Job Input) */}
-                {pricingKind === 'special_job' ? (
-                  <div className="grid grid-cols-2 gap-2.5">
-                    <div>
-                      <label className="block text-xs font-bold text-slate-800 mb-1">
-                        Quantity
-                      </label>
-                      <input
-                        type="number"
-                        min="1"
-                        value={isCustomQty ? customQtyInput : quantity}
-                        onChange={(e) => {
-                          setIsCustomQty(true);
-                          setCustomQtyInput(e.target.value);
-                        }}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-slate-800 mb-1">
-                        Price per Piece (₹)
-                      </label>
-                      <input
-                        type="number"
-                        min="1"
-                        step="0.5"
-                        value={specialUnitPrice}
-                        onChange={(e) => setSpecialUnitPrice(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <label className="font-extrabold text-slate-800">
-                        {supportsBothSides ? '5' : '4'}. Select Quantity ({pricingConfig.unitName || 'Units'})
-                      </label>
-                      <span className="text-[11px] text-brand-crimson font-bold">
-                        Min: {packSize.toLocaleString('en-IN')}
-                      </span>
-                    </div>
-
-                    {/* Quantity Pills */}
-                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
-                      {quantityTiers.map((q) => (
-                        <button
-                          key={q}
-                          type="button"
-                          onClick={() => {
-                            setQuantity(q);
-                            setIsCustomQty(false);
-                          }}
-                          className={`py-2 px-1 rounded-xl border text-xs font-extrabold transition-all text-center ${
-                            !isCustomQty && quantity === q
-                              ? 'border-brand-crimson bg-brand-crimson text-white shadow-sm'
-                              : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                          }`}
-                        >
-                          {q.toLocaleString('en-IN')}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Custom Quantity Option */}
-                    <div className="pt-1">
-                      {!isCustomQty ? (
-                        <button
-                          type="button"
-                          onClick={() => setIsCustomQty(true)}
-                          className="text-[11px] font-bold text-brand-crimson hover:underline"
-                        >
-                          + Need a different pack multiple? Enter custom quantity
-                        </button>
-                      ) : (
-                        <div className="flex items-center space-x-2 pt-1">
-                          <input
-                            type="number"
-                            min={packSize}
-                            step={packSize}
-                            placeholder={`Multiples of ${packSize}`}
-                            value={customQtyInput}
-                            onChange={(e) => setCustomQtyInput(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs text-slate-900 font-bold focus:bg-white focus:border-brand-crimson focus:outline-none"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setIsCustomQty(false)}
-                            className="text-xs text-slate-400 hover:text-slate-600 px-2 py-2"
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Delivery Mode Selector (Exact printizer-main options) */}
-                <div className="space-y-1.5">
-                  <label className="block text-xs font-extrabold text-slate-800">
-                    Delivery Mode
-                  </label>
-                  <div className="grid grid-cols-3 gap-1.5">
-                    {[
-                      { id: 'collect', label: 'Office Pickup', sub: 'Free' },
-                      { id: 'courier', label: 'Courier', sub: `₹${priceSheets?.[customerClass]?.courierPerPack || 60}/pack` },
-                      { id: 'transport', label: 'Transport', sub: `₹${priceSheets?.[customerClass]?.transportPerParcel || 300}/parcel` }
-                    ].map(d => (
-                      <button
-                        key={d.id}
-                        type="button"
-                        onClick={() => setDeliveryMode(d.id)}
-                        className={`p-2 rounded-xl border text-center transition ${
-                          deliveryMode === d.id
-                            ? 'border-brand-crimson bg-rose-50/50 text-slate-900 ring-1 ring-brand-crimson'
-                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                        }`}
-                      >
-                        <span className="block text-[11px] font-bold leading-tight">{d.label}</span>
-                        <span className="text-[10px] text-slate-500 font-semibold">{d.sub}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 6. Job Name / Reference */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Job / Project Title (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. 2026 Executive Brand Refresh"
-                    value={jobName}
-                    onChange={(e) => setJobName(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs text-slate-900 focus:bg-white focus:border-brand-blue focus:outline-none"
-                  />
-                </div>
-
-                {/* 7. LIVE ITEMISED PRICE BREAKDOWN */}
-                <div className="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-200 space-y-3">
-                  <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
-                    <span className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-                      Price Calculation Summary
-                    </span>
-                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
-                      {customerClass === 'gst' ? 'GST Billing' : 'Retail Rate'}
-                    </span>
-                  </div>
-
-                  {pricing.hasPrice ? (
-                    <div className="space-y-1.5 text-xs">
-                      <div className="flex items-center justify-between text-slate-600">
-                        <span>
-                          Base Printing ({pricing.qty.toLocaleString('en-IN')} {pricing.unitName}
-                          {pricing.areaSqIn ? ` • ${pricing.areaSqIn} sq.in` : ''}):
-                        </span>
-                        <span className="font-semibold text-slate-800">₹ {pricing.baseAmount.toLocaleString('en-IN')}</span>
-                      </div>
-
-                      {pricing.foilExtra > 0 && (
-                        <div className="flex items-center justify-between text-slate-600">
-                          <span>Hot Foil Stamping ({selectedFoil}):</span>
-                          <span className="font-semibold text-slate-800">+₹ {pricing.foilExtra.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-
-                      {pricing.spotUvExtra > 0 && (
-                        <div className="flex items-center justify-between text-slate-600">
-                          <span>Raised Spot UV Embellishment:</span>
-                          <span className="font-semibold text-slate-800">+₹ {pricing.spotUvExtra.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-
-                      {pricing.finishingExtra > 0 && (
-                        <div className="flex items-center justify-between text-slate-600">
-                          <span>Finishing Add-ons:</span>
-                          <span className="font-semibold text-slate-800">+₹ {pricing.finishingExtra.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-
-                      {pricing.deliveryCharge > 0 && (
-                        <div className="flex items-center justify-between text-slate-600">
-                          <span>{deliveryMode === 'courier' ? 'Courier Charges' : 'Transport Charges'}:</span>
-                          <span className="font-semibold text-slate-800">+₹ {pricing.deliveryCharge.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-
-                      {customerClass === 'gst' && (
-                        <div className="flex items-center justify-between text-slate-500 pt-1 border-t border-slate-200">
-                          <span>Applicable GST (18%):</span>
-                          <span className="font-semibold text-slate-700">+₹ {pricing.gstAmount.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
-
-                      <div className="pt-2 border-t-2 border-slate-300 flex items-center justify-between">
-                        <div>
-                          <span className="text-xs font-extrabold text-slate-900 block">Total Estimated Amount:</span>
-                          <span className="text-[10px] text-slate-500">
-                            Effective: ₹{pricing.effectiveUnitRate} per {pricing.unitName.replace(/s$/, '').toLowerCase()}
-                            {pricing.minApplied ? ' (Minimum order charge applied)' : ''}
-                          </span>
-                        </div>
-                        <div className="text-right">
-                          <span className="text-xl sm:text-2xl font-black text-brand-crimson">
-                            ₹ {pricing.finalTotal.toLocaleString('en-IN')}
-                          </span>
-                        </div>
-                      </div>
-
-                      <p className="text-[10px] text-slate-400 italic pt-1 leading-normal">
-                        * Official rate from PRINTIZER price sheet ({customerClass === 'gst' ? 'GST Tax Invoice' : 'Retail'}). Custom goods once printed are non-returnable.
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="text-center py-3">
-                      <p className="text-xs text-slate-600 font-medium">
-                        Custom specifications require specialist evaluation.
-                      </p>
-                      <span className="text-base font-extrabold text-slate-900 block mt-1">
-                        Request a Tailored Quote
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* 8. PRIMARY ACTION BUTTONS */}
-                <div className="space-y-2.5 pt-1">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSuccessData(null);
-                      setSubmitError('');
-                      setIsModalOpen(true);
-                    }}
-                    className="w-full bg-brand-crimson hover:bg-brand-red text-white font-extrabold py-3.5 px-6 rounded-2xl text-xs sm:text-sm transition flex items-center justify-center space-x-2 shadow-lg shadow-brand-crimson/25 hover:shadow-xl cursor-pointer"
-                  >
-                    <span>Request Official Quotation</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => onNavigate('configure', product.slug)}
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-2xl text-xs transition flex items-center justify-center space-x-2 shadow-xs cursor-pointer"
-                  >
-                    <Layers className="w-4 h-4" />
-                    <span>Add to Multi-Product Order Builder</span>
-                  </button>
-
-                  <a
-                    href={getWhatsAppEnquiryUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-2xl text-xs transition flex items-center justify-center space-x-2 shadow-xs"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>Instant WhatsApp Enquiry</span>
-                  </a>
-                </div>
-
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* 3. RELATED PRODUCTS IN THIS CATEGORY */}
@@ -1455,7 +821,7 @@ Thank you!`;
                       className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-1.5 transition shadow-sm"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      <span>Continue on WhatsApp (+91 98983 51920)</span>
+                      <span>Continue on WhatsApp (+91 75749 27200)</span>
                     </a>
                   </div>
 
@@ -1528,7 +894,7 @@ Thank you!`;
                       <input
                         type="tel"
                         required
-                        placeholder="+91 98983 51920"
+                        placeholder="+91 75749 27200"
                         value={whatsappNumber}
                         onChange={(e) => setWhatsappNumber(e.target.value)}
                         className="w-full bg-slate-50 border border-slate-300 rounded-xl py-2 px-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-brand-crimson focus:outline-none"

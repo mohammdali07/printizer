@@ -52,7 +52,7 @@ export function generateQuotationPdf(enquiry, quotation, stream) {
      .text('Everything Your Business Needs to Print.', 350, headerTop + 32, { align: 'right' })
      .text('Website: www.Printizer.in', 350, headerTop + 44, { align: 'right' })
      .text('Email: Printizerdesign@gmail.com', 350, headerTop + 56, { align: 'right' })
-     .text('WhatsApp: +91 98983 51920', 350, headerTop + 68, { align: 'right' });
+     .text('WhatsApp: +91 75749 27200', 350, headerTop + 68, { align: 'right' });
 
   // Decorative Accent bar
   doc.rect(40, headerTop + 85, 515, 3).fill(navy);
@@ -207,7 +207,7 @@ export function generateQuotationPdf(enquiry, quotation, stream) {
     `1. Validity: This quotation is valid for ${quotation.validityDays || 15} days from the date of issue.`,
     '2. Proof Approval: Production begins upon client sign-off on the digital soft proof. Colors match calibrated digital files.',
     '3. Dispatch: Goods are carefully packaged and dispatched via insured expedited courier across India.',
-    '4. Support & Approvals: For adjustments or questions, contact your dedicated print manager via WhatsApp: +91 98983 51920.'
+    '4. Support & Approvals: For adjustments or questions, contact your dedicated print manager via WhatsApp: +91 75749 27200.'
   ];
 
   terms.forEach((t, i) => {
@@ -218,7 +218,7 @@ export function generateQuotationPdf(enquiry, quotation, stream) {
   doc.fontSize(8).fillColor(navy).font('Helvetica-Bold')
      .text('PRINTIZER', 40, 785, { width: 515, align: 'center' });
   doc.fontSize(7).fillColor(slateLight).font('Helvetica')
-     .text('Everything Your Business Needs to Print.  |  https://Printizer.in  |  Printizerdesign@gmail.com  |  +91 98983 51920', 40, 796, { width: 515, align: 'center' });
+     .text('Everything Your Business Needs to Print.  |  https://Printizer.in  |  Printizerdesign@gmail.com  |  +91 75749 27200', 40, 796, { width: 515, align: 'center' });
 
   doc.end();
 }

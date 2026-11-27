@@ -444,13 +444,13 @@ export default function Header({
                   Commercial Support Channel
                 </span>
                 <a
-                  href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20need%20assistance%20with%20custom%20printing."
+                  href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20need%20assistance%20with%20custom%20printing."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 transition shadow-xs"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp (+91 98983 51920)</span>
+                  <span>WhatsApp (+91 75749 27200)</span>
                 </a>
               </div>
 

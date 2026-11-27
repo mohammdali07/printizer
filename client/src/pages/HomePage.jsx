@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowRight, MessageCircle, ShieldCheck, CheckCircle2, Sparkles, 
-  Layers, Package, Award, Clock, FileText, ChevronRight, Phone, 
+  Layers, Package, Award, Clock, FileText, ChevronRight, ChevronLeft, Phone, 
   ArrowUpRight, Check, Printer, Truck, Palette, Mail, Send, CheckCircle, 
-  ExternalLink, Search
+  ExternalLink, Search, Star
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import ProductImage from '../components/ProductImage';
@@ -11,6 +11,8 @@ import ProductImage from '../components/ProductImage';
 export default function HomePage({ 
   categories = [], 
   products = [], 
+  promotions = null,
+  settings = null,
   onNavigate, 
   onRequestQuote
 }) {
@@ -37,7 +39,7 @@ export default function HomePage({
       id: 1,
       title: 'Custom Product Packaging Boxes',
       tagline: 'Rigid SBS Board & Clean Auto-Lock Folding',
-      image: '/images/slides/packaging.webp',
+      image: '/images/slides/packaging-pro.webp',
       badge: 'Luxury Packaging',
       circleBg: 'from-emerald-500/15 via-emerald-500/5 to-transparent',
       pill1: '📦 Custom Structural Dielines',
@@ -146,57 +148,223 @@ export default function HomePage({
       image: '/images/categories/restaurant-hotel-printing.webp',
       targetCategory: 'restaurant-hotel-printing',
       badge: getCategoryBadge('restaurant-hotel-printing', '9 Products')
+    },
+    {
+      id: 'hospital-medical-printing',
+      title: 'HOSPITAL & MEDICAL',
+      subtitle: 'Prescription Pads, OPD Papers, IPD Files, Case Papers, Lab Reports & ID Cards',
+      image: '/images/categories/hospital-medical-printing.webp',
+      targetCategory: 'hospital-medical-printing',
+      badge: getCategoryBadge('hospital-medical-printing', '7 Products')
     }
   ];
 
-  // Curated Featured Commercial Products (Synced MOQs & Specs from Printizer Catalogue)
-  const featuredProducts = [
+  // Infinite-Loop Carousel State & Shared Controller
+  const [activeCatIndex, setActiveCatIndex] = useState(0);
+  const [isCategoryPaused, setIsCategoryPaused] = useState(false);
+  const categoryCarouselRef = useRef(null);
+  const categoryScrollTimerRef = useRef(null);
+
+  const [isProductsPaused, setIsProductsPaused] = useState(false);
+  const [activeProductIndex, setActiveProductIndex] = useState(0);
+  const productsCarouselRef = useRef(null);
+  const productsScrollTimerRef = useRef(null);
+
+  // Curated "Our Products" Catalogue items
+  const ourProductsList = [
     {
-      id: 'visiting-card',
+      id: 'nt-card',
       slug: 'visiting-card',
-      name: 'Executive Visiting Cards',
-      category: 'Business Stationery',
-      image: '/images/products/visiting-card.webp',
-      specs: '250/350/500 GSM Card / Spot UV / Gold & Silver Foil',
-      minQty: 1000
+      title: 'NT CARD',
+      subtitle: 'Non-Tearable Waterproof Card',
+      image: '/images/products/nt-card-waterproof.jpg',
+      category: 'Visiting Card'
     },
     {
-      id: 'product-box',
-      slug: 'product-box',
-      name: 'Custom Product Packaging Boxes',
-      category: 'Packaging Printing',
-      image: '/images/products/product-box.webp',
-      specs: '320 GSM Ultima Board / UV & Drip-Off / Per Sq. Inch',
-      minQty: 1000
+      id: '350-gsm-matt',
+      slug: 'visiting-card',
+      title: '350 GSM MATT CARD',
+      subtitle: 'Executive Satin Smooth Finish',
+      image: '/images/products/350-gsm-matt-card.webp',
+      category: 'Visiting Card'
     },
     {
-      id: 'letterhead',
-      slug: 'letterhead',
-      name: 'Corporate Letterheads',
-      category: 'Business Stationery',
-      image: '/images/products/letterhead.webp',
-      specs: '80/100 GSM Sunshine, Alabaster & Executive Bond',
-      minQty: 1000
-    },
-    {
-      id: 'round-sticker',
+      id: 'waterproof-stickers',
       slug: 'round-sticker',
-      name: 'Waterproof Die-Cut Stickers',
-      category: 'Labels & Stickers',
-      image: '/images/products/round-sticker.webp',
-      specs: 'HM / Silver Metallic / PVC Vinyl / Per Sq. Inch',
-      minQty: 1000
+      title: 'WATERPROOF STICKERS',
+      subtitle: 'Die-Cut PVC & Metallic Labels',
+      image: '/images/products/waterproof-sticker.webp',
+      category: 'Labels & Stickers'
     },
     {
-      id: 'brochure',
+      id: 'corporate-letterhead',
+      slug: 'letterhead',
+      title: 'CORPORATE LETTERHEAD',
+      subtitle: '100 GSM Bond & Alabaster Stock',
+      image: '/images/products/letterhead.webp',
+      category: 'Business Stationery'
+    },
+    {
+      id: 'flyers-brochures',
       slug: 'brochure',
-      name: 'Art Paper Flyers & Brochures',
-      category: 'Marketing & Advertising',
+      title: 'FLYERS & BROCHURES',
+      subtitle: '130/170 GSM Art Paper Multi-Fold',
       image: '/images/products/brochure.webp',
-      specs: '100 / 130 / 170 GSM Art Paper (210x285mm) / Multi-Fold',
-      minQty: 1000
+      category: 'Marketing'
+    },
+    {
+      id: 'packaging-boxes',
+      slug: 'product-box',
+      title: 'PACKAGING BOXES',
+      subtitle: '320 GSM Ultima Board & Drip-Off UV',
+      image: '/images/products/product-box.webp',
+      category: 'Packaging'
+    },
+    {
+      id: 'gold-foil-cards',
+      slug: 'visiting-card',
+      title: 'GOLD FOIL CARDS',
+      subtitle: 'Metallic Hot Foil Stamping',
+      image: '/images/products/gold-foil.webp',
+      category: 'Visiting Card'
+    },
+    {
+      id: 'paper-shopping-bags',
+      slug: 'shopping-bag',
+      title: 'PAPER SHOPPING BAGS',
+      subtitle: 'Heavy Kraft & Gloss Art Bags',
+      image: '/images/products/shopping-bag.webp',
+      category: 'Packaging'
+    },
+    {
+      id: 'royal-wedding-card',
+      slug: 'wedding-invitation-card',
+      title: 'ROYAL WEDDING CARDS',
+      subtitle: 'Embossed Metallic Royal Invitations',
+      image: '/images/products/wedding-invitation-card.webp',
+      category: 'Invitations'
+    },
+    {
+      id: 'pvc-plastic-cards',
+      slug: 'pvc-card-printing',
+      title: 'PVC PLASTIC CARDS',
+      subtitle: 'Durable RFID & Employee ID Cards',
+      image: '/images/products/pvc-card-printing.webp',
+      category: 'ID Systems'
+    },
+    {
+      id: 'cash-memo-books',
+      slug: 'bill-book',
+      title: 'CASH MEMO BOOKS',
+      subtitle: 'Carbonless NCR Duplicate / Triplicate',
+      image: '/images/products/bill-book.webp',
+      category: 'Business Stationery'
+    },
+    {
+      id: '500-gsm-velvet-uv',
+      slug: 'visiting-card',
+      title: '500 GSM VELVET UV',
+      subtitle: 'Ultra Heavyweight Raised Spot UV',
+      image: '/images/products/500-gsm-matt-card-uv.webp',
+      category: 'Visiting Card'
     }
   ];
+
+  // Triple-cloned arrays for seamless infinite looping (no first/last stop)
+  const loopedCategories = [...showcaseCategories, ...showcaseCategories, ...showcaseCategories];
+  const loopedProducts = [...ourProductsList, ...ourProductsList, ...ourProductsList];
+
+  const getCarouselStep = (container, selector) => {
+    const card = container.querySelector(selector);
+    const cardWidth = card ? card.offsetWidth : 280;
+    const style = window.getComputedStyle(container);
+    const gap = parseFloat(style.columnGap || style.gap) || 14;
+    return cardWidth + gap;
+  };
+
+  const instantScrollLeft = (container, left) => {
+    container.style.scrollBehavior = 'auto';
+    container.scrollLeft = left;
+    container.style.scrollBehavior = '';
+  };
+
+  const stepInfiniteCarousel = (ref, selector, itemCount, direction) => {
+    const container = ref.current;
+    if (!container) return;
+    const step = getCarouselStep(container, selector);
+    const oneSetWidth = step * itemCount;
+
+    if (direction === 'next' && container.scrollLeft >= oneSetWidth * 2 - container.clientWidth - step) {
+      instantScrollLeft(container, container.scrollLeft - oneSetWidth);
+    } else if (direction === 'prev' && container.scrollLeft <= oneSetWidth * 0.5 + step) {
+      instantScrollLeft(container, container.scrollLeft + oneSetWidth);
+    }
+
+    container.scrollBy({ left: direction === 'next' ? step : -step, behavior: 'smooth' });
+  };
+
+  const handleInfiniteScroll = (ref, selector, itemCount, setIndex, timerRef) => {
+    const container = ref.current;
+    if (!container) return;
+    const step = getCarouselStep(container, selector);
+    const oneSetWidth = step * itemCount;
+    const idx = ((Math.round(container.scrollLeft / step) % itemCount) + itemCount) % itemCount;
+    setIndex(idx);
+
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      if (!ref.current) return;
+      if (container.scrollLeft < oneSetWidth * 0.45) {
+        instantScrollLeft(container, container.scrollLeft + oneSetWidth);
+      } else if (container.scrollLeft >= oneSetWidth * 1.95) {
+        instantScrollLeft(container, container.scrollLeft - oneSetWidth);
+      }
+    }, 180);
+  };
+
+  const jumpInfiniteCarousel = (ref, selector, itemCount, idx, setIndex) => {
+    const container = ref.current;
+    if (!container) return;
+    const step = getCarouselStep(container, selector);
+    const oneSetWidth = step * itemCount;
+    container.scrollTo({ left: oneSetWidth + idx * step, behavior: 'smooth' });
+    setIndex(idx);
+  };
+
+  // Initialize both carousels at the middle set so left/right both loop immediately
+  useEffect(() => {
+    const initCenter = (ref, selector, itemCount) => {
+      const container = ref.current;
+      if (!container) return;
+      const step = getCarouselStep(container, selector);
+      if (step > 0) {
+        instantScrollLeft(container, step * itemCount);
+      }
+    };
+    const raf = requestAnimationFrame(() => {
+      initCenter(categoryCarouselRef, '[data-category-card]', showcaseCategories.length);
+      initCenter(productsCarouselRef, '[data-product-card]', ourProductsList.length);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  // Auto-advance Categories carousel
+  useEffect(() => {
+    if (isCategoryPaused) return;
+    const timer = setInterval(() => {
+      stepInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, 'next');
+    }, 3600);
+    return () => clearInterval(timer);
+  }, [isCategoryPaused]);
+
+  // Auto-advance "Our Products" carousel
+  useEffect(() => {
+    if (isProductsPaused) return;
+    const timer = setInterval(() => {
+      stepInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, 'next');
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [isProductsPaused]);
 
   // Commercial Capabilities & Production Quality
   const printingGuides = [
@@ -223,6 +391,37 @@ export default function HomePage({
     }
   ];
 
+  // Verified Client Reviews with Delivered Print Showcases
+  const customerReviews = [
+    {
+      id: 'ahle-interior-studio',
+      client: 'Ahlé Interior Studio',
+      role: 'Architecture & Interior Design',
+      product: '350 GSM Velvet + Gold Foil Visiting Cards',
+      slug: 'visiting-card',
+      image: '/images/reviews/ahle-interior-studio.jpg',
+      quote: 'The velvet lamination and metallic gold foil stamping gave our studio cards an unmistakable luxury feel. Color accuracy and sharp cutting were spot on.'
+    },
+    {
+      id: 'manzil-travels',
+      client: 'Manzil Travels',
+      role: 'Tours, Travels & Car Rentals',
+      product: '170 GSM Art Paper Tri-Fold Brochures',
+      slug: 'brochure',
+      image: '/images/reviews/manzil-travels.jpg',
+      quote: 'We print our tour package brochures, itineraries, and travel collaterals regularly with PRINTIZER. Consistent CMYK color calibration, crisp creasing, and reliable on-time delivery.'
+    },
+    {
+      id: 'izel',
+      client: 'Izel',
+      role: 'Food & Purity Brand',
+      product: '500 GSM Velvet + Raised Spot UV Cards',
+      slug: 'visiting-card',
+      image: '/images/reviews/izel.jpg',
+      quote: 'Heavyweight 500 GSM cards with raised spot UV made our brand stand out immediately in client meetings. Great support from soft proof to final dispatch.'
+    }
+  ];
+
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
     if (!newsletterEmail || !newsletterEmail.includes('@')) return;
@@ -232,8 +431,59 @@ export default function HomePage({
     } catch (err) {}
   };
 
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const activePromoBanners = Array.isArray(promotions?.banners)
+    ? promotions.banners.filter((b) => {
+        if (b.active === false) return false;
+        if (b.startDate && todayStr < b.startDate) return false;
+        if (b.endDate && todayStr > b.endDate) return false;
+        return Boolean(b.title || b.imageUrl);
+      })
+    : [];
+
   return (
     <div className="space-y-10 sm:space-y-20 lg:space-y-24 pb-20 bg-[#fafbfc]">
+      {/* Admin-Controlled Announcement Bar */}
+      {promotions?.announcementBar?.enabled && promotions?.announcementBar?.text && (
+        <div
+          className="text-white text-center text-xs sm:text-sm font-semibold py-2 px-4"
+          style={{ backgroundColor: promotions.announcementBar.bgColor || '#be123c' }}
+        >
+          {promotions.announcementBar.text}
+        </div>
+      )}
+
+      {/* Admin-Controlled Active Promotional Banners */}
+      {activePromoBanners.length > 0 && (
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-4 -mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {activePromoBanners.map((b) => (
+              <div
+                key={b.id}
+                className="bg-white border border-slate-200 rounded-2xl p-3 sm:p-4 flex items-center justify-between gap-3 shadow-xs"
+              >
+                <div className="min-w-0">
+                  {b.discountBadge && (
+                    <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-50 text-brand-crimson border border-rose-200 mb-1">
+                      {b.discountBadge}
+                    </span>
+                  )}
+                  <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate">{b.title}</h3>
+                  {b.subtitle && <p className="text-[11px] text-slate-500 line-clamp-1">{b.subtitle}</p>}
+                </div>
+                {b.imageUrl && (
+                  <img
+                    src={b.imageUrl}
+                    alt={b.title}
+                    className="w-16 h-12 rounded-xl object-cover shrink-0 border border-slate-100"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* 1. HERO SECTION (Expanded Full-Width Mobile-First Showcase) */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9]/60 to-[#fafbfc] pt-4 pb-8 xs:pt-6 xs:pb-10 sm:pt-12 sm:pb-16 lg:pt-16 lg:pb-20 border-b border-slate-200/70">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -283,7 +533,7 @@ export default function HomePage({
                   </button>
 
                   <a
-                    href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20am%20interested%20in%20getting%20a%20quotation%20for%20business%20printing."
+                    href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20am%20interested%20in%20getting%20a%20quotation%20for%20business%20printing."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-none px-3.5 py-3 sm:py-3.5 rounded-xl sm:rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition flex items-center justify-center active:scale-[0.98] text-xs font-bold min-h-[46px]"
@@ -394,9 +644,9 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 2. EXPLORE OUR PRINTING SOLUTIONS (Category Showcase Grid) */}
+      {/* 2. EXPLORE OUR PRINTING SOLUTIONS (Category Showcase Grid + Mobile Auto-Swipe Carousel) */}
       <section id="categories-showcase" className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 scroll-mt-20">
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-1.5 sm:space-y-2">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-12 space-y-1.5 sm:space-y-2">
           <span className="text-[10px] sm:text-xs font-bold text-brand-crimson uppercase tracking-widest block">
             Commercial Printing Catalogue
           </span>
@@ -408,7 +658,96 @@ export default function HomePage({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 min-[350px]:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
+        {/* Swipe Carousel for Mobile */}
+        <div className="block sm:hidden relative px-2">
+          <div
+            ref={categoryCarouselRef}
+            onScroll={() => handleInfiniteScroll(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, setActiveCatIndex, categoryScrollTimerRef)}
+            onMouseEnter={() => setIsCategoryPaused(true)}
+            onMouseLeave={() => setIsCategoryPaused(false)}
+            onTouchStart={() => setIsCategoryPaused(true)}
+            onTouchEnd={() => {
+              setTimeout(() => setIsCategoryPaused(false), 2000);
+            }}
+            className="flex items-stretch gap-3.5 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 px-1 no-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {loopedCategories.map((card, loopIdx) => (
+              <div
+                key={`${card.id}-${loopIdx}`}
+                data-category-card
+                onClick={() => onNavigate('category', card.targetCategory)}
+                className="w-[82%] xs:w-[76%] shrink-0 snap-center bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between"
+                title={`View ${card.title} Catalogue`}
+              >
+                <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5">
+                  <ProductImage
+                    src={card.image}
+                    alt={card.title}
+                    placeholderLabel={card.title}
+                    imgClassName="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="space-y-1 px-0.5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 tracking-tight line-clamp-1">
+                      {card.title}
+                    </h3>
+                    <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-2 mt-0.5">
+                      {card.subtitle}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800">
+                    <span className="text-[11px]">View Products</span>
+                    <div className="w-5 h-5 rounded-full bg-slate-50 flex items-center justify-center text-slate-500">
+                      <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Circular Arrow Buttons for Mobile Carousel */}
+          <button
+            type="button"
+            onClick={() => stepInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, 'prev')}
+            aria-label="Previous Category"
+            className="absolute -left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border border-slate-300 bg-white/95 backdrop-blur-sm text-slate-700 shadow-md flex items-center justify-center cursor-pointer active:scale-90"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => stepInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, 'next')}
+            aria-label="Next Category"
+            className="absolute -right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border border-slate-300 bg-white/95 backdrop-blur-sm text-slate-700 shadow-md flex items-center justify-center cursor-pointer active:scale-90"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+
+          {/* Pagination Dots for Mobile Categories Carousel */}
+          <div className="flex items-center justify-center space-x-1.5 pt-3">
+            {showcaseCategories.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => jumpInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, idx, setActiveCatIndex)}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  activeCatIndex === idx
+                    ? 'w-5 h-1.5 bg-brand-crimson shadow-sm'
+                    : 'w-1.5 h-1.5 bg-slate-300 hover:bg-slate-500'
+                }`}
+                aria-label={`Jump to category ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Grid View for Desktop */}
+        <div className="hidden sm:grid grid-cols-1 min-[350px]:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
           {showcaseCategories.map((card) => (
             <div
               key={card.id}
@@ -424,9 +763,6 @@ export default function HomePage({
                   placeholderLabel={card.title}
                   imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <span className="absolute top-2 right-2 sm:top-3.5 sm:right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-[9px] sm:text-[11px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-slate-200/80 shadow-sm">
-                  {card.badge}
-                </span>
               </div>
 
               {/* Category Information */}
@@ -453,59 +789,101 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 3. FEATURED COMMERCIAL PRODUCTS (Phase 5.3 - Real Products Grid) */}
-      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2">
-          <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
+      {/* 3. OUR PRODUCTS (Auto-Swipe Commercial Products Carousel) */}
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10 space-y-1.5 sm:space-y-2">
+          <span className="text-[10px] sm:text-xs font-bold text-brand-crimson uppercase tracking-widest block">
             Featured Collaterals
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Popular Commercial Products
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Our Products
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
-            Selected high-volume business essentials engineered for executive presentation.
+          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+            Selected high-volume business essentials engineered for executive presentation and instant quotations.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 min-[350px]:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-5">
-          {featuredProducts.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => onNavigate('configure', item.slug)}
-              className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-left"
-            >
-              <div>
-                <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 mb-2.5 sm:mb-3.5 border border-slate-200/60 shadow-sm">
+        {/* Carousel Container with Circular Navigation Buttons */}
+        <div className="relative px-1 sm:px-6">
+          {/* Circular Left Arrow Button */}
+          <button
+            type="button"
+            onClick={() => stepInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, 'prev')}
+            aria-label="Previous Product"
+            className="absolute -left-2 sm:left-0 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-slate-200 bg-white/95 backdrop-blur-sm text-slate-800 shadow-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-200 flex items-center justify-center cursor-pointer active:scale-90"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          {/* Circular Right Arrow Button */}
+          <button
+            type="button"
+            onClick={() => stepInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, 'next')}
+            aria-label="Next Product"
+            className="absolute -right-2 sm:right-0 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-slate-200 bg-white/95 backdrop-blur-sm text-slate-800 shadow-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-200 flex items-center justify-center cursor-pointer active:scale-90"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Horizontal Auto-Swipe Scrolling Container */}
+          <div
+            ref={productsCarouselRef}
+            onScroll={() => handleInfiniteScroll(productsCarouselRef, '[data-product-card]', ourProductsList.length, setActiveProductIndex, productsScrollTimerRef)}
+            onMouseEnter={() => setIsProductsPaused(true)}
+            onMouseLeave={() => setIsProductsPaused(false)}
+            onTouchStart={() => setIsProductsPaused(true)}
+            onTouchEnd={() => {
+              setTimeout(() => setIsProductsPaused(false), 2000);
+            }}
+            className="flex items-stretch gap-3.5 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-3 px-2 no-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {loopedProducts.map((product, loopIdx) => (
+              <div
+                key={`${product.id}-${loopIdx}`}
+                data-product-card
+                onClick={() => onNavigate('configure', product.slug)}
+                className="w-[82%] xs:w-[74%] sm:w-[46%] md:w-[31%] lg:w-[270px] shrink-0 snap-center bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-center"
+              >
+                {/* Product Image Box */}
+                <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5">
                   <ProductImage
-                    src={item.image}
-                    alt={item.name}
-                    placeholderLabel={item.name}
-                    imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src={product.image}
+                    alt={product.title}
+                    placeholderLabel={product.title}
+                    imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <span className="absolute bottom-1.5 left-1.5 sm:bottom-2.5 sm:left-2.5 bg-slate-900/90 backdrop-blur-sm text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2.5 py-0.5 rounded-md shadow-sm">
-                    MOQ: {item.minQty}
-                  </span>
                 </div>
 
-                <span className="text-[9px] sm:text-[10px] font-bold text-brand-crimson uppercase tracking-wider block truncate">
-                  {item.category}
-                </span>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 line-clamp-1 group-hover:text-brand-crimson transition mt-0.5 sm:mt-1">
-                  {item.name}
-                </h4>
-                <p className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5 sm:mt-1 line-clamp-2 leading-relaxed hidden xs:block">
-                  {item.specs}
-                </p>
-              </div>
-
-              <div className="pt-2.5 sm:pt-3.5 mt-2.5 sm:mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
-                <span className="tracking-wide text-[10px] sm:text-xs">View Product</span>
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
-                  <ArrowRight className="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform" />
+                {/* Centered Bold Uppercase Title */}
+                <div className="pt-1.5 pb-1 text-center">
+                  <h3 className="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-brand-crimson tracking-tight uppercase transition-colors">
+                    {product.title}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                    {product.subtitle}
+                  </p>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Pagination Dots for "Our Products" Carousel */}
+          <div className="flex items-center justify-center space-x-1.5 pt-3">
+            {ourProductsList.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => jumpInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, idx, setActiveProductIndex)}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  activeProductIndex === idx
+                    ? 'w-5 h-1.5 bg-brand-crimson shadow-sm'
+                    : 'w-1.5 h-1.5 bg-slate-300 hover:bg-slate-500'
+                }`}
+                aria-label={`Jump to product ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -579,63 +957,6 @@ export default function HomePage({
                 Direct phone and WhatsApp consultation with seasoned print specialists from requirement to doorstep delivery.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. HOW IT WORKS (Phase 5.5 - 4-Step Process) */}
-      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-2">
-          <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
-            Ordering Process
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            How It Works
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
-            A transparent four-step commercial workflow designed for businesses and institutions.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
-            <span className="text-xs font-extrabold text-brand-crimson uppercase tracking-wider block">
-              Step 01
-            </span>
-            <h3 className="text-sm sm:text-base font-bold text-slate-900">Choose Your Product</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              Browse our nine commercial printing categories to locate the exact collateral your business needs.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
-            <span className="text-xs font-extrabold text-brand-crimson uppercase tracking-wider block">
-              Step 02
-            </span>
-            <h3 className="text-sm sm:text-base font-bold text-slate-900">Select Options or Share Artwork</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              Configure paper grammages, dimensions, and finishes, or upload your CorelDRAW CDR / PDF vector artwork.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
-            <span className="text-xs font-extrabold text-brand-crimson uppercase tracking-wider block">
-              Step 03
-            </span>
-            <h3 className="text-sm sm:text-base font-bold text-slate-900">Confirm Your Order</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              Review your itemized quotation and digital soft proof with our print specialists via WhatsApp or email.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-2.5">
-            <span className="text-xs font-extrabold text-brand-crimson uppercase tracking-wider block">
-              Step 04
-            </span>
-            <h3 className="text-sm sm:text-base font-bold text-slate-900">Receive Your Printed Product</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              Manufactured with strict quality inspection and safely delivered in protective packaging anywhere in India.
-            </p>
           </div>
         </div>
       </section>
@@ -724,6 +1045,71 @@ export default function HomePage({
         </div>
       </section>
 
+      {/* 8. CUSTOMER REVIEWS (Delivered Visiting Cards & Brochures Showcase) */}
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
+          <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
+            Client Reviews
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Trusted by Creative &amp; Commercial Brands
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500">
+            Real feedback from studios, agencies, and businesses printing their visiting cards and brochures with PRINTIZER.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {customerReviews.map((review) => (
+            <div
+              key={review.id}
+              onClick={() => onNavigate('configure', review.slug)}
+              className="group bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+            >
+              <div>
+                {/* Delivered Product Photo */}
+                <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 mb-4">
+                  <ProductImage
+                    src={review.image}
+                    alt={`${review.client} - ${review.product}`}
+                    placeholderLabel={review.client}
+                    imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
+                {/* 5-Star Rating */}
+                <div className="flex items-center gap-1 mb-2.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                  <span className="text-[11px] font-bold text-slate-400 ml-1.5">5.0 Verified Order</span>
+                </div>
+
+                {/* Review Quote */}
+                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+                  &ldquo;{review.quote}&rdquo;
+                </p>
+              </div>
+
+              {/* Client Identity & Product Footer */}
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <h3 className="text-sm font-extrabold text-slate-900 group-hover:text-brand-crimson transition-colors truncate">
+                    {review.client}
+                  </h3>
+                  <p className="text-[11px] font-medium text-slate-500 truncate">
+                    {review.product}
+                  </p>
+                </div>
+                <div className="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-colors text-slate-500 shrink-0">
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* 9. BUSINESS CONTACT & CONSULTATION BANNER (Phase 5.6) */}
       <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
         <div className="rounded-3xl bg-slate-900 p-6 sm:p-12 text-white shadow-xl relative overflow-hidden border border-slate-800">
@@ -742,7 +1128,7 @@ export default function HomePage({
               <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold text-slate-300">
                 <div className="flex items-center space-x-2">
                   <Phone className="w-4 h-4 text-emerald-400" />
-                  <span>WhatsApp: +91 98983 51920</span>
+                  <span>WhatsApp: +91 75749 27200</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-4 h-4 text-blue-400" />
@@ -754,7 +1140,7 @@ export default function HomePage({
             {/* Right Action */}
             <div className="lg:col-span-5 flex flex-col sm:flex-row items-center gap-3">
               <a
-                href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20have%20a%20custom%20commercial%20printing%20requirement.%20Please%20guide%20me."
+                href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20have%20a%20custom%20commercial%20printing%20requirement.%20Please%20guide%20me."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-full transition flex items-center justify-center space-x-2 shadow-md"

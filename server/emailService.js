@@ -104,7 +104,7 @@ export async function sendAdminEnquiryNotification(enquiry) {
           </div>
         </div>
         <div class="footer">
-          PRINTIZER &bull; https://Printizer.in &bull; +91 98983 51920
+          PRINTIZER &bull; https://Printizer.in &bull; +91 75749 27200
         </div>
       </div>
     </body>
@@ -187,13 +187,13 @@ export async function sendCustomerAcknowledgment(enquiry) {
 
           <div style="text-align: center; margin-top: 25px; padding: 15px; background: #f8fafc; border-radius: 6px;">
             <p style="margin: 0 0 10px 0; font-size: 13.5px; color: #475569;">Need an urgent price or immediate discussion?</p>
-            <a href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20submitted%20enquiry%20${enquiry.referenceNo}%20for%20${encodeURIComponent(enquiry.productName)}" class="wa-btn">
+            <a href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20submitted%20enquiry%20${enquiry.referenceNo}%20for%20${encodeURIComponent(enquiry.productName)}" class="wa-btn">
               Chat With Us on WhatsApp
             </a>
           </div>
         </div>
         <div class="footer">
-          PRINTIZER Solutions &bull; https://Printizer.in &bull; +91 98983 51920 &bull; Printizerdesign@gmail.com
+          PRINTIZER Solutions &bull; https://Printizer.in &bull; +91 75749 27200 &bull; Printizerdesign@gmail.com
         </div>
       </div>
     </body>
@@ -271,13 +271,13 @@ export async function sendCustomerQuotationEmail(enquiry, quotation) {
           </div>
 
           <div style="text-align: center; margin-top: 25px;">
-            <a href="https://wa.me/919898351920?text=Hello%20PRINTIZER%2C%20I%20would%20like%20to%20confirm%20Quotation%20${quotation.quotationNumber}%20for%20${encodeURIComponent(enquiry.productName)}" class="btn">
+            <a href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20would%20like%20to%20confirm%20Quotation%20${quotation.quotationNumber}%20for%20${encodeURIComponent(enquiry.productName)}" class="btn">
               Approve & Confirm on WhatsApp
             </a>
           </div>
         </div>
         <div class="footer">
-          PRINTIZER &bull; https://Printizer.in &bull; +91 98983 51920 &bull; Printizerdesign@gmail.com
+          PRINTIZER &bull; https://Printizer.in &bull; +91 75749 27200 &bull; Printizerdesign@gmail.com
         </div>
       </div>
     </body>

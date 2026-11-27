@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowRight, MessageCircle, ChevronRight, Search, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MessageCircle, Search, ShieldCheck } from 'lucide-react';
 import ProductImage from '../components/ProductImage';
+import { collapseGroupedProductsForCategory } from '../utils/productGroups';
 
 export default function CategoryPage({ 
   category, 
@@ -24,7 +25,8 @@ export default function CategoryPage({
     );
   }
 
-  const categoryProducts = products.filter(p => p.categoryId === category.id);
+  const categoryProductsRaw = products.filter(p => p.categoryId === category.id);
+  const categoryProducts = collapseGroupedProductsForCategory(categoryProductsRaw);
   const filteredProducts = categoryProducts.filter(p => 
     p.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
     p.description.toLowerCase().includes(filterQuery.toLowerCase())
@@ -36,17 +38,20 @@ export default function CategoryPage({
       <div className="bg-slate-900 text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-800 relative overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div className="lg:col-span-7 space-y-3.5 text-left">
-            {/* Breadcrumb */}
-            <div className="flex items-center space-x-2 text-xs text-slate-400">
-              <button onClick={() => onNavigate('home')} className="hover:text-white transition">
-                Home
+            {/* Back Button */}
+            <div>
+              <button
+                type="button"
+                onClick={() => onNavigate('home')}
+                className="inline-flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-white border border-slate-700/80 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer active:scale-95"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Back to Home</span>
               </button>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-brand-crimson font-medium">{category.name}</span>
             </div>
 
             <span className="inline-block bg-brand-crimson/20 border border-brand-crimson/40 text-rose-300 text-[11px] font-bold px-3 py-1 rounded-full">
-              {category.badge || `${categoryProducts.length} Products`}
+              {`${categoryProducts.length} Products`}
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               {category.name}
@@ -101,7 +106,7 @@ I am interested in getting a quotation for ${p.name}.
 Quantity: ${p.minQuantity || 500} ${unitLabel}
 Please share your best quotation.
 Thank you.`;
-              const waUrl = `https://wa.me/919898351920?text=${encodeURIComponent(waQuoteText)}`;
+              const waUrl = `https://wa.me/917574927200?text=${encodeURIComponent(waQuoteText)}`;
 
               const startingPriceDisplay = p.pricingConfig?.startingPrice
                 ? `₹ ${Number(p.pricingConfig.startingPrice).toLocaleString('en-IN')}`

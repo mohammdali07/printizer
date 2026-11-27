@@ -35,14 +35,20 @@ export function getEffectiveOrderFields(product) {
     pricingKind,
     hasDimensions,
     supportsBoth,
-    supportsFoil: Boolean(pc.supportsFoil),
-    supportsSpotUv: Boolean(pc.supportsSpotUv),
+    supportsFoil: Boolean(
+      pc.supportsFoil &&
+      (pc.priceSheets?.retail?.foilGold || pc.priceSheets?.retail?.foilSilver || pc.goldFoilRate || pc.silverFoilRate)
+    ),
+    supportsSpotUv: Boolean(
+      pc.supportsSpotUv &&
+      (pc.priceSheets?.retail?.spotUvSingle || pc.priceSheets?.retail?.spotUvBoth || pc.spotUvRate)
+    ),
     showMaterial: fields.showMaterial !== false && materials.length > 0,
     showSize: (fields.showSize !== false && sizes.length > 0) || (pricingKind === 'area' && hasDimensions),
     showFinishing: fields.showFinishing !== false && finishes.length > 0,
     showPrinting: fields.showPrinting !== undefined ? fields.showPrinting : (supportsBoth || printingOptions.length > 1),
     showColour: fields.showColour !== undefined ? fields.showColour : colourOptions.length > 0,
-    showDelivery: fields.showDelivery !== false,
+    showDelivery: false,
     showBilling: fields.showBilling !== false,
     showNcr: Boolean(fields.showNcr && Array.isArray(fields.ncrOptions) && fields.ncrOptions.length > 0),
     showCopyType: Boolean(fields.showCopyType && Array.isArray(fields.copyOptions) && fields.copyOptions.length > 0),
@@ -77,7 +83,35 @@ export function getEffectiveOrderFields(product) {
 export function calculateConfiguredOrderPrice(product, selection) {
   if (!product) return { hasPrice: false, quoteOnly: true };
   const cfg = getEffectiveOrderFields(product);
-  if (cfg.quoteOnly || cfg.pricingKind === 'special_job') {
+
+  if (cfg.pricingKind === 'special_job') {
+    const unitP = Math.max(0, parseFloat(selection?.specialUnitPrice) || 0);
+    const q = Math.max(1, Number(selection?.quantity) || 1);
+    if (unitP > 0) {
+      const baseAmount = Math.round(q * unitP);
+      return {
+        hasPrice: true,
+        quoteOnly: false,
+        qty: q,
+        packs: 1,
+        areaSqIn: null,
+        baseAmount,
+        foilExtra: 0,
+        spotUvExtra: 0,
+        finishingExtra: 0,
+        deliveryCharge: 0,
+        netSubtotal: baseAmount,
+        gstAmount: 0,
+        totalAmount: baseAmount,
+        unitPrice: unitP,
+        unitName: cfg.unitName || 'Units',
+        customerClass: 'retail'
+      };
+    }
+    return { hasPrice: false, quoteOnly: true, unitName: cfg.unitName };
+  }
+
+  if (cfg.quoteOnly) {
     return { hasPrice: false, quoteOnly: true, unitName: cfg.unitName };
   }
 
@@ -138,11 +172,13 @@ export function calculateConfiguredOrderPrice(product, selection) {
     }
 
     if (cfg.supportsFoil && selection.foil && selection.foil !== 'none') {
-      const foilRate = selection.foil === 'silver' ? activeSheet.foilSilver : activeSheet.foilGold;
+      const isSilver = /silver/i.test(selection.foil);
+      const foilRate = isSilver ? activeSheet.foilSilver : activeSheet.foilGold;
       if (foilRate) foilExtra += Number(foilRate) * packs;
     }
     if (cfg.supportsSpotUv && selection.spotUv && selection.spotUv !== 'none') {
-      const uvRate = (isBothSides && activeSheet.spotUvBoth) ? activeSheet.spotUvBoth : activeSheet.spotUvSingle;
+      const isBothUV = /both/i.test(selection.spotUv) || (isBothSides && selection.spotUv === 'spot-uv');
+      const uvRate = (isBothUV && activeSheet.spotUvBoth) ? activeSheet.spotUvBoth : activeSheet.spotUvSingle;
       if (uvRate) spotUvExtra += Number(uvRate) * packs;
     }
 

@@ -20,6 +20,22 @@ export default function App() {
 
   const [categories, setCategories] = useState(initialCatalog.categories || []);
   const [products, setProducts] = useState(initialCatalog.products || []);
+  const [promotions, setPromotions] = useState(() => {
+    try {
+      const saved = localStorage.getItem('prz_custom_promotions');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [settings, setSettings] = useState(() => {
+    try {
+      const saved = localStorage.getItem('prz_custom_settings');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
   const [loading, setLoading] = useState(false);
 
   // Persistent multi-product Order Configurator cart summary
@@ -45,19 +61,51 @@ export default function App() {
 
   const refreshCatalog = async () => {
     try {
-      const [catRes, prodRes] = await Promise.all([
+      const [catRes, prodRes, promoRes, setRes] = await Promise.all([
         fetch('/api/categories'),
-        fetch('/api/products')
+        fetch('/api/products'),
+        fetch('/api/promotions').catch(() => null),
+        fetch('/api/settings').catch(() => null)
       ]);
-      const [catJson, prodJson] = await Promise.all([
-        catRes.json(),
-        prodRes.json()
-      ]);
-
-      if (catJson.success) setCategories(catJson.data);
-      if (prodJson.success) setProducts(prodJson.data);
-    } catch (err) {
-      console.error('Failed to load catalog data:', err);
+      if (promoRes?.ok) {
+        const promoJson = await promoRes.json();
+        if (promoJson.success && promoJson.data) setPromotions(promoJson.data);
+      }
+      if (setRes?.ok) {
+        const setJson = await setRes.json();
+        if (setJson.success && setJson.data) setSettings(setJson.data);
+      }
+      if (catRes.ok && prodRes.ok) {
+        const [catJson, prodJson] = await Promise.all([
+          catRes.json(),
+          prodRes.json()
+        ]);
+        if (catJson.success) setCategories(catJson.data);
+        if (prodJson.success) setProducts(prodJson.data);
+        return;
+      }
+      throw new Error('Static fallback');
+    } catch {
+      try {
+        const saved = localStorage.getItem('prz_custom_catalog');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed.categories)) {
+            setCategories(
+              parsed.categories
+                .filter((c) => c.enabled !== false)
+                .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999))
+            );
+          }
+          if (Array.isArray(parsed.products)) {
+            setProducts(parsed.products.filter((p) => p.enabled !== false));
+          }
+        }
+        const savedPromos = localStorage.getItem('prz_custom_promotions');
+        if (savedPromos) setPromotions(JSON.parse(savedPromos));
+        const savedSettings = localStorage.getItem('prz_custom_settings');
+        if (savedSettings) setSettings(JSON.parse(savedSettings));
+      } catch {}
     } finally {
       setLoading(false);
     }
@@ -183,6 +231,8 @@ export default function App() {
               <HomePage
                 categories={categories}
                 products={products}
+                promotions={promotions}
+                settings={settings}
                 onNavigate={navigate}
                 onRequestQuote={handleOpenQuoteModal}
                 onOpenRateList={() => {}}

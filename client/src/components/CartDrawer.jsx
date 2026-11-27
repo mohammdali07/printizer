@@ -348,10 +348,6 @@ export default function CartDrawer({
                     <span className="font-semibold">{totals.quoteOnlyCount} item(s)</span>
                   </div>
                 )}
-                <div className="flex justify-between text-xs text-slate-700">
-                  <span>Soft Proof Verification</span>
-                  <span className="font-bold text-emerald-600">FREE</span>
-                </div>
                 <div className="flex justify-between text-sm font-black text-slate-900 border-t border-slate-100 pt-2.5">
                   <span>Estimated Total</span>
                   <span>

@@ -585,7 +585,33 @@ Thank you!`;
               <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   type="button"
-                  onClick={() => onAddToCart && onAddToCart(product)}
+                  onClick={() => {
+                    if (!onAddToCart) return;
+                    const qty = pricing.qty || activeQuantity;
+                    const specs = [
+                      { label: 'Material', value: selectedMaterial },
+                      { label: 'Size', value: hasDimensions ? `${dimWidth}" × ${dimHeight}"` : selectedSize },
+                      { label: 'Finish', value: selectedFinish },
+                      ...(supportsBothSides ? [{ label: 'Printing', value: selectedSides === 'both-sides' ? 'Both Sides' : 'Single Side' }] : []),
+                      ...(supportsFoil && selectedFoil !== 'none' ? [{ label: 'Foil', value: selectedFoil }] : []),
+                      ...(supportsSpotUv && selectedSpotUv !== 'none' ? [{ label: 'Spot UV', value: selectedSpotUv }] : [])
+                    ];
+                    onAddToCart(product, {
+                      lineId: `cart_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+                      productId: product.id,
+                      productSlug: product.slug,
+                      productName: product.name,
+                      categoryName: product.categoryName || 'Printing',
+                      image: currentMainImage,
+                      quantity: qty,
+                      packSize,
+                      unitName: pricingConfig.unitName || 'Units',
+                      hasPrice: Boolean(pricing.hasPrice),
+                      unitPrice: pricing.hasPrice ? Math.round((pricing.finalTotal / qty) * 100) / 100 : 0,
+                      totalAmount: pricing.hasPrice ? pricing.finalTotal : 0,
+                      specs
+                    });
+                  }}
                   className="w-full bg-[#ff9f00] hover:bg-[#f09300] text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center space-x-2 shadow-sm cursor-pointer"
                 >
                   <ShoppingCart className="w-4 h-4" />
@@ -756,7 +782,33 @@ Thank you!`;
         <div className="flex items-center space-x-2">
           <button
             type="button"
-            onClick={() => onAddToCart && onAddToCart(product)}
+            onClick={() => {
+              if (!onAddToCart) return;
+              const qty = pricing.qty || activeQuantity;
+              const specs = [
+                { label: 'Material', value: selectedMaterial },
+                { label: 'Size', value: hasDimensions ? `${dimWidth}" × ${dimHeight}"` : selectedSize },
+                { label: 'Finish', value: selectedFinish },
+                ...(supportsBothSides ? [{ label: 'Printing', value: selectedSides === 'both-sides' ? 'Both Sides' : 'Single Side' }] : []),
+                ...(supportsFoil && selectedFoil !== 'none' ? [{ label: 'Foil', value: selectedFoil }] : []),
+                ...(supportsSpotUv && selectedSpotUv !== 'none' ? [{ label: 'Spot UV', value: selectedSpotUv }] : [])
+              ];
+              onAddToCart(product, {
+                lineId: `cart_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+                productId: product.id,
+                productSlug: product.slug,
+                productName: product.name,
+                categoryName: product.categoryName || 'Printing',
+                image: currentMainImage,
+                quantity: qty,
+                packSize,
+                unitName: pricingConfig.unitName || 'Units',
+                hasPrice: Boolean(pricing.hasPrice),
+                unitPrice: pricing.hasPrice ? Math.round((pricing.finalTotal / qty) * 100) / 100 : 0,
+                totalAmount: pricing.hasPrice ? pricing.finalTotal : 0,
+                specs
+              });
+            }}
             className="bg-[#ff9f00] hover:bg-[#f09300] text-slate-950 text-xs font-extrabold px-3.5 py-2.5 rounded-xl transition shadow-sm flex items-center space-x-1 cursor-pointer"
           >
             <ShoppingCart className="w-3.5 h-3.5" />

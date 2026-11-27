@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowRight, MessageCircle, ShieldCheck, CheckCircle2, Sparkles, 
-  Layers, Package, Award, Clock, FileText, ChevronRight, ChevronLeft, Phone, 
+  Layers, Package, Award, Clock, FileText, ChevronRight, ChevronLeft, ChevronDown, Phone, 
   ArrowUpRight, Check, Printer, Truck, Palette, Mail, Send, CheckCircle, 
   ExternalLink, Search, Star
 } from 'lucide-react';
@@ -19,6 +19,30 @@ export default function HomePage({
   // Hero Carousel Slides with 100% Transparent Isolated Mockups
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
   const [heroPaused, setHeroPaused] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState(0);
+
+  const homeFaqs = [
+    {
+      q: 'What file formats do you accept, and do you provide a soft proof before printing?',
+      a: 'We accept print-ready PDF, CDR, AI, EPS, and high-resolution (300 DPI) PNG/JPG files in CMYK color mode. Before any job goes to press, our pre-press team sends you a free digital soft proof to verify layout, bleeds, and typography.'
+    },
+    {
+      q: 'What is the minimum order quantity and how does bulk pricing work?',
+      a: 'Minimum quantities depend on the product—visiting cards start from 100 or 250 pieces, while flyers, letterheads, and packaging boxes have quantity-based price tiers. Higher quantities significantly lower the per-unit cost.'
+    },
+    {
+      q: 'How long does production and PAN India delivery take?',
+      a: 'Most standard orders are printed within 2 to 4 business days after digital soft proof approval. Specialty finishes like raised spot UV, metallic foil, or custom die-cut boxes take 4 to 6 business days, followed by moisture-proof PAN India dispatch.'
+    },
+    {
+      q: 'Can you help design or modify my artwork if I do not have a ready print file?',
+      a: 'Yes! Share your logo, text, and rough idea on WhatsApp (+91 75749 27200) or through our quotation form. Our design team can prepare or format your print-ready layout before printing begins.'
+    },
+    {
+      q: 'What paper stocks and luxury finishing options are available?',
+      a: 'We offer 80–120 GSM executive bond, 130–250 GSM art paper, 350–500 GSM visiting card boards, non-tearable waterproof NT cards, and 320 GSM Ultima packaging boards—with matte/velvet lamination, raised spot UV, hot foil stamping, and custom die-cutting.'
+    }
+  ];
 
   const heroSlides = [
     {
@@ -1097,6 +1121,58 @@ export default function HomePage({
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 8. FREQUENTLY ASKED QUESTIONS (5 Essential Printing FAQs) */}
+      <section className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 space-y-2">
+          <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
+            Quick Answers
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500">
+            Everything you need to know about artwork preparation, minimum quantities, finishes, and PAN India delivery.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          {homeFaqs.map((faq, idx) => {
+            const isOpen = openFaqIndex === idx;
+            return (
+              <div
+                key={idx}
+                className={`bg-white rounded-2xl border transition-all duration-200 ${
+                  isOpen ? 'border-slate-300 shadow-sm' : 'border-slate-200/90 hover:border-slate-300'
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                  aria-expanded={isOpen}
+                  className="w-full px-5 py-4 sm:px-6 sm:py-5 flex items-center justify-between gap-4 text-left cursor-pointer"
+                >
+                  <span className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                    {faq.q}
+                  </span>
+                  <span
+                    className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 ${
+                      isOpen ? 'bg-brand-crimson text-white rotate-180' : 'bg-slate-100 text-slate-600'
+                    }`}
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="px-5 pb-4 sm:px-6 sm:pb-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 mt-0 pt-3">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
 

@@ -3,7 +3,7 @@ import {
   ArrowRight, MessageCircle, ChevronRight, CheckCircle2, 
   UploadCloud, ShieldCheck, Sparkles, Layers, FileText, 
   Truck, Clock, AlertCircle, HelpCircle, Eye, Check, X,
-  FileCheck, Printer, ArrowLeft, Send
+  FileCheck, Printer, ArrowLeft, Send, ShoppingCart
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import ProductImage from '../components/ProductImage';
@@ -13,6 +13,7 @@ export default function ProductDetailPage({
   product, 
   onNavigate, 
   onRequestQuote,
+  onAddToCart,
   allProducts = []
 }) {
   if (!product) {
@@ -579,6 +580,26 @@ Thank you!`;
                   <span className="font-bold text-slate-800">Doorstep Dispatch</span>
                 </div>
               </div>
+
+              {/* Flipkart / Amazon Style Add to Cart & Quote Actions */}
+              <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => onAddToCart && onAddToCart(product)}
+                  className="w-full bg-[#ff9f00] hover:bg-[#f09300] text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center space-x-2 shadow-sm cursor-pointer"
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  <span>Add to Cart</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('configure', product.slug)}
+                  className="w-full bg-[#fb641b] hover:bg-[#e8580e] text-white font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center space-x-2 shadow-sm cursor-pointer"
+                >
+                  <span>Configure &amp; Buy</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             {/* Technical Specifications & Prepress Guide (Synced from printizer.in) */}
@@ -733,15 +754,14 @@ Thank you!`;
         </div>
 
         <div className="flex items-center space-x-2">
-          <a
-            href={getWhatsAppEnquiryUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm"
-            title="Chat on WhatsApp"
+          <button
+            type="button"
+            onClick={() => onAddToCart && onAddToCart(product)}
+            className="bg-[#ff9f00] hover:bg-[#f09300] text-slate-950 text-xs font-extrabold px-3.5 py-2.5 rounded-xl transition shadow-sm flex items-center space-x-1 cursor-pointer"
           >
-            <MessageCircle className="w-5 h-5" />
-          </a>
+            <ShoppingCart className="w-3.5 h-3.5" />
+            <span>Add to Cart</span>
+          </button>
 
           <button
             type="button"
@@ -750,9 +770,9 @@ Thank you!`;
               setSubmitError('');
               setIsModalOpen(true);
             }}
-            className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-extrabold px-5 py-2.5 rounded-xl transition shadow-md"
+            className="bg-brand-crimson hover:bg-brand-red text-white text-xs font-extrabold px-4 py-2.5 rounded-xl transition shadow-md"
           >
-            Request Quotation
+            Quote
           </button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, MessageCircle, Search, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MessageCircle, Search, ShieldCheck, ShoppingCart, Check } from 'lucide-react';
 import ProductImage from '../components/ProductImage';
 import { collapseGroupedProductsForCategory } from '../utils/productGroups';
 
@@ -7,9 +7,11 @@ export default function CategoryPage({
   category, 
   products = [], 
   onNavigate, 
-  onRequestQuote
+  onRequestQuote,
+  onAddToCart
 }) {
   const [filterQuery, setFilterQuery] = useState('');
+  const [addedId, setAddedId] = useState(null);
   
   if (!category) {
     return (
@@ -175,13 +177,43 @@ Thank you.`;
                         </span>
                       </div>
 
-                      <button
-                        onClick={() => onNavigate('configure', p.slug)}
-                        className="w-full bg-brand-crimson hover:bg-brand-red text-white font-extrabold py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-[10.5px] sm:text-xs transition flex items-center justify-center space-x-1 shadow-md shadow-brand-crimson/20 min-h-[36px] sm:min-h-[38px]"
-                      >
-                        <span>Configure &amp; Get Quote</span>
-                        <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
-                      </button>
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (onAddToCart) {
+                              onAddToCart(p);
+                              setAddedId(p.id);
+                              setTimeout(() => setAddedId((prev) => (prev === p.id ? null : prev)), 1800);
+                            }
+                          }}
+                          className={`w-full font-extrabold py-2 px-2 rounded-xl text-[10.5px] sm:text-xs transition flex items-center justify-center space-x-1 min-h-[36px] sm:min-h-[38px] cursor-pointer shadow-xs ${
+                            addedId === p.id
+                              ? 'bg-emerald-600 text-white'
+                              : 'bg-[#ff9f00] hover:bg-[#f09300] text-slate-950'
+                          }`}
+                        >
+                          {addedId === p.id ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 shrink-0" />
+                              <span>Added</span>
+                            </>
+                          ) : (
+                            <>
+                              <ShoppingCart className="w-3.5 h-3.5 shrink-0" />
+                              <span>Add to Cart</span>
+                            </>
+                          )}
+                        </button>
+
+                        <button
+                          onClick={() => onNavigate('configure', p.slug)}
+                          className="w-full bg-brand-crimson hover:bg-brand-red text-white font-extrabold py-2 px-2 rounded-xl text-[10.5px] sm:text-xs transition flex items-center justify-center space-x-1 shadow-md shadow-brand-crimson/20 min-h-[36px] sm:min-h-[38px] cursor-pointer"
+                        >
+                          <span>Configure</span>
+                          <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+                        </button>
+                      </div>
 
                       <div className="grid grid-cols-2 gap-1 sm:gap-2">
                         <button

@@ -3,7 +3,7 @@ import {
   ArrowRight, MessageCircle, ShieldCheck, CheckCircle2, Sparkles, 
   Layers, Package, Award, Clock, FileText, ChevronRight, ChevronLeft, ChevronDown, Phone, 
   ArrowUpRight, Check, Printer, Truck, Palette, Mail, Send, CheckCircle, 
-  ExternalLink, Search, Star
+  ExternalLink, Search, Star, ShoppingCart
 } from 'lucide-react';
 import ProductImage from '../components/ProductImage';
 
@@ -13,7 +13,8 @@ export default function HomePage({
   promotions = null,
   settings = null,
   onNavigate, 
-  onRequestQuote
+  onRequestQuote,
+  onAddToCart
 }) {
 
   // Hero Carousel Slides with 100% Transparent Isolated Mockups
@@ -868,13 +869,35 @@ export default function HomePage({
                 </div>
 
                 {/* Centered Bold Uppercase Title */}
-                <div className="pt-1.5 pb-1 text-center">
-                  <h3 className="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-brand-crimson tracking-tight uppercase transition-colors">
-                    {product.title}
-                  </h3>
-                  <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
-                    {product.subtitle}
-                  </p>
+                <div className="pt-1.5 pb-1 text-center space-y-2">
+                  <div>
+                    <h3 className="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-brand-crimson tracking-tight uppercase transition-colors">
+                      {product.title}
+                    </h3>
+                    <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                      {product.subtitle}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (!onAddToCart) return;
+                      const matched = products.find((p) => p.slug === product.slug);
+                      onAddToCart(matched || {
+                        id: product.id,
+                        slug: product.slug,
+                        name: product.title,
+                        categoryName: product.category,
+                        image: product.image,
+                        minQuantity: 100
+                      });
+                    }}
+                    className="w-full bg-[#ff9f00] hover:bg-[#f09300] text-slate-950 font-extrabold text-[11px] py-2 px-3 rounded-xl transition flex items-center justify-center space-x-1.5 shadow-2xs cursor-pointer"
+                  >
+                    <ShoppingCart className="w-3.5 h-3.5 shrink-0" />
+                    <span>Add to Cart</span>
+                  </button>
                 </div>
               </div>
             ))}

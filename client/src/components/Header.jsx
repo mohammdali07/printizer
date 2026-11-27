@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Search, Phone, Mail, ChevronDown, Menu, X, ArrowRight, 
   MessageCircle, ShieldCheck, Lock, ExternalLink, ArrowUpRight,
-  Sparkles, Layers, FileText
+  Sparkles, Layers, FileText, ShoppingCart
 } from 'lucide-react';
 
 export default function Header({ 
@@ -10,6 +10,7 @@ export default function Header({
   categories = [], 
   products = [], 
   onRequestQuote,
+  onOpenCart,
   activePage = 'home',
   orderCount = 0
 }) {
@@ -241,6 +242,23 @@ export default function Header({
             aria-label="Search"
           >
             <Search className="w-5 h-5" />
+          </button>
+
+          {/* Flipkart/Amazon Style Cart Icon Button */}
+          <button
+            type="button"
+            onClick={() => onOpenCart && onOpenCart()}
+            className="relative h-9 px-2.5 sm:px-3.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs transition flex items-center space-x-1.5 cursor-pointer shrink-0 shadow-2xs"
+            aria-label="Open My Cart"
+            title="View My Cart"
+          >
+            <ShoppingCart className="w-4 h-4 text-slate-800 shrink-0" />
+            <span className="hidden sm:inline">Cart</span>
+            {orderCount > 0 && (
+              <span className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-brand-crimson text-white text-[10px] font-black leading-none">
+                {orderCount}
+              </span>
+            )}
           </button>
 
           {/* Primary Action Button - Compact & Crisp on Mobile */}

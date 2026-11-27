@@ -3,6 +3,7 @@ import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import WhatsAppFloating from './components/WhatsAppFloating.jsx';
 import QuoteModal from './components/QuoteModal.jsx';
+import CartDrawer from './components/CartDrawer.jsx';
 
 import HomePage from './pages/HomePage.jsx';
 import CategoryPage from './pages/CategoryPage.jsx';
@@ -55,9 +56,58 @@ export default function App() {
     } catch {}
   };
 
-  // Global Quote Modal State
+  // Global Quote Modal & Cart Drawer State
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [quoteModalProduct, setQuoteModalProduct] = useState(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartToast, setCartToast] = useState(null);
+
+  const handleAddToCart = (product, customItem = null) => {
+    if (!product && !customItem) return;
+    let newItem = customItem;
+    if (!newItem && product) {
+      const pc = product.pricingConfig || {};
+      const qty = Number(product.minQuantity || pc.minQuantity || pc.packSize || 100);
+      const packSize = Number(pc.packSize || product.minQuantity || qty);
+      const unitName = pc.unitName || 'Units';
+      const startingTotal = pc.startingPrice
+        ? Number(pc.startingPrice)
+        : (product.baseRate ? Math.round(Number(product.baseRate) * qty) : 0);
+      const hasPrice = startingTotal > 0;
+      const unitPrice = hasPrice ? Math.round((startingTotal / qty) * 100) / 100 : 0;
+      const specs = [];
+      if (Array.isArray(product.materials) && product.materials[0]) {
+        specs.push({ label: 'Material', value: product.materials[0] });
+      }
+      if (Array.isArray(product.standardSizes) && product.standardSizes[0]) {
+        specs.push({ label: 'Size', value: product.standardSizes[0] });
+      }
+      if (Array.isArray(product.finishes) && product.finishes[0]) {
+        specs.push({ label: 'Finish', value: product.finishes[0] });
+      }
+      newItem = {
+        lineId: `cart_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+        productId: product.id,
+        productSlug: product.slug,
+        productName: product.name,
+        categoryName: product.categoryName || 'Printing',
+        image: product.image || '',
+        quantity: qty,
+        packSize,
+        unitName,
+        hasPrice,
+        unitPrice,
+        totalAmount: startingTotal,
+        specs
+      };
+    }
+    const next = [...orderItems, newItem];
+    handleOrderItemsChange(next);
+    setCartToast(newItem.productName);
+    setTimeout(() => {
+      setCartToast((prev) => (prev === newItem.productName ? null : prev));
+    }, 3200);
+  };
 
   const refreshCatalog = async () => {
     try {
@@ -209,6 +259,7 @@ export default function App() {
           products={products}
           onRequestQuote={handleOpenQuoteModal}
           onOpenRateList={() => {}}
+          onOpenCart={() => setIsCartOpen(true)}
           orderCount={orderItems.length}
           activePage={currentParam ? `${currentPage}-${currentParam}` : currentPage}
         />
@@ -235,6 +286,7 @@ export default function App() {
                 settings={settings}
                 onNavigate={navigate}
                 onRequestQuote={handleOpenQuoteModal}
+                onAddToCart={handleAddToCart}
                 onOpenRateList={() => {}}
               />
             )}
@@ -245,6 +297,7 @@ export default function App() {
                 products={products}
                 onNavigate={navigate}
                 onRequestQuote={handleOpenQuoteModal}
+                onAddToCart={handleAddToCart}
               />
             )}
 
@@ -253,6 +306,7 @@ export default function App() {
                 product={activeProduct}
                 onNavigate={navigate}
                 onRequestQuote={handleOpenQuoteModal}
+                onAddToCart={handleAddToCart}
                 allProducts={products}
               />
             )}
@@ -314,6 +368,34 @@ export default function App() {
         product={quoteModalProduct}
         products={products}
       />
+
+      {/* Flipkart / Amazon Style Slide-Out Cart Drawer */}
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        orderItems={orderItems}
+        onOrderItemsChange={handleOrderItemsChange}
+        onNavigate={navigate}
+      />
+
+      {/* Added-to-Cart Toast Notification */}
+      {cartToast && (
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 text-xs animate-in fade-in slide-in-from-bottom-2">
+          <span className="font-semibold truncate max-w-[200px] sm:max-w-xs">
+            ✓ Added <strong>{cartToast}</strong> to Cart
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setCartToast(null);
+              setIsCartOpen(true);
+            }}
+            className="bg-[#ff9f00] hover:bg-[#f09300] text-slate-950 font-extrabold px-3 py-1 rounded-lg text-[11px] shrink-0 cursor-pointer"
+          >
+            View Cart
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -5,7 +5,6 @@ import {
   ArrowUpRight, Check, Printer, Truck, Palette, Mail, Send, CheckCircle, 
   ExternalLink, Search, Star
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import ProductImage from '../components/ProductImage';
 
 export default function HomePage({ 
@@ -16,8 +15,6 @@ export default function HomePage({
   onNavigate, 
   onRequestQuote
 }) {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
   // Hero Carousel Slides with 100% Transparent Isolated Mockups
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
@@ -421,15 +418,6 @@ export default function HomePage({
       quote: 'Heavyweight 500 GSM cards with raised spot UV made our brand stand out immediately in client meetings. Great support from soft proof to final dispatch.'
     }
   ];
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (!newsletterEmail || !newsletterEmail.includes('@')) return;
-    setNewsletterSubscribed(true);
-    try {
-      confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
-    } catch (err) {}
-  };
 
   const todayStr = new Date().toISOString().slice(0, 10);
   const activePromoBanners = Array.isArray(promotions?.banners)
@@ -961,91 +949,7 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 6. BESTSELLING COLLATERALS BANNER */}
-      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-slate-900 text-white overflow-hidden shadow-xl border border-slate-800">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-            <div className="lg:col-span-5 p-6 sm:p-12 lg:p-14 space-y-4 text-left">
-              <span className="text-[10px] font-bold tracking-widest text-rose-300 uppercase bg-white/10 px-3 py-1 rounded-full inline-block">
-                Executive Stationery
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                Discover Our Bestselling Products
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Engineered for corporate credibility: heavy board stocks, tactile velvet lamination, raised spot UV, and crisp hot foil stamping that make your brand memorable.
-              </p>
-              <div className="pt-2">
-                <button
-                  onClick={() => onRequestQuote({ productName: 'Bestselling Corporate Collaterals' })}
-                  className="bg-white text-slate-900 hover:bg-slate-100 font-bold text-xs sm:text-sm px-6 py-3 rounded-full transition flex items-center space-x-2 shadow-md"
-                >
-                  <span>Request Custom Quotation</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 h-64 sm:h-80 lg:h-96 relative overflow-hidden">
-              <img
-                src="/images/bestselling-banner-mockup.jpg"
-                alt="PRINTIZER Bestselling Corporate Collaterals"
-                className="w-full h-full object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-transparent to-transparent hidden lg:block"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. PRINTING CAPABILITIES & FINISHING STANDARDS */}
-      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
-          <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
-            Quality Assurance
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Commercial Printing Standards
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
-            Specialized printing capabilities, premium paper engineering, and luxury tactile embellishments.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {printingGuides.map((guide) => (
-            <div
-              key={guide.id}
-              className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between"
-            >
-              <div className="space-y-2.5">
-                <span className="text-[10px] font-bold text-brand-crimson uppercase tracking-wider block">
-                  {guide.category}
-                </span>
-                <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
-                  {guide.title}
-                </h3>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  {guide.snippet}
-                </p>
-              </div>
-
-              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <span className="font-semibold text-slate-700">{guide.date}</span>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('product', 'visiting-card')}
-                  className="font-bold text-brand-crimson hover:underline flex items-center space-x-1"
-                >
-                  <span>Explore Specs &rarr;</span>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 8. CUSTOMER REVIEWS (Delivered Visiting Cards & Brochures Showcase) */}
+      {/* 5. CUSTOMER REVIEWS (Delivered Visiting Cards & Brochures Showcase) */}
       <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
@@ -1104,6 +1008,92 @@ export default function HomePage({
                 <div className="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-colors text-slate-500 shrink-0">
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 6. BESTSELLING COLLATERALS BANNER */}
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="relative rounded-3xl bg-slate-900 text-white overflow-hidden shadow-xl border border-slate-800">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+            <div className="lg:col-span-5 p-6 sm:p-12 lg:p-14 space-y-4 text-left">
+              <span className="text-[10px] font-bold tracking-widest text-rose-300 uppercase bg-white/10 px-3 py-1 rounded-full inline-block">
+                Executive Stationery
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                Discover Our Bestselling Products
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Engineered for corporate credibility: heavy board stocks, tactile velvet lamination, raised spot UV, and crisp hot foil stamping that make your brand memorable.
+              </p>
+              <div className="pt-2">
+                <button
+                  onClick={() => onRequestQuote({ productName: 'Bestselling Corporate Collaterals' })}
+                  className="bg-white text-slate-900 hover:bg-slate-100 font-bold text-xs sm:text-sm px-6 py-3 rounded-full transition flex items-center space-x-2 shadow-md"
+                >
+                  <span>Request Custom Quotation</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 h-64 sm:h-80 lg:h-96 relative overflow-hidden">
+              <img
+                src="/images/bestselling-banner-mockup.jpg"
+                alt="PRINTIZER Bestselling Corporate Collaterals"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-transparent to-transparent hidden lg:block"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. PRINTING CAPABILITIES & FINISHING STANDARDS */}
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
+          <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
+            Quality Assurance
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Commercial Printing Standards
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500">
+            Specialized printing capabilities, premium paper engineering, and luxury tactile embellishments.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {printingGuides.map((guide) => (
+            <div
+              key={guide.id}
+              className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between"
+            >
+              <div className="space-y-2.5">
+                <span className="text-[10px] font-bold text-brand-crimson uppercase tracking-wider block">
+                  {guide.category}
+                </span>
+                <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                  {guide.title}
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  {guide.snippet}
+                </p>
+              </div>
+
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span className="font-semibold text-slate-700">{guide.date}</span>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('product', 'visiting-card')}
+                  className="font-bold text-brand-crimson hover:underline flex items-center space-x-1"
+                >
+                  <span>Explore Specs &rarr;</span>
+                </button>
               </div>
             </div>
           ))}

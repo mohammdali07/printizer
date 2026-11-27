@@ -527,10 +527,7 @@ export default function HomePage({
               {/* Primary & Secondary Action Buttons (Stacked on Small Mobile, Horizontal on Wider Screens) */}
               <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-3 pt-1 w-full max-w-md sm:max-w-none">
                 <button
-                  onClick={() => {
-                    const el = document.getElementById('categories-showcase');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }}
+                  onClick={() => onNavigate('categories')}
                   className="w-full xs:w-auto bg-slate-950 hover:bg-slate-800 text-white font-bold px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm shadow-lg shadow-slate-900/15 hover:shadow-xl transition flex items-center justify-center space-x-2 active:scale-[0.98] cursor-pointer min-h-[46px]"
                 >
                   <span>Explore Our Products</span>
@@ -566,17 +563,30 @@ export default function HomePage({
                     />
                   )}
 
-                  {/* Studio Product Showcase - Full-bleed photo or isolated transparent mockup */}
-                  <img
-                    key={activeHero.id}
-                    src={activeHero.image}
-                    alt={activeHero.title}
-                    className={`relative z-10 w-full h-full transition-transform duration-500 hover:scale-[1.03] select-none ${
-                      activeHero.fullBleed
-                        ? 'object-cover'
-                        : 'object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.12)]'
-                    }`}
-                  />
+                  {/* Studio Product Showcase - Animated Crossfade + Subtle Zoom */}
+                  {heroSlides.map((slide, idx) => {
+                    const isActive = idx === currentHeroSlide;
+                    return (
+                      <div
+                        key={slide.id}
+                        className={`absolute inset-0 p-3 sm:p-6 flex items-center justify-center transition-all duration-700 ease-out ${
+                          isActive
+                            ? 'opacity-100 scale-100 translate-y-0 z-10'
+                            : 'opacity-0 scale-95 translate-y-2 pointer-events-none z-0'
+                        }`}
+                      >
+                        <img
+                          src={slide.image}
+                          alt={slide.title}
+                          className={`w-full h-full transition-transform duration-500 hover:scale-[1.03] select-none ${
+                            slide.fullBleed
+                              ? 'object-cover'
+                              : 'object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.12)]'
+                          }`}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
 
                 {/* Slide Switcher Dots */}
@@ -632,14 +642,14 @@ export default function HomePage({
 
               <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-3 transition hover:shadow-md">
                 <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center shrink-0 text-purple-600">
-                  <Palette className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="min-w-0">
                   <h4 className="text-[10px] xs:text-[11px] sm:text-xs lg:text-sm font-bold text-slate-900 leading-tight">
-                    Free Soft Proofs
+                    24 Hours Service
                   </h4>
                   <p className="text-[10px] text-slate-500 hidden sm:block mt-0.5">
-                    Pre-Press Digital Verification
+                    Round-the-Clock Print Support
                   </p>
                 </div>
               </div>
@@ -663,7 +673,7 @@ export default function HomePage({
         </div>
 
         {/* Swipe Carousel for Mobile */}
-        <div className="block sm:hidden relative px-2">
+        <div className="block sm:hidden relative">
           <div
             ref={categoryCarouselRef}
             onScroll={() => handleInfiniteScroll(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, setActiveCatIndex, categoryScrollTimerRef)}
@@ -673,7 +683,7 @@ export default function HomePage({
             onTouchEnd={() => {
               setTimeout(() => setIsCategoryPaused(false), 2000);
             }}
-            className="flex items-stretch gap-3.5 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 px-1 no-scrollbar"
+            className="flex items-stretch gap-0 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 no-scrollbar"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {loopedCategories.map((card, loopIdx) => (
@@ -681,10 +691,11 @@ export default function HomePage({
                 key={`${card.id}-${loopIdx}`}
                 data-category-card
                 onClick={() => onNavigate('category', card.targetCategory)}
-                className="w-[82%] xs:w-[76%] shrink-0 snap-center bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between"
+                className="w-full shrink-0 snap-center px-1"
                 title={`View ${card.title} Catalogue`}
               >
-                <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5">
+                <div className="bg-white rounded-2xl p-3.5 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between h-full">
+                <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-3">
                   <ProductImage
                     src={card.image}
                     alt={card.title}
@@ -695,7 +706,7 @@ export default function HomePage({
 
                 <div className="space-y-1 px-0.5 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900 tracking-tight line-clamp-1">
+                    <h3 className="text-sm font-extrabold text-slate-900 tracking-tight line-clamp-1">
                       {card.title}
                     </h3>
                     <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-2 mt-0.5">
@@ -703,12 +714,13 @@ export default function HomePage({
                     </p>
                   </div>
 
-                  <div className="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800">
+                  <div className="pt-2.5 mt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800">
                     <span className="text-[11px]">View Products</span>
-                    <div className="w-5 h-5 rounded-full bg-slate-50 flex items-center justify-center text-slate-500">
-                      <ArrowRight className="w-3 h-3" />
+                    <div className="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center text-slate-500">
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             ))}
@@ -719,7 +731,7 @@ export default function HomePage({
             type="button"
             onClick={() => stepInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, 'prev')}
             aria-label="Previous Category"
-            className="absolute -left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border border-slate-300 bg-white/95 backdrop-blur-sm text-slate-700 shadow-md flex items-center justify-center cursor-pointer active:scale-90"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border border-slate-200 bg-white/95 backdrop-blur-sm text-slate-700 shadow-lg flex items-center justify-center cursor-pointer active:scale-90"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
@@ -727,7 +739,7 @@ export default function HomePage({
             type="button"
             onClick={() => stepInfiniteCarousel(categoryCarouselRef, '[data-category-card]', showcaseCategories.length, 'next')}
             aria-label="Next Category"
-            className="absolute -right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border border-slate-300 bg-white/95 backdrop-blur-sm text-slate-700 shadow-md flex items-center justify-center cursor-pointer active:scale-90"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full border border-slate-200 bg-white/95 backdrop-blur-sm text-slate-700 shadow-lg flex items-center justify-center cursor-pointer active:scale-90"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -839,7 +851,7 @@ export default function HomePage({
             onTouchEnd={() => {
               setTimeout(() => setIsProductsPaused(false), 2000);
             }}
-            className="flex items-stretch gap-3.5 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-3 px-2 no-scrollbar"
+            className="flex items-stretch gap-0 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-3 px-0 sm:px-2 no-scrollbar"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {loopedProducts.map((product, loopIdx) => (
@@ -847,8 +859,9 @@ export default function HomePage({
                 key={`${product.id}-${loopIdx}`}
                 data-product-card
                 onClick={() => onNavigate('configure', product.slug)}
-                className="w-[82%] xs:w-[74%] sm:w-[46%] md:w-[31%] lg:w-[270px] shrink-0 snap-center bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-center"
+                className="w-full sm:w-[46%] md:w-[31%] lg:w-[270px] shrink-0 snap-center px-1 sm:px-0"
               >
+                <div className="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-center h-full">
                 {/* Product Image Box */}
                 <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5">
                   <ProductImage
@@ -867,6 +880,7 @@ export default function HomePage({
                   <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
                     {product.subtitle}
                   </p>
+                </div>
                 </div>
               </div>
             ))}

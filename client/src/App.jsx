@@ -6,6 +6,7 @@ import QuoteModal from './components/QuoteModal.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
 
 import HomePage from './pages/HomePage.jsx';
+import CategoriesPage from './pages/CategoriesPage.jsx';
 import CategoryPage from './pages/CategoryPage.jsx';
 import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
@@ -185,6 +186,9 @@ export default function App() {
       if (!active || active === 'home') {
         setCurrentPage('home');
         setCurrentParam(null);
+      } else if (active === 'categories') {
+        setCurrentPage('categories');
+        setCurrentParam(null);
       } else if (active.startsWith('category/') || active.startsWith('categories/')) {
         setCurrentPage('category');
         const catSlug = active.replace(/^(category|categories)\//, '').split('/')[0];
@@ -288,6 +292,15 @@ export default function App() {
                 onRequestQuote={handleOpenQuoteModal}
                 onAddToCart={handleAddToCart}
                 onOpenRateList={() => {}}
+              />
+            )}
+
+            {currentPage === 'categories' && (
+              <CategoriesPage
+                categories={categories}
+                products={products}
+                onNavigate={navigate}
+                onRequestQuote={handleOpenQuoteModal}
               />
             )}
 

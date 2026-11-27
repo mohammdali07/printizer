@@ -145,20 +145,6 @@ export default function Header({
           </div>
 
           <button
-            onClick={() => onNavigate('configure')}
-            className={`hover:text-brand-crimson transition uppercase tracking-wider flex items-center space-x-1.5 ${
-              activePage === 'configure' ? 'text-brand-crimson font-extrabold' : ''
-            }`}
-          >
-            <span>Add Order</span>
-            {orderCount > 0 && (
-              <span className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-brand-crimson text-white text-[10px] font-black leading-none">
-                {orderCount}
-              </span>
-            )}
-          </button>
-
-          <button
             onClick={() => onNavigate('about')}
             className={`hover:text-brand-crimson transition uppercase tracking-wider ${
               activePage === 'about' ? 'text-brand-crimson font-extrabold' : ''
@@ -418,22 +404,6 @@ export default function Header({
                     </div>
                   )}
                 </div>
-
-                <button
-                  onClick={() => { setMobileMenuOpen(false); onNavigate('configure'); }}
-                  className={`w-full text-left py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-between ${
-                    activePage === 'configure' ? 'bg-rose-50 text-brand-crimson font-extrabold' : 'text-slate-800 hover:bg-slate-50'
-                  }`}
-                >
-                  <span>Order Builder / Add Order</span>
-                  {orderCount > 0 ? (
-                    <span className="inline-flex items-center justify-center min-w-[20px] h-[20px] px-1.5 rounded-full bg-brand-crimson text-white text-[10px] font-black">
-                      {orderCount}
-                    </span>
-                  ) : activePage === 'configure' ? (
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson"></span>
-                  ) : null}
-                </button>
 
                 <button
                   onClick={() => { setMobileMenuOpen(false); onNavigate('about'); }}

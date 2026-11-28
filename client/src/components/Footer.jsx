@@ -31,14 +31,25 @@ export default function Footer({ onNavigate, categories = [] }) {
             </p>
 
             {/* Social Icons */}
-            <div className="flex items-center space-x-2.5 pt-1 text-slate-400">
-              <a href="#" className="w-8 h-8 rounded-full bg-slate-100 hover:bg-brand-crimson hover:text-white flex items-center justify-center transition">
+            <div className="flex items-center space-x-2.5 pt-1 text-slate-500">
+              <a
+                href="https://www.facebook.com/printizer_"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="PRINTIZER on Facebook (@printizer_)"
+                aria-label="Facebook @printizer_"
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-brand-crimson hover:text-white flex items-center justify-center transition"
+              >
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-slate-100 hover:bg-brand-crimson hover:text-white flex items-center justify-center transition">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-slate-100 hover:bg-brand-crimson hover:text-white flex items-center justify-center transition">
+              <a
+                href="https://www.instagram.com/printizer_"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="PRINTIZER on Instagram (@printizer_)"
+                aria-label="Instagram @printizer_"
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-brand-crimson hover:text-white flex items-center justify-center transition"
+              >
                 <Instagram className="w-4 h-4" />
               </a>
             </div>
@@ -62,8 +73,8 @@ export default function Footer({ onNavigate, categories = [] }) {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-blue-600 shrink-0" />
-                <a href="mailto:Printizerdesign@gmail.com" className="hover:text-brand-crimson font-medium">
-                  Printizerdesign@gmail.com
+                <a href="mailto:printizerdesign@gmail.com" className="hover:text-brand-crimson font-medium">
+                  printizerdesign@gmail.com
                 </a>
               </li>
             </ul>

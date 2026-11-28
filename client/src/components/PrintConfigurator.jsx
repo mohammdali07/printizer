@@ -466,7 +466,7 @@ Thank you!`;
               </p>
               <p className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson shrink-0"></span>
-                <span><strong>Turnaround:</strong> 3-5 business days after digital soft proof</span>
+                <span><strong>Turnaround:</strong> 3-5 business days after file confirmation</span>
               </p>
               <p className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-crimson shrink-0"></span>

@@ -29,16 +29,16 @@ export default function HomePage({
 
   const homeFaqs = [
     {
-      q: 'What file formats do you accept, and do you provide a soft proof before printing?',
-      a: 'We accept print-ready PDF, CDR, AI, EPS, and high-resolution (300 DPI) PNG/JPG files in CMYK color mode. Before any job goes to press, our pre-press team sends you a free digital soft proof to verify layout, bleeds, and typography.'
+      q: 'What file formats do you accept for printing?',
+      a: 'We accept print-ready PDF, CDR (CorelDRAW X7), AI, EPS, and high-resolution (300 DPI) PNG/JPG files in CMYK color mode with fonts converted to curves.'
     },
     {
       q: 'What is the minimum order quantity and how does bulk pricing work?',
-      a: 'Minimum quantities depend on the product—visiting cards start from 100 or 250 pieces, while flyers, letterheads, and packaging boxes have quantity-based price tiers. Higher quantities significantly lower the per-unit cost.'
+      a: 'Minimum order quantities vary by product and custom specification—we offer flexible custom MOQs along with quantity-based price tiers, where higher volumes significantly lower the per-unit cost.'
     },
     {
       q: 'How long does production and PAN India delivery take?',
-      a: 'Most standard orders are printed within 2 to 4 business days after digital soft proof approval. Specialty finishes like raised spot UV, metallic foil, or custom die-cut boxes take 4 to 6 business days, followed by moisture-proof PAN India dispatch.'
+      a: 'Most standard orders are printed within 2 to 4 business days after file confirmation. Specialty finishes like raised spot UV, metallic foil, or custom die-cut boxes take 4 to 6 business days, followed by moisture-proof PAN India dispatch.'
     },
     {
       q: 'Can you help design or modify my artwork if I do not have a ready print file?',
@@ -166,7 +166,9 @@ export default function HomePage({
     }
   ];
 
-  // Infinite-Loop Carousel State & Shared Controller
+  const visibleShowcaseCategories = categories.length > 0
+    ? showcaseCategories.filter((sc) => categories.some((c) => c.id === sc.id))
+    : showcaseCategories;
   const [activeCatIndex, setActiveCatIndex] = useState(0);
   const [isCategoryPaused, setIsCategoryPaused] = useState(false);
   const categoryCarouselRef = useRef(null);
@@ -237,44 +239,44 @@ export default function HomePage({
       category: 'Visiting Card'
     },
     {
-      id: 'paper-shopping-bags',
-      slug: 'shopping-bag',
-      title: 'PAPER SHOPPING BAGS',
-      subtitle: 'Heavy Kraft & Gloss Art Bags',
-      image: '/images/products/shopping-bag.webp',
-      category: 'Packaging'
-    },
-    {
-      id: 'royal-wedding-card',
-      slug: 'wedding-invitation-card',
-      title: 'ROYAL WEDDING CARDS',
-      subtitle: 'Embossed Metallic Royal Invitations',
-      image: '/images/products/wedding-invitation-card.webp',
-      category: 'Invitations'
-    },
-    {
-      id: 'pvc-plastic-cards',
-      slug: 'pvc-card-printing',
-      title: 'PVC PLASTIC CARDS',
-      subtitle: 'Durable RFID & Employee ID Cards',
-      image: '/images/products/pvc-card-printing.webp',
-      category: 'ID Systems'
-    },
-    {
       id: 'cash-memo-books',
-      slug: 'bill-book',
+      slug: 'cash-memo-book',
       title: 'CASH MEMO BOOKS',
       subtitle: 'Carbonless NCR Duplicate / Triplicate',
+      image: '/images/products/cash-memo-book.webp',
+      category: 'Business Stationery'
+    },
+    {
+      id: 'bill-books-ncr',
+      slug: 'bill-book',
+      title: 'BILL BOOKS (NCR)',
+      subtitle: 'Duplicate & Triplicate Invoice Books',
       image: '/images/products/bill-book.webp',
       category: 'Business Stationery'
     },
     {
       id: '500-gsm-velvet-uv',
-      slug: 'visiting-card',
+      slug: '500-gsm-matt-card-uv',
       title: '500 GSM VELVET UV',
       subtitle: 'Ultra Heavyweight Raised Spot UV',
       image: '/images/products/500-gsm-matt-card-uv.webp',
       category: 'Visiting Card'
+    },
+    {
+      id: 'custom-envelopes',
+      slug: 'envelope',
+      title: 'BRANDED ENVELOPES',
+      subtitle: 'Custom Window & Peel-Seal Envelopes',
+      image: '/images/products/envelope.webp',
+      category: 'Business Stationery'
+    },
+    {
+      id: 'product-catalogues',
+      slug: 'catalogue',
+      title: 'PRODUCT CATALOGUES',
+      subtitle: 'Multi-Page Art Paper Catalogues',
+      image: '/images/products/catalogue.webp',
+      category: 'Marketing'
     }
   ];
 
@@ -339,47 +341,7 @@ export default function HomePage({
     setIndex(idx);
   };
 
-  // Initialize both carousels at the middle set so left/right both loop immediately
-  useEffect(() => {
-    const initCenter = (ref, selector, itemCount) => {
-      const container = ref.current;
-      if (!container) return;
-      const step = getCarouselStep(container, selector);
-      if (step > 0) {
-        instantScrollLeft(container, step * itemCount);
-      }
-    };
-    const raf = requestAnimationFrame(() => {
-      initCenter(categoryCarouselRef, '[data-category-card]', showcaseCategories.length);
-      initCenter(productsCarouselRef, '[data-product-card]', ourProductsList.length);
-    });
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
-  // Auto-advance Categories carousel (mobile slider)
-  const catTouchStartXRef = useRef(null);
-  const prodTouchStartXRef = useRef(null);
-
-  useEffect(() => {
-    if (isCategoryPaused) return;
-    const timer = setInterval(() => {
-      setActiveCatIndex((prev) => (prev + 1) % showcaseCategories.length);
-    }, 3600);
-    return () => clearInterval(timer);
-  }, [isCategoryPaused, showcaseCategories.length]);
-
-  // Auto-advance "Our Products" carousel (desktop horizontal + mobile slider)
-  useEffect(() => {
-    if (isProductsPaused) return;
-    const timer = setInterval(() => {
-      if (productsCarouselRef.current && productsCarouselRef.current.offsetParent !== null) {
-        stepInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, 'next');
-      } else {
-        setActiveProductIndex((prev) => (prev + 1) % ourProductsList.length);
-      }
-    }, 3200);
-    return () => clearInterval(timer);
-  }, [isProductsPaused, ourProductsList.length]);
+  // Manual scroll only (no auto-scroll for categories or products)
 
   // Commercial Capabilities & Production Quality
   const printingGuides = [
@@ -433,7 +395,7 @@ export default function HomePage({
       product: '500 GSM Velvet + Raised Spot UV Cards',
       slug: 'visiting-card',
       image: '/images/reviews/izel.jpg',
-      quote: 'Heavyweight 500 GSM cards with raised spot UV made our brand stand out immediately in client meetings. Great support from soft proof to final dispatch.'
+      quote: 'Heavyweight 500 GSM cards with raised spot UV made our brand stand out immediately in client meetings. Great support from order to final dispatch.'
     }
   ];
 
@@ -737,7 +699,7 @@ export default function HomePage({
             className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 no-scrollbar"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {showcaseCategories.map((card) => (
+            {visibleShowcaseCategories.map((card) => (
               <div
                 key={card.id}
                 onClick={() => onNavigate('category', card.targetCategory)}
@@ -761,14 +723,14 @@ export default function HomePage({
           </div>
 
           <div className="flex items-center justify-center space-x-2 pt-3">
-            {Array.from({ length: Math.ceil(showcaseCategories.length / 2) }).map((_, idx) => (
+            {Array.from({ length: Math.ceil(visibleShowcaseCategories.length / 2) }).map((_, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => {
                   const el = mobileCategoryStripRef.current;
                   if (!el) return;
-                  const pageCount = Math.ceil(showcaseCategories.length / 2);
+                  const pageCount = Math.ceil(visibleShowcaseCategories.length / 2);
                   const maxScroll = el.scrollWidth - el.clientWidth;
                   el.scrollTo({ left: (maxScroll / Math.max(1, pageCount - 1)) * idx, behavior: 'smooth' });
                   setActiveCatIndex(idx);
@@ -815,7 +777,7 @@ export default function HomePage({
             className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-1 no-scrollbar"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {showcaseCategories.map((card) => (
+            {visibleShowcaseCategories.map((card) => (
               <div
                 key={card.id}
                 onClick={() => onNavigate('category', card.targetCategory)}
@@ -927,18 +889,11 @@ export default function HomePage({
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
           {[
             {
-              id: 'new-ipd-file',
-              title: 'Hospital IPD Files',
-              badge: 'NEW ARRIVAL',
-              image: '/images/products/ipd-file.webp',
-              slug: 'ipd-file'
-            },
-            {
               id: 'new-velvet-uv',
               title: '500 GSM Velvet UV Cards',
               badge: 'TRENDING',
               image: '/images/products/500-gsm-matt-card-uv.webp',
-              slug: 'visiting-card'
+              slug: '500-gsm-matt-card-uv'
             },
             {
               id: 'new-cash-memo',
@@ -948,18 +903,25 @@ export default function HomePage({
               slug: 'cash-memo-book'
             },
             {
-              id: 'new-rx-pad',
-              title: 'Custom Prescription Pads',
+              id: 'new-ultima-box',
+              title: '320 GSM Ultima UV Boxes',
               badge: 'NEW ARRIVAL',
-              image: '/images/products/prescription-pad.webp',
-              slug: 'prescription-pad'
+              image: '/images/products/320-gsm-ultima-uv-lamination.webp',
+              slug: '320-gsm-ultima-uv-lamination'
             },
             {
-              id: 'new-hospital-id',
-              title: 'Staff & Hospital ID Cards',
+              id: 'new-waterproof-sticker',
+              title: 'Waterproof Vinyl Stickers',
               badge: 'NEW ARRIVAL',
-              image: '/images/products/hospital-id-card.webp',
-              slug: 'hospital-id-card'
+              image: '/images/products/waterproof-sticker.webp',
+              slug: 'waterproof-sticker'
+            },
+            {
+              id: 'new-nt-card',
+              title: 'Non-Tearable NT Cards',
+              badge: 'POPULAR',
+              image: '/images/products/nt-card-waterproof.jpg',
+              slug: 'nt-card'
             }
           ].map((item) => (
             <div
@@ -1285,7 +1247,7 @@ export default function HomePage({
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-4 h-4 text-blue-400" />
-                  <span>Email: Printizerdesign@gmail.com</span>
+                  <span>Email: printizerdesign@gmail.com</span>
                 </div>
               </div>
             </div>

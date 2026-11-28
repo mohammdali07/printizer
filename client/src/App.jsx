@@ -21,8 +21,16 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [currentParam, setCurrentParam] = useState(null);
 
-  const [categories, setCategories] = useState(initialCatalog.categories || []);
-  const [products, setProducts] = useState(initialCatalog.products || []);
+  const CATALOG_VERSION = 'madhuram-35-v3';
+  const [categories, setCategories] = useState(() => {
+    const enabledProds = (initialCatalog.products || []).filter((p) => p.enabled !== false);
+    return (initialCatalog.categories || []).filter(
+      (c) => c.enabled !== false && enabledProds.some((p) => p.categoryId === c.id)
+    );
+  });
+  const [products, setProducts] = useState(() =>
+    (initialCatalog.products || []).filter((p) => p.enabled !== false)
+  );
   const [promotions, setPromotions] = useState(() => {
     try {
       const saved = localStorage.getItem('prz_custom_promotions');
@@ -132,8 +140,13 @@ export default function App() {
           catRes.json(),
           prodRes.json()
         ]);
-        if (catJson.success) setCategories(catJson.data);
-        if (prodJson.success) setProducts(prodJson.data);
+        const liveProds = prodJson.success ? prodJson.data : products;
+        if (prodJson.success) setProducts(liveProds);
+        if (catJson.success) {
+          setCategories(
+            catJson.data.filter((c) => liveProds.some((p) => p.categoryId === c.id))
+          );
+        }
         return;
       }
       throw new Error('Static fallback');
@@ -142,15 +155,22 @@ export default function App() {
         const saved = localStorage.getItem('prz_custom_catalog');
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed.categories)) {
-            setCategories(
-              parsed.categories
-                .filter((c) => c.enabled !== false)
-                .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999))
-            );
-          }
-          if (Array.isArray(parsed.products)) {
-            setProducts(parsed.products.filter((p) => p.enabled !== false));
+          if (parsed.version === CATALOG_VERSION) {
+            const enabledProds = Array.isArray(parsed.products)
+              ? parsed.products.filter((p) => p.enabled !== false)
+              : [];
+            if (Array.isArray(parsed.products)) {
+              setProducts(enabledProds);
+            }
+            if (Array.isArray(parsed.categories)) {
+              setCategories(
+                parsed.categories
+                  .filter((c) => c.enabled !== false && enabledProds.some((p) => p.categoryId === c.id))
+                  .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999))
+              );
+            }
+          } else {
+            localStorage.removeItem('prz_custom_catalog');
           }
         }
         const savedPromos = localStorage.getItem('prz_custom_promotions');

@@ -8,7 +8,7 @@ export default function AdminSettings({ settings = {}, onSaveSettings }) {
     logoUrl: settings.logoUrl || '/images/printizer-logo.png',
     phone: settings.phone || '+91 75749 27200',
     whatsappNumber: settings.whatsappNumber || '917574927200',
-    email: settings.email || 'Printizerdesign@gmail.com',
+    email: settings.email || 'printizerdesign@gmail.com',
     address: settings.address || 'PRINTIZER Solutions, Corporate Printing Hub, India',
     heroHeadline: settings.heroHeadline || 'Make Every Print Stand Out.',
     heroSubtitle: settings.heroSubtitle || 'Premium business printing, marketing materials and custom packaging — made to represent your brand.',

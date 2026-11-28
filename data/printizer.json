@@ -117,7 +117,7 @@
         "Special Drip-Off Texture"
       ],
       "featured": true,
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -126,9 +126,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
+        "startingPrice": 473,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": true,
@@ -144,45 +144,45 @@
         "hsnCode": "4911",
         "priceSheets": {
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -204,13 +204,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4911",
       "dimensions": false,
-      "pricingKind": "visiting_card"
+      "pricingKind": "visiting_card",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-letterhead",
@@ -241,7 +244,7 @@
         "Micro-Perforated Edge"
       ],
       "featured": true,
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -250,9 +253,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 608,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -268,8 +271,8 @@
         "hsnCode": "4820",
         "priceSheets": {
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -277,18 +280,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -296,17 +299,17 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -328,13 +331,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 450.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4820",
       "dimensions": false,
-      "pricingKind": "pack"
+      "pricingKind": "pack",
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "prd-bill-book",
@@ -365,7 +371,7 @@
         "Standard Tear-Off Finish"
       ],
       "featured": true,
-      "baseRate": 84.5,
+      "baseRate": 87.75,
       "quantityTiers": [
         10,
         20,
@@ -374,9 +380,9 @@
         200
       ],
       "pricingConfig": {
-        "baseRate": 84.5,
+        "baseRate": 87.75,
         "minQuantity": 10,
-        "startingPrice": 845,
+        "startingPrice": 878,
         "unitName": "Books",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -385,7 +391,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
@@ -438,8 +444,11 @@
               "100 Sets / Book": 1.75
             }
           }
-        }
-      }
+        },
+        "supplierCost": 650.0
+      },
+      "enabled": true,
+      "supplierCost": 650.0
     },
     {
       "id": "prd-cash-memo-book",
@@ -470,7 +479,7 @@
         "Perforated Detachable Leaves"
       ],
       "featured": true,
-      "baseRate": 71.5,
+      "baseRate": 74.25,
       "quantityTiers": [
         10,
         20,
@@ -479,9 +488,9 @@
         200
       ],
       "pricingConfig": {
-        "baseRate": 71.5,
+        "baseRate": 74.25,
         "minQuantity": 10,
-        "startingPrice": 715,
+        "startingPrice": 742,
         "unitName": "Books",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -490,7 +499,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
@@ -544,8 +553,11 @@
               "100 Sets / Book": 1.75
             }
           }
-        }
-      }
+        },
+        "supplierCost": 550.0
+      },
+      "enabled": true,
+      "supplierCost": 550.0
     },
     {
       "id": "prd-receipt-book",
@@ -575,7 +587,7 @@
         "Sequential Red Numbering"
       ],
       "featured": true,
-      "baseRate": 65,
+      "baseRate": 67.5,
       "quantityTiers": [
         10,
         20,
@@ -584,9 +596,9 @@
         200
       ],
       "pricingConfig": {
-        "baseRate": 65,
+        "baseRate": 67.5,
         "minQuantity": 10,
-        "startingPrice": 650,
+        "startingPrice": 675,
         "unitName": "Books",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -595,7 +607,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
@@ -644,9 +656,12 @@
               "100 Receipts / Book": 1.75
             }
           }
-        }
+        },
+        "supplierCost": 500.0
       },
-      "updatedAt": "2026-11-27T06:47:53.424Z"
+      "updatedAt": "2026-11-27T06:47:53.424Z",
+      "enabled": true,
+      "supplierCost": 500.0
     },
     {
       "id": "prd-quotation-book",
@@ -675,7 +690,7 @@
         "Numbered Slips + Micro-Perforation"
       ],
       "featured": true,
-      "baseRate": 97.5,
+      "baseRate": 101.25,
       "quantityTiers": [
         10,
         20,
@@ -684,9 +699,9 @@
         200
       ],
       "pricingConfig": {
-        "baseRate": 97.5,
+        "baseRate": 101.25,
         "minQuantity": 10,
-        "startingPrice": 975,
+        "startingPrice": 1013,
         "unitName": "Books",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -695,7 +710,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
@@ -745,8 +760,11 @@
               "100 Sets / Book": 1.75
             }
           }
-        }
-      }
+        },
+        "supplierCost": 750.0
+      },
+      "enabled": true,
+      "supplierCost": 750.0
     },
     {
       "id": "prd-invoice-book",
@@ -776,7 +794,7 @@
         "Micro-Perforated Sheets"
       ],
       "featured": true,
-      "baseRate": 110.5,
+      "baseRate": 114.75,
       "quantityTiers": [
         10,
         20,
@@ -785,9 +803,9 @@
         200
       ],
       "pricingConfig": {
-        "baseRate": 110.5,
+        "baseRate": 114.75,
         "minQuantity": 10,
-        "startingPrice": 1105,
+        "startingPrice": 1148,
         "unitName": "Books",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -796,7 +814,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
@@ -844,8 +862,11 @@
               "100 Sets / Book": 1.75
             }
           }
-        }
-      }
+        },
+        "supplierCost": 850.0
+      },
+      "enabled": true,
+      "supplierCost": 850.0
     },
     {
       "id": "prd-delivery-challan-book",
@@ -876,7 +897,7 @@
         "Receiver Signature Box"
       ],
       "featured": true,
-      "baseRate": 91,
+      "baseRate": 94.5,
       "quantityTiers": [
         10,
         20,
@@ -885,9 +906,9 @@
         200
       ],
       "pricingConfig": {
-        "baseRate": 91,
+        "baseRate": 94.5,
         "minQuantity": 10,
-        "startingPrice": 910,
+        "startingPrice": 945,
         "unitName": "Books",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -896,7 +917,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
@@ -943,8 +964,11 @@
               "100 Sets / Book": 1.75
             }
           }
-        }
-      }
+        },
+        "supplierCost": 700.0
+      },
+      "enabled": true,
+      "supplierCost": 700.0
     },
     {
       "id": "prd-purchase-order-book",
@@ -973,7 +997,7 @@
         "Terms & Conditions Backing"
       ],
       "featured": false,
-      "baseRate": 104,
+      "baseRate": 108.0,
       "quantityTiers": [
         10,
         20,
@@ -982,9 +1006,9 @@
         200
       ],
       "pricingConfig": {
-        "baseRate": 104,
+        "baseRate": 108.0,
         "minQuantity": 10,
-        "startingPrice": 1040,
+        "startingPrice": 1080,
         "unitName": "Books",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -993,7 +1017,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
@@ -1041,8 +1065,11 @@
               "100 Sets / Book": 1.75
             }
           }
-        }
-      }
+        },
+        "supplierCost": 800.0
+      },
+      "enabled": true,
+      "supplierCost": 800.0
     },
     {
       "id": "prd-payment-voucher",
@@ -1070,7 +1097,7 @@
         "Tear-off Perforation"
       ],
       "featured": false,
-      "baseRate": 52,
+      "baseRate": 54.0,
       "quantityTiers": [
         20,
         40,
@@ -1079,9 +1106,9 @@
         400
       ],
       "pricingConfig": {
-        "baseRate": 52,
+        "baseRate": 54.0,
         "minQuantity": 20,
-        "startingPrice": 1040,
+        "startingPrice": 1080,
         "unitName": "Units",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -1090,7 +1117,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": true,
@@ -1138,8 +1165,11 @@
               "100 Sets / Book": 1.75
             }
           }
-        }
-      }
+        },
+        "supplierCost": 800.0
+      },
+      "enabled": true,
+      "supplierCost": 800.0
     },
     {
       "id": "prd-envelope",
@@ -1168,7 +1198,7 @@
         "Full Face Printing"
       ],
       "featured": false,
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -1177,9 +1207,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 608,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -1195,8 +1225,8 @@
         "hsnCode": "4817",
         "priceSheets": {
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -1204,18 +1234,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -1223,17 +1253,17 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -1255,13 +1285,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 450.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4817",
       "dimensions": false,
-      "pricingKind": "pack"
+      "pricingKind": "pack",
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "prd-office-file",
@@ -1330,7 +1363,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-folder",
@@ -1398,7 +1432,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-id-card",
@@ -1468,7 +1503,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-employee-id-card",
@@ -1539,7 +1575,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-pamphlet",
@@ -1567,7 +1604,7 @@
         "Single / Both Side"
       ],
       "featured": false,
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -1576,9 +1613,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 608,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -1594,8 +1631,8 @@
         "hsnCode": "4911",
         "priceSheets": {
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -1603,18 +1640,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -1622,17 +1659,17 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -1654,13 +1691,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 450.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4911",
       "dimensions": false,
-      "pricingKind": "pack"
+      "pricingKind": "pack",
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "prd-flyer",
@@ -1688,7 +1728,7 @@
         "Creased"
       ],
       "featured": false,
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -1697,9 +1737,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 608,
         "unitName": "Copies",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -1715,8 +1755,8 @@
         "hsnCode": "4911",
         "priceSheets": {
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -1724,18 +1764,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -1743,17 +1783,17 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -1775,13 +1815,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 450.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4911",
       "dimensions": false,
-      "pricingKind": "pack"
+      "pricingKind": "pack",
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "prd-brochure",
@@ -1809,7 +1852,7 @@
         "Thermal Matte Lamination"
       ],
       "featured": false,
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -1818,9 +1861,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 608,
         "unitName": "Copies",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -1836,8 +1879,8 @@
         "hsnCode": "4911",
         "priceSheets": {
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -1845,18 +1888,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -1864,17 +1907,17 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -1896,13 +1939,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 450.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4911",
       "dimensions": false,
-      "pricingKind": "pack"
+      "pricingKind": "pack",
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "prd-poster",
@@ -1975,7 +2021,8 @@
         },
         "pricingKind": "pack",
         "dimensions": false
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-catalogue",
@@ -2002,7 +2049,7 @@
         "Thermal Matte Lamination Cover"
       ],
       "featured": false,
-      "baseRate": 58.5,
+      "baseRate": 60.75,
       "quantityTiers": [
         200,
         400,
@@ -2010,9 +2057,9 @@
         2000
       ],
       "pricingConfig": {
-        "baseRate": 58.5,
+        "baseRate": 60.75,
         "minQuantity": 200,
-        "startingPrice": 11700,
+        "startingPrice": 12150,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -2021,7 +2068,7 @@
         "spotUvExtraPercent": 15,
         "bothSidesMultiplier": 1.4,
         "gstPercent": 18,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -2045,8 +2092,11 @@
           "optionRateModifiers": {}
         },
         "pricingKind": "pack",
-        "dimensions": false
-      }
+        "dimensions": false,
+        "supplierCost": 9000.0
+      },
+      "enabled": true,
+      "supplierCost": 9000.0
     },
     {
       "id": "prd-leaflet",
@@ -2074,7 +2124,7 @@
         "Straight Trim"
       ],
       "featured": false,
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -2083,9 +2133,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
+        "startingPrice": 608,
         "unitName": "Copies",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -2101,8 +2151,8 @@
         "hsnCode": "4911",
         "priceSheets": {
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -2110,18 +2160,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -2129,17 +2179,17 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -2161,13 +2211,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 450.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4911",
       "dimensions": false,
-      "pricingKind": "pack"
+      "pricingKind": "pack",
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "prd-danglers",
@@ -2235,7 +2288,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-standee",
@@ -2303,7 +2357,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-banner",
@@ -2370,7 +2425,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-flex-printing",
@@ -2437,7 +2493,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-sunboard-printing",
@@ -2506,7 +2563,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-promotional-cards",
@@ -2627,7 +2685,8 @@
       "maxPacks": 100,
       "hsnCode": "4911",
       "dimensions": false,
-      "pricingKind": "visiting_card"
+      "pricingKind": "visiting_card",
+      "enabled": false
     },
     {
       "id": "prd-notebook",
@@ -2707,7 +2766,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-pub-school-diary",
@@ -2787,7 +2847,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-office-diary",
@@ -2867,7 +2928,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-exercise-book",
@@ -2946,7 +3008,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-book-printing",
@@ -3027,7 +3090,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-magazine",
@@ -3106,7 +3170,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-journal",
@@ -3186,7 +3251,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-annual-report",
@@ -3265,7 +3331,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-calendar",
@@ -3345,7 +3412,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-e-book-printing",
@@ -3426,7 +3494,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-project-report",
@@ -3506,7 +3575,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-thesis-printing",
@@ -3586,7 +3656,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-wedding-invitation-card",
@@ -3656,7 +3727,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-engagement-card",
@@ -3724,7 +3796,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-birthday-invitation",
@@ -3793,7 +3866,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-anniversary-invitation",
@@ -3860,7 +3934,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-invitation-envelope",
@@ -3980,7 +4055,8 @@
       "maxPacks": 100,
       "hsnCode": "4817",
       "dimensions": false,
-      "pricingKind": "pack"
+      "pricingKind": "pack",
+      "enabled": false
     },
     {
       "id": "prd-save-the-date-card",
@@ -4048,7 +4124,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-thank-you-card",
@@ -4116,7 +4193,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-greeting-card",
@@ -4184,7 +4262,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-religious-invitation-card",
@@ -4251,7 +4330,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-paper-bag",
@@ -4325,7 +4405,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-shopping-bag",
@@ -4399,7 +4480,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-product-box",
@@ -4427,7 +4509,7 @@
         "Window Cutout"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -4436,9 +4518,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Boxes",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -4454,18 +4536,18 @@
         "hsnCode": "4819",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -4473,18 +4555,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -4492,7 +4574,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -4513,13 +4595,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4819",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-cake-box",
@@ -4546,7 +4631,7 @@
         "Oil/Moisture Barrier"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -4555,9 +4640,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Boxes",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -4573,18 +4658,18 @@
         "hsnCode": "4819",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -4592,18 +4677,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -4611,7 +4696,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -4632,13 +4717,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4819",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-sweet-box",
@@ -4664,7 +4752,7 @@
         "Gold Foil Logo Accent"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -4673,9 +4761,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Boxes",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -4691,18 +4779,18 @@
         "hsnCode": "4819",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -4710,18 +4798,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -4729,7 +4817,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -4750,13 +4838,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4819",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-food-packaging",
@@ -4827,7 +4918,8 @@
         },
         "pricingKind": "area",
         "dimensions": true
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-pkg-product-label",
@@ -4854,7 +4946,7 @@
         "Permanent Cold-Tack Adhesive"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -4863,9 +4955,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -4881,18 +4973,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -4900,18 +4992,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -4919,7 +5011,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -4940,13 +5032,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-sticker-label",
@@ -4972,7 +5067,7 @@
         "Precision Half-Cut"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -4981,9 +5076,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -4999,18 +5094,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5018,18 +5113,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5037,7 +5132,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -5058,13 +5153,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-barcode-label",
@@ -5092,7 +5190,7 @@
         "High Speed Barcode / SKU Print"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -5101,9 +5199,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -5119,18 +5217,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5138,18 +5236,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5157,7 +5255,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -5178,13 +5276,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-hang-tag",
@@ -5260,7 +5361,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-product-sleeve",
@@ -5333,7 +5435,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-round-sticker",
@@ -5362,7 +5465,7 @@
         "Easy Peel Backing"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -5371,9 +5474,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -5389,18 +5492,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5408,18 +5511,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5427,7 +5530,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -5448,13 +5551,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-square-sticker",
@@ -5483,7 +5589,7 @@
         "UV Barrier"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -5492,9 +5598,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -5510,18 +5616,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5529,18 +5635,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5548,7 +5654,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -5569,13 +5675,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-transparent-sticker",
@@ -5602,7 +5711,7 @@
         "100% Water Resistant"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -5611,9 +5720,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -5629,18 +5738,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5648,18 +5757,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5667,7 +5776,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -5688,13 +5797,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-waterproof-sticker",
@@ -5720,7 +5832,7 @@
         "Permanent Adhesive"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -5729,9 +5841,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -5747,18 +5859,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5766,18 +5878,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5785,7 +5897,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -5806,13 +5918,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-vinyl-sticker",
@@ -5838,7 +5953,7 @@
         "Scratchproof Lamination"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -5847,9 +5962,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -5865,18 +5980,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5884,18 +5999,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -5903,7 +6018,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -5924,13 +6039,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-logo-sticker",
@@ -5957,7 +6075,7 @@
         "Precision Kiss-Cut Sheet"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -5966,9 +6084,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -5984,18 +6102,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -6003,18 +6121,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -6022,7 +6140,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -6043,13 +6161,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-qr-code-sticker",
@@ -6076,7 +6197,7 @@
         "Direct Payment / URL Code"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -6085,9 +6206,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -6103,18 +6224,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -6122,18 +6243,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -6141,7 +6262,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -6162,13 +6283,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-lbl-product-label",
@@ -6194,7 +6318,7 @@
         "Roll or Sheet Delivery"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -6203,9 +6327,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -6221,18 +6345,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -6240,18 +6364,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -6259,7 +6383,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -6280,13 +6404,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-warning-label",
@@ -6314,7 +6441,7 @@
         "Heavy Industrial Adhesive"
       ],
       "featured": false,
-      "baseRate": 455,
+      "baseRate": 472.5,
       "quantityTiers": [
         1000,
         2000,
@@ -6323,9 +6450,9 @@
         10000
       ],
       "pricingConfig": {
-        "baseRate": 455,
+        "baseRate": 472.5,
         "minQuantity": 1000,
-        "startingPrice": 650,
+        "startingPrice": 473,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -6341,18 +6468,18 @@
         "hsnCode": "4821",
         "priceSheets": {
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -6360,18 +6487,18 @@
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -6379,7 +6506,7 @@
             "transportPerParcel": 300
           }
         },
-        "markupPercent": 30,
+        "markupPercent": 35,
         "orderFields": {
           "enabled": true,
           "showMaterial": false,
@@ -6400,13 +6527,16 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 350.0
       },
       "packSize": 1000,
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-photo-printing",
@@ -6476,7 +6606,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-passport-size-photo",
@@ -6543,7 +6674,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-photo-album",
@@ -6610,7 +6742,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-photo-frame",
@@ -6678,7 +6811,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-canvas-printing",
@@ -6746,7 +6880,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-customized-photo-mug",
@@ -6812,7 +6947,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-personalized-gifts",
@@ -6879,7 +7015,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-pvc-card-printing",
@@ -6950,7 +7087,8 @@
         },
         "pricingKind": "visiting_card",
         "dimensions": false
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-school-id-card",
@@ -7017,7 +7155,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-edu-school-diary",
@@ -7096,7 +7235,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-marksheet",
@@ -7165,7 +7305,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-certificate",
@@ -7233,7 +7374,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-question-paper",
@@ -7302,7 +7444,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-admission-form",
@@ -7369,7 +7512,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-school-prospectus",
@@ -7448,7 +7592,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-exam-pad",
@@ -7518,7 +7663,8 @@
         },
         "pricingKind": "pack",
         "dimensions": false
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-student-notebook",
@@ -7589,7 +7735,8 @@
         },
         "pricingKind": "pack",
         "dimensions": false
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-school-calendar",
@@ -7656,7 +7803,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-restaurant-menu-card",
@@ -7726,7 +7874,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-food-menu",
@@ -7795,7 +7944,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-table-tent-card",
@@ -7864,7 +8014,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-rest-bill-book",
@@ -7961,7 +8112,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-parcel-sticker",
@@ -8080,7 +8232,8 @@
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": false
     },
     {
       "id": "prd-rest-food-label",
@@ -8198,7 +8351,8 @@
       "maxPacks": 100,
       "hsnCode": "4821",
       "dimensions": true,
-      "pricingKind": "area"
+      "pricingKind": "area",
+      "enabled": false
     },
     {
       "id": "prd-takeaway-menu",
@@ -8267,7 +8421,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-hotel-key-card",
@@ -8334,7 +8489,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-room-service-card",
@@ -8402,7 +8558,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-visiting-card-nt-card",
@@ -8431,7 +8588,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -8455,10 +8612,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 378,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -8466,38 +8623,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "retail": {
-            "single": 364,
-            "both": 510,
+            "single": 378,
+            "both": 446,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 60,
             "transportPerParcel": 300
           },
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 401,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": null,
+            "foilSilver": null,
+            "spotUvSingle": null,
+            "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 60,
@@ -8525,9 +8682,12 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
+        },
+        "supplierCost": 280.0
       },
-      "updatedAt": "2026-11-27T06:47:25.520Z"
+      "updatedAt": "2026-11-27T06:47:25.520Z",
+      "enabled": true,
+      "supplierCost": 280.0
     },
     {
       "id": "pm-visiting-card-250-gsm-art-card",
@@ -8556,7 +8716,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -8580,10 +8740,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -8591,38 +8751,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -8650,8 +8810,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-visiting-card-250-gsm-art-card-lamination",
@@ -8680,7 +8843,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -8704,10 +8867,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -8715,38 +8878,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -8774,8 +8937,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-visiting-card-350-gsm-matt-card",
@@ -8804,7 +8970,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -8828,10 +8994,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -8839,38 +9005,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -8898,8 +9064,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-visiting-card-500-gsm-matt-card-uv",
@@ -8928,7 +9097,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -8953,10 +9122,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -8964,38 +9133,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -9023,8 +9192,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-visiting-card-400-gsm-round-cut-drip-off-uv",
@@ -9053,7 +9225,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -9077,10 +9249,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -9088,38 +9260,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -9147,8 +9319,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-visiting-card-drip-off-nt",
@@ -9177,7 +9352,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -9201,10 +9376,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -9212,38 +9387,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -9271,8 +9446,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-visiting-card-gold-foil-s-s-350-gsm-matt",
@@ -9301,7 +9479,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -9326,10 +9504,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -9337,38 +9515,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -9396,8 +9574,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-pre-nt-coating-87x51mm",
@@ -9426,7 +9607,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -9450,10 +9631,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -9461,38 +9642,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -9520,8 +9701,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-pre-250-gsm-art",
@@ -9550,7 +9734,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -9574,10 +9758,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -9585,38 +9769,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -9644,8 +9828,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-pre-250-gsm-art-uv-coating",
@@ -9674,7 +9861,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -9698,10 +9885,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -9709,38 +9896,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -9768,8 +9955,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-pre-350-gsm-matt",
@@ -9798,7 +9988,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -9822,10 +10012,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -9833,38 +10023,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -9892,8 +10082,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-pre-350-gsm-matt-uv",
@@ -9922,7 +10115,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -9947,10 +10140,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -9958,38 +10151,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -10017,8 +10210,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-velvet-uv-500-gsm-500-nos",
@@ -10047,7 +10243,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.91,
+      "baseRate": 0.945,
       "quantityTiers": [
         500,
         1000,
@@ -10072,10 +10268,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.91,
+        "baseRate": 0.945,
         "minQuantity": 500,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -10083,38 +10279,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -10142,8 +10338,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-velvet-s-s-foil-500-gsm-500-nos",
@@ -10172,7 +10371,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.91,
+      "baseRate": 0.945,
       "quantityTiers": [
         500,
         1000,
@@ -10197,10 +10396,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.91,
+        "baseRate": 0.945,
         "minQuantity": 500,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -10208,38 +10407,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -10267,8 +10466,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-matt-500-gsm-s-s-foil-500-nos",
@@ -10297,7 +10499,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.91,
+      "baseRate": 0.945,
       "quantityTiers": [
         500,
         1000,
@@ -10322,10 +10524,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.91,
+        "baseRate": 0.945,
         "minQuantity": 500,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -10333,38 +10535,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -10392,8 +10594,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-premium-visiting-card-matt-800-gsm-uv-500-nos",
@@ -10422,7 +10627,7 @@
       "hsnCode": "4911",
       "dimensions": false,
       "pricingKind": "visiting_card",
-      "baseRate": 0.91,
+      "baseRate": 0.945,
       "quantityTiers": [
         500,
         1000,
@@ -10447,10 +10652,10 @@
         "dimensions": false,
         "hsnCode": "4911",
         "gstPercent": 18,
-        "baseRate": 0.91,
+        "baseRate": 0.945,
         "minQuantity": 500,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Cards",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -10458,38 +10663,38 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
-            "both": 573.3,
+            "single": 425,
+            "both": 595,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
-            "both": 637,
+            "single": 473,
+            "both": 662,
             "minimum": null,
-            "foilGold": 325,
-            "foilSilver": 286,
-            "spotUvSingle": 195,
-            "spotUvBoth": 325,
+            "foilGold": 338,
+            "foilSilver": 297,
+            "spotUvSingle": 202,
+            "spotUvBoth": 338,
             "finishing": {
               "halfBlade": null,
               "creasing": null,
               "perforation": null,
-              "die": 195,
-              "punching": 65,
+              "die": 202,
+              "punching": 68,
               "folding": null
             },
             "courierPerPack": 6000,
@@ -10517,8 +10722,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-letter-pad-80-gsm-sunshine-210x285mm",
@@ -10547,7 +10755,7 @@
       "hsnCode": "4820",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -10571,10 +10779,10 @@
         "dimensions": false,
         "hsnCode": "4820",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -10582,8 +10790,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -10591,18 +10799,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -10610,11 +10818,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -10641,8 +10849,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-letter-pad-80-gsm-sunshine-210x297mm",
@@ -10671,7 +10882,7 @@
       "hsnCode": "4820",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -10695,10 +10906,10 @@
         "dimensions": false,
         "hsnCode": "4820",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -10706,8 +10917,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -10715,18 +10926,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -10734,11 +10945,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -10765,8 +10976,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-letter-pad-100-gsm-alabaster-210x297mm",
@@ -10795,7 +11009,7 @@
       "hsnCode": "4820",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -10819,10 +11033,10 @@
         "dimensions": false,
         "hsnCode": "4820",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -10830,8 +11044,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -10839,18 +11053,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -10858,11 +11072,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -10889,8 +11103,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-letter-pad-100-gsm-sunshine-210x297mm",
@@ -10919,7 +11136,7 @@
       "hsnCode": "4820",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -10943,10 +11160,10 @@
         "dimensions": false,
         "hsnCode": "4820",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -10954,8 +11171,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -10963,18 +11180,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -10982,11 +11199,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -11013,8 +11230,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-letter-pad-80-gsm-bond-210x297mm",
@@ -11043,7 +11263,7 @@
       "hsnCode": "4820",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -11067,10 +11287,10 @@
         "dimensions": false,
         "hsnCode": "4820",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -11078,8 +11298,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11087,18 +11307,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11106,11 +11326,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -11137,8 +11357,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-letter-pad-100-gsm-bond-210x297mm",
@@ -11167,7 +11390,7 @@
       "hsnCode": "4820",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -11191,10 +11414,10 @@
         "dimensions": false,
         "hsnCode": "4820",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -11202,8 +11425,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11211,18 +11434,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11230,11 +11453,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -11261,8 +11484,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-7x4-size-100-gsm-alabaster",
@@ -11291,7 +11517,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -11315,10 +11541,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -11326,8 +11552,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11335,18 +11561,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11354,11 +11580,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -11385,8 +11611,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-7x4-size-100-gsm-ssp",
@@ -11415,7 +11644,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -11439,10 +11668,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -11450,8 +11679,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11459,18 +11688,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11478,11 +11707,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -11509,8 +11738,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-9-5x4-25-size-80-gsm-ssp",
@@ -11539,7 +11771,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -11563,10 +11795,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -11574,8 +11806,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11583,18 +11815,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11602,11 +11834,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -11633,8 +11865,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-9-5x4-25-size-100-gsm-alabaster",
@@ -11663,7 +11898,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -11687,10 +11922,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -11698,8 +11933,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11707,18 +11942,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11726,11 +11961,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -11757,8 +11992,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-9-5x4-25-size-100-gsm-ssp",
@@ -11787,7 +12025,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -11811,10 +12049,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -11822,8 +12060,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11831,18 +12069,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11850,11 +12088,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -11881,8 +12119,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-9-5x4-25-size-100-gsm-excel-bond",
@@ -11911,7 +12152,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -11935,10 +12176,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -11946,8 +12187,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11955,18 +12196,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -11974,11 +12215,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -12005,8 +12246,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-11x5-size-100-gsm-ssp",
@@ -12035,7 +12279,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -12059,10 +12303,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -12070,8 +12314,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -12079,18 +12323,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -12098,11 +12342,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -12129,8 +12373,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-11x5-size-100-gsm-alabaster",
@@ -12159,7 +12406,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -12183,10 +12430,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -12194,8 +12441,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -12203,18 +12450,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -12222,11 +12469,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -12253,8 +12500,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-cover-window-cover-9-5x4-25-size-100-gsm-alabaster",
@@ -12283,7 +12533,7 @@
       "hsnCode": "4817",
       "dimensions": false,
       "pricingKind": "pack",
-      "baseRate": 0.585,
+      "baseRate": 0.607,
       "quantityTiers": [
         1000,
         2000,
@@ -12307,10 +12557,10 @@
         "dimensions": false,
         "hsnCode": "4817",
         "gstPercent": 18,
-        "baseRate": 0.585,
+        "baseRate": 0.607,
         "minQuantity": 1000,
-        "startingPrice": 585,
-        "markupPercent": 30,
+        "startingPrice": 608,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": true,
         "supportsFoil": false,
@@ -12318,8 +12568,8 @@
         "bothSidesMultiplier": 1.4,
         "priceSheets": {
           "gst": {
-            "single": 526.5,
-            "both": 737.1,
+            "single": 547,
+            "both": 765,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -12327,18 +12577,18 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 585,
-            "both": 819,
+            "single": 608,
+            "both": 850,
             "minimum": null,
             "foilGold": null,
             "foilSilver": null,
@@ -12346,11 +12596,11 @@
             "spotUvBoth": null,
             "finishing": {
               "halfBlade": null,
-              "creasing": 39,
-              "perforation": 39,
+              "creasing": 40,
+              "perforation": 40,
               "die": null,
               "punching": null,
-              "folding": 6.5
+              "folding": 7
             },
             "courierPerPack": 6000,
             "transportPerParcel": 30000
@@ -12377,8 +12627,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 450.0
+      },
+      "enabled": true,
+      "supplierCost": 450.0
     },
     {
       "id": "pm-art-mix-250-gsm-250-gsm-art-210x285mm",
@@ -12502,7 +12755,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-art-mix-250-gsm-250-gsm-art-lamination-210x285mm",
@@ -12626,7 +12880,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-art-mix-250-gsm-250-gsm-art-per-sq-in",
@@ -12749,7 +13004,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-art-mix-250-gsm-250-gsm-art-lamination-per-sq-in",
@@ -12872,7 +13128,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-art-mix-250-gsm-350-gsm-matt-lamination-per-sq-in",
@@ -12995,7 +13252,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-sticker-hm-sticker",
@@ -13024,7 +13282,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -13048,10 +13306,10 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -13059,18 +13317,18 @@
         "bothSidesMultiplier": 1,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13078,18 +13336,18 @@
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13117,8 +13375,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-sticker-hm-sticker-uv-lamination",
@@ -13147,7 +13408,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -13171,10 +13432,10 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -13182,18 +13443,18 @@
         "bothSidesMultiplier": 1,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13201,18 +13462,18 @@
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13240,8 +13501,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-sticker-silver-metallic-drip-off-uv",
@@ -13270,7 +13534,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -13294,10 +13558,10 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -13305,18 +13569,18 @@
         "bothSidesMultiplier": 1,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13324,18 +13588,18 @@
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13363,8 +13627,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-sticker-every-sticker",
@@ -13393,7 +13660,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -13417,10 +13684,10 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -13428,18 +13695,18 @@
         "bothSidesMultiplier": 1,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13447,18 +13714,18 @@
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13486,8 +13753,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-sticker-every-sticker-lamination",
@@ -13516,7 +13786,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -13540,10 +13810,10 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -13551,18 +13821,18 @@
         "bothSidesMultiplier": 1,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13570,18 +13840,18 @@
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13609,8 +13879,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-sticker-pvc-sticker-lamination",
@@ -13639,7 +13912,7 @@
       "hsnCode": "4821",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -13663,10 +13936,10 @@
         "dimensions": true,
         "hsnCode": "4821",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Labels",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -13674,18 +13947,18 @@
         "bothSidesMultiplier": 1,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13693,18 +13966,18 @@
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -13732,8 +14005,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-art-paper-100-gsm-art-paper-210x285mm",
@@ -13857,7 +14133,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-art-paper-130-gsm-art-paper-210x285mm",
@@ -13981,7 +14258,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-art-paper-170-gsm-art-paper-210x285mm",
@@ -14105,7 +14383,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "pm-special-job-special-job-printing",
@@ -14160,7 +14439,7 @@
         "baseRate": 0,
         "minQuantity": 1,
         "startingPrice": 0,
-        "markupPercent": 30,
+        "markupPercent": 35,
         "unitName": "Units",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -14229,7 +14508,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": true
     },
     {
       "id": "pm-box-320-gsm-ultima-uv-lamination",
@@ -14258,7 +14538,7 @@
       "hsnCode": "4819",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -14282,10 +14562,10 @@
         "dimensions": true,
         "hsnCode": "4819",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Boxes",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -14293,18 +14573,18 @@
         "bothSidesMultiplier": 1,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -14312,18 +14592,18 @@
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -14351,8 +14631,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "pm-box-320-gsm-ultima-drip-off-uv",
@@ -14381,7 +14664,7 @@
       "hsnCode": "4819",
       "dimensions": true,
       "pricingKind": "area",
-      "baseRate": 0.455,
+      "baseRate": 0.472,
       "quantityTiers": [
         1000,
         2000,
@@ -14405,10 +14688,10 @@
         "dimensions": true,
         "hsnCode": "4819",
         "gstPercent": 18,
-        "baseRate": 0.455,
+        "baseRate": 0.472,
         "minQuantity": 1000,
-        "startingPrice": 455,
-        "markupPercent": 30,
+        "startingPrice": 473,
+        "markupPercent": 35,
         "unitName": "Boxes",
         "supportsBothSides": false,
         "supportsFoil": false,
@@ -14416,18 +14699,18 @@
         "bothSidesMultiplier": 1,
         "priceSheets": {
           "gst": {
-            "single": 409.5,
+            "single": 425,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -14435,18 +14718,18 @@
             "transportPerParcel": 30000
           },
           "retail": {
-            "single": 455,
+            "single": 473,
             "both": null,
-            "minimum": 650,
+            "minimum": 675,
             "foilGold": null,
             "foilSilver": null,
             "spotUvSingle": null,
             "spotUvBoth": null,
             "finishing": {
-              "halfBlade": 130,
+              "halfBlade": 135,
               "creasing": null,
               "perforation": null,
-              "die": 195,
+              "die": 202,
               "punching": null,
               "folding": null
             },
@@ -14474,8 +14757,11 @@
             "Full Color (CMYK)"
           ],
           "optionRateModifiers": {}
-        }
-      }
+        },
+        "supplierCost": 350.0
+      },
+      "enabled": true,
+      "supplierCost": 350.0
     },
     {
       "id": "prd-prescription-pad",
@@ -14547,7 +14833,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-opd-paper",
@@ -14618,7 +14905,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-ipd-file",
@@ -14690,7 +14978,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-patient-case-paper",
@@ -14761,7 +15050,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-lab-report",
@@ -14831,7 +15121,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-hospital-bill-book",
@@ -14934,7 +15225,8 @@
             }
           }
         }
-      }
+      },
+      "enabled": false
     },
     {
       "id": "prd-hospital-id-card",
@@ -15003,7 +15295,8 @@
           ],
           "optionRateModifiers": {}
         }
-      }
+      },
+      "enabled": false
     }
   ],
   "enquiries": [

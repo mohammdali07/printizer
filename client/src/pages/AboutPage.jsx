@@ -140,7 +140,7 @@ export default function AboutPage({ onNavigate, onRequestQuote }) {
             <ul className="space-y-3.5 text-xs sm:text-[13px] text-slate-700">
               <li className="flex items-start space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 mt-0.5" />
-                <span><strong>Rigorous Color Fidelity:</strong> Design strictly in CMYK with fonts converted to curves (CorelDRAW X7 or older / press PDF); digital proofs verified prior to print.</span>
+                <span><strong>Rigorous Color Fidelity:</strong> Design strictly in CMYK with fonts converted to curves (CorelDRAW X7 or older / press PDF) for crisp output.</span>
               </li>
               <li className="flex items-start space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 mt-0.5" />
@@ -152,7 +152,7 @@ export default function AboutPage({ onNavigate, onRequestQuote }) {
               </li>
               <li className="flex items-start space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 text-brand-crimson shrink-0 mt-0.5" />
-                <span><strong>Gujarat Dispatch &amp; PAN India Delivery:</strong> Courier (₹60/pack), Transport (₹300/parcel), or Office Pickup with Retail &amp; GST (State Code 24) tax invoicing.</span>
+                <span><strong>Gujarat Dispatch &amp; PAN India Delivery:</strong> Reliable nationwide dispatch with Retail &amp; GST (State Code 24) tax invoicing.</span>
               </li>
             </ul>
           </div>

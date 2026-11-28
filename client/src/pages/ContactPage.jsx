@@ -93,10 +93,10 @@ Thank you.`;
                       Official Business Email
                     </h4>
                     <a
-                      href="mailto:Printizerdesign@gmail.com"
+                      href="mailto:printizerdesign@gmail.com"
                       className="text-sm font-bold text-slate-900 hover:text-brand-crimson transition block mt-0.5"
                     >
-                      Printizerdesign@gmail.com
+                      printizerdesign@gmail.com
                     </a>
                     <span className="text-xs text-slate-400">Artwork & formal quotation correspondence</span>
                   </div>
@@ -130,13 +130,12 @@ Thank you.`;
                     <p className="text-sm font-semibold text-slate-900 mt-0.5">
                       Gujarat (State Code: 24) &bull; PAN India Dispatch
                     </p>
-                    <span className="text-xs text-slate-400">Courier (₹60/pack), Transport (₹300/parcel) &amp; Office Pickup</span>
                   </div>
                 </div>
               </div>
 
-              {/* Direct WhatsApp Action Button */}
-              <div className="pt-2">
+              {/* Direct WhatsApp Action Button & Social Channels */}
+              <div className="pt-2 space-y-2.5">
                 <a
                   href="https://wa.me/917574927200?text=Hello%20PRINTIZER%2C%20I%20would%20like%20to%20connect%20with%20your%20printing%20team."
                   target="_blank"
@@ -146,6 +145,24 @@ Thank you.`;
                   <MessageCircle className="w-4 h-4" />
                   <span>Start WhatsApp Chat Now</span>
                 </a>
+                <div className="grid grid-cols-2 gap-2.5">
+                  <a
+                    href="https://www.instagram.com/printizer_"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center transition"
+                  >
+                    Instagram: @printizer_
+                  </a>
+                  <a
+                    href="https://www.facebook.com/printizer_"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center transition"
+                  >
+                    Facebook: @printizer_
+                  </a>
+                </div>
               </div>
             </div>
           </div>

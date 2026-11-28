@@ -573,8 +573,8 @@ Thank you!`;
                   <span className="font-bold text-slate-800">300 DPI CMYK</span>
                 </div>
                 <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Proofing</span>
-                  <span className="font-bold text-slate-800">Digital PDF Sign-off</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">File Format</span>
+                  <span className="font-bold text-slate-800">CDR X7 / Press PDF</span>
                 </div>
                 <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">Delivery</span>

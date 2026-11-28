@@ -3,33 +3,33 @@ import { ArrowLeft, Search, Sparkles } from 'lucide-react';
 import ProductImage from '../components/ProductImage';
 
 const NEW_ARRIVAL_PRODUCTS = [
-  { id: 'na-1', title: 'Hospital IPD Files', badge: 'NEW ARRIVAL', category: 'Hospital & Medical', image: '/images/products/ipd-file.webp', slug: 'ipd-file' },
-  { id: 'na-2', title: '500 GSM Velvet UV Cards', badge: 'TRENDING', category: 'Business Stationery', image: '/images/products/500-gsm-matt-card-uv.webp', slug: 'visiting-card' },
-  { id: 'na-3', title: 'Carbonless Cash Memo Books', badge: 'NEW ARRIVAL', category: 'Business Stationery', image: '/images/products/cash-memo-book.webp', slug: 'cash-memo-book' },
-  { id: 'na-4', title: 'Custom Prescription Pads', badge: 'NEW ARRIVAL', category: 'Hospital & Medical', image: '/images/products/prescription-pad.webp', slug: 'prescription-pad' },
-  { id: 'na-5', title: 'Staff & Hospital ID Cards', badge: 'NEW ARRIVAL', category: 'Hospital & Medical', image: '/images/products/hospital-id-card.webp', slug: 'hospital-id-card' },
-  { id: 'na-6', title: 'Gold Foil Visiting Cards', badge: 'TRENDING', category: 'Business Stationery', image: '/images/products/gold-foil.webp', slug: 'visiting-card' },
-  { id: 'na-7', title: 'Waterproof NT Cards', badge: 'POPULAR', category: 'Business Stationery', image: '/images/products/nt-card-waterproof.jpg', slug: 'visiting-card' },
+  { id: 'na-1', title: '500 GSM Velvet UV Cards', badge: 'TRENDING', category: 'Business Stationery', image: '/images/products/500-gsm-matt-card-uv.webp', slug: '500-gsm-matt-card-uv' },
+  { id: 'na-2', title: 'Carbonless Cash Memo Books', badge: 'NEW ARRIVAL', category: 'Business Stationery', image: '/images/products/cash-memo-book.webp', slug: 'cash-memo-book' },
+  { id: 'na-3', title: '320 GSM Ultima UV Boxes', badge: 'NEW ARRIVAL', category: 'Packaging', image: '/images/products/320-gsm-ultima-uv-lamination.webp', slug: '320-gsm-ultima-uv-lamination' },
+  { id: 'na-4', title: 'Waterproof Vinyl Stickers', badge: 'NEW ARRIVAL', category: 'Labels & Stickers', image: '/images/products/waterproof-sticker.webp', slug: 'waterproof-sticker' },
+  { id: 'na-5', title: 'Non-Tearable NT Cards', badge: 'POPULAR', category: 'Business Stationery', image: '/images/products/nt-card-waterproof.jpg', slug: 'nt-card' },
+  { id: 'na-6', title: '350 GSM Matte Visiting Cards', badge: 'TRENDING', category: 'Business Stationery', image: '/images/products/350-gsm-matt-card.webp', slug: '350-gsm-matt-card' },
+  { id: 'na-7', title: 'Gold Foil Visiting Cards', badge: 'POPULAR', category: 'Business Stationery', image: '/images/products/gold-foil.webp', slug: 'visiting-card' },
   { id: 'na-8', title: '320 GSM Ultima Product Boxes', badge: 'NEW ARRIVAL', category: 'Packaging', image: '/images/products/product-box.webp', slug: 'product-box' },
-  { id: 'na-9', title: 'Paper Shopping Bags', badge: 'NEW ARRIVAL', category: 'Packaging', image: '/images/products/shopping-bag.webp', slug: 'shopping-bag' },
-  { id: 'na-10', title: 'Waterproof Vinyl Stickers', badge: 'NEW ARRIVAL', category: 'Packaging', image: '/images/products/waterproof-sticker.webp', slug: 'round-sticker' },
+  { id: 'na-9', title: '320 GSM Drip-Off UV Boxes', badge: 'NEW ARRIVAL', category: 'Packaging', image: '/images/products/320-gsm-ultima-drip-off-uv.webp', slug: '320-gsm-ultima-drip-off-uv' },
+  { id: 'na-10', title: 'Round Die-Cut Stickers', badge: 'NEW ARRIVAL', category: 'Labels & Stickers', image: '/images/products/round-sticker.webp', slug: 'round-sticker' },
   { id: 'na-11', title: 'Corporate Letterheads', badge: 'POPULAR', category: 'Business Stationery', image: '/images/products/letterhead.webp', slug: 'letterhead' },
   { id: 'na-12', title: 'Tri-Fold Art Paper Brochures', badge: 'TRENDING', category: 'Marketing', image: '/images/products/brochure.webp', slug: 'brochure' },
   { id: 'na-13', title: 'Custom Business Flyers', badge: 'NEW ARRIVAL', category: 'Marketing', image: '/images/products/flyer.webp', slug: 'flyer' },
   { id: 'na-14', title: 'Multi-Page Product Catalogues', badge: 'NEW ARRIVAL', category: 'Marketing', image: '/images/products/catalogue.webp', slug: 'catalogue' },
-  { id: 'na-15', title: 'Royal Wedding Invitations', badge: 'TRENDING', category: 'Marketing', image: '/images/products/wedding-invitation-card.webp', slug: 'wedding-invitation-card' },
-  { id: 'na-16', title: 'PVC Plastic & RFID Cards', badge: 'NEW ARRIVAL', category: 'Business Stationery', image: '/images/products/pvc-card-printing.webp', slug: 'pvc-card-printing' },
-  { id: 'na-17', title: 'Patient Case Papers', badge: 'NEW ARRIVAL', category: 'Hospital & Medical', image: '/images/products/patient-case-paper.webp', slug: 'patient-case-paper' },
-  { id: 'na-18', title: 'Lab Report Folders', badge: 'NEW ARRIVAL', category: 'Hospital & Medical', image: '/images/products/lab-report.webp', slug: 'lab-report' },
-  { id: 'na-19', title: 'OPD Papers & Slip Pads', badge: 'NEW ARRIVAL', category: 'Hospital & Medical', image: '/images/products/opd-paper.webp', slug: 'opd-paper' },
-  { id: 'na-20', title: 'Hospital Bill Books', badge: 'NEW ARRIVAL', category: 'Hospital & Medical', image: '/images/products/hospital-bill-book.webp', slug: 'hospital-bill-book' }
+  { id: 'na-15', title: 'Branded Envelopes', badge: 'NEW ARRIVAL', category: 'Business Stationery', image: '/images/products/envelope.webp', slug: 'envelope' },
+  { id: 'na-16', title: 'Bill Books (NCR Carbonless)', badge: 'POPULAR', category: 'Business Stationery', image: '/images/products/bill-book.webp', slug: 'bill-book' },
+  { id: 'na-17', title: 'Receipt Books', badge: 'NEW ARRIVAL', category: 'Business Stationery', image: '/images/products/receipt-book.webp', slug: 'receipt-book' },
+  { id: 'na-18', title: 'Invoice Books', badge: 'NEW ARRIVAL', category: 'Business Stationery', image: '/images/products/invoice-book.webp', slug: 'invoice-book' },
+  { id: 'na-19', title: 'Quotation Books', badge: 'NEW ARRIVAL', category: 'Business Stationery', image: '/images/products/quotation-book.webp', slug: 'quotation-book' },
+  { id: 'na-20', title: 'Sweet & Cake Packaging Boxes', badge: 'NEW ARRIVAL', category: 'Packaging', image: '/images/products/sweet-box.webp', slug: 'sweet-box' }
 ];
 
 export default function NewArrivalsPage({ onNavigate, onRequestQuote }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('All');
 
-  const filterTabs = ['All', 'Business Stationery', 'Hospital & Medical', 'Packaging', 'Marketing'];
+  const filterTabs = ['All', 'Business Stationery', 'Packaging', 'Labels & Stickers', 'Marketing'];
 
   const filteredItems = NEW_ARRIVAL_PRODUCTS.filter((item) => {
     const matchesTab = selectedFilter === 'All' || item.category === selectedFilter;

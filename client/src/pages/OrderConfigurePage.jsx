@@ -626,14 +626,11 @@ Please share the final quotation and artwork instructions. Thank you!`;
                   onChange={(e) => handleCategoryChange(e.target.value)}
                   className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none rounded-lg py-2.5 px-3.5 text-sm font-medium text-slate-800 transition cursor-pointer"
                 >
-                  {categories.map((cat) => {
-                    const count = products.filter(p => p.categoryId === cat.id).length;
-                    return (
-                      <option key={cat.id} value={cat.id}>
-                        {cat.name} ({count} Products)
-                      </option>
-                    );
-                  })}
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -1404,7 +1401,7 @@ Please share the final quotation and artwork instructions. Thank you!`;
                   {/* Quick Spec Sheet Footer Link */}
                   <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
                     <span className="text-slate-500 font-medium">
-                      Free soft proof before bulk print
+                      300 DPI CMYK Print-Ready Quality
                     </span>
                     <button
                       type="button"

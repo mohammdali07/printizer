@@ -31,18 +31,20 @@ import AdminAnalytics from '../components/admin/AdminAnalytics';
 import AdminSettings from '../components/admin/AdminSettings';
 
 const LOCAL_CATALOG_KEY = 'prz_custom_catalog';
+const CATALOG_VERSION = 'madhuram-35-v3';
 
 const readLocalCatalog = () => {
   try {
     const raw = localStorage.getItem(LOCAL_CATALOG_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed.categories) && Array.isArray(parsed.products)) {
+      if (parsed.version === CATALOG_VERSION && Array.isArray(parsed.categories) && Array.isArray(parsed.products)) {
         return parsed;
       }
     }
   } catch {}
   return {
+    version: CATALOG_VERSION,
     categories: initialCatalog.categories || [],
     products: initialCatalog.products || []
   };
@@ -50,7 +52,7 @@ const readLocalCatalog = () => {
 
 const writeLocalCatalog = (categories, products) => {
   try {
-    localStorage.setItem(LOCAL_CATALOG_KEY, JSON.stringify({ categories, products }));
+    localStorage.setItem(LOCAL_CATALOG_KEY, JSON.stringify({ version: CATALOG_VERSION, categories, products }));
   } catch {}
 };
 

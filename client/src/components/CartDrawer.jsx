@@ -208,7 +208,7 @@ export default function CartDrawer({
                 </span>
                 <h3 className="text-lg font-extrabold text-slate-900">Order Placed Successfully!</h3>
                 <p className="text-xs text-slate-600">
-                  Thank you, {customerName}. Our print specialist will reach out with your soft proof shortly.
+                  Thank you, {customerName}. Our print specialist will contact you shortly to confirm your order.
                 </p>
               </div>
               <a

@@ -3,10 +3,11 @@ import {
   ArrowRight, MessageCircle, ShieldCheck, CheckCircle2, Sparkles, 
   Layers, Package, Award, Clock, FileText, ChevronRight, ChevronLeft, ChevronDown, Phone, 
   ArrowUpRight, Check, Printer, Truck, Palette, Mail, Send, CheckCircle, 
-  ExternalLink, Search, Star, ShoppingCart
+  ExternalLink, Search, Star, ShoppingCart, Heart
 } from 'lucide-react';
 import ProductImage from '../components/ProductImage';
 import InfiniteMobileSlider from '../components/InfiniteMobileSlider';
+import ScrollReveal from '../components/ScrollReveal';
 
 export default function HomePage({ 
   categories = [], 
@@ -24,6 +25,7 @@ export default function HomePage({
   const [heroDragX, setHeroDragX] = useState(0);
   const heroTouchStartXRef = useRef(null);
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
+  const [likedProducts, setLikedProducts] = useState({});
 
   const homeFaqs = [
     {
@@ -100,87 +102,67 @@ export default function HomePage({
     return count > 0 ? `${count} Products` : fallback;
   };
 
-  // 9 Authentic Commercial Showcase Categories from user catalogue
+  // 10 Authentic Commercial Showcase Categories from user catalogue
   const showcaseCategories = [
     {
       id: 'business-stationery',
-      title: 'BUSINESS STATIONERY',
-      subtitle: 'Visiting Cards, Premium Cards, Letter Pads, Covers, Bill Books & ID Systems',
+      title: 'Business Stationery',
       image: '/images/categories/business-stationery.webp',
-      targetCategory: 'business-stationery',
-      badge: getCategoryBadge('business-stationery', '47 Products')
+      targetCategory: 'business-stationery'
     },
     {
       id: 'marketing-advertising',
-      title: 'MARKETING & ADVERTISING',
-      subtitle: 'Art Paper (100/130/170 gsm), 250 gsm Art Mix, Flyers, Brochures & Special Jobs',
+      title: 'Marketing & Advertising',
       image: '/images/categories/marketing-advertising.webp',
-      targetCategory: 'marketing-advertising',
-      badge: getCategoryBadge('marketing-advertising', '21 Products')
+      targetCategory: 'marketing-advertising'
     },
     {
       id: 'books-publications',
-      title: 'BOOKS & PUBLICATIONS',
-      subtitle: 'Notebooks, Diaries, Book Printing, Magazines & Thesis Binding',
+      title: 'Books & Publications',
       image: '/images/categories/books-publications.webp',
-      targetCategory: 'books-publications',
-      badge: getCategoryBadge('books-publications', '12 Products')
+      targetCategory: 'books-publications'
     },
     {
       id: 'wedding-invitation',
-      title: 'WEDDING & INVITATION',
-      subtitle: 'Royal Wedding Cards, Metallic Foil Invitations & Envelopes',
+      title: 'Wedding & Invitation',
       image: '/images/categories/wedding-invitation.webp',
-      targetCategory: 'wedding-invitation',
-      badge: getCategoryBadge('wedding-invitation', '9 Products')
+      targetCategory: 'wedding-invitation'
     },
     {
       id: 'packaging-printing',
-      title: 'PACKAGING PRINTING',
-      subtitle: '320 gsm Ultima Boxes, Paper Bags, Shopping Bags & Folding Cartons',
+      title: 'Packaging Printing',
       image: '/images/categories/packaging-printing.webp',
-      targetCategory: 'packaging-printing',
-      badge: getCategoryBadge('packaging-printing', '13 Products')
+      targetCategory: 'packaging-printing'
     },
     {
       id: 'labels-stickers',
-      title: 'LABELS & STICKERS',
-      subtitle: 'HM Sticker, Silver Metallic, Every Sticker, PVC & Waterproof Vinyl Stickers',
+      title: 'Labels & Stickers',
       image: '/images/categories/labels-stickers.webp',
-      targetCategory: 'labels-stickers',
-      badge: getCategoryBadge('labels-stickers', '15 Products')
+      targetCategory: 'labels-stickers'
     },
     {
       id: 'photo-digital-printing',
-      title: 'PHOTO & DIGITAL PRINTING',
-      subtitle: 'Ultra HD Photo Prints, Canvases, PVC Cards & Photo Frames',
+      title: 'Photo & Digital Printing',
       image: '/images/categories/photo-digital-printing.webp',
-      targetCategory: 'photo-digital-printing',
-      badge: getCategoryBadge('photo-digital-printing', '8 Products')
+      targetCategory: 'photo-digital-printing'
     },
     {
       id: 'school-educational-printing',
-      title: 'SCHOOL & EDUCATIONAL',
-      subtitle: 'School ID Cards, Marksheets, Certificates, Diaries & Prospectus',
+      title: 'School & Educational Printing',
       image: '/images/categories/school-educational-printing.webp',
-      targetCategory: 'school-educational-printing',
-      badge: getCategoryBadge('school-educational-printing', '10 Products')
+      targetCategory: 'school-educational-printing'
     },
     {
       id: 'restaurant-hotel-printing',
-      title: 'RESTAURANT & HOTEL',
-      subtitle: 'Menu Cards, Food Packaging, Table Tents & Key Card Sleeves',
+      title: 'Restaurant & Hotel Printing',
       image: '/images/categories/restaurant-hotel-printing.webp',
-      targetCategory: 'restaurant-hotel-printing',
-      badge: getCategoryBadge('restaurant-hotel-printing', '9 Products')
+      targetCategory: 'restaurant-hotel-printing'
     },
     {
       id: 'hospital-medical-printing',
-      title: 'HOSPITAL & MEDICAL',
-      subtitle: 'Prescription Pads, OPD Papers, IPD Files, Case Papers, Lab Reports & ID Cards',
+      title: 'Hospital & Medical Printing',
       image: '/images/categories/hospital-medical-printing.webp',
-      targetCategory: 'hospital-medical-printing',
-      badge: getCategoryBadge('hospital-medical-printing', '7 Products')
+      targetCategory: 'hospital-medical-printing'
     }
   ];
 
@@ -188,6 +170,7 @@ export default function HomePage({
   const [activeCatIndex, setActiveCatIndex] = useState(0);
   const [isCategoryPaused, setIsCategoryPaused] = useState(false);
   const categoryCarouselRef = useRef(null);
+  const mobileCategoryStripRef = useRef(null);
   const categoryScrollTimerRef = useRef(null);
 
   const [isProductsPaused, setIsProductsPaused] = useState(false);
@@ -698,34 +681,69 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 2. EXPLORE OUR PRINTING SOLUTIONS (Category Showcase Grid + Mobile Auto-Swipe Carousel) */}
-      <section id="categories-showcase" className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 scroll-mt-20">
-        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-12 space-y-1.5 sm:space-y-2">
-          <span className="text-[10px] sm:text-xs font-bold text-brand-crimson uppercase tracking-widest block">
-            Commercial Printing Catalogue
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Explore Our Printing Solutions
+      {/* 2. EXPLORE ALL CATEGORIES (Horizontal Strip on Desktop + 3-Up Strip with Dots on Mobile) */}
+      <ScrollReveal>
+      <section id="categories-showcase" className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 scroll-mt-20 text-left">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl lg:text-[26px] font-extrabold text-slate-900 tracking-tight">
+            Explore all categories
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-            Nine specialized printing divisions engineered with high-grade substrates, exact color fidelity, and tailored finishing options.
-          </p>
+          <button
+            type="button"
+            onClick={() => onNavigate('categories')}
+            className="text-xs font-bold text-slate-600 hover:text-brand-crimson flex items-center gap-1 cursor-pointer"
+          >
+            <span>View all</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
 
-        {/* Seamless Infinite Mobile Slider */}
-        <div className="block sm:hidden">
-          <InfiniteMobileSlider
-            items={showcaseCategories}
-            autoPlayMs={3600}
-            prevLabel="Previous Category"
-            nextLabel="Next Category"
-            renderItem={(card) => (
+        {/* Mobile: 3-Up Horizontal Swipe Strip + Small Scroll Buttons + Pagination Dots */}
+        <div className="block sm:hidden relative">
+          <button
+            type="button"
+            onClick={() => {
+              const el = mobileCategoryStripRef.current;
+              if (el) el.scrollBy({ left: -el.clientWidth * 0.85, behavior: 'smooth' });
+            }}
+            aria-label="Scroll Categories Left"
+            className="absolute -left-1.5 top-[38%] -translate-y-1/2 z-20 w-7 h-7 rounded-full border border-slate-200 bg-white/95 backdrop-blur-xs text-slate-800 shadow-md flex items-center justify-center cursor-pointer active:scale-90"
+          >
+            <ChevronLeft className="w-3.5 h-3.5" />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              const el = mobileCategoryStripRef.current;
+              if (el) el.scrollBy({ left: el.clientWidth * 0.85, behavior: 'smooth' });
+            }}
+            aria-label="Scroll Categories Right"
+            className="absolute -right-1.5 top-[38%] -translate-y-1/2 z-20 w-7 h-7 rounded-full border border-slate-200 bg-white/95 backdrop-blur-xs text-slate-800 shadow-md flex items-center justify-center cursor-pointer active:scale-90"
+          >
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+
+          <div
+            ref={mobileCategoryStripRef}
+            onScroll={() => {
+              const el = mobileCategoryStripRef.current;
+              if (!el) return;
+              const maxScroll = Math.max(1, el.scrollWidth - el.clientWidth);
+              const pageCount = Math.ceil(showcaseCategories.length / 2);
+              const nextDot = Math.min(pageCount - 1, Math.round((el.scrollLeft / maxScroll) * (pageCount - 1)));
+              setActiveCatIndex(nextDot);
+            }}
+            className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 no-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {showcaseCategories.map((card) => (
               <div
+                key={card.id}
                 onClick={() => onNavigate('category', card.targetCategory)}
-                className="bg-white rounded-2xl p-3.5 shadow-md border border-slate-200/80 cursor-pointer flex flex-col justify-between h-full"
-                title={`View ${card.title} Catalogue`}
+                className="w-[calc((100%-12px)/2)] shrink-0 snap-start bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs active:scale-[0.98] transition cursor-pointer flex flex-col"
               >
-                <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-3">
+                <div className="aspect-square w-full bg-[#f5f3ee] overflow-hidden">
                   <ProductImage
                     src={card.image}
                     alt={card.title}
@@ -733,204 +751,241 @@ export default function HomePage({
                     imgClassName="w-full h-full object-cover"
                   />
                 </div>
-
-                <div className="space-y-1 px-0.5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-sm font-extrabold text-slate-900 tracking-tight line-clamp-1">
-                      {card.title}
-                    </h3>
-                    <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-2 mt-0.5">
-                      {card.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="pt-2.5 mt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-800">
-                    <span className="text-[11px]">View Products</span>
-                    <div className="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center text-slate-500">
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          />
-        </div>
-
-        {/* Grid View for Desktop */}
-        <div className="hidden sm:grid grid-cols-1 min-[350px]:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
-          {showcaseCategories.map((card) => (
-            <div
-              key={card.id}
-              onClick={() => onNavigate('category', card.targetCategory)}
-              className="group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-slate-200/80 cursor-pointer flex flex-col justify-between"
-              title={`View ${card.title} Catalogue`}
-            >
-              {/* Large Studio Product Photograph */}
-              <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5 sm:mb-4">
-                <ProductImage
-                  src={card.image}
-                  alt={card.title}
-                  placeholderLabel={card.title}
-                  imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-
-              {/* Category Information */}
-              <div className="space-y-1 sm:space-y-1.5 px-0.5 sm:px-1 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xs sm:text-base lg:text-lg font-bold text-slate-900 tracking-tight group-hover:text-brand-crimson transition-colors duration-200 line-clamp-1">
+                <div className="p-3 flex-1 flex items-start">
+                  <h3 className="text-xs font-bold text-slate-900 leading-snug line-clamp-2">
                     {card.title}
                   </h3>
-                  <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed line-clamp-2 mt-0.5 sm:mt-1 hidden xs:block">
-                    {card.subtitle}
-                  </p>
-                </div>
-
-                {/* Explore & Configure Action Row */}
-                <div className="pt-2 sm:pt-4 mt-2 sm:mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-brand-crimson transition-colors">
-                  <span className="tracking-wide text-[10px] sm:text-xs">View Products</span>
-                  <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-brand-crimson group-hover:text-white flex items-center justify-center transition-all duration-200 text-slate-500">
-                    <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. OUR PRODUCTS (Auto-Swipe Commercial Products Carousel) */}
-      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative">
-        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10 space-y-1.5 sm:space-y-2">
-          <span className="text-[10px] sm:text-xs font-bold text-brand-crimson uppercase tracking-widest block">
-            Featured Collaterals
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Our Products
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-            Selected high-volume business essentials engineered for executive presentation and instant quotations.
-          </p>
-        </div>
-
-        {/* Seamless Infinite Mobile Slider for "Our Products" */}
-        <div className="block sm:hidden">
-          <InfiniteMobileSlider
-            items={ourProductsList}
-            autoPlayMs={3200}
-            prevLabel="Previous Product"
-            nextLabel="Next Product"
-            renderItem={(product) => (
-              <div
-                onClick={() => onNavigate('configure', product.slug)}
-                className="bg-white rounded-2xl p-3.5 border border-slate-200/80 shadow-md cursor-pointer flex flex-col justify-between text-center h-full"
-              >
-                <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5">
-                  <ProductImage
-                    src={product.image}
-                    alt={product.title}
-                    placeholderLabel={product.title}
-                    imgClassName="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="pt-1.5 pb-1 text-center">
-                  <h3 className="text-sm font-extrabold text-slate-900 tracking-tight uppercase">
-                    {product.title}
-                  </h3>
-                  <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
-                    {product.subtitle}
-                  </p>
-                </div>
-              </div>
-            )}
-          />
-        </div>
-
-        {/* Desktop Carousel Container with Circular Navigation Buttons */}
-        <div className="hidden sm:block relative px-6">
-          {/* Circular Left Arrow Button */}
-          <button
-            type="button"
-            onClick={() => stepInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, 'prev')}
-            aria-label="Previous Product"
-            className="absolute -left-2 sm:left-0 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-slate-200 bg-white/95 backdrop-blur-sm text-slate-800 shadow-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-200 flex items-center justify-center cursor-pointer active:scale-90"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          {/* Circular Right Arrow Button */}
-          <button
-            type="button"
-            onClick={() => stepInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, 'next')}
-            aria-label="Next Product"
-            className="absolute -right-2 sm:right-0 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-slate-200 bg-white/95 backdrop-blur-sm text-slate-800 shadow-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-200 flex items-center justify-center cursor-pointer active:scale-90"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
-          {/* Horizontal Auto-Swipe Scrolling Container */}
-          <div
-            ref={productsCarouselRef}
-            onScroll={() => handleInfiniteScroll(productsCarouselRef, '[data-product-card]', ourProductsList.length, setActiveProductIndex, productsScrollTimerRef)}
-            onMouseEnter={() => setIsProductsPaused(true)}
-            onMouseLeave={() => setIsProductsPaused(false)}
-            onTouchStart={() => setIsProductsPaused(true)}
-            onTouchEnd={() => {
-              setTimeout(() => setIsProductsPaused(false), 2000);
-            }}
-            className="flex items-stretch gap-0 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-3 px-0 sm:px-2 no-scrollbar"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {loopedProducts.map((product, loopIdx) => (
-              <div
-                key={`${product.id}-${loopIdx}`}
-                data-product-card
-                onClick={() => onNavigate('configure', product.slug)}
-                className="w-full sm:w-[46%] md:w-[31%] lg:w-[270px] shrink-0 snap-center px-1 sm:px-0"
-              >
-                <div className="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between group text-center h-full">
-                {/* Product Image Box */}
-                <div className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-sm mb-2.5">
-                  <ProductImage
-                    src={product.image}
-                    alt={product.title}
-                    placeholderLabel={product.title}
-                    imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                </div>
-
-                {/* Centered Bold Uppercase Title */}
-                <div className="pt-1.5 pb-1 text-center">
-                  <h3 className="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-brand-crimson tracking-tight uppercase transition-colors">
-                    {product.title}
-                  </h3>
-                  <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
-                    {product.subtitle}
-                  </p>
-                </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Pagination Dots for "Our Products" Carousel */}
-          <div className="flex items-center justify-center space-x-1.5 pt-3">
-            {ourProductsList.map((_, idx) => (
+          <div className="flex items-center justify-center space-x-2 pt-3">
+            {Array.from({ length: Math.ceil(showcaseCategories.length / 2) }).map((_, idx) => (
               <button
                 key={idx}
                 type="button"
-                onClick={() => jumpInfiniteCarousel(productsCarouselRef, '[data-product-card]', ourProductsList.length, idx, setActiveProductIndex)}
+                onClick={() => {
+                  const el = mobileCategoryStripRef.current;
+                  if (!el) return;
+                  const pageCount = Math.ceil(showcaseCategories.length / 2);
+                  const maxScroll = el.scrollWidth - el.clientWidth;
+                  el.scrollTo({ left: (maxScroll / Math.max(1, pageCount - 1)) * idx, behavior: 'smooth' });
+                  setActiveCatIndex(idx);
+                }}
+                aria-label={`Category page ${idx + 1}`}
                 className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  activeProductIndex === idx
-                    ? 'w-5 h-1.5 bg-brand-crimson shadow-sm'
-                    : 'w-1.5 h-1.5 bg-slate-300 hover:bg-slate-500'
+                  activeCatIndex === idx
+                    ? 'w-5 h-2 bg-slate-800'
+                    : 'w-2 h-2 border border-slate-400 bg-transparent'
                 }`}
-                aria-label={`Jump to product ${idx + 1}`}
               />
             ))}
           </div>
         </div>
+
+        {/* Desktop: Clean Horizontal Scrollable Strip (5 Full Cards on Laptop) */}
+        <div className="hidden sm:block relative">
+          <button
+            type="button"
+            onClick={() => {
+              const el = categoryCarouselRef.current;
+              if (el) el.scrollBy({ left: -el.clientWidth, behavior: 'smooth' });
+            }}
+            aria-label="Scroll Categories Left"
+            className="absolute -left-3 top-[42%] -translate-y-1/2 z-20 w-9 h-9 rounded-lg border border-slate-200 bg-white/95 hover:bg-white text-slate-800 shadow-md flex items-center justify-center cursor-pointer transition active:scale-95"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              const el = categoryCarouselRef.current;
+              if (el) el.scrollBy({ left: el.clientWidth, behavior: 'smooth' });
+            }}
+            aria-label="Scroll Categories Right"
+            className="absolute -right-3 top-[42%] -translate-y-1/2 z-20 w-9 h-9 rounded-lg border border-slate-200 bg-white/95 hover:bg-white text-slate-800 shadow-md flex items-center justify-center cursor-pointer transition active:scale-95"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+
+          <div
+            ref={categoryCarouselRef}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-1 no-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {showcaseCategories.map((card) => (
+              <div
+                key={card.id}
+                onClick={() => onNavigate('category', card.targetCategory)}
+                className="group w-[calc((100%-32px)/3)] md:w-[calc((100%-48px)/4)] lg:w-[calc((100%-64px)/5)] shrink-0 snap-start bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md hover:border-slate-300 transition-all duration-200 cursor-pointer flex flex-col"
+                title={`View ${card.title}`}
+              >
+                <div className="aspect-square w-full bg-[#f5f3ee] overflow-hidden">
+                  <ProductImage
+                    src={card.image}
+                    alt={card.title}
+                    placeholderLabel={card.title}
+                    imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                </div>
+                <div className="p-3 flex-1 flex items-start">
+                  <h3 className="text-xs sm:text-[13px] font-bold text-slate-900 group-hover:text-brand-crimson transition-colors leading-snug line-clamp-2">
+                    {card.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
+      </ScrollReveal>
+
+      {/* 3. OUR PRODUCTS (2-Column Mobile / 5-Column Desktop Grid — Top 10 Products) */}
+      <ScrollReveal>
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl lg:text-[26px] font-extrabold text-slate-900 tracking-tight">
+            Our Products
+          </h2>
+          <button
+            type="button"
+            onClick={() => onNavigate('categories')}
+            className="text-xs font-bold text-slate-600 hover:text-brand-crimson flex items-center gap-1 cursor-pointer"
+          >
+            <span>View all</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
+          {ourProductsList.slice(0, 10).map((item) => {
+            const isLiked = Boolean(likedProducts[item.id]);
+
+            return (
+              <div
+                key={item.id}
+                onClick={() => onNavigate('configure', item.slug)}
+                className="group cursor-pointer flex flex-col text-left"
+              >
+                {/* Rounded Square Product Photo + Wishlist Heart */}
+                <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 shadow-2xs mb-2.5">
+                  <ProductImage
+                    src={item.image}
+                    alt={item.title}
+                    placeholderLabel={item.title}
+                    imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLikedProducts((prev) => ({ ...prev, [item.id]: !prev[item.id] }));
+                    }}
+                    aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
+                    className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/95 hover:bg-white shadow-sm border border-slate-200/70 flex items-center justify-center transition active:scale-90 cursor-pointer"
+                  >
+                    <Heart
+                      className={`w-4 h-4 transition-colors ${
+                        isLiked ? 'fill-brand-crimson text-brand-crimson' : 'text-slate-700'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                {/* Product Title */}
+                <div className="px-0.5">
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-brand-crimson transition-colors leading-snug line-clamp-2">
+                    {item.title}
+                  </h3>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+      </ScrollReveal>
+
+      {/* 3B. NEW ARRIVALS (5-Column Desktop / 2-Column Mobile Grid with Top-Left Pill Badge) */}
+      <ScrollReveal>
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl lg:text-[26px] font-extrabold text-slate-900 tracking-tight">
+            New arrivals
+          </h2>
+          <button
+            type="button"
+            onClick={() => onNavigate('new-arrivals')}
+            className="text-xs font-bold text-slate-600 hover:text-brand-crimson flex items-center gap-1 cursor-pointer"
+          >
+            <span>View all</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
+          {[
+            {
+              id: 'new-ipd-file',
+              title: 'Hospital IPD Files',
+              badge: 'NEW ARRIVAL',
+              image: '/images/products/ipd-file.webp',
+              slug: 'ipd-file'
+            },
+            {
+              id: 'new-velvet-uv',
+              title: '500 GSM Velvet UV Cards',
+              badge: 'TRENDING',
+              image: '/images/products/500-gsm-matt-card-uv.webp',
+              slug: 'visiting-card'
+            },
+            {
+              id: 'new-cash-memo',
+              title: 'Carbonless Cash Memo Books',
+              badge: 'NEW ARRIVAL',
+              image: '/images/products/cash-memo-book.webp',
+              slug: 'cash-memo-book'
+            },
+            {
+              id: 'new-rx-pad',
+              title: 'Custom Prescription Pads',
+              badge: 'NEW ARRIVAL',
+              image: '/images/products/prescription-pad.webp',
+              slug: 'prescription-pad'
+            },
+            {
+              id: 'new-hospital-id',
+              title: 'Staff & Hospital ID Cards',
+              badge: 'NEW ARRIVAL',
+              image: '/images/products/hospital-id-card.webp',
+              slug: 'hospital-id-card'
+            }
+          ].map((item) => (
+            <div
+              key={item.id}
+              onClick={() => onNavigate('configure', item.slug)}
+              className="group cursor-pointer flex flex-col text-left"
+            >
+              <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/90 shadow-2xs mb-2.5">
+                <span className="absolute top-2.5 left-2.5 z-10 bg-sky-200/95 text-slate-900 text-[10px] font-extrabold uppercase tracking-wide px-2.5 py-0.5 rounded-full shadow-2xs">
+                  {item.badge}
+                </span>
+                <ProductImage
+                  src={item.image}
+                  alt={item.title}
+                  placeholderLabel={item.title}
+                  imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+              </div>
+              <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-brand-crimson transition-colors leading-snug line-clamp-2 px-0.5">
+                {item.title}
+              </h3>
+            </div>
+          ))}
+        </div>
+      </section>
+      </ScrollReveal>
 
       {/* 4. WHY CHOOSE PRINTIZER (Phase 5.4 - Genuine Business Standards) */}
       <section className="bg-slate-50 border-y border-slate-200 py-14 sm:py-20 text-left">
@@ -979,25 +1034,25 @@ export default function HomePage({
                 desc: 'Direct phone and WhatsApp consultation with seasoned print specialists from requirement to delivery.',
                 tone: 'bg-emerald-50 text-emerald-600'
               }
-            ].map((step) => (
-              <div
-                key={step.num}
-                className="bg-white p-3.5 sm:p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-row md:flex-col items-start gap-3 md:gap-3"
-              >
-                <div className={`w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center font-extrabold text-xs shrink-0 ${step.tone}`}>
-                  {step.num}
+            ].map((step, idx) => (
+              <ScrollReveal key={step.num} delay={idx * 90} className="h-full">
+                <div className="bg-white p-3.5 sm:p-4 md:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-row md:flex-col items-start gap-3 md:gap-3 h-full">
+                  <div className={`w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center font-extrabold text-xs shrink-0 ${step.tone}`}>
+                    {step.num}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-bold text-slate-900 leading-snug">{step.title}</h3>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">{step.desc}</p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <h3 className="text-sm font-bold text-slate-900 leading-snug">{step.title}</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed mt-1">{step.desc}</p>
-                </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* 5. CUSTOMER REVIEWS (Delivered Visiting Cards & Brochures Showcase) */}
+      <ScrollReveal>
       <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
@@ -1061,8 +1116,10 @@ export default function HomePage({
           ))}
         </div>
       </section>
+      </ScrollReveal>
 
       {/* 6. BESTSELLING COLLATERALS BANNER */}
+      <ScrollReveal>
       <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl bg-slate-900 text-white overflow-hidden shadow-xl border border-slate-800">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
@@ -1100,8 +1157,10 @@ export default function HomePage({
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* 7. PRINTING CAPABILITIES & FINISHING STANDARDS */}
+      <ScrollReveal>
       <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
@@ -1147,8 +1206,10 @@ export default function HomePage({
           ))}
         </div>
       </section>
+      </ScrollReveal>
 
       {/* 8. FREQUENTLY ASKED QUESTIONS (5 Essential Printing FAQs) */}
+      <ScrollReveal>
       <section className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 space-y-2">
           <span className="text-xs font-bold text-brand-crimson uppercase tracking-widest block">
@@ -1199,8 +1260,10 @@ export default function HomePage({
           })}
         </div>
       </section>
+      </ScrollReveal>
 
       {/* 9. BUSINESS CONTACT & CONSULTATION BANNER (Phase 5.6) */}
+      <ScrollReveal>
       <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-left">
         <div className="rounded-3xl bg-slate-900 p-6 sm:p-12 text-white shadow-xl relative overflow-hidden border border-slate-800">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -1250,6 +1313,7 @@ export default function HomePage({
           </div>
         </div>
       </section>
+      </ScrollReveal>
     </div>
   );
 }

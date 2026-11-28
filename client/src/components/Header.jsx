@@ -20,6 +20,7 @@ export default function Header({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
+  const [hoveredCategoryId, setHoveredCategoryId] = useState(null);
   const [categoriesAccordionOpen, setCategoriesAccordionOpen] = useState(true);
 
   const searchRef = useRef(null);
@@ -114,35 +115,6 @@ export default function Header({
           >
             Home
           </button>
-
-          {/* Products Dropdown (Desktop) */}
-          <div ref={productsMenuRef} className="relative">
-            <button
-              onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
-              className="hover:text-brand-crimson transition uppercase tracking-wider flex items-center space-x-1"
-            >
-              <span>Products</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${productsDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {productsDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-1 max-h-[85vh] overflow-y-auto">
-                <div className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
-                  Commercial Printing Categories (9)
-                </div>
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => handleSelectCategory(cat.id)}
-                    className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-brand-crimson transition flex items-center justify-between"
-                  >
-                    <span className="font-bold text-slate-800">{cat.name}</span>
-                    <ArrowRight className="w-3 h-3 text-slate-400" />
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
 
           <button
             onClick={() => onNavigate('about')}
@@ -267,6 +239,238 @@ export default function Header({
             <Menu className="w-5 h-5" />
           </button>
         </div>
+      </div>
+
+      {/* DESKTOP HORIZONTAL CATEGORY SUB-NAVBAR + HOVER MEGA-MENU (Laptop / Desktop Only) */}
+      <div
+        className="hidden lg:block border-t border-slate-100 bg-white/95 relative"
+        onMouseLeave={() => setHoveredCategoryId(null)}
+      >
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-2 text-[11.5px] font-medium text-slate-700 leading-tight">
+          <button
+            type="button"
+            onMouseEnter={() => setHoveredCategoryId(null)}
+            onClick={() => onNavigate('new-arrivals')}
+            className={`shrink-0 px-1.5 py-1 rounded hover:text-brand-crimson transition text-center cursor-pointer ${
+              activePage === 'new-arrivals' ? 'text-brand-crimson font-bold' : 'text-brand-crimson font-semibold'
+            }`}
+          >
+            New Arrivals
+          </button>
+
+          {categories.map((cat) => {
+            const isActive = activePage === `category-${cat.id}`;
+            const isHovered = hoveredCategoryId === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onMouseEnter={() => setHoveredCategoryId(cat.id)}
+                onClick={() => {
+                  setHoveredCategoryId(null);
+                  handleSelectCategory(cat.id);
+                }}
+                className={`px-1.5 py-1 transition text-center cursor-pointer max-w-[115px] border-b-2 ${
+                  isHovered
+                    ? 'border-slate-900 text-slate-950 font-semibold'
+                    : isActive
+                      ? 'border-brand-crimson text-brand-crimson font-bold'
+                      : 'border-transparent text-slate-700 hover:text-brand-crimson'
+                }`}
+                title={cat.name}
+              >
+                {cat.name}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* HOVER MEGA-MENU PANEL */}
+        {hoveredCategoryId && (() => {
+          const hoveredCat = categories.find((c) => c.id === hoveredCategoryId);
+          if (!hoveredCat) return null;
+          const catProducts = products.filter((p) => p.categoryId === hoveredCat.id);
+
+          const goToProduct = (slug) => {
+            setHoveredCategoryId(null);
+            onNavigate('configure', slug);
+          };
+
+          const goToCat = () => {
+            setHoveredCategoryId(null);
+            handleSelectCategory(hoveredCat.id);
+          };
+
+          return (
+            <div className="absolute left-0 right-0 top-full bg-white border-t border-b border-slate-200 shadow-2xl z-50 text-left">
+              <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6">
+                {hoveredCat.id === 'business-stationery' ? (
+                  <div className="grid grid-cols-4 gap-8 text-xs">
+                    {/* Column 1: Visiting Cards */}
+                    <div className="space-y-2.5">
+                      <h4 className="text-[13px] font-extrabold text-slate-900">Visiting Cards</h4>
+                      <ul className="space-y-2 text-slate-600">
+                        <li>
+                          <button type="button" onClick={() => goToProduct('visiting-card')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Standard Visiting Cards
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('350-gsm-matt-card')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            350 GSM Matte Visiting Cards
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('500-gsm-matt-card-uv')} className="hover:text-brand-crimson transition cursor-pointer text-left inline-flex items-center gap-1.5">
+                            <span>500 GSM Velvet + Spot UV</span>
+                            <span className="bg-sky-200 text-slate-900 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full">NEW</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('nt-card')} className="hover:text-brand-crimson transition cursor-pointer text-left inline-flex items-center gap-1.5">
+                            <span>Non-Tearable Waterproof NT Card</span>
+                            <span className="bg-sky-200 text-slate-900 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full">NEW</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('250-gsm-art-card')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            250 GSM Art Card
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('250-gsm-art-card-lamination')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            250 GSM Laminated Card
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Column 2: Office Stationery */}
+                    <div className="space-y-2.5">
+                      <h4 className="text-[13px] font-extrabold text-slate-900">Office Stationery</h4>
+                      <ul className="space-y-2 text-slate-600">
+                        <li>
+                          <button type="button" onClick={() => goToProduct('letterhead')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Corporate Letterheads
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('envelope')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Branded Envelopes
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('office-file')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Office Files
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('folder')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Presentation Folders
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Column 3: Books & Billing */}
+                    <div className="space-y-2.5">
+                      <h4 className="text-[13px] font-extrabold text-slate-900">Bill &amp; Voucher Books</h4>
+                      <ul className="space-y-2 text-slate-600">
+                        <li>
+                          <button type="button" onClick={() => goToProduct('bill-book')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Bill Books (NCR)
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('cash-memo-book')} className="hover:text-brand-crimson transition cursor-pointer text-left inline-flex items-center gap-1.5">
+                            <span>Cash Memo Books</span>
+                            <span className="bg-sky-200 text-slate-900 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full">NEW</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('receipt-book')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Receipt Books
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('invoice-book')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Invoice Books
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('quotation-book')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Quotation Books
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Column 4: ID Systems */}
+                    <div className="space-y-2.5">
+                      <h4 className="text-[13px] font-extrabold text-slate-900">ID Cards &amp; Custom</h4>
+                      <ul className="space-y-2 text-slate-600">
+                        <li>
+                          <button type="button" onClick={() => goToProduct('employee-id-card')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Employee ID Cards
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={() => goToProduct('id-card')} className="hover:text-brand-crimson transition cursor-pointer text-left">
+                            Corporate ID Cards
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setHoveredCategoryId(null);
+                              onRequestQuote({ productName: 'Visiting Cards & Stationery' });
+                            }}
+                            className="hover:text-brand-crimson transition cursor-pointer text-left font-bold text-slate-900"
+                          >
+                            Request Custom Quote &rarr;
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-extrabold text-slate-900">{hoveredCat.name}</h4>
+                      <span className="text-[11px] font-semibold text-slate-500">{catProducts.length} Products Available</span>
+                    </div>
+                    <div className="grid grid-cols-4 gap-x-8 gap-y-2.5 text-xs">
+                      {catProducts.slice(0, 16).map((p) => (
+                        <button
+                          key={p.id}
+                          type="button"
+                          onClick={() => goToProduct(p.slug)}
+                          className="text-left text-slate-600 hover:text-brand-crimson transition truncate cursor-pointer py-0.5"
+                          title={p.name}
+                        >
+                          {p.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between text-xs">
+                  <button
+                    type="button"
+                    onClick={goToCat}
+                    className="font-extrabold text-slate-900 hover:text-brand-crimson inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>See All {hoveredCat.name}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                  <span className="text-[11px] text-slate-400">Hover any category to explore options</span>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* 3. MOBILE SEARCH DROPDOWN STRIP */}

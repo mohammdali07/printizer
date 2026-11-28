@@ -7,6 +7,7 @@ import CartDrawer from './components/CartDrawer.jsx';
 
 import HomePage from './pages/HomePage.jsx';
 import CategoriesPage from './pages/CategoriesPage.jsx';
+import NewArrivalsPage from './pages/NewArrivalsPage.jsx';
 import CategoryPage from './pages/CategoryPage.jsx';
 import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
@@ -189,6 +190,9 @@ export default function App() {
       } else if (active === 'categories') {
         setCurrentPage('categories');
         setCurrentParam(null);
+      } else if (active === 'new-arrivals') {
+        setCurrentPage('new-arrivals');
+        setCurrentParam(null);
       } else if (active.startsWith('category/') || active.startsWith('categories/')) {
         setCurrentPage('category');
         const catSlug = active.replace(/^(category|categories)\//, '').split('/')[0];
@@ -299,6 +303,13 @@ export default function App() {
               <CategoriesPage
                 categories={categories}
                 products={products}
+                onNavigate={navigate}
+                onRequestQuote={handleOpenQuoteModal}
+              />
+            )}
+
+            {currentPage === 'new-arrivals' && (
+              <NewArrivalsPage
                 onNavigate={navigate}
                 onRequestQuote={handleOpenQuoteModal}
               />
